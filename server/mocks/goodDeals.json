@@ -1,0 +1,42 @@
+[
+  {
+    "storeName": "Naturalia",
+    "description": "7€ de réduction dès 30€ d'achat",
+    "like": 102,
+    "address": "8 Avenue Corentin Cariou",
+    "city": "Paris",
+    "postalCode": "75019"
+  },
+  {
+    "storeName": "Pierre Hermé",
+    "description": "1 macaron acheté, 1 offert",
+    "like": 800,
+    "address": "4 Rue de Bretagne",
+    "city": "Paris",
+    "postalCode": "75003"
+  },
+  {
+    "storeName": "Boulangerie Paul",
+    "description": "1 muffin acheté, 3 offerts",
+    "like": 10,
+    "address": "25 Avenue de l'Opéra",
+    "city": "Paris",
+    "postalCode": "75001"
+  },
+  {
+    "storeName": "Bio c'bon",
+    "description": "1 article acheté, 2 offerts",
+    "like": 55,
+    "address": "118 Rue Caulaincourt",
+    "city": "Paris",
+    "postalCode": "75018"
+  },
+  {
+    "storeName": "Starbucks",
+    "description": "1 thé acheté, 1 thé offert",
+    "like": 1,
+    "address": "10 Rue Norvins",
+    "city": "Paris",
+    "postalCode": "75018"
+  }
+]

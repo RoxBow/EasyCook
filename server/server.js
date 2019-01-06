@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const RateLimit = require('express-rate-limit');
 
 const { mainRouter } = require('./routes/main.router');
+const goodDeals = require('./mocks/goodDeals.json');
 
 /* # MODELS # */
 const User = require('./models/User.js');
@@ -66,6 +67,10 @@ app.use(
 db.on('error', console.error.bind(console, 'Error connect database'));
 db.once('open', () => {
   console.log('Connected to database');
+});
+
+app.get('/goodDeals', (req, res) => {
+  res.json(goodDeals);
 });
 
 passport.use(new LocalStrategy(User.authenticate()));

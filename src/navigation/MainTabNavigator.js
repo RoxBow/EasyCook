@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon/TabBarIcon';
-import DiscoverScreen from '../screens/Discover/DiscoverScreen';
+import DiscoverScreen from '../screens/DiscoverScreen/DiscoverScreen';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
 import ListScreen from '../screens/ListScreen/ListScreen';
