@@ -19,11 +19,11 @@ export default class App extends React.Component {
     return Promise.all([
       Asset.loadAsync([
         /* Load assets img here */
-        //require('./assets/images/robot-dev.png'),
+        require('./src/assets/images/tabBar_recipes.png'),
       ]),
       Font.loadAsync({
         /* Load assets fonts/icons here */
-        ...Icon.Ionicons.font
+        ...Icon.FontAwesome.font
         /*
 
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
