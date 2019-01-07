@@ -1,23 +1,16 @@
 import styles from './discoverscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { Text, View } from 'react-native';
 import { Tabs, Tab } from 'native-base';
-import { tabBar } from '../../constants/Colors';
-import Layout from '../../constants/Layout';
+import { tabBar } from '../../constants/colors';
+import Layout from '../../constants/layout';
+import { serverUrl, styleTab } from '../../constants/global';
 import GoodDeal from '../../components/GoodDeal/GoodDeal';
 import Carousel from 'react-native-snap-carousel';
 import MapView from 'react-native-maps';
 
-const { tabBarSelected, textDefault, backgroundTab } = tabBar;
+const { tabBarSelected } = tabBar;
 const { window } = Layout;
-
-const styleTab = {
-  textStyle: { color: textDefault },
-  activeTextStyle: { backgroundColor: backgroundTab, color: tabBarSelected },
-  tabStyle: { backgroundColor: backgroundTab },
-  activeTabStyle: { backgroundColor: backgroundTab }
-};
 
 export const getCurrentLocation = () => {
   return new Promise((resolve, reject) => {
@@ -35,7 +28,7 @@ class DiscoverScreen extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:3333/goodDeals')
+      .get(`${serverUrl}/goodDeals`)
       .then(({ data }) => {
         this.setState({
           goodDeals: data

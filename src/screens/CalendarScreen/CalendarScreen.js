@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { Container, Tabs, Tab } from 'native-base';
 import styles from './calendarscreen.style';
 import Test from '../../components/Test/Test';
-import { tabBar } from '../../constants/Colors';
+import { tabBar } from '../../constants/colors';
 
 const { tabBarSelected, textDefault, backgroundTab } = tabBar;
 

@@ -1,30 +1,45 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { Container, Tabs, Tab } from 'native-base';
+import axios from 'axios';
+import { ScrollView, Text, View } from 'react-native';
+import { Tabs, Tab } from 'native-base';
 import styles from './recipesscreen.style';
-import Test from '../../components/Test/Test';
-import { tabBar } from '../../constants/Colors';
+import { tabBar } from '../../constants/colors';
+import { serverUrl, styleTab } from '../../constants/global';
+import ThumbnailList from '../../components/ThumbnailList/ThumbnailList';
 
-const { tabBarSelected, textDefault, backgroundTab } = tabBar;
-
-const styleTab = {
-  textStyle: { color: textDefault },
-  activeTextStyle: { backgroundColor: backgroundTab, color: tabBarSelected },
-  tabStyle: { backgroundColor: backgroundTab },
-  activeTabStyle: { backgroundColor: backgroundTab }
-};
+const { tabBarSelected } = tabBar;
 
 class RecipesScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+  componentDidMount() {
+    axios
+      .get(`${serverUrl}/ingredients`)
+      .then(({ data }) => {
+        this.setState({
+          ingredients: data
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
   render() {
+    const { ingredients } = this.state;
+
     return (
-      <Container style={styles.container}>
-        <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }}>
-          <Tab heading="Événements culinaires" {...styleTab} />
-          <Tab heading="Bons plans" {...styleTab} />
-        </Tabs>
-        <Text>Bonsoir</Text>
-        <Test />
-      </Container>
+      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} locked={true}>
+        <Tab heading="Toutes les recettes" {...styleTab}>
+          {ingredients && <ThumbnailList title="Ingrédients de saison" list={ingredients} />}
+          {ingredients && <ThumbnailList title="La communauté" list={ingredients} />}
+        </Tab>
+        <Tab heading="Mon frigo" {...styleTab}>
+          {ingredients && <ThumbnailList title="Dans mon frigo" list={ingredients} />}
+        </Tab>
+      </Tabs>
     );
   }
 }

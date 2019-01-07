@@ -19,7 +19,6 @@ export default class App extends React.Component {
     return Promise.all([
       Asset.loadAsync([
         /* Load assets img here */
-        require('./src/assets/images/tabBar_recipes.png'),
       ]),
       Font.loadAsync({
         /* Load assets fonts/icons here */

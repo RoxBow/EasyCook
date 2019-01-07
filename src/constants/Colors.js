@@ -1,5 +1,3 @@
-
-
 export const mainText = '#000';
 
 export const tabBar = {

@@ -70,8 +70,8 @@ AccountStack.navigationOptions = {
 
 
 export default createBottomTabNavigator({
-  DiscoverStack,
   RecipesStack,
+  DiscoverStack,
   CalendarStack,
   ListStack,
   AccountStack
