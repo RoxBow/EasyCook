@@ -1,0 +1,32 @@
+{
+  "2017-05-16": [
+    {
+      "type": "Petit déjeuner",
+      "name": "Cake framboise",
+      "author": "Jean",
+      "uri": "/recipes/cake.jpg"
+    },
+    {
+      "type": "Déjeuner",
+      "name": "Cake",
+      "author": "Paul",
+      "uri": "/recipes/cake.jpg"
+    }
+  ],
+  "2017-05-17": [
+    {
+      "name": "Salut"
+    },
+    {
+      "name": "Patate"
+    }
+  ],
+  "2017-05-18": [
+    {
+      "name": "Prompt"
+    },
+    {
+      "name": "Wouah"
+    }
+  ]
+}

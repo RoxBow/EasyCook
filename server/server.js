@@ -14,6 +14,7 @@ const { mainRouter } = require('./routes/main.router');
 
 const goodDeals = require('./mocks/goodDeals.json');
 const ingredients = require('./mocks/ingredients.json');
+const calendar = require('./mocks/calendar.json');
 
 /* # MODELS # */
 const User = require('./models/User.js');
@@ -81,6 +82,10 @@ app.get('/goodDeals', (req, res) => {
 
 app.get('/ingredients', (req, res) => {
   res.json(ingredients);
+});
+
+app.get('/calendar', (req, res) => {
+  res.json(calendar);
 });
 
 passport.use(new LocalStrategy(User.authenticate()));

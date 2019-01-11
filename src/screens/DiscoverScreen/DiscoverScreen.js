@@ -64,7 +64,7 @@ class DiscoverScreen extends React.Component {
     const { goodDeals, region } = this.state;
 
     return (
-      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} page={1}>
+      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} page={1} locked={true}>
         <Tab heading="Événements culinaires" {...styleTab} />
         <Tab heading="Bons plans" {...styleTab}>
           <MapView
@@ -78,7 +78,7 @@ class DiscoverScreen extends React.Component {
           {goodDeals && (
             <Carousel
               loop={true}
-              containerCustomStyle={{ position: 'absolute', bottom: 10 }}
+              containerCustomStyle={{ position: 'absolute', bottom: 10, zIndex: 999 }}
               itemWidth={this.getWidthItemCarousel()}
               sliderWidth={window.width}
               data={goodDeals}

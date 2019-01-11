@@ -1,0 +1,26 @@
+[
+  {
+    "type": "Petit déjeuner",
+    "name": "Cake framboise",
+    "author": "Jean",
+    "uri": "/recipes/cake.jpg"
+  },
+  {
+    "type": "Déjeuner",
+    "name": "Cake",
+    "author": "Paul",
+    "uri": "/recipes/cake.jpg"
+  },
+  {
+    "type": "Petit déjeuner",
+    "name": "Cake framboise",
+    "author": "Jean",
+    "uri": "/recipes/cake.jpg"
+  },
+  {
+    "type": "Petit déjeuner",
+    "name": "Cake framboise",
+    "author": "Jean",
+    "uri": "/recipes/cake.jpg"
+  }
+]

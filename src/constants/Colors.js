@@ -5,3 +5,7 @@ export const tabBar = {
   textDefault: '#D8D8D8',
   backgroundTab: '#fff'
 }
+
+export const calendar = {
+  dotColor: '#51D8C5',
+}
