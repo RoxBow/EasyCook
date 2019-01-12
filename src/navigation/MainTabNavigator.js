@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
-import TabBarIcon from '../components/TabBarIcon/TabBarIcon';
+import { greenApp } from '../constants/colors';
+import { tabBarIcon } from '../constants/global';
 import DiscoverScreen from '../screens/DiscoverScreen/DiscoverScreen';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
@@ -13,11 +13,7 @@ import ShoppingListScreen from '../screens/ShoppingListScreen/ShoppingListScreen
 import AccountScreen from '../screens/AccountScreen/AccountScreen';
 import { Feather } from '@expo/vector-icons';
 
-const tabTabDiscoverIcon = require('../assets/images/tabBar_discover.png');
-const tabTabRecipesIcon = require('../assets/images/tabBar_recipes.png');
-const tabTabCalendarIcon = require('../assets/images/tabBar_calendar.png');
-const tabTabListIcon = require('../assets/images/tabBar_list.png');
-const tabTabAccountIcon = require('../assets/images/tabBar_account.png');
+const getTabBarIcon = (name, focus) => (!focus ? tabBarIcon[name].normal : tabBarIcon[name].focus);
 
 const styleTabBarIcon = {
   flex: 1,
@@ -33,7 +29,9 @@ const DiscoverStack = createStackNavigator({
 
 DiscoverStack.navigationOptions = {
   tabBarLabel: 'Découvrir',
-  tabBarIcon: ({ focused }) => <Image source={tabTabDiscoverIcon} style={styleTabBarIcon} />
+  tabBarIcon: ({ focused }) => (
+    <Image source={getTabBarIcon('discover', focused)} style={styleTabBarIcon} />
+  )
 };
 
 const RecipesStack = createStackNavigator({
@@ -42,7 +40,9 @@ const RecipesStack = createStackNavigator({
 
 RecipesStack.navigationOptions = {
   tabBarLabel: 'Recettes',
-  tabBarIcon: ({ focused }) => <Image source={tabTabRecipesIcon} style={styleTabBarIcon} />
+  tabBarIcon: ({ focused }) => (
+    <Image source={getTabBarIcon('recipes', focused)} style={styleTabBarIcon} />
+  )
 };
 
 const CalendarStack = createStackNavigator({
@@ -51,7 +51,9 @@ const CalendarStack = createStackNavigator({
 
 CalendarStack.navigationOptions = {
   tabBarLabel: 'Calendrier',
-  tabBarIcon: ({ focused }) => <Image source={tabTabCalendarIcon} style={styleTabBarIcon} />
+  tabBarIcon: ({ focused }) => (
+    <Image source={getTabBarIcon('calendar', focused)} style={styleTabBarIcon} />
+  )
 };
 
 const ListShoppingListStack = createStackNavigator(
@@ -59,7 +61,9 @@ const ListShoppingListStack = createStackNavigator(
     ListShoppingList: {
       screen: ListShoppingListScreen,
       navigationOptions: () => ({
-        headerRight: <Feather name="plus" size={30} color="green" style={{ paddingRight: 20 }} />,
+        headerRight: (
+          <Feather name="plus" size={30} color={greenApp} style={{ paddingRight: 20 }} />
+        ),
         title: 'Mes listes de course',
         headerStyle: {
           height: 80
@@ -73,7 +77,7 @@ const ListShoppingListStack = createStackNavigator(
       screen: ShoppingListScreen,
       navigationOptions: ({ navigation }) => ({
         title: 'Petit repas',
-        headerTintColor: 'green',
+        headerTintColor: greenApp,
         headerTitleStyle: { color: '#000' }
       })
     }
@@ -86,7 +90,9 @@ const ListShoppingListStack = createStackNavigator(
 
 ListShoppingListStack.navigationOptions = {
   tabBarLabel: 'Liste',
-  tabBarIcon: ({ focused }) => <Image source={tabTabListIcon} style={styleTabBarIcon} />
+  tabBarIcon: ({ focused }) => (
+    <Image source={getTabBarIcon('list', focused)} style={styleTabBarIcon} />
+  )
 };
 
 const AccountStack = createStackNavigator({
@@ -95,7 +101,9 @@ const AccountStack = createStackNavigator({
 
 AccountStack.navigationOptions = {
   tabBarLabel: 'Compte',
-  tabBarIcon: ({ focused }) => <Image source={tabTabAccountIcon} style={styleTabBarIcon} />
+  tabBarIcon: ({ focused }) => (
+    <Image source={getTabBarIcon('account', focused)} style={styleTabBarIcon} />
+  )
 };
 
 export default createBottomTabNavigator(
@@ -106,5 +114,11 @@ export default createBottomTabNavigator(
     ListShoppingListStack,
     AccountStack
   },
-  { initialRouteName: 'ListShoppingListStack' }
+  {
+    initialRouteName: 'ListShoppingListStack',
+    tabBarOptions: {
+      activeTintColor: greenApp,
+      inactiveTintColor: '#888'
+    }
+  }
 );

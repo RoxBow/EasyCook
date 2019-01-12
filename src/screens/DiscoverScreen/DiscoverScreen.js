@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Tabs, Tab } from 'native-base';
 import { tabBar } from '../../constants/colors';
 import Layout from '../../constants/layout';
-import { serverUrl, styleTab } from '../../constants/global';
+import { serverUrl, styleTab } from '../../constants/global';
 import GoodDeal from '../../components/GoodDeal/GoodDeal';
 import Carousel from 'react-native-snap-carousel';
 import MapView from 'react-native-maps';
@@ -22,8 +22,7 @@ class DiscoverScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -38,18 +37,18 @@ class DiscoverScreen extends React.Component {
         console.log(err);
       });
 
-      return getCurrentLocation().then(position => {
-        if (position) {
-          this.setState({
-            region: {
-              latitude: position.coords.latitude,
-              longitude: position.coords.longitude,
-              latitudeDelta: 0.003,
-              longitudeDelta: 0.003,
-            },
-          });
-        }
-      });
+    return getCurrentLocation().then(position => {
+      if (position) {
+        this.setState({
+          region: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.003,
+            longitudeDelta: 0.003
+          }
+        });
+      }
+    });
   }
 
   _renderItem({ item, index }) {
@@ -78,7 +77,7 @@ class DiscoverScreen extends React.Component {
           {goodDeals && (
             <Carousel
               loop={true}
-              containerCustomStyle={{ position: 'absolute', bottom: 10, zIndex: 999 }}
+              containerCustomStyle={styles.carousel}
               itemWidth={this.getWidthItemCarousel()}
               sliderWidth={window.width}
               data={goodDeals}

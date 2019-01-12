@@ -1,58 +1,20 @@
+import styles from './calendarscreen.style';
 import React from 'react';
+import axios from 'axios';
 import { View, Text } from 'react-native';
 import { Button } from 'native-base';
-import styles from './calendarscreen.style';
-import { Agenda, LocaleConfig } from 'react-native-calendars';
-import axios from 'axios';
-import { serverUrl } from '../../constants/global';
-import { calendar } from '../../constants/colors';
+import { Agenda } from 'react-native-calendars';
+import { serverUrl, styleDotCalendar, themeCalendar } from '../../constants/global';
 import RecipeCalendar from '../../components/RecipeCalendar/RecipeCalendar';
 
-const { dotColor } = calendar;
-
-LocaleConfig.locales['fr'] = {
-  monthNames: [
-    'Janvier',
-    'Février',
-    'Mars',
-    'Avril',
-    'Mai',
-    'Juin',
-    'Juillet',
-    'Août',
-    'Septembre',
-    'Octobre',
-    'Novembre',
-    'Décembre'
-  ],
-  monthNamesShort: [
-    'Janv.',
-    'Févr.',
-    'Mars',
-    'Avril',
-    'Mai',
-    'Juin',
-    'Juil.',
-    'Août',
-    'Sept.',
-    'Oct.',
-    'Nov.',
-    'Déc.'
-  ],
-  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.']
-};
-
-LocaleConfig.defaultLocale = 'fr';
-
 const MEAL = {
-  breakFast: { key: 'breakFast', color: dotColor, selectedDotColor: dotColor },
-  lunch: { key: 'lunch', color: dotColor, selectedDotColor: dotColor },
-  snack: { key: 'snack', color: dotColor, selectedDotColor: dotColor },
-  dinner: { key: 'dinnerdot', color: dotColor, selectedDotColor: dotColor }
+  breakFast: { key: 'breakFast', ...styleDotCalendar },
+  lunch: { key: 'lunch', ...styleDotCalendar },
+  snack: { key: 'snack', ...styleDotCalendar },
+  dinner: { key: 'dinnerdot', ...styleDotCalendar }
 };
 
-export default class AgendaScreen extends React.Component {
+class CalendarScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -74,15 +36,15 @@ export default class AgendaScreen extends React.Component {
     return [year, month, day].join('-');
   }
 
-  onUpdateSelectedDate = date => {
+  onUpdateSelectedDate(date) {
     const { allDates } = this.state;
     const dates = allDates[date.dateString];
 
     this.setState({ items: { [date.dateString]: dates } });
-  };
+  }
 
   renderDay(day, item) {
-    return ;
+    return;
   }
 
   renderKnob() {
@@ -153,24 +115,10 @@ export default class AgendaScreen extends React.Component {
           }
         }}
         markingType={'multi-dot'}
-        theme={{
-          backgroundColor: '#ffffff',
-          calendarBackground: '#ffffff',
-          textSectionTitleColor: '#000',
-          selectedDayBackgroundColor: 'rgba(81,216, 197, .2)',
-          selectedDayTextColor: '#000',
-          todayTextColor: '#000',
-          dayTextColor: '#000',
-          textDisabledColor: '#d9e1e8',
-          dotColor,
-          selectedDotColor: dotColor,
-          monthTextColor: dotColor,
-          textMonthFontWeight: 'bold',
-          textDayFontSize: 16,
-          textMonthFontSize: 16,
-          textDayHeaderFontSize: 16
-        }}
+        theme={{ ...themeCalendar }}
       />
     );
   }
 }
+
+export default CalendarScreen;

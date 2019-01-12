@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 8,
     height: 80,
-    borderRadius: 6,
+    borderRadius: 6
   },
 
   header: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   }
 });
 

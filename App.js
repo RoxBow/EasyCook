@@ -22,9 +22,7 @@ export default class App extends React.Component {
       ]),
       Font.loadAsync({
         /* Load assets fonts/icons here */
-        ...Icon.FontAwesome.font
         /*
-
         'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
         */
       })

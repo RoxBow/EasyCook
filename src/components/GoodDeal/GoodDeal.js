@@ -1,6 +1,6 @@
+import styles from './gooddeal.style';
 import React from 'react';
 import { View, Text } from 'react-native';
-import styles from './gooddeal.style';
 
 const GoodDeal = ({ storeName, description, like }) => (
   <View style={styles.wrapper}>

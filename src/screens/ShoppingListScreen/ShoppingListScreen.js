@@ -1,9 +1,9 @@
-import React from 'react';
 import styles from './shoppinglistscreen.style';
+import React from 'react';
+import axios from 'axios';
 import { View, Text } from 'react-native';
 import { Header, Item, Input } from 'native-base';
 import { EvilIcons } from '@expo/vector-icons';
-import axios from 'axios';
 import { serverUrl } from '../../constants/global';
 
 class ShoppingListScreen extends React.Component {
@@ -32,8 +32,8 @@ class ShoppingListScreen extends React.Component {
     return (
       <View>
         <Header searchBar rounded transparent>
-          <Item style={{ backgroundColor: "#E5E5E5", paddingHorizontal: 5 }}>
-            <EvilIcons name="search" size={25} color="black" style={styles.iconSearch} />
+          <Item style={styles.item}>
+            <EvilIcons name="search" size={25} color="#000" style={styles.iconSearch} />
             <Input placeholder="Rechercher un aliment dans la liste"  />
           </Item>
         </Header>

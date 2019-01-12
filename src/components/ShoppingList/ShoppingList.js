@@ -1,6 +1,6 @@
+import styles from './shoppinglist.style';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from './shoppinglist.style';
 import { withNavigation } from 'react-navigation';
 
 class ShoppingList extends React.Component {

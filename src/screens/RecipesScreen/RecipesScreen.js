@@ -1,8 +1,7 @@
+import styles from './recipesscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { ScrollView, Text, View } from 'react-native';
 import { Tabs, Tab } from 'native-base';
-import styles from './recipesscreen.style';
 import { tabBar } from '../../constants/colors';
 import { serverUrl, styleTab } from '../../constants/global';
 import ThumbnailList from '../../components/ThumbnailList/ThumbnailList';
