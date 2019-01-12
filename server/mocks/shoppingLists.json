@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Doux repas 👌🏼",
+    "dateMax": "Jusqu'au 13/02/19",
+    "aliments": [
+      "pomme",
+      "confiture",
+      "cerise",
+      "prune",
+      "kiwi"
+    ],
+    "ourAliments": [
+      "pomme",
+      "prune",
+      "kiwi",
+      "confiture"
+    ]
+  },
+  {
+    "name": "Soirée Halloween",
+    "dateMax": "Jusqu'au 13/02/19",
+    "aliments": [
+      "pomme",
+      "confiture",
+      "cerise",
+      "prune",
+      "kiwi"
+    ]
+  },
+  {
+    "name": "Déjeuner anniversaire",
+    "dateMax": "Jusqu'au 13/02/19",
+    "aliments": [
+      "pomme",
+      "confiture",
+      "cerise",
+      "prune",
+      "kiwi"
+    ]
+  }
+]

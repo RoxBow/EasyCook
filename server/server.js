@@ -15,6 +15,7 @@ const { mainRouter } = require('./routes/main.router');
 const goodDeals = require('./mocks/goodDeals.json');
 const ingredients = require('./mocks/ingredients.json');
 const calendar = require('./mocks/calendar.json');
+const shoppingLists = require('./mocks/shoppingLists.json');
 
 /* # MODELS # */
 const User = require('./models/User.js');
@@ -86,6 +87,15 @@ app.get('/ingredients', (req, res) => {
 
 app.get('/calendar', (req, res) => {
   res.json(calendar);
+});
+
+app.get('/shoppingLists', (req, res) => {
+  res.json(shoppingLists);
+});
+
+app.get('/shoppingLists/:id', (req, res) => {
+  // req.params.id
+  res.json(shoppingLists);
 });
 
 passport.use(new LocalStrategy(User.authenticate()));

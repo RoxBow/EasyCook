@@ -6,8 +6,12 @@ import TabBarIcon from '../components/TabBarIcon/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen/DiscoverScreen';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
-import ListScreen from '../screens/ListScreen/ListScreen';
+
+import ListShoppingListScreen from '../screens/ListShoppingListScreen/ListShoppingListScreen';
+import ShoppingListScreen from '../screens/ShoppingListScreen/ShoppingListScreen';
+
 import AccountScreen from '../screens/AccountScreen/AccountScreen';
+import { Feather } from '@expo/vector-icons';
 
 const tabTabDiscoverIcon = require('../assets/images/tabBar_discover.png');
 const tabTabRecipesIcon = require('../assets/images/tabBar_recipes.png');
@@ -50,11 +54,37 @@ CalendarStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <Image source={tabTabCalendarIcon} style={styleTabBarIcon} />
 };
 
-const ListStack = createStackNavigator({
-  List: ListScreen
-});
+const ListShoppingListStack = createStackNavigator(
+  {
+    ListShoppingList: {
+      screen: ListShoppingListScreen,
+      navigationOptions: () => ({
+        headerRight: <Feather name="plus" size={30} color="green" style={{ paddingRight: 20 }} />,
+        title: 'Mes listes de course',
+        headerStyle: {
+          height: 80
+        },
+        headerTitleStyle: {
+          fontSize: 23
+        }
+      })
+    },
+    ShoppingList: {
+      screen: ShoppingListScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Petit repas',
+        headerTintColor: 'green',
+        headerTitleStyle: { color: '#000' }
+      })
+    }
+  },
+  {
+    headerBackTitleVisible: false,
+    headerLayoutPreset: 'left'
+  }
+);
 
-ListStack.navigationOptions = {
+ListShoppingListStack.navigationOptions = {
   tabBarLabel: 'Liste',
   tabBarIcon: ({ focused }) => <Image source={tabTabListIcon} style={styleTabBarIcon} />
 };
@@ -68,11 +98,13 @@ AccountStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <Image source={tabTabAccountIcon} style={styleTabBarIcon} />
 };
 
-
-export default createBottomTabNavigator({
-  CalendarStack,
-  RecipesStack,
-  DiscoverStack,
-  ListStack,
-  AccountStack
-});
+export default createBottomTabNavigator(
+  {
+    DiscoverStack,
+    RecipesStack,
+    CalendarStack,
+    ListShoppingListStack,
+    AccountStack
+  },
+  { initialRouteName: 'ListShoppingListStack' }
+);
