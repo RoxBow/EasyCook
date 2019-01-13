@@ -8,9 +8,12 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 const LocalStrategy = require('passport-local').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
 const RateLimit = require('express-rate-limit');
 
 const { mainRouter } = require('./routes/main.router');
+
+const optionsJwtStrategy = require('./constants').optionsJwtStrategy;
 
 const goodDeals = require('./mocks/goodDeals.json');
 const ingredients = require('./mocks/ingredients.json');
@@ -25,10 +28,13 @@ const User = require('./models/User.js');
   res.header("Access-Control-Allow-Origin", "*");
 */
 
-mongoose.connect(process.env.DB_URL,{ 
-  useNewUrlParser: true,
-  useCreateIndex: true,
-});
+mongoose.connect(
+  process.env.DB_URL,
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true
+  }
+);
 
 const db = mongoose.connection;
 
@@ -72,6 +78,21 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/', mainRouter);
 
 passport.use(new LocalStrategy(User.authenticate()));
+
+passport.use(
+  new JwtStrategy(optionsJwtStrategy, (jwt_payload, done) => {
+    User.findOne({ username: jwt_payload.id }, (err, user) => {
+      if (err) {
+        console.log('Erreur identification avec le token');
+      }
+      
+      if (user) {
+        console.log('User reconnu avec le token');
+      }
+    });
+  })
+);
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 

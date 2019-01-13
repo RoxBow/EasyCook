@@ -5,8 +5,8 @@ const express = require('express');
 const authRouter = express.Router({ mergeParams: true });
 const User = require('../../models/User');
 const passport = require('passport');
-
-//
+const { jwtSecret } = require('../../constants');
+const jwt = require('jsonwebtoken');
 
 /*
 Routes definition
@@ -35,10 +35,14 @@ class AuthRouterClass {
     // Login
     authRouter.post('/login', (req, res, next) => {
       passport.authenticate('local', (err, user, info) => {
-        if (err) return res.status(500).send({ err });
+        if (err) {
+          err = err.length ? err : "Something went wrong login";
+          return res.status(500).send({ err });
+        }
         if (!user) return res.status(401).send({ message: 'User or password is incorrect' });
 
-        return res.status(200).send({ status: "SUCCESS", message: "Successfully login" });
+        const token = jwt.sign({ id: user.username }, jwtSecret.secret);
+        return res.status(200).send({ status: 'SUCCESS', token, message: 'Successfully login' });
       })(req, res, next);
     });
   }

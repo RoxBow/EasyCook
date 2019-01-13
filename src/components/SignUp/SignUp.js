@@ -1,8 +1,8 @@
 import styles from './signup.style';
 import React from 'react';
 import axios from 'axios';
-import { Button, TextInput, View, Text } from 'react-native';
-import { serverUrl, STATUS } from '../../constants/global';
+import { AsyncStorage, Button, TextInput, View, Text } from 'react-native';
+import { serverUrl, STATUS } from '../../constants/global';
 import { withNavigation } from 'react-navigation';
 
 class SignUp extends React.Component {
@@ -10,11 +10,11 @@ class SignUp extends React.Component {
     super();
 
     this.state = {
-      email: "test@yopmail.fr",
-      password: "patate"
+      email: 'test@yopmail.fr',
+      password: 'patate'
     };
 
-    this.login =  this.login.bind(this);
+    this.login = this.login.bind(this);
   }
 
   login() {
@@ -26,14 +26,16 @@ class SignUp extends React.Component {
         username: email,
         password
       })
-      .then(({data}) => {
+      .then(({ data }) => {
+        AsyncStorage.setItem('userToken', data.token);
+
         // redirect to app
         navigation.navigate(data.status === STATUS.SUCCESS ? 'App' : 'Auth');
       })
       .catch(err => {
-        console.log('ERR',err.response.data);
+        console.log('ERR login', err.response.data);
       });
-  };
+  }
 
   render() {
     return (

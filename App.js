@@ -2,7 +2,7 @@ import React from 'react';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { AsyncStorage, Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Icon, Font } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import rootReducer from './src/redux/index';
@@ -16,6 +16,8 @@ export default class App extends React.Component {
   };
 
   _loadResourcesAsync = async () => {
+    // await AsyncStorage.clear();
+    
     return Promise.all([
       Asset.loadAsync([
         /* Load assets img here */
