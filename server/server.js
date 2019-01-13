@@ -57,9 +57,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//=> Router
-app.use('/', mainRouter);
-
 // Config bodyParser
 app.use(bodyParser.json()); // For parsing application/json
 app.use(
@@ -71,6 +68,12 @@ app.use(
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
+//=> Router
+app.use('/', mainRouter);
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 db.on('error', console.error.bind(console, 'Error connect database'));
 db.once('open', () => {
@@ -97,10 +100,6 @@ app.get('/shoppingLists/:id', (req, res) => {
   // req.params.id
   res.json(shoppingLists);
 });
-
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 app.listen(process.env.PORT, () => {
   console.log(`Serveur running on ${process.env.PORT}`);

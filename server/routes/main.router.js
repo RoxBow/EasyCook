@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const express = require('express');
 const AuthRouterClass = require('./auth/auth.routes');
 
 /* Define routers */
-const mainRouter = Router({ mergeParams: true });
-const apiRouter = Router({ mergeParams: true });
+const mainRouter = express.Router({ mergeParams: true });
+const apiRouter = express.Router({ mergeParams: true });
 
 const authRouter = new AuthRouterClass();
 

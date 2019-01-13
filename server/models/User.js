@@ -13,13 +13,17 @@ const User = new Schema(
       unique: true,
       trim: true
     },
-    firstName: {
-      type: String
-    },
-    lastName: {
-      type: String
+    username: {
+      type: String,
+      unique: true,
+      required: [true, "can't be blank"],
+      trim: true
     },
     avatar: { type: Schema.Types.ObjectId, ref: 'Image' },
+    recipes: [String],
+    shoppingList: [String],
+    events: [String],
+    goodDeals: [],
     lastConnection: Date,
     isVerified: {
       type: Boolean,
@@ -34,6 +38,11 @@ const User = new Schema(
   }
 );
 
-User.plugin(passportLocalMongoose, { usernameField: 'email', usernameQueryFields: ['email'] });
+User.plugin(passportLocalMongoose, {
+  usernameField: 'email',
+  usernameQueryFields: ['email'],
+  limitAttempts: true,
+  lastLoginField: 'lastConnection'
+});
 
 module.exports = mongoose.model('User', User);

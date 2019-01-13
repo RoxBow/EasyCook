@@ -1,40 +1,56 @@
 /*
 Imports
 */
-    const express = require('express');
-    const authRouter = express.Router({ mergeParams: true });
+const express = require('express');
+const authRouter = express.Router({ mergeParams: true });
+const User = require('../../models/User');
+const passport = require('passport');
+
 //
 
 /*
 Routes definition
 */
-    class AuthRouterClass {
-        routes(){
-            // HATEOAS
-            authRouter.get('/', (req, res) => {
-                res.json('HATEOAS for auth');
-            });
-            
-            // Register
-            authRouter.post('/register', (req, res) => {
-                console.log('register');
-            });
+class AuthRouterClass {
+  routes() {
+    // HATEOAS
+    authRouter.get('/', (req, res) => {
+      res.send('HATEOAS for auth');
+    });
 
-            // Login
-            authRouter.post('/login', (req, res) => {
-                console.log('register');
-            });
-        };
+    // Register
+    authRouter.post('/signIn', (req, res) => {
+      const { email, username, password } = req.body;
 
-        init(){
-            this.routes();
-            return authRouter;
+      User.register(new User({ email, username }), password, (err, user) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).send({ message: err.message });
         }
-    }
-//
+
+        return res.status(200).send({ msg: 'Sucess signin', user });
+      });
+    });
+
+    // Login
+    authRouter.post('/login', (req, res, next) => {
+      passport.authenticate('local', (err, user, info) => {
+        if (err) return res.status(500).send({ err });
+        if (!user) return res.status(401).send({ message: 'User or password is incorrect' });
+
+        return res.status(200).send({ status: "SUCCESS", message: "Successfully login" });
+      })(req, res, next);
+    });
+  }
+
+  init() {
+    this.routes();
+    return authRouter;
+  }
+}
 
 /*
 Export
 */
-    module.exports = AuthRouterClass;
+module.exports = AuthRouterClass;
 //

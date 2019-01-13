@@ -7,6 +7,10 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  * CONFIG
  */
 export const serverUrl = 'http://localhost:3333';
+export const STATUS = {
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE",
+}
 
 // Config wording calendar
 LocaleConfig.locales['fr'] = {
