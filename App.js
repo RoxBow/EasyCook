@@ -17,7 +17,7 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     // await AsyncStorage.clear();
-    
+
     return Promise.all([
       Asset.loadAsync([
         /* Load assets img here */

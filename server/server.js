@@ -9,11 +9,10 @@ const passport = require('passport');
 const path = require('path');
 const LocalStrategy = require('passport-local').Strategy;
 const JwtStrategy = require('passport-jwt').Strategy;
+const optionsJwtStrategy = require('./constants').optionsJwtStrategy;
 const RateLimit = require('express-rate-limit');
 
 const { mainRouter } = require('./routes/main.router');
-
-const optionsJwtStrategy = require('./constants').optionsJwtStrategy;
 
 const goodDeals = require('./mocks/goodDeals.json');
 const ingredients = require('./mocks/ingredients.json');
@@ -53,7 +52,6 @@ app.use(cors());
 
 app.use(
   session({
-    cookieName: 'session',
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false
@@ -77,6 +75,11 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 //=> Router
 app.use('/', mainRouter);
 
+db.on('error', console.error.bind(console, 'Error connect database'));
+db.once('open', () => {
+  console.log('Connected to database');
+});
+
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.use(
@@ -85,9 +88,9 @@ passport.use(
       if (err) {
         console.log('Erreur identification avec le token');
       }
-      
+
       if (user) {
-        console.log('User reconnu avec le token');
+        return done(null, user);
       }
     });
   })
@@ -96,10 +99,7 @@ passport.use(
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-db.on('error', console.error.bind(console, 'Error connect database'));
-db.once('open', () => {
-  console.log('Connected to database');
-});
+/* # fetch data # */
 
 app.get('/goodDeals', (req, res) => {
   res.json(goodDeals);

@@ -1,14 +1,12 @@
-
-const { ExtractJwt } = require('passport-jwt');
+const KindExtractJwt = require('passport-jwt').ExtractJwt;
 
 const jwtSecret = {
   secret: 'jwt-secret'
 };
 
 const optionsJwtStrategy = {};
-optionsJwtStrategy.jwtFromRequest = ExtractJwt.fromBodyField('token');
-optionsJwtStrategy.secretOrKey = jwtSecret;
-optionsJwtStrategy.issuer = 'accounts.examplesoft.com';
-optionsJwtStrategy.audience = 'yoursite.net';
+optionsJwtStrategy.jwtFromRequest = KindExtractJwt.fromAuthHeaderAsBearerToken();
+optionsJwtStrategy.secretOrKey = jwtSecret.secret;
+
 
 module.exports = { jwtSecret, optionsJwtStrategy };

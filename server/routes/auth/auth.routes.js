@@ -18,31 +18,59 @@ class AuthRouterClass {
       res.send('HATEOAS for auth');
     });
 
-    // Register
-    authRouter.post('/signIn', (req, res) => {
-      const { email, username, password } = req.body;
-
-      User.register(new User({ email, username }), password, (err, user) => {
-        if (err) {
-          console.log(err);
-          return res.status(400).send({ message: err.message });
+    // Signin with token
+    authRouter.get('/token', (req, res, next) => {
+      passport.authenticate('jwt', { session: false }, (error, user) => {
+        if (error || !user) {
+          error = error || !user ? error : 'Unauthorized';
+          return res.status(500).send({ error });
         }
 
-        return res.status(200).send({ msg: 'Sucess signin', user });
+        req.logIn(user, error => {
+          if (error) {
+            error = error.length ? error : 'Something went wrong token';
+            return res.status(500).send({ error });
+          }
+
+          return res.status(200).send({ status: 'SUCCESS', message: 'Successfully login', user });
+        });
+      })(req, res, next);
+    });
+
+    // Register
+    authRouter.post('/signUp', (req, res) => {
+      const { email, username, password } = req.body;
+
+      User.register(new User({ email, username }), password, (error, user) => {
+        if (error) {
+          return res.status(400).send({ message: error.message });
+        }
+
+        return res.status(200).send({ msg: 'Success signin', user });
       });
     });
 
     // Login
     authRouter.post('/login', (req, res, next) => {
-      passport.authenticate('local', (err, user, info) => {
-        if (err) {
-          err = err.length ? err : "Something went wrong login";
-          return res.status(500).send({ err });
+      passport.authenticate('local', (error, user, info) => {
+        if (error) {
+          error = err.length ? error : 'Something went wrong login';
+          return res.status(500).send({ error });
         }
         if (!user) return res.status(401).send({ message: 'User or password is incorrect' });
 
-        const token = jwt.sign({ id: user.username }, jwtSecret.secret);
-        return res.status(200).send({ status: 'SUCCESS', token, message: 'Successfully login' });
+        req.logIn(user, error => {
+          if (error) {
+            error = error.length ? error : 'Something went wrong login';
+            return res.status(500).send({ error });
+          }
+
+          const token = jwt.sign({ id: user.username }, jwtSecret.secret, { expiresIn: '1d' });
+
+          return res
+            .status(200)
+            .send({ status: 'SUCCESS', token, message: 'Successfully login', user });
+        });
       })(req, res, next);
     });
   }

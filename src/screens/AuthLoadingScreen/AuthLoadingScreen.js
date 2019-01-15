@@ -1,6 +1,9 @@
+import styles from './authloadingscreen.style';
 import React from 'react';
 import { ActivityIndicator, AsyncStorage, StatusBar, View } from 'react-native';
-import styles from './authloadingscreen.style';
+import { connect } from 'react-redux';
+import { requestValidityToken } from '../../redux/User/actions';
+import { withNavigation } from 'react-navigation';
 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -10,13 +13,16 @@ class AuthLoadingScreen extends React.Component {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const { navigation } = this.props;
+    const { requestValidityToken, navigation } = this.props;
     const userToken = await AsyncStorage.getItem('userToken');
-    
-    navigation.navigate(userToken ? 'App' : 'Auth');
+
+    if (userToken) {
+      requestValidityToken(userToken);
+    } else {
+      navigation.navigate('Auth');
+    }
   };
 
-  // Render any loading content that you like here
   render() {
     return (
       <View style={styles.container}>
@@ -27,4 +33,13 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
-export default AuthLoadingScreen;
+const mapDispatchToProps = (dispatch, { navigation }) => ({
+  requestValidityToken: token => dispatch(requestValidityToken(token, navigation))
+});
+
+export default withNavigation(
+  connect(
+    null,
+    mapDispatchToProps
+  )(AuthLoadingScreen)
+);

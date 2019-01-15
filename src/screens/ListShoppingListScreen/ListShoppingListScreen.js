@@ -1,7 +1,7 @@
 import styles from './listshoppinglistscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { ScrollView } from 'react-native';
+import { ScrollView, Button,Text } from 'react-native';
 import ShoppingList from '../../components/ShoppingList/ShoppingList';
 import { serverUrl } from '../../constants/global';
 

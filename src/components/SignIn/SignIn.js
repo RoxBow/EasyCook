@@ -1,60 +1,38 @@
 import styles from './signin.style';
 import React from 'react';
-import axios from 'axios';
-import { AsyncStorage, Button, TextInput, View, Text } from 'react-native';
-import { serverUrl } from '../../constants/global';
+import { Button, TextInput, View, Text } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { requestLogin } from '../../redux/User/actions';
+import { connect } from 'react-redux';
 
 class SignIn extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      email: "test@yopmail.fr",
-      username: "vince",
-      password: "patate"
+      email: 'test@yopmail.fr',
+      password: 'patate'
     };
 
-    this.signIn =  this.signIn.bind(this);
+    this.login = this.login.bind(this);
   }
 
-  _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'abc');
-    this.props.navigation.navigate('App');
-  };
+  login() {
+    const { email, password } = this.state;
+    const { requestLogin } = this.props;
 
-  signIn() {
-    const { email, username, password } = this.state;
-
-    axios
-      .post(`${serverUrl}/api/auth/signIn`, {
-        email,
-        username,
-        password
-      })
-      .then(({data}) => {
-        console.log('RESPONSE SIGNIN', data);
-      })
-      .catch(err => {
-        console.log('ERR',err.response.data);
-      });
-  };
+    requestLogin(email, password);
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Sign up</Text>
+        <Text>Login</Text>
         <TextInput
           style={styles.input}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
           placeholder="Email"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={username => this.setState({ username })}
-          value={this.state.username}
-          placeholder="Username"
           autoCapitalize="none"
         />
         <TextInput
@@ -66,10 +44,19 @@ class SignIn extends React.Component {
           autoCapitalize="none"
         />
 
-        <Button title="Sign in!" onPress={this.signIn} />
+        <Button title="Login!" onPress={this.login} />
       </View>
     );
   }
 }
 
-export default SignIn;
+const mapDispatchToProps = (dispatch, { navigation }) => ({
+  requestLogin: (email, password) => dispatch(requestLogin(email, password, navigation))
+});
+
+export default withNavigation(
+  connect(
+    null,
+    mapDispatchToProps
+  )(SignIn)
+);

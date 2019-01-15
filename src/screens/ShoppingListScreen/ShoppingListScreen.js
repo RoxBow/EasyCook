@@ -34,7 +34,7 @@ class ShoppingListScreen extends React.Component {
         <Header searchBar rounded transparent>
           <Item style={styles.item}>
             <EvilIcons name="search" size={25} color="#000" style={styles.iconSearch} />
-            <Input placeholder="Rechercher un aliment dans la liste"  />
+            <Input placeholder="Rechercher un aliment dans la liste" />
           </Item>
         </Header>
         <Text>Shopping List</Text>

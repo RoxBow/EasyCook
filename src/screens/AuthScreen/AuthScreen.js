@@ -8,10 +8,9 @@ class AuthScreen extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-    };
+    this.state = {};
   }
-  
+
   static navigationOptions = {
     title: 'Authentication'
   };
@@ -19,8 +18,8 @@ class AuthScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <SignIn />
         <SignUp />
+        <SignIn />
       </View>
     );
   }
