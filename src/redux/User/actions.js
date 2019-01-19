@@ -63,7 +63,6 @@ export const requestSignUp = (email, username, password) => dispatch => {
       dispatch(setMessageInfo(data.messageInfo));
     })
     .catch(err => {
-      console.log('signup', err);
       dispatch(setError(err.response.data.err));
     });
 };
@@ -72,14 +71,13 @@ export const requestLogin = (email, password, navigation) => {
   return dispatch => {
     axios
       .post(`${serverUrl}/api/auth/login`, {
-        username: email,
+        email,
         password
       })
       .then(({ data }) => {
         AsyncStorage.setItem('userToken', data.token);
         dispatch(setUser(data.user));
 
-        // redirect to app
         navigation.navigate(data.status === STATUS.SUCCESS ? 'App' : 'Auth');
       })
       .catch(err => {

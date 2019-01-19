@@ -20,7 +20,6 @@ class ListScreen extends React.Component {
         headers: { Authorization: 'bearer ' + await getToken() }
       })
       .then(({ data }) => {
-        console.log('Shopping list', data);
         this.setState({
           shoppingLists: data.shoppingList
         });

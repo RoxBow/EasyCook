@@ -1,8 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 const User = new Schema(
   {
@@ -12,6 +12,10 @@ const User = new Schema(
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
       unique: true,
       trim: true
+    },
+    password: { 
+      type: String, 
+      required: true 
     },
     username: {
       type: String,
@@ -38,10 +42,8 @@ const User = new Schema(
   }
 );
 
-User.plugin(passportLocalMongoose, {
-  usernameField: 'email',
-  limitAttempts: true,
-  lastLoginField: 'lastConnection',
-});
+User.methods.encryptPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
+
+User.methods.validPassword = (password, hash) => bcrypt.compareSync(password, hash);
 
 module.exports = mongoose.model('User', User);

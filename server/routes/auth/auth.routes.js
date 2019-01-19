@@ -35,28 +35,26 @@ class AuthRouterClass {
     authRouter.post('/signUp', (req, res) => {
       const { email, username, password } = req.body;
 
-      User.register(new User({ email, username }), password, (error, user) => {
-        if (error) {
-          console.log('error',error)
-          return res.status(400).send({ message: error.message });
-        }
+      let user = new User({ email, username });
+      user.password = user.encryptPassword(password);
 
-        return res.status(200).send({ msg: 'Success signin', user });
+      user.save(err => {
+        if (err){
+          return res.status(400).send({ message: error.message });
+        } else {
+          return res.status(200).send({ msg: 'Success signin', user });
+        }
       });
+
     });
 
     // Login
     authRouter.post('/login', (req, res, next) => {
       passport.authenticate('local', (error, user, info) => {
         if (error) {
-          console.log('error login',error)
-          console.log('info', info)
-          console.log('user', user)
           error = error && error.length ? error : 'Something went wrong login';
           return res.status(500).send({ error });
         }
-
-        console.log('TEST', user)
 
         if (!user) return res.status(401).send({ message: 'User or password is incorrect' });
 

@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: "#fff",
     width: "48%",
+    maxHeight: 160,
     padding: 10,
     marginBottom: 10,
     borderRadius: 4,

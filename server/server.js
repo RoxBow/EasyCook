@@ -80,24 +80,62 @@ db.once('open', () => {
   console.log('Connected to database');
 });
 
-passport.use(new LocalStrategy(User.authenticate()));
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password'
+    },
+    (email, password, done) => {
+      User.findOne({ email })
+        .populate('shoppingList')
+        .exec((err, user) => {
+          if (err) {
+            return done(err);
+          }
+
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username.' });
+          }
+
+          if (!user.validPassword(password, user.password)) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+
+          return done(null, user);
+        });
+    }
+  )
+);
 
 passport.use(
   new JwtStrategy(optionsJwtStrategy, (jwt_payload, done) => {
-    User.findOne({ username: jwt_payload.id }, (err, user) => {
-      if (err) {
-        console.log('Erreur identification avec le token');
-      }
+    User.findOne({ username: jwt_payload.id })
+      .populate('shoppingList')
+      .exec((err, user) => {
+        if (err) {
+          console.log('Erreur identification avec le token');
+          return;
+        }
 
-      if (user) {
-        return done(null, user);
-      }
-    });
+        if (user) {
+          return done(null, user);
+        }
+      });
   })
 );
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .populate('shoppingList')
+    .exec((err, user) => {
+      done(err, user);
+    });
+});
 
 /* # fetch data # */
 

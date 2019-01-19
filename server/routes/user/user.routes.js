@@ -10,7 +10,6 @@ class UserRouterClass {
     });
 
     userRouter.get('/shoppingList', (req, res) => {
-      console.log('req.user', req.user)
       res.send({ shoppingList: req.user.shoppingList });
     });
 
@@ -23,7 +22,8 @@ class UserRouterClass {
         if (err) console.log('ERR SAVE', err);
 
         User.updateOne({ _id: req.user._id }, { $push: { shoppingList: shoppingListAdded } }, err => {
-          console.log('Err update user', err);
+          if(err) console.log('Err update user', err);
+          
         });
       });
 
