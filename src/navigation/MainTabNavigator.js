@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { greenApp } from '../constants/colors';
 import { tabBarIcon } from '../constants/global';
@@ -9,6 +9,7 @@ import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
 
 import ListShoppingListScreen from '../screens/ListShoppingListScreen/ListShoppingListScreen';
 import ShoppingListScreen from '../screens/ShoppingListScreen/ShoppingListScreen';
+import AddShoppingListScreen from '../screens/AddShoppingListScreen/AddShoppingListScreen';
 
 import AccountScreen from '../screens/AccountScreen/AccountScreen';
 import { Feather } from '@expo/vector-icons';
@@ -60,9 +61,11 @@ const ListShoppingListStack = createStackNavigator(
   {
     ListShoppingList: {
       screen: ListShoppingListScreen,
-      navigationOptions: () => ({
+      navigationOptions: ({ navigation }) => ({
         headerRight: (
-          <Feather name="plus" size={30} color={greenApp} style={{ paddingRight: 20 }} />
+          <TouchableOpacity onPress={() => navigation.navigate('AddShoppingList')}>
+            <Feather name="plus" size={30} color={greenApp} style={{ paddingRight: 20 }} />
+          </TouchableOpacity>
         ),
         title: 'Mes listes de course',
         headerStyle: {
@@ -77,6 +80,14 @@ const ListShoppingListStack = createStackNavigator(
       screen: ShoppingListScreen,
       navigationOptions: ({ navigation }) => ({
         title: 'Petit repas',
+        headerTintColor: greenApp,
+        headerTitleStyle: { color: '#000' }
+      })
+    },
+    AddShoppingList: {
+      screen: AddShoppingListScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Créer liste de course',
         headerTintColor: greenApp,
         headerTitleStyle: { color: '#000' }
       })

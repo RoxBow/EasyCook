@@ -12,17 +12,13 @@ import MapView from 'react-native-maps';
 const { tabBarSelected } = tabBar;
 const { window } = Layout;
 
-export const getCurrentLocation = () => {
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
-  });
-};
-
 class DiscoverScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+
+    this.getCurrentLocation = this.getCurrentLocation.bind(this)
   }
 
   componentDidMount() {
@@ -37,7 +33,7 @@ class DiscoverScreen extends React.Component {
         console.log(err);
       });
 
-    return getCurrentLocation().then(position => {
+    return this.getCurrentLocation().then(position => {
       if (position) {
         this.setState({
           region: {
@@ -51,6 +47,12 @@ class DiscoverScreen extends React.Component {
     });
   }
 
+  getCurrentLocation() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
+    });
+  };
+
   _renderItem({ item, index }) {
     return <GoodDeal key={index} {...item} />;
   }
@@ -63,7 +65,7 @@ class DiscoverScreen extends React.Component {
     const { goodDeals, region } = this.state;
 
     return (
-      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} page={1} locked={true}>
+      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} locked={true}>
         <Tab heading="Événements culinaires" {...styleTab} />
         <Tab heading="Bons plans" {...styleTab}>
           <MapView

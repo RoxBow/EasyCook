@@ -1,23 +1,28 @@
 import styles from './listshoppinglistscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { ScrollView, Button,Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import ShoppingList from '../../components/ShoppingList/ShoppingList';
 import { serverUrl } from '../../constants/global';
+import { getToken } from '../../constants/helpers';
+import Empty from '../../components/Empty/Empty';
 
 class ListScreen extends React.Component {
-  constructor(){
+  constructor() {
     super();
 
-    this.state = {}
+    this.state = {};
   }
-  
-  componentDidMount() {
+
+  componentDidMount = async() => {
     axios
-      .get(`${serverUrl}/shoppingLists`)
+      .get(`${serverUrl}/api/user/shoppingList`, {
+        headers: { Authorization: 'bearer ' + await getToken() }
+      })
       .then(({ data }) => {
+        console.log('Shopping list', data);
         this.setState({
-          shoppingLists: data
+          shoppingLists: data.shoppingList
         });
       })
       .catch(err => {
@@ -28,12 +33,14 @@ class ListScreen extends React.Component {
   render() {
     const { shoppingLists } = this.state;
 
-    return (
-        <ScrollView contentContainerStyle={styles.wrapper}>
-          {shoppingLists && shoppingLists.map((shoppingList, i) => (
-            <ShoppingList {...shoppingList} key={i} />
-          ))}
-        </ScrollView>
+    return shoppingLists && shoppingLists.length ? (
+      <ScrollView contentContainerStyle={styles.wrapper}>
+        {shoppingLists.map((shoppingList, i) => (
+          <ShoppingList {...shoppingList} key={i} />
+        ))}
+      </ScrollView>
+    ) : (
+      <Empty name={'liste de course'} />
     );
   }
 }

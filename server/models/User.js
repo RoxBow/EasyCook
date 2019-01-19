@@ -21,7 +21,7 @@ const User = new Schema(
     },
     avatar: { type: Schema.Types.ObjectId, ref: 'Image' },
     recipes: [String],
-    shoppingList: [String],
+    shoppingList: [{ type: Schema.Types.ObjectId, ref: 'ShoppingList' }],
     events: [String],
     goodDeals: [],
     lastConnection: Date,
@@ -40,9 +40,8 @@ const User = new Schema(
 
 User.plugin(passportLocalMongoose, {
   usernameField: 'email',
-  usernameQueryFields: ['email'],
   limitAttempts: true,
-  lastLoginField: 'lastConnection'
+  lastLoginField: 'lastConnection',
 });
 
 module.exports = mongoose.model('User', User);

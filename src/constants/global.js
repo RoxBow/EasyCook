@@ -1,6 +1,5 @@
 import { tabBar, greenApp } from './colors';
 import { LocaleConfig } from 'react-native-calendars';
-
 const { tabBarSelected, textDefault, backgroundTab } = tabBar;
 
 /**
@@ -82,7 +81,7 @@ export const themeCalendar = {
   textMonthFontWeight: 'bold',
   textDayFontSize: 16,
   textMonthFontSize: 16,
-  textDayHeaderFontSize: 16
+  textDayHeaderFontSize: 16,
 };
 
 export const tabBarIcon = {

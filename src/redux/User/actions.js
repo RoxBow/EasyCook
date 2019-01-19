@@ -1,56 +1,71 @@
 import axios from 'axios';
 import { serverUrl, STATUS } from '../../constants/global';
 import { AsyncStorage } from 'react-native';
+import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
 export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
-export const SET_USER = 'SET_USER';
 export const LOGOUT = 'LOGOUT';
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const SET_ERROR = 'SET_ERROR';
+export const SET_USER = 'SET_USER';
 
-export const requestValidityToken = (token, navigation) => {
-  return dispatch => {
-    axios
-      .get(`${serverUrl}/api/auth/token`, {
-        headers: { Authorization: 'bearer ' + token }
-      })
-      .then(({ data }) => {
-        if (data.status === SUCCESS) {
-          dispatch(setUser(data.user));
-
-          // redirect to app
-          navigation.navigate('App');
-        } else {
-          navigation.navigate('Auth');
-        } 
-      })
-      .catch(err => {
-        dispatch(setError(err.response.data));
-        navigation.navigate('Auth');
-      });
-  };
+export const addShoppingList = (name, aliments, navigation) => async dispatch => {
+  return axios
+    .post(
+      `${serverUrl}/api/user/shoppingList/add`,
+      {
+        name,
+        aliments
+      },
+      { headers: { Authorization: 'bearer ' + (await getToken()) } }
+    )
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        navigation.navigate('ListShoppingList');
+      }
+    })
+    .catch(err => {
+      dispatch(setError(err.response.data));
+    });
 };
 
-export const requestSignUp = (email, username, password) => {
-  return dispatch => {
-    axios
-      .post(`${serverUrl}/api/auth/signUp`, {
-        email,
-        username,
-        password
-      })
-      .then(({ data }) => {
-        dispatch(setMessageInfo(data.messageInfo));
+export const requestValidityToken = (token, navigation) => dispatch => {
+  axios
+    .get(`${serverUrl}/api/auth/token`, {
+      headers: { Authorization: 'bearer ' + token }
+    })
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        dispatch(setUser(data.user));
 
         // redirect to app
-        navigation.navigate(data.status === STATUS.SUCCESS ? 'Auth' : 'Auth');
-      })
-      .catch(err => {
-        dispatch(setError(err.response.data.err.message));
-      });
-  };
+        navigation.navigate('App');
+      } else {
+        navigation.navigate('Auth');
+      }
+    })
+    .catch(err => {
+      // dispatch(setError(err.response.data));
+      navigation.navigate('Auth');
+    });
+};
+
+export const requestSignUp = (email, username, password) => dispatch => {
+  axios
+    .post(`${serverUrl}/api/auth/signUp`, {
+      email,
+      username,
+      password
+    })
+    .then(({ data }) => {
+      dispatch(setMessageInfo(data.messageInfo));
+    })
+    .catch(err => {
+      console.log('signup', err);
+      dispatch(setError(err.response.data.err));
+    });
 };
 
 export const requestLogin = (email, password, navigation) => {
@@ -83,20 +98,24 @@ export const setUser = user => ({
   info: user
 });
 
-export const setAuthentication = isAuthenticated => {
-  return {
-    type: SET_AUTHENTICATION,
-    isAuthenticated
-  };
-};
+export const setAuthentication = isAuthenticated => ({
+  type: SET_AUTHENTICATION,
+  isAuthenticated
+});
 
-export const logout = () => {
-  axios.get(`${serverUrl}/api/auth/logout`).catch(err => {
-    console.log(err.response.data);
-  });
-
-  return {
-    type: LOGOUT
+export const requestLogout = navigation => {
+  return dispatch => {
+    axios
+      .get(`${serverUrl}/api/auth/logout`)
+      .then(({ data }) => {
+        if (data.status === STATUS.SUCCESS) {
+          dispatch(setMessageInfo(data.messageInfo));
+          navigation.navigate('Auth');
+        }
+      })
+      .catch(err => {
+        dispatch(setError(err.response.data.err.message));
+      });
   };
 };
 

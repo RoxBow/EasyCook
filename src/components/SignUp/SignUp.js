@@ -57,8 +57,8 @@ class SignUp extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, { navigation }) => ({
-  requestSignUp: (email, password) => dispatch(requestSignUp(email, username, password))
+const mapDispatchToProps = dispatch => ({
+  requestSignUp: (email, username, password) => dispatch(requestSignUp(email, username, password))
 });
 
 export default connect(null, mapDispatchToProps)(SignUp);

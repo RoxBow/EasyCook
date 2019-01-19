@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: '#fff',
     padding: 8,
-    height: 80,
+    height: 100,
     borderRadius: 6
   },
 
@@ -31,7 +31,17 @@ const styles = StyleSheet.create({
 
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+
+  wrapperLike: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  iconLike: {
+    color: 'red',
+    marginRight: 5,
   }
 });
 

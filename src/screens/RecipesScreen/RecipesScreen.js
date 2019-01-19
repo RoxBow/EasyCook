@@ -14,6 +14,7 @@ class RecipesScreen extends React.Component {
 
     this.state = {};
   }
+  
   componentDidMount() {
     axios
       .get(`${serverUrl}/ingredients`)

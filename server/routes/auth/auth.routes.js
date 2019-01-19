@@ -1,6 +1,3 @@
-/*
-Imports
-*/
 const express = require('express');
 const authRouter = express.Router({ mergeParams: true });
 const User = require('../../models/User');
@@ -8,9 +5,6 @@ const passport = require('passport');
 const { jwtSecret } = require('../../constants');
 const jwt = require('jsonwebtoken');
 
-/*
-Routes definition
-*/
 class AuthRouterClass {
   routes() {
     // HATEOAS
@@ -43,6 +37,7 @@ class AuthRouterClass {
 
       User.register(new User({ email, username }), password, (error, user) => {
         if (error) {
+          console.log('error',error)
           return res.status(400).send({ message: error.message });
         }
 
@@ -54,9 +49,15 @@ class AuthRouterClass {
     authRouter.post('/login', (req, res, next) => {
       passport.authenticate('local', (error, user, info) => {
         if (error) {
-          error = err.length ? error : 'Something went wrong login';
+          console.log('error login',error)
+          console.log('info', info)
+          console.log('user', user)
+          error = error && error.length ? error : 'Something went wrong login';
           return res.status(500).send({ error });
         }
+
+        console.log('TEST', user)
+
         if (!user) return res.status(401).send({ message: 'User or password is incorrect' });
 
         req.logIn(user, error => {
@@ -73,6 +74,11 @@ class AuthRouterClass {
         });
       })(req, res, next);
     });
+
+    authRouter.get('/logout', (req, res) => {
+      req.logout();
+      return res.status(200).send({ status: 'SUCCESS', message: 'Successfully logout' });
+    });
   }
 
   init() {
@@ -81,8 +87,4 @@ class AuthRouterClass {
   }
 }
 
-/*
-Export
-*/
 module.exports = AuthRouterClass;
-//
