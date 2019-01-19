@@ -1,148 +1,166 @@
 [
   {
+    "id": "F00001",
     "name": "Abricots",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/pomme.jpg"
   },
   {
-    "name": "Actinidia (Kiwi)",
+    "id": "F00002",
+    "name": "Kiwi",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/kiwi.jpg"
   },
   {
+    "id": "F00003",
     "name": "Amandes",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/amande.jpg"
   },
   {
+    "id": "F00004",
     "name": "Avocats",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/avocat.jpg"
   },
   {
-    "name": "Cassis et myrtilles",
+    "id": "F00005",
+    "name": "Myrtilles",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/myrtille.jpg"
   },
   {
+    "id": "F00006",
     "name": "Cerises",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/cerise.jpg"
   },
   {
+    "id": "F00007",
     "name": "Châtaignes",
     "kind": "fruit",
     "season": "spring",
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Clémentines, mandarines",
+    "id": "F00008",
+    "name": "Clémentines",
     "kind": "fruit",
     "season": "spring",
     "uri": "/ingredients/pomme.png"
   },
   {
+    "id": "F00009",
     "name": "Figues",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/figue.jpg"
   },
   {
+    "id": "F00010",
+    "name": "Fraise",
+    "kind": "fruit",
+    "season": "spring",
+    "uri": "/ingredients/fraise.jpg"
+  },
+  {
+    "id": "F00011",
     "name": "Framboises",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/framboise.jpg"
   },
   {
+    "id": "F00012",
     "name": "Groseilles",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/groseille.jpg"
   },
   {
-    "name": "Nectarines et brugnons",
+    "id": "F00013",
+    "name": "Nectarines",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/nectarine.jpg"
   },
   {
+    "id": "F00014",
     "name": "Noisettes",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/noisette.jpg"
   },
   {
+    "id": "F00015",
     "name": "Noix",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/noix.jpg"
   },
   {
-    "name": "Oranges, tangor",
+    "id": "F00016",
+    "name": "Oranges",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/orange.jpg"
   },
   {
+    "id": "F00017",
     "name": "Pamplemousses",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/pamplemousse.jpg"
   },
   {
-    "name": "Pavies",
-    "kind": "fruit",
-    "season": "spring",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Pêche-Nectarine",
-    "kind": "fruit",
-    "season": "spring",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
+    "id": "F00018",
     "name": "Pêches",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/peche.jpg"
   },
   {
-    "name": "Poires de table",
-    "kind": "fruit",
-    "season": "spring",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Pommes de table",
-    "kind": "fruit",
-    "season": "spring",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
+    "id": "F00019",
     "name": "Prunes",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/prune.jpg"
   },
   {
-    "name": "Vignes à raisin de table",
+    "id": "F00020",
+    "name": "Raisin",
     "kind": "fruit",
     "season": "spring",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/raisin.jpg"
   },
   {
+    "id": "F00021",
+    "name": "Ananas",
+    "kind": "fruit",
+    "season": "spring",
+    "uri": "/ingredients/ananas.jpg"
+  },
+  {
+    "id": "F00022",
+    "name": "Kaki",
+    "kind": "fruit",
+    "season": "spring",
+    "uri": "/ingredients/kaki.jpg"
+  },
+  {
+    "id": "V00001",
     "name": "Ail",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
   {
+    "id": "V00002",
     "name": "Artichauts",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
