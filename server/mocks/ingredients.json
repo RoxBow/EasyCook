@@ -154,21 +154,22 @@
     "uri": "/ingredients/kaki.jpg"
   },
   {
-    "id": "V00001",
+    "id": "I00023",
     "name": "Ail",
     "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/ail.jpg"
   },
   {
-    "id": "V00002",
+    "id": "I00024",
     "name": "Artichauts",
     "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/artichaut.jpg"
   },
   {
-    "name": "Asperges en production",
+    "id": "I00025",
+    "name": "Asperges",
     "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/asperge.jpg"
   },
   {
     "name": "Aubergines",
@@ -197,11 +198,6 @@
   },
   {
     "name": "Céleris branches",
-    "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Céleris raves",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
@@ -281,22 +277,7 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Fraises",
-    "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Haricots à écosser et demi-secs (grain)",
-    "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Haricots secs (y compris semences)",
-    "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
-    "name": "Haricots verts (y c. haricots beurre)",
+    "name": "Haricots verts",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
@@ -306,7 +287,7 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Lentilles (y compris semences)",
+    "name": "Lentilles",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
@@ -316,7 +297,7 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Maïs doux",
+    "name": "Maïs",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
@@ -326,7 +307,7 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Navets potagers",
+    "name": "Navets",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
@@ -356,27 +337,42 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Pois secs (pois de casserie) (y compris semences)",
+    "name": "Pois secs",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Poivrons et piments",
+    "name": "Poivrons",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Potirons, courges, citrouilles, giraumon",
+    "name": "Piments",
+    "kind": "vegetable",
+    "uri": "/ingredients/pomme.png"
+  },
+  {
+    "name": "Potirons",
+    "kind": "vegetable",
+    "uri": "/ingredients/pomme.png"
+  },
+  {
+    "name": "Courges",
+    "kind": "vegetable",
+    "uri": "/ingredients/pomme.png"
+  },
+  {
+    "name": "Citrouilles",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },
   {
     "name": "Radis",
     "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
+    "uri": "/ingredients/radis.jpg"
   },
   {
-    "name": "Salsifis et scorsonères",
+    "name": "Salsifis",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
   },

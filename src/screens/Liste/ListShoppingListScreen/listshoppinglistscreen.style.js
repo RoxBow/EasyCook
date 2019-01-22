@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
+  container: {
     backgroundColor: '#ddd',
+    flex: 1,
+  },
+
+  wrapper: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

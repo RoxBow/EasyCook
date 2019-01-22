@@ -4,8 +4,9 @@ const jwtSecret = {
   secret: 'jwt-secret'
 };
 
-const optionsJwtStrategy = {};
-optionsJwtStrategy.jwtFromRequest = KindExtractJwt.fromAuthHeaderAsBearerToken();
-optionsJwtStrategy.secretOrKey = jwtSecret.secret;
+const optionsJwtStrategy = {
+  jwtFromRequest: KindExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: jwtSecret.secret
+};
 
 module.exports = { jwtSecret, optionsJwtStrategy };

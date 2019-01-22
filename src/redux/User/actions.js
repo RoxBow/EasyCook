@@ -10,24 +10,89 @@ export const LOGOUT = 'LOGOUT';
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_USER = 'SET_USER';
+export const UPDATE_SHOPPING_LIST = 'UPDATE_SHOPPING_LIST';
+export const SET_FETCH = 'SET_FETCH';
 
-export const addShoppingList = (name, aliments, navigation) => async dispatch => {
-  return axios
-    .post(
-      `${serverUrl}/api/user/shoppingList/add`,
-      {
-        name,
-        aliments
-      },
-      { headers: { Authorization: 'bearer ' + (await getToken()) } }
-    )
+const axiosUser = axios.create({
+  baseURL: `${serverUrl}/api/user`
+});
+
+axiosUser.interceptors.request.use(
+  async options => {
+    options.headers['Authorization'] = 'bearer ' + (await getToken());
+    return options;
+  },
+  error => {
+    console.log('Request error: ', error);
+    return Promise.reject(error);
+  }
+);
+
+export const fetchShoppingList = () => {
+  return dispatch => {
+    dispatch(setFetch(true));
+
+    axiosUser
+      .get('/shoppingList')
+      .then(({ data }) => {
+        dispatch(updateShoppingList(data.shoppingList));
+        dispatch(setFetch(false));
+      })
+      .catch(err => {});
+  };
+};
+
+export const toggleValidAliment = (idShoppingList, idAliment, navigation) => async dispatch => {
+  return axiosUser
+    .post('/shoppingList/toggleValidAliment', {
+      idAliment,
+      idShoppingList
+    })
     .then(({ data }) => {
       if (data.status === SUCCESS) {
-        navigation.navigate('ListShoppingList');
+        navigation.setParams({ ...data.currentShoppingList });
+        dispatch(updateShoppingList(data.shoppingList));
       }
     })
     .catch(err => {
-      dispatch(setError(err.response.data));
+      console.log(err.response);
+      // dispatch(setError(err.response.data));
+    });
+};
+
+export const addShoppingList = (name, ingredients, navigation) => async dispatch => {
+  return axiosUser
+    .post('/shoppingList/add', {
+      name,
+      ingredients
+    })
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        dispatch(updateShoppingList(data.shoppingList));
+        navigation.goBack();
+      }
+    })
+    .catch(err => {
+      // console.log(err);
+      // dispatch(setError(err.response.data));
+    });
+};
+
+export const addIngredientToShoppingListItem = (idIngredient, idShoppingList, navigation) => dispatch => {
+  return axiosUser
+    .post('/shoppingList/shoppingListItem/add', {
+      idIngredient,
+      idShoppingList
+    })
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        dispatch(updateShoppingList(data.shoppingList));
+        navigation.pop(2);
+      }
+    })
+    .catch(err => {
+      // console.log(err);
+      // dispatch(setError(err.response.data));
     });
 };
 
@@ -47,6 +112,7 @@ export const requestValidityToken = (token, navigation) => dispatch => {
       }
     })
     .catch(err => {
+      // console.log('err', err.response);
       // dispatch(setError(err.response.data));
       navigation.navigate('Auth');
     });
@@ -63,7 +129,7 @@ export const requestSignUp = (email, username, password) => dispatch => {
       dispatch(setMessageInfo(data.messageInfo));
     })
     .catch(err => {
-      dispatch(setError(err.response.data.err));
+      // dispatch(setError(err.response.data.err));
     });
 };
 
@@ -77,11 +143,11 @@ export const requestLogin = (email, password, navigation) => {
       .then(({ data }) => {
         AsyncStorage.setItem('userToken', data.token);
         dispatch(setUser(data.user));
-
         navigation.navigate(data.status === STATUS.SUCCESS ? 'App' : 'Auth');
       })
       .catch(err => {
-        dispatch(setError(err.response.data.message));
+        // console.log('err', err);
+        // dispatch(setError(err.response.data.message));
       });
   };
 };
@@ -91,9 +157,19 @@ export const setMessageInfo = messageInfo => ({
   messageInfo
 });
 
+export const setFetch = fetch => ({
+  type: SET_FETCH,
+  isFetching: fetch
+});
+
 export const setUser = user => ({
   type: SET_USER,
   info: user
+});
+
+export const updateShoppingList = shoppingLists => ({
+  type: UPDATE_SHOPPING_LIST,
+  shoppingLists
 });
 
 export const setAuthentication = isAuthenticated => ({
@@ -112,7 +188,7 @@ export const requestLogout = navigation => {
         }
       })
       .catch(err => {
-        dispatch(setError(err.response.data.err.message));
+        // dispatch(setError(err.response.data.err.message));
       });
   };
 };

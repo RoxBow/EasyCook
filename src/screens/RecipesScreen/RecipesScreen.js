@@ -27,6 +27,7 @@ class RecipesScreen extends React.Component {
         console.log(err);
       });
   }
+  
   render() {
     const { ingredients } = this.state;
 

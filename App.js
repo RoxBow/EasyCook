@@ -7,6 +7,8 @@ import { AppLoading, Asset, Icon, Font } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import rootReducer from './src/redux/index';
 
+import { requestIngredients } from './src/redux/Recipe/actions';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk)));
 
@@ -17,6 +19,7 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     // await AsyncStorage.clear();
+    store.dispatch(requestIngredients());
 
     return Promise.all([
       Asset.loadAsync([

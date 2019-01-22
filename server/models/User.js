@@ -25,9 +25,12 @@ const User = new Schema(
     },
     avatar: { type: Schema.Types.ObjectId, ref: 'Image' },
     recipes: [String],
-    shoppingList: [{ type: Schema.Types.ObjectId, ref: 'ShoppingList' }],
+    shoppingLists: [{ type: Schema.Types.ObjectId, ref: 'ShoppingList' }],
     events: [String],
     goodDeals: [],
+    bio: {
+      type: String,
+    },
     lastConnection: Date,
     isVerified: {
       type: Boolean,

@@ -2,12 +2,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const ingredient = mongoose.Schema(
+  {
+    id: String,
+    isValidate: {
+      type: Boolean,
+      default: false
+    }
+  },
+  { _id: false }
+);
+
 const ShoppingList = new Schema(
   {
     name: String,
     maxDate: Date,
-    aliments: [String],
-    ourAliments: [String],
+    ingredients: [ingredient],
+    isPin: Boolean
   },
   {
     timestamps: {

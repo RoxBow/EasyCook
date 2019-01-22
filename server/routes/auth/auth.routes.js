@@ -40,7 +40,8 @@ class AuthRouterClass {
 
       user.save(err => {
         if (err){
-          return res.status(400).send({ message: error.message });
+          console.log('err', err);
+          return res.status(400).send({ message: err.message });
         } else {
           return res.status(200).send({ msg: 'Success signin', user });
         }
@@ -50,7 +51,7 @@ class AuthRouterClass {
 
     // Login
     authRouter.post('/login', (req, res, next) => {
-      passport.authenticate('local', (error, user, info) => {
+      passport.authenticate('local', { session: false }, (error, user, info) => {
         if (error) {
           error = error && error.length ? error : 'Something went wrong login';
           return res.status(500).send({ error });

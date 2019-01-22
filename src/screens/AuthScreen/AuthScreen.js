@@ -1,8 +1,8 @@
 import styles from './authscreen.style';
 import React from 'react';
 import { View } from 'react-native';
-import SignIn from '../../components/SignIn/SignIn';
-import SignUp from '../../components/SignUp/SignUp';
+import SignIn from '../../components/Auth/SignIn/SignIn';
+import SignUp from '../../components/Auth/SignUp/SignUp';
 
 class AuthScreen extends React.Component {
   constructor() {

@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { greyApp } from '../../constants/colors';
 
 const styles = StyleSheet.create({
-  item: {
-    backgroundColor: greyApp,
-    paddingHorizontal: 5
+  container: {
+    backgroundColor: '#ddd',
+    flex: 1
   },
+
   iconSearch: {
     paddingVertical: 5
   }

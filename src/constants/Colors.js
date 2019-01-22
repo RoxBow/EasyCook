@@ -1,6 +1,6 @@
 export const mainText = '#000';
 
-export const greenApp = '#51D8C5';
+export const greenApp = '#3CC6B2';
 export const greyApp = '#E5E5E5';
 
 export const tabBar = {

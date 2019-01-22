@@ -1,19 +1,19 @@
 import styles from './addshoppinglistscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { Button, TextInput, View, TouchableOpacity, Text } from 'react-native';
+import { Button, TextInput, View, TouchableOpacity } from 'react-native';
 import { Container, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
-import { serverUrl } from '../../constants/global';
-import { addShoppingList } from '../../redux/User/actions';
+import { serverUrl } from '../../../constants/global';
+import { addShoppingList } from '../../../redux/User/actions';
 
 class AddShoppingListScreen extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      name: "Mon anniv"
+      name: 'Mon anniv'
     };
 
     this.toggleIngredient = this.toggleIngredient.bind(this);
@@ -21,16 +21,11 @@ class AddShoppingListScreen extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get(`${serverUrl}/ingredients`)
-      .then(({ data }) => {
-        this.setState({
-          ingredients: data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const { refIngredients } = this.props;
+
+    this.setState({
+      ingredients: refIngredients
+    });
   }
 
   toggleIngredient(name) {
@@ -52,7 +47,7 @@ class AddShoppingListScreen extends React.Component {
     const ingredienntSelected = [];
 
     ingredients.map(({ isSelected, id }) => {
-      if (isSelected) ingredienntSelected.push(id);
+      if (isSelected) ingredienntSelected.push({ id });
     });
 
     return ingredienntSelected;
@@ -94,11 +89,15 @@ class AddShoppingListScreen extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  refIngredients: state.recipe.refIngredients
+});
+
 const mapDispatchToProps = (dispatch, { navigation }) => ({
-  addShoppingList: (name, aliments) => dispatch(addShoppingList(name, aliments, navigation))
+  addShoppingList: (name, ingredients) => dispatch(addShoppingList(name, ingredients, navigation))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddShoppingListScreen);

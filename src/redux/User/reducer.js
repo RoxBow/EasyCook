@@ -4,11 +4,13 @@ import {
   SET_AUTHENTICATION,
   LOGOUT,
   SET_ERROR,
+  UPDATE_SHOPPING_LIST,
+  SET_FETCH
 } from './actions';
 
 const initialState = {
   isAuthenticated: false,
-  error: ''
+  error: '',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -24,15 +26,28 @@ const userReducer = (state = initialState, action) => {
         isAuthenticated: true,
         info: action.info
       };
+    case SET_FETCH:
+      return {
+        ...state,
+        isFetching: action.isFetching
+      };
+    case UPDATE_SHOPPING_LIST:
+      return {
+        ...state,
+        info: {
+          ...state.info,
+          shoppingLists: action.shoppingLists
+        }
+      };
     case LOGOUT:
       return {
         ...state,
-        isAuthenticated: false,
+        isAuthenticated: false
       };
     case SET_AUTHENTICATION:
       return {
         ...state,
-        isAuthenticated: action.isAuthenticated,
+        isAuthenticated: action.isAuthenticated
       };
     case SET_ERROR:
       return {

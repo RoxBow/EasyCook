@@ -73,7 +73,7 @@ class CalendarScreen extends React.Component {
         this.onUpdateSelectedDate(day);
       })
       .catch(err => {
-        console.log(err);
+        console.log('err',err);
       });
   }
 

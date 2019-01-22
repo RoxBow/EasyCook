@@ -7,10 +7,9 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
-const LocalStrategy = require('passport-local').Strategy;
-const JwtStrategy = require('passport-jwt').Strategy;
-const optionsJwtStrategy = require('./constants').optionsJwtStrategy;
 const RateLimit = require('express-rate-limit');
+const LocalStrategy = require('./passport.config').PassportLocalStrategy;
+const JwtStrategy = require('./passport.config').PassportJwtStrategy;
 
 const { mainRouter } = require('./routes/main.router');
 
@@ -76,65 +75,20 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 app.use('/', mainRouter);
 
 db.on('error', console.error.bind(console, 'Error connect database'));
-db.once('open', () => {
-  console.log('Connected to database');
-});
+db.once('open', () => !console.log('Connected to database'));
 
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: 'email',
-      passwordField: 'password'
-    },
-    (email, password, done) => {
-      User.findOne({ email })
-        .populate('shoppingList')
-        .exec((err, user) => {
-          if (err) {
-            return done(err);
-          }
-
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
-          }
-
-          if (!user.validPassword(password, user.password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-
-          return done(null, user);
-        });
-    }
-  )
-);
-
-passport.use(
-  new JwtStrategy(optionsJwtStrategy, (jwt_payload, done) => {
-    User.findOne({ username: jwt_payload.id })
-      .populate('shoppingList')
-      .exec((err, user) => {
-        if (err) {
-          console.log('Erreur identification avec le token');
-          return;
-        }
-
-        if (user) {
-          return done(null, user);
-        }
-      });
-  })
-);
+//=> Passport Strategy
+passport.use(LocalStrategy);
+passport.use(JwtStrategy);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .populate('shoppingList')
-    .exec((err, user) => {
-      done(err, user);
-    });
+  User.findById(id).exec((err, user) => {
+    done(err, user);
+  });
 });
 
 /* # fetch data # */

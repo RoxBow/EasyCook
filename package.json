@@ -16,7 +16,6 @@
     "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
-    "dotenv": "^6.2.0",
     "expo": "^32.0.0",
     "express": "^4.16.4",
     "express-rate-limit": "^3.3.2",
@@ -39,6 +38,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "dotenv": "^6.2.0",
     "babel-preset-expo": "^5.0.0",
     "concurrently": "^4.1.0",
     "jest-expo": "^32.0.0",
