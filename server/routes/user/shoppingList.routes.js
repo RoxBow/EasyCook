@@ -14,9 +14,9 @@ class ShoppingListRouterClass {
     });
 
     shoppingListRouter.post('/add', (req, res) => {
-      const { name, ingredients } = req.body;
+      const { name, maxDate } = req.body;
 
-      const shoppingListAdded = new ShoppingList({ name, ingredients });
+      const shoppingListAdded = new ShoppingList({ name, maxDate });
 
       shoppingListAdded.save(err => {
         if (err) {
@@ -32,8 +32,6 @@ class ShoppingListRouterClass {
           .populate('shoppingLists')
           .exec((err, user) => {
             if (err) console.log('Something wrong when updating data!');
-
-            console.log('user', user);
 
             res.status(200).send({ status: 'SUCCESS', shoppingList: user.shoppingLists });
           });
@@ -58,6 +56,30 @@ class ShoppingListRouterClass {
               res.status(200).send({
                 status: 'SUCCESS',
                 currentShoppingList: updatedShoppingList,
+                shoppingList: user.shoppingLists
+              });
+            });
+        });
+      });
+    });
+
+    shoppingListRouter.post('/shoppingListItem/togglePin', (req, res) => {
+      const { idShoppingList } = req.body;
+
+      ShoppingList.findById(idShoppingList, (err, shoppingList) => {
+        if (err) console.log(err);
+
+        shoppingList.isPin = !shoppingList.isPin;
+
+        shoppingList.save((err, updatedShoppingList) => {
+          if (err) console.log(err);
+
+          User.findById({ _id: req.user._id })
+            .populate('shoppingLists')
+            .exec((err, user) => {
+              console.log('USER', user.shoppingLists)
+              res.status(200).send({
+                status: 'SUCCESS',
                 shoppingList: user.shoppingLists
               });
             });

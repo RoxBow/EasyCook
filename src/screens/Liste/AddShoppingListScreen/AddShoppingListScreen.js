@@ -1,23 +1,20 @@
 import styles from './addshoppinglistscreen.style';
 import React from 'react';
-import axios from 'axios';
-import { Button, TextInput, View, TouchableOpacity } from 'react-native';
-import { Container, Thumbnail } from 'native-base';
+import { TextInput, View, Text } from 'react-native';
+import { Container, DatePicker, Button } from 'native-base';
 import { connect } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
-import { serverUrl } from '../../../constants/global';
-import { addShoppingList } from '../../../redux/User/actions';
+import { addShoppingList } from '../../../redux/ShoppingList/actions';
 
 class AddShoppingListScreen extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      name: 'Mon anniv'
+      name: 'Mon anniv',
+      chosenDate: new Date()
     };
 
-    this.toggleIngredient = this.toggleIngredient.bind(this);
-    this.getIngredientSelected = this.getIngredientSelected.bind(this);
+    this.setDate = this.setDate.bind(this);
   }
 
   componentDidMount() {
@@ -28,34 +25,13 @@ class AddShoppingListScreen extends React.Component {
     });
   }
 
-  toggleIngredient(name) {
-    const { ingredients } = this.state;
-
-    const ingredientsUpdate = ingredients.map(ingredient => {
-      if (ingredient.name === name) return { ...ingredient, isSelected: !ingredient.isSelected };
-
-      return ingredient;
-    });
-
-    this.setState({
-      ingredients: ingredientsUpdate
-    });
-  }
-
-  getIngredientSelected() {
-    const { ingredients } = this.state;
-    const ingredienntSelected = [];
-
-    ingredients.map(({ isSelected, id }) => {
-      if (isSelected) ingredienntSelected.push({ id });
-    });
-
-    return ingredienntSelected;
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate });
   }
 
   render() {
     const { addShoppingList } = this.props;
-    const { name, ingredients } = this.state;
+    const { name, chosenDate } = this.state;
 
     return (
       <Container style={styles.container}>
@@ -64,26 +40,32 @@ class AddShoppingListScreen extends React.Component {
             style={styles.input}
             onChangeText={name => this.setState({ name })}
             value={this.state.name}
-            placeholder="Anniv' Cécile"
+            placeholder="Donner un nom à la liste"
           />
         </View>
-        <ScrollView contentContainerStyle={styles.wrapperIngredient}>
-          {ingredients &&
-            ingredients.map(({ name, uri, isSelected }, i) => (
-              <TouchableOpacity
-                key={i}
-                style={[isSelected && styles.isSelected, styles.ingredient]}
-                onPress={() => this.toggleIngredient(name)}
-              >
-                <Thumbnail square large source={{ uri: `${serverUrl}/assets/${uri}` }} />
-              </TouchableOpacity>
-            ))}
-        </ScrollView>
+
+        <DatePicker
+          minimumDate={new Date()}
+          maximumDate={new Date(2019, 12, 31)}
+          locale={'fr'}
+          modalTransparent={false}
+          animationType={'fade'}
+          androidMode={'default'}
+          placeHolderText="Définir une date de fin"
+          textStyle={{ color: '#000' }}
+          placeHolderTextStyle={{ color: '#d3d3d3' }}
+          onDateChange={this.setDate}
+          disabled={false}
+        />
+        <Text>Date: {chosenDate.toString().substr(4, 12)}</Text>
 
         <Button
-          title="Sauvegarder"
-          onPress={() => addShoppingList(name, this.getIngredientSelected())}
-        />
+          style={styles.btnValidate}
+          rounded
+          onPress={() => addShoppingList(name, chosenDate)}
+        >
+          <Text style={styles.btnValidateText}>Créer</Text>
+        </Button>
       </Container>
     );
   }
@@ -94,7 +76,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
-  addShoppingList: (name, ingredients) => dispatch(addShoppingList(name, ingredients, navigation))
+  addShoppingList: (name, maxDate) => dispatch(addShoppingList(name, maxDate, navigation))
 });
 
 export default connect(

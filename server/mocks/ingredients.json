@@ -302,11 +302,6 @@
     "uri": "/ingredients/pomme.png"
   },
   {
-    "name": "Melons",
-    "kind": "vegetable",
-    "uri": "/ingredients/pomme.png"
-  },
-  {
     "name": "Navets",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
@@ -385,5 +380,55 @@
     "name": "Truffes",
     "kind": "vegetable",
     "uri": "/ingredients/pomme.png"
+  },
+  {
+    "name": "Fruit du dragon",
+    "kind": "fruit",
+    "uri": "/ingredients/fruit_du_dragon.jpg"
+  },
+  {
+    "name": "Papaye",
+    "kind": "fruit",
+    "uri": "/ingredients/papaye.jpg"
+  },
+  {
+    "name": "Fruit de la passion",
+    "kind": "fruit",
+    "uri": "/ingredients/fruit_de_la_passion.jpg"
+  },
+  {
+    "name": "Noix de coco",
+    "kind": "fruit",
+    "uri": "/ingredients/noix_de_coco.jpg"
+  },
+  {
+    "name": "Litchi",
+    "kind": "fruit",
+    "uri": "/ingredients/litchi.jpg"
+  },
+  {
+    "name": "Mangue",
+    "kind": "fruit",
+    "uri": "/ingredients/mangue.jpg"
+  },
+  {
+    "name": "Mûres",
+    "kind": "fruit",
+    "uri": "/ingredients/mures.jpg"
+  },
+  {
+    "name": "Banane",
+    "kind": "fruit",
+    "uri": "/ingredients/banane.jpg"
+  },
+  {
+    "name": "Pastèque",
+    "kind": "fruit",
+    "uri": "/ingredients/pasteque.jpg"
+  },
+  {
+    "name": "Melon",
+    "kind": "fruit",
+    "uri": "/ingredients/melon.jpg"
   }
 ]

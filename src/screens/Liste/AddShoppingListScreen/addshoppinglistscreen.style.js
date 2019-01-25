@@ -1,31 +1,34 @@
 import { StyleSheet } from 'react-native';
+import { greenApp } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
   },
+
   wrapperInput: {
     marginBottom: 10,
   },
-  wrapperIngredient: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  ingredient: {
-    marginBottom: 5,
-  },
-  isSelected: {
-    borderColor: 'green',
-    borderWidth: 5,
-  },  
+
   input: {
-    backgroundColor: '#ccc',
+    backgroundColor: '#fff',
     color: '#000',
-    fontSize: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    fontSize: 20,
+    paddingVertical: 60,
+    paddingHorizontal: 15,
+  },
+
+  btnValidate: {
+    paddingHorizontal: 50,
+    backgroundColor: greenApp,
+    alignSelf: 'center'
+  },
+
+  btnValidateText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 15,
   }
 });
 

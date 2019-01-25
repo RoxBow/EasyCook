@@ -28,74 +28,6 @@ axiosUser.interceptors.request.use(
   }
 );
 
-export const fetchShoppingList = () => {
-  return dispatch => {
-    dispatch(setFetch(true));
-
-    axiosUser
-      .get('/shoppingList')
-      .then(({ data }) => {
-        dispatch(updateShoppingList(data.shoppingList));
-        dispatch(setFetch(false));
-      })
-      .catch(err => {});
-  };
-};
-
-export const toggleValidAliment = (idShoppingList, idAliment, navigation) => async dispatch => {
-  return axiosUser
-    .post('/shoppingList/toggleValidAliment', {
-      idAliment,
-      idShoppingList
-    })
-    .then(({ data }) => {
-      if (data.status === SUCCESS) {
-        navigation.setParams({ ...data.currentShoppingList });
-        dispatch(updateShoppingList(data.shoppingList));
-      }
-    })
-    .catch(err => {
-      console.log(err.response);
-      // dispatch(setError(err.response.data));
-    });
-};
-
-export const addShoppingList = (name, ingredients, navigation) => async dispatch => {
-  return axiosUser
-    .post('/shoppingList/add', {
-      name,
-      ingredients
-    })
-    .then(({ data }) => {
-      if (data.status === SUCCESS) {
-        dispatch(updateShoppingList(data.shoppingList));
-        navigation.goBack();
-      }
-    })
-    .catch(err => {
-      // console.log(err);
-      // dispatch(setError(err.response.data));
-    });
-};
-
-export const addIngredientToShoppingListItem = (idIngredient, idShoppingList, navigation) => dispatch => {
-  return axiosUser
-    .post('/shoppingList/shoppingListItem/add', {
-      idIngredient,
-      idShoppingList
-    })
-    .then(({ data }) => {
-      if (data.status === SUCCESS) {
-        dispatch(updateShoppingList(data.shoppingList));
-        navigation.pop(2);
-      }
-    })
-    .catch(err => {
-      // console.log(err);
-      // dispatch(setError(err.response.data));
-    });
-};
-
 export const requestValidityToken = (token, navigation) => dispatch => {
   axios
     .get(`${serverUrl}/api/auth/token`, {
@@ -165,11 +97,6 @@ export const setFetch = fetch => ({
 export const setUser = user => ({
   type: SET_USER,
   info: user
-});
-
-export const updateShoppingList = shoppingLists => ({
-  type: UPDATE_SHOPPING_LIST,
-  shoppingLists
 });
 
 export const setAuthentication = isAuthenticated => ({

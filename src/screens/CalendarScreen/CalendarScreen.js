@@ -73,7 +73,7 @@ class CalendarScreen extends React.Component {
         this.onUpdateSelectedDate(day);
       })
       .catch(err => {
-        console.log('err',err);
+        console.log('err', err);
       });
   }
 
@@ -115,7 +115,15 @@ class CalendarScreen extends React.Component {
           }
         }}
         markingType={'multi-dot'}
-        theme={{ ...themeCalendar }}
+        theme={{ ...themeCalendar,
+          'stylesheet.calendar.header': {
+            header: {
+              height: 0
+            },
+            week: {
+              height: 0
+            }
+          }}}
       />
     );
   }

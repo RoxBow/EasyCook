@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import CheckBox from '../Checkbox/Checkbox';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
-import { toggleValidAliment } from '../../redux/User/actions';
+import { toggleValidAliment } from '../../redux/ShoppingList/actions';
 
 const ListIngredient = ({
   title,

@@ -1,9 +1,9 @@
 import styles from './searchingredientscreen.style';
 import React from 'react';
-import { View, Text, TouchableOpacity, Icon } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Item, Header, Input } from 'native-base';
-import { EvilIcons, AntDesign } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 
 class SearchIngredientScreen extends React.Component {
   constructor(props) {
@@ -38,12 +38,6 @@ class SearchIngredientScreen extends React.Component {
               placeholder="Rechercher un ingredient"
             />
           </Item>
-          <AntDesign
-            name="closecircle"
-            size={25}
-            color="#000"
-            onPress={() => this.props.navigation.goBack()}
-          />
         </Header>
 
         <View>

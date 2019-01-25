@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { AntDesign } from '@expo/vector-icons';
 import { Header, Button } from 'native-base';
-import { addIngredientToShoppingListItem } from '../../../redux/User/actions';
+import { addIngredientToShoppingListItem } from '../../../redux/ShoppingList/actions';
 
 class AddIngredientScreen extends React.Component {
   constructor(props) {

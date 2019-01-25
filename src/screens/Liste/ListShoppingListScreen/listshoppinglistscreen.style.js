@@ -7,11 +7,17 @@ const styles = StyleSheet.create({
   },
 
   wrapper: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 20,
+  },
+
+  title: {
+    marginBottom: 5,
+  },
+
+  wrapperShoppingList: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   }
 });
 

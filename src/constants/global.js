@@ -5,6 +5,7 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
 /**
  * CONFIG
  */
+
 export const serverUrl = 'http://localhost:3333';
 
 export const STATUS = {
