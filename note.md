@@ -9,7 +9,7 @@ User: {
 }
 
 [SHOPPING LIST] 
--> User creates shopping list; DONE
+-> User creates shopping list
 -> User opens shopping list [
   - User can add ingredient -> Search name ingredient -> User select quantity ingredient -> Add ingredient to shopping list
   - User can validate an ingredient
@@ -17,4 +17,4 @@ User: {
   - User can share shopping list with users
 ];
 
-[]
+[EVENT]

@@ -37,14 +37,14 @@ mongoose.connect(
 const db = mongoose.connection;
 
 // security (limit number request)
-const apiLimiter = new RateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 2000,
-  delayMs: 0 // disabled
-});
+// const apiLimiter = new RateLimit({
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 2000,
+//   delayMs: 0 // disabled
+// });
 
 // stop all next request from 150
-app.use('/', apiLimiter);
+// app.use('/', apiLimiter);
 
 // configure cors
 app.use(cors());
@@ -61,7 +61,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Config bodyParser
-app.use(bodyParser.json()); // For parsing application/json
+app.use(bodyParser.json({ limit: '50mb', extended: true })); // For parsing application/json
 app.use(
   bodyParser.urlencoded({
     extended: true,

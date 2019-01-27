@@ -36,11 +36,9 @@ class ShoppingListItem extends React.Component {
   }
 
   redirectToShoppingListItem() {
-    const { navigation, ingredients } = this.props;
+    const dataShoppingList = this.props;
 
-    const dataShoppingList = { ...this.props, remainingAliment: ingredients.length };
-
-    navigation.navigate('ShoppingListItem', {
+    this.props.navigation.navigate('ShoppingListItem', {
       ...dataShoppingList
     });
   }

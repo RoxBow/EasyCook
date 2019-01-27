@@ -124,7 +124,7 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    mode: 'modal'
+    mode: 'modal',
   }
 );
 

@@ -30,12 +30,12 @@ class ShoppingListScreen extends React.Component {
       const fruitsAliment = getIngredientsFromKind(ingredientsNotValidate, 'fruit');
       const vegetablesAliment = getIngredientsFromKind(ingredientsNotValidate, 'vegetable');
 
-      const bruh = getValidateIngredientsFromId(ingredients, refIngredients, true);
+      const validateAliments = getValidateIngredientsFromId(ingredients, refIngredients, true);
 
       return {
         fruitsAliment,
         vegetablesAliment,
-        validateAliments: bruh || []
+        validateAliments
       };
     }
 
@@ -43,17 +43,21 @@ class ShoppingListScreen extends React.Component {
   }
 
   renderRemainingAliments() {
-    const { fruitsAliment, vegetablesAliment } = this.state;
+    const { ingredients } = this.props.navigation.state.params;
 
-    const remainingAliment = fruitsAliment.length + vegetablesAliment.length;
+    const ingredientsValidate = ingredients.filter(({ isValidate }) => isValidate);
+    const ingredientsNotValidate = ingredients.filter(({ isValidate }) => !isValidate);
+    const nbrIngredients = ingredients.length;
 
-    if (remainingAliment > 1) {
-      return `${remainingAliment} aliments restants`;
-    } else if (remainingAliment === 0) {
-      return 'COMPLET';
+    if (ingredientsNotValidate.length > 1) {
+      return `${ingredientsNotValidate.length} ingredients restants`;
+    } else if(ingredientsValidate.length === ingredientsNotValidate.length && nbrIngredients > 1){
+      return "COMPLET";
+    } else if (nbrIngredients === 0) {
+      return "Liste vide";
     }
 
-    return `${remainingAliment} aliment restant`;
+    return `${nbrIngredients} ingredients restant`;
   }
 
   addAliment() {

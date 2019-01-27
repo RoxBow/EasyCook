@@ -3,11 +3,11 @@ import { Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { greenApp } from '../constants/colors';
 import { getTabBarIcon } from '../constants/helpers';
-import DiscoverScreen from '../screens/DiscoverScreen/DiscoverScreen';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
 
 /* # STACK # */
+import DiscoverStack from './DiscoverStack';
 import ListShoppingListStack from './ListShoppingListStack';
 
 import AccountScreen from '../screens/AccountScreen/AccountScreen';
@@ -20,16 +20,6 @@ export const styleTabBarIcon = {
   marginBottom: -3
 };
 
-const DiscoverStack = createStackNavigator({
-  Discover: DiscoverScreen
-});
-
-DiscoverStack.navigationOptions = {
-  tabBarLabel: 'Découvrir',
-  tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('discover', focused)} style={styleTabBarIcon} />
-  )
-};
 
 const RecipesStack = createStackNavigator({
   Recipes: RecipesScreen
@@ -53,7 +43,6 @@ CalendarStack.navigationOptions = {
   )
 };
 
-
 const AccountStack = createStackNavigator({
   Account: AccountScreen
 });
@@ -74,7 +63,7 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'ListShoppingListStack',
+    initialRouteName: 'DiscoverStack',
     tabBarOptions: {
       activeTintColor: greenApp,
       inactiveTintColor: '#888'
