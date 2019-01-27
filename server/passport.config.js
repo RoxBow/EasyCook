@@ -12,7 +12,7 @@ const PassportLocalStrategy = new LocalStrategy(
     session: false
   },
   (email, password, done) => {
-    User.findOne({ email }, fieldsWanted)
+    User.findOne({ email })
       .exec((err, user) => {
         if (err) {
           return done(err);
@@ -34,7 +34,7 @@ const PassportLocalStrategy = new LocalStrategy(
 );
 
 const PassportJwtStrategy = new JwtStrategy(optionsJwtStrategy, (jwt_payload, done) => {
-  User.findOne({ username: jwt_payload.id }, fieldsWanted)
+  User.findOne({ username: jwt_payload.id })
     .exec((err, user) => {
       if (err) {
         console.log('Erreur identification avec le token');

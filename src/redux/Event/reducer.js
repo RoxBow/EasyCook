@@ -1,4 +1,11 @@
-import { SET_MESSAGE_INFO, SET_ERROR, UPDATE_EVENTS, ADD_EVENT, SET_FETCH } from './actions';
+import {
+  SET_MESSAGE_INFO,
+  SET_ERROR,
+  UPDATE_EVENTS,
+  ADD_EVENT,
+  SET_FETCH,
+  UPDATE_EVENT
+} from './actions';
 
 const initialState = {
   events: [],
@@ -22,13 +29,23 @@ const eventReducer = (state = initialState, action) => {
         ...state,
         events: action.events
       };
+    case UPDATE_EVENT:
+      const updatedEvents = state.events.map(event => {
+        if (event._id === action.event._id) {
+          return action.event;
+        }
+
+        return event;
+      });
+
+      return {
+        ...state,
+        events: updatedEvents
+      };
     case ADD_EVENT:
       return {
         ...state,
-        events: [
-          ...state.events,
-          action.event
-        ]
+        events: [...state.events, action.event]
       };
     case SET_ERROR:
       return {

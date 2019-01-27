@@ -13,8 +13,12 @@ const Event = new Schema(
       maxlength: 500
     },
     isFav: Boolean,
-    isRegistered: Boolean,
-    price: Number,
+    isParticipant: Boolean,
+    price: {
+      type: Number,
+      default: 0,
+    },
+    interested: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     participants: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     image: { type: Schema.Types.ObjectId, ref: 'Image' }
   },

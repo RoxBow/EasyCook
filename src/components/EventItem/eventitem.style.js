@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
 
   wrapperActions: {
     borderTopWidth: 1,
+    borderColor: 'lightgrey',
     marginTop: 5,
     paddingVertical: 5,
     paddingRight: 15

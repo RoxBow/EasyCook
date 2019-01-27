@@ -9,13 +9,15 @@ import { FontAwesome } from '@expo/vector-icons';
 class EventItem extends React.Component {
   constructor(props) {
     super(props);
+
+    this.redirectToEventItem = this.redirectToEventItem.bind(this);
   }
 
   redirectToEventItem() {
     const dataEventItem = this.props;
 
-    this.props.navigate('EventItem', {
-      ...dataEventItem
+    this.props.navigation.navigate('EventItem', {
+      idEvent: dataEventItem._id
     });
   }
 

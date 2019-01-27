@@ -1,75 +1,151 @@
 import styles from './eventitemscreen.style';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'native-base';
+import { Button, Header } from 'native-base';
+import { AntDesign, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { toggleRegister, toggleInterested } from '../../../redux/Event/actions';
+import { currentEventSelector } from '../../../redux/Event/selectors';
 
 class EventItem extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+
+    this.formatDate = this.formatDate.bind(this);
+    this._toggleRegister = this._toggleRegister.bind(this);
+    this._toggleInterested = this._toggleInterested.bind(this);
+    this.isParticipant = this.isParticipant.bind(this);
+    this.isInterested = this.isInterested.bind(this);
+  }
+
+  formatDate(date) {
+    date = new Date(date);
+    date = date.getDate();
+  }
+
+  _toggleRegister() {
+    const { idEvent } = this.props.navigation.state.params;
+    this.props.toggleRegister(idEvent);
+  }
+
+  _toggleInterested() {
+    const { idEvent } = this.props.navigation.state.params;
+    this.props.toggleInterested(idEvent);
+  }
+
+  isParticipant() {
+    const { currentUsername, currentEvent } = this.props;
+    const { participants } = currentEvent;
+
+    return !!participants.find(({ username }) => username === currentUsername);
+  }
+
+  isInterested() {
+    const { currentUsername, currentEvent } = this.props;
+    const { interested } = currentEvent;
+
+    return !!interested.find(({ username }) => username === currentUsername);
   }
 
   render() {
-    const {
-      name,
-      date,
-      creator,
-      address,
-      description,
-      isFav,
-      price,
-      participants
-    } = this.props.navigation.state.params;
+    const { navigation, currentEvent } = this.props;
+
+    const { name, date, creator, address, description, price, participants } = currentEvent;
+
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.eventName}>{name}</Text>
-        <Text style={styles.proposedBy}>proposée par {creator.username}</Text>
-
-        <View style={styles.wrapperInfo}>
-          <View style={styles.info}>
-            <Text>{date}</Text>
+      <ScrollView>
+        <Header style={{ height: 200 }} transparent>
+          <ImageBackground
+            source={{ uri: 'https://bit.ly/2DD9kVF' }}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <AntDesign
+              size={26}
+              name="arrowleft"
+              style={{ padding: 8 }}
+              onPress={() => navigation.goBack()}
+            />
+          </ImageBackground>
+        </Header>
+        <View style={styles.wrapperContent}>
+          <View style={styles.headContent}>
+            <Text style={styles.eventName}>{name}</Text>
+            <Text style={styles.proposedBy}>proposée par {creator.username}</Text>
           </View>
-          <View style={styles.info}>
-            <Text>{address}</Text>
+          <View style={styles.wrapperInfo}>
+            <View style={styles.info}>
+              <AntDesign size={22} name="calendar" style={styles.iconInfo} />
+              <Text>{date}</Text>
+            </View>
+            <View style={styles.info}>
+              <Entypo name="location-pin" size={22} style={styles.iconInfo} />
+              <Text>{address}</Text>
+            </View>
+            <View style={styles.info}>
+              <Entypo name="price-tag" size={22} style={styles.iconInfo} />
+              <Text>{price === 0 ? 'Gratuit' : price}</Text>
+            </View>
           </View>
-          <View style={styles.info}>
-            <Text>{address}</Text>
+
+          <View style={styles.wrapperParticipants}>
+            {participants && participants.length ? (
+              <Text>{participants.length} y participent</Text>
+            ) : (
+              <Text>Aucun inscrit pour le moment</Text>
+            )}
           </View>
-        </View>
 
-        <View style={styles.participants}>
-          <Text>{participants.length} y participent</Text>
-        </View>
-
-        <View style={styles.wrapperAbout}>
-          <View>
-            <Text>CREATOR AVATAR</Text>
-            <View>
-              <Text>Organisateur</Text>
-              <Text>{creator.name}</Text>
-              <Text>{creator.bio}</Text>
+          <View style={styles.wrapperAbout}>
+            <View style={styles.wrapperDescription}>
+              <Text>A propos</Text>
+              <Text>{description}</Text>
+            </View>
+            <View style={styles.wrapperAboutInfo}>
+              <Text>CREATOR AVATAR</Text>
+              <View style={styles.aboutInfo}>
+                <Text style={styles.aboutInfoText}>Organisateur</Text>
+                <Text style={styles.aboutInfoText}>{creator.username}</Text>
+                <Text style={styles.aboutInfoText}>{creator.bio}</Text>
+              </View>
             </View>
           </View>
         </View>
         <View style={styles.wrapperActions}>
-          <Button>
-            Intéressé(e)
+          <Button
+            onPress={this._toggleInterested}
+            style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
+          >
+            <FontAwesome name={this.isInterested() ? 'star' : 'star-o'} size={22} />
+            <Text style={styles.btnActionText}>Intéressé(e)</Text>
           </Button>
-          <Button>
-            J'y participe
+          <Button style={styles.btnAction} onPress={this._toggleRegister}>
+            <MaterialCommunityIcons
+              name={this.isParticipant() ? 'check-circle' : 'check-circle-outline'}
+              size={22}
+            />
+
+            <Text style={styles.btnActionText}>J'y participe</Text>
           </Button>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({});
+const mapStateToProps = (state, { navigation }) => ({
+  currentUsername: state.user.info.username,
+  currentEvent: currentEventSelector(state.event.events, navigation.state.params.idEvent)
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggleRegister: idEvent => dispatch(toggleRegister(idEvent)),
+  toggleInterested: idEvent => dispatch(toggleInterested(idEvent))
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(EventItem);

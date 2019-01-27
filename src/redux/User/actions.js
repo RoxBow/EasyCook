@@ -111,6 +111,7 @@ export const requestLogout = navigation => {
       .then(({ data }) => {
         if (data.status === STATUS.SUCCESS) {
           dispatch(setMessageInfo(data.messageInfo));
+          AsyncStorage.removeItem('userToken');
           navigation.navigate('Auth');
         }
       })

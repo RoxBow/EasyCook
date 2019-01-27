@@ -3,19 +3,26 @@ import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getTabBarIcon } from '../constants/helpers';
 import { styleTabBarIcon } from './MainTabNavigator';
-import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
-import CreateEvent from '../screens/Discover/CreateEventScreen/CreateEventScreen';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { greenApp } from '../constants/colors';
+
+import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
+import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
+import CreateEvent from '../screens/Discover/CreateEventScreen/CreateEventScreen';
 
 const DiscoverStack = createStackNavigator(
   {
     Discover: {
       screen: DiscoverScreen,
       navigationOptions: ({ navigation }) => ({})
+    },
+    EventItem: {
+      screen: EventItemScreen,
+      navigationOptions: ({ navigation }) => ({})
     }
   },
+
   {
     headerMode: 'none'
   }

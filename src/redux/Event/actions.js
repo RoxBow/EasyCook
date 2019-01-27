@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { serverUrl, STATUS } from '../../constants/global';
 import { getToken } from '../../constants/helpers';
-import { Buffer } from 'buffer';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 const { SUCCESS, FAILURE } = STATUS;
 
 export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
 export const SET_ERROR = 'SET_ERROR';
 export const UPDATE_EVENTS = 'UPDATE_EVENTS';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const ADD_EVENT = 'ADD_EVENT';
 export const SET_FETCH = 'SET_FETCH';
 
@@ -48,7 +49,7 @@ export const createEvent = (name, date, address, description, image, navigation)
 
   return dispatch =>
     axiosEvent
-      .post('/add', {
+      .put('/add', {
         name,
         date,
         address,
@@ -58,6 +59,40 @@ export const createEvent = (name, date, address, description, image, navigation)
         if (data.status === SUCCESS) {
           dispatch(addEvent(data.event));
           navigation.goBack();
+        }
+      })
+      .catch(err => {
+        // console.log(err);
+        // dispatch(setError(err.response.data));
+      });
+};
+
+export const toggleRegister = idEvent => {
+  return dispatch =>
+    axiosEvent
+      .put('/toggleRegister', {
+        idEvent
+      })
+      .then(({ data }) => {
+        if (data.status === SUCCESS) {
+          dispatch(updateEvent(data.event));
+        }
+      })
+      .catch(err => {
+        // console.log(err);
+        // dispatch(setError(err.response.data));
+      });
+};
+
+export const toggleInterested = idEvent => {
+  return dispatch =>
+    axiosEvent
+      .put('/toggleInterested', {
+        idEvent
+      })
+      .then(({ data }) => {
+        if (data.status === SUCCESS) {
+          dispatch(updateEvent(data.event));
         }
       })
       .catch(err => {
@@ -79,6 +114,11 @@ export const setFetch = fetch => ({
 export const updateEvents = events => ({
   type: UPDATE_EVENTS,
   events
+});
+
+export const updateEvent = event => ({
+  type: UPDATE_EVENT,
+  event
 });
 
 export const addEvent = event => ({
