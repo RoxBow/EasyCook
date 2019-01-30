@@ -3,14 +3,18 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
-import { togglePin } from '../../redux/ShoppingList/actions';
-import { FontAwesome } from '@expo/vector-icons';
+import IconStar from '../Icons/IconStar';
 
 class EventItem extends React.Component {
   constructor(props) {
     super(props);
 
     this.redirectToEventItem = this.redirectToEventItem.bind(this);
+  }
+
+  isInterested() {
+    const { currentUsername, interested } = this.props;
+    return !!interested.find(({ username }) => username === currentUsername);
   }
 
   redirectToEventItem() {
@@ -22,7 +26,7 @@ class EventItem extends React.Component {
   }
 
   render() {
-    const { name, creator, isFav } = this.props;
+    const { name, creator } = this.props;
 
     return (
       <TouchableOpacity style={styles.container} onPress={this.redirectToEventItem}>
@@ -35,20 +39,15 @@ class EventItem extends React.Component {
           </View>
         </View>
         <View style={styles.wrapperActions}>
-          <FontAwesome name={isFav ? 'star' : 'star-o'} size={30} style={styles.icon} />
+          <IconStar isFill={this.isInterested()} size={30} style={styles.icon} />
         </View>
       </TouchableOpacity>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  togglePin: id => dispatch(togglePin(id))
+const mapStateToProps = state => ({
+  currentUsername: state.user.info.username
 });
 
-export default withNavigation(
-  connect(
-    null,
-    mapDispatchToProps
-  )(EventItem)
-);
+export default withNavigation(connect(mapStateToProps)(EventItem));

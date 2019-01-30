@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { greenApp } from '../constants/colors';
+import { pink } from '../constants/colors'
 import { getTabBarIcon } from '../constants/helpers';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
@@ -9,8 +9,7 @@ import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
 /* # STACK # */
 import DiscoverStack from './DiscoverStack';
 import ListShoppingListStack from './ListShoppingListStack';
-
-import AccountScreen from '../screens/AccountScreen/AccountScreen';
+import AccountStack from './AccountStack';
 
 export const styleTabBarIcon = {
   flex: 1,
@@ -19,7 +18,6 @@ export const styleTabBarIcon = {
   resizeMode: 'contain',
   marginBottom: -3
 };
-
 
 const RecipesStack = createStackNavigator({
   Recipes: RecipesScreen
@@ -43,17 +41,6 @@ CalendarStack.navigationOptions = {
   )
 };
 
-const AccountStack = createStackNavigator({
-  Account: AccountScreen
-});
-
-AccountStack.navigationOptions = {
-  tabBarLabel: 'Compte',
-  tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('account', focused)} style={styleTabBarIcon} />
-  )
-};
-
 export default createBottomTabNavigator(
   {
     DiscoverStack,
@@ -63,9 +50,9 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'DiscoverStack',
+    initialRouteName: 'AccountStack',
     tabBarOptions: {
-      activeTintColor: greenApp,
+      activeTintColor: pink,
       inactiveTintColor: '#888'
     }
   }

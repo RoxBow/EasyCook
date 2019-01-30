@@ -24,8 +24,8 @@ class EventTab extends React.Component {
   }
 }
 
-const mapStateToProps= state => ({
-  events: state.event.events
+const mapStateToProps= (state, { events }) => ({
+  events: events || state.event.events
 });
 
 const mapDispatchToProps = dispatch => ({});

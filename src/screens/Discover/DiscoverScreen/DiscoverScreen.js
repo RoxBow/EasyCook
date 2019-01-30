@@ -9,7 +9,7 @@ import { Container, Header, Left, Right, Body } from 'native-base';
 import { Item, Input } from 'native-base';
 import Layout from '../../../constants/layout';
 import { styleTab } from '../../../constants/global';
-import { tabBar, greenApp } from '../../../constants/colors';
+import { tabBar, pink } from '../../../constants/colors';
 import { fetchEvents } from '../../../redux/Event/actions';
 import { connect } from 'react-redux';
 import EventTab from '../../../components/EventTab/EvenTab';
@@ -60,7 +60,7 @@ class DiscoverScreen extends React.Component {
               <FontAwesome
                 name="location-arrow"
                 size={20}
-                color={greenApp}
+                color={pink}
                 style={{ marginHorizontal: 5 }}
               />
             </Item>
@@ -77,7 +77,7 @@ class DiscoverScreen extends React.Component {
             <Feather
               name="plus"
               size={30}
-              color={greenApp}
+              color={pink}
               style={{ marginHorizontal: 10 }}
               onPress={() => this.props.navigation.navigate('CreateEvent')}
             />

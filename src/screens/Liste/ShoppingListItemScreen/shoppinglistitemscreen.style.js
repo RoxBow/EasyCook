@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { greyApp, greenApp } from '../../../constants/colors';
+import { greyApp, pink } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   parentContainer: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 10,
     alignSelf: 'center',
-    backgroundColor: greenApp,
+    backgroundColor: pink,
   },
 
   textAddAliment: {

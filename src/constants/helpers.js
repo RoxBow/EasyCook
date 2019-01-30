@@ -18,8 +18,10 @@ export const getIngredientsFromId = (ingredients, refIngredients) =>
 
 export const getValidateIngredientsFromId = (ingredients, refIngredients, ingredientIsValidate) => {
   const filteredIngredients = getIngredientsFromId(ingredients, refIngredients);
-  return filteredIngredients.filter(({ isValidate }) => isValidate === ingredientIsValidate);;
+  return filteredIngredients.filter(({ isValidate }) => isValidate === ingredientIsValidate);
 };
 
 export const getIngredientsFromKind = (ingredients, kind) =>
   ingredients.filter(ingredient => ingredient.kind === kind);
+
+export const isUserInArray = (array, idUser) => array.some(element => element._id === idUser);

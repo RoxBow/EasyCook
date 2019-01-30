@@ -1,12 +1,13 @@
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { greenApp, greyApp } from '../../constants/colors';
+import { pink } from '../../constants/colors';
 
-export const CheckBox = ({ isChecked, size }) =>
-  isChecked ? (
-    <MaterialCommunityIcons name="circle-slice-8" size={size || 25} color={greenApp} />
-  ) : (
-    <MaterialCommunityIcons name="circle-outline" size={25} color={greyApp} />
-  );
+export const CheckBox = ({ isChecked, size }) => (
+  <MaterialCommunityIcons
+    name={isChecked ? 'circle-slice-8' : 'circle-outline'}
+    size={size || 25}
+    color={pink}
+  />
+);
 
 export default CheckBox;

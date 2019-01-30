@@ -77,7 +77,6 @@ class ShoppingListRouterClass {
           User.findById({ _id: req.user._id })
             .populate('shoppingLists')
             .exec((err, user) => {
-              console.log('USER', user.shoppingLists)
               res.status(200).send({
                 status: 'SUCCESS',
                 shoppingList: user.shoppingLists

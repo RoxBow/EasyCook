@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { greenApp } from '../../../constants/colors';
+import { pink } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 
   btnValidate: {
     paddingHorizontal: 50,
-    backgroundColor: greenApp,
+    backgroundColor: pink,
     alignSelf: 'center'
   },
 

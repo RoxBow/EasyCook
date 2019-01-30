@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { orange } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapperContent: {
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   btnActionText: {
-    fontSize: 15
+    fontSize: 15,
   }
 });
 

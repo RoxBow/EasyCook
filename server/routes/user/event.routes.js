@@ -42,7 +42,7 @@ class EventRouterClass {
       });
     }); // put /add
 
-    eventRouter.put('/toggleRegister', (req, res) => {
+    eventRouter.put('/toggleParticipate', (req, res) => {
       const { idEvent } = req.body;
 
       Event.findById(idEvent, (err, event) => {

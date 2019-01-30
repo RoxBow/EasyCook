@@ -12,8 +12,6 @@ const Event = new Schema(
       type: String,
       maxlength: 500
     },
-    isFav: Boolean,
-    isParticipant: Boolean,
     price: {
       type: Number,
       default: 0,

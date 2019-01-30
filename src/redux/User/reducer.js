@@ -24,7 +24,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        info: action.info
+        info: {
+          ...state.info,
+          ...action.info
+        }
       };
     case SET_FETCH:
       return {

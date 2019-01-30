@@ -1,4 +1,4 @@
-import { tabBar, greenApp } from './colors';
+import { tabBar, pink } from './colors';
 import { LocaleConfig } from 'react-native-calendars';
 const { tabBarSelected, textDefault, backgroundTab } = tabBar;
 
@@ -64,22 +64,22 @@ export const styleTab = {
 
 /* # CALENDAR # */
 export const styleDotCalendar = {
-  color: greenApp,
-  selectedDotColor: greenApp
+  color: pink,
+  selectedDotColor: pink
 };
 
 export const themeCalendar = {
-  backgroundColor: '#ffffff',
-  calendarBackground: '#ffffff',
+  backgroundColor: '#fff',
+  calendarBackground: '#fff',
   textSectionTitleColor: '#000',
   selectedDayBackgroundColor: 'rgba(81,216, 197, .2)',
   selectedDayTextColor: '#000',
   todayTextColor: '#000',
   dayTextColor: '#000',
   textDisabledColor: '#d9e1e8',
-  dotColor: greenApp,
-  selectedDotColor: greenApp,
-  monthTextColor: greenApp,
+  dotColor: pink,
+  selectedDotColor: pink,
+  monthTextColor: pink,
   textMonthFontWeight: 'bold',
   textDayFontSize: 16,
   textMonthFontSize: 16,

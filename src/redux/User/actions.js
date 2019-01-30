@@ -84,6 +84,21 @@ export const requestLogin = (email, password, navigation) => {
   };
 };
 
+export const saveEditUser = (info, navigation) => dispatch => {
+  axiosUser
+    .put(`/edit`, {
+      ...info,
+    })
+    .then(({ data }) => {
+      dispatch(setMessageInfo(data.messageInfo));
+      dispatch(setUser(data.user));
+      navigation.goBack();
+    })
+    .catch(err => {
+      // dispatch(setError(err.response.data.err));
+    });
+};
+
 export const setMessageInfo = messageInfo => ({
   type: SET_MESSAGE_INFO,
   messageInfo

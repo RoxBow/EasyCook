@@ -5,7 +5,7 @@ import { getTabBarIcon } from '../constants/helpers';
 import { styleTabBarIcon } from './MainTabNavigator';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
-import { greenApp } from '../constants/colors';
+import { pink } from '../constants/colors';
 
 import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
 import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
@@ -45,7 +45,7 @@ const RootStack = createStackNavigator(
               <AntDesign
                 name="close"
                 size={30}
-                color={greenApp}
+                color={pink}
                 onPress={() => navigation.goBack()}
               />
             </Left>
@@ -56,7 +56,7 @@ const RootStack = createStackNavigator(
           </Header>
         ),
         title: 'Créer un événement',
-        headerTintColor: greenApp,
+        headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     }

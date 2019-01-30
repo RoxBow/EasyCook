@@ -67,10 +67,10 @@ export const createEvent = (name, date, address, description, image, navigation)
       });
 };
 
-export const toggleRegister = idEvent => {
+export const toggleParticipate = idEvent => {
   return dispatch =>
     axiosEvent
-      .put('/toggleRegister', {
+      .put('/toggleParticipate', {
         idEvent
       })
       .then(({ data }) => {

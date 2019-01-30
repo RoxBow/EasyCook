@@ -3,9 +3,10 @@ import React from 'react';
 import { Text, View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header } from 'native-base';
-import { AntDesign, Entypo, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
-import { toggleRegister, toggleInterested } from '../../../redux/Event/actions';
+import { AntDesign, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { toggleParticipate, toggleInterested } from '../../../redux/Event/actions';
 import { currentEventSelector } from '../../../redux/Event/selectors';
+import IconStar from '../../../components/Icons/IconStar';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -14,8 +15,7 @@ class EventItem extends React.Component {
     this.state = {};
 
     this.formatDate = this.formatDate.bind(this);
-    this._toggleRegister = this._toggleRegister.bind(this);
-    this._toggleInterested = this._toggleInterested.bind(this);
+    this._toggleUser = this._toggleUser.bind(this);
     this.isParticipant = this.isParticipant.bind(this);
     this.isInterested = this.isInterested.bind(this);
   }
@@ -25,14 +25,15 @@ class EventItem extends React.Component {
     date = date.getDate();
   }
 
-  _toggleRegister() {
+  _toggleUser(interestedOrParticipate) {
     const { idEvent } = this.props.navigation.state.params;
-    this.props.toggleRegister(idEvent);
-  }
+    const { toggleInterested, toggleParticipate } = this.props;
 
-  _toggleInterested() {
-    const { idEvent } = this.props.navigation.state.params;
-    this.props.toggleInterested(idEvent);
+    if(interestedOrParticipate === "interested"){
+      toggleInterested(idEvent);
+    } else if(interestedOrParticipate === "participate"){
+      toggleParticipate(idEvent);
+    }
   }
 
   isParticipant() {
@@ -53,7 +54,6 @@ class EventItem extends React.Component {
     const { navigation, currentEvent } = this.props;
 
     const { name, date, creator, address, description, price, participants } = currentEvent;
-
 
     return (
       <ScrollView>
@@ -86,7 +86,7 @@ class EventItem extends React.Component {
             </View>
             <View style={styles.info}>
               <Entypo name="price-tag" size={22} style={styles.iconInfo} />
-              <Text>{price === 0 ? 'Gratuit' : price}</Text>
+              <Text>{price === 0 ? 'Gratuit' : `${price}€`}</Text>
             </View>
           </View>
 
@@ -115,13 +115,13 @@ class EventItem extends React.Component {
         </View>
         <View style={styles.wrapperActions}>
           <Button
-            onPress={this._toggleInterested}
+            onPress={() => this._toggleUser("interested")}
             style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
           >
-            <FontAwesome name={this.isInterested() ? 'star' : 'star-o'} size={22} />
+            <IconStar isFill={this.isInterested()} size={22} />
             <Text style={styles.btnActionText}>Intéressé(e)</Text>
           </Button>
-          <Button style={styles.btnAction} onPress={this._toggleRegister}>
+          <Button style={styles.btnAction} onPress={() => this._toggleUser("participate")}>
             <MaterialCommunityIcons
               name={this.isParticipant() ? 'check-circle' : 'check-circle-outline'}
               size={22}
@@ -141,7 +141,7 @@ const mapStateToProps = (state, { navigation }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleRegister: idEvent => dispatch(toggleRegister(idEvent)),
+  toggleParticipate: idEvent => dispatch(toggleParticipate(idEvent)),
   toggleInterested: idEvent => dispatch(toggleInterested(idEvent))
 });
 

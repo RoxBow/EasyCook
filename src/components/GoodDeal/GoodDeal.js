@@ -2,6 +2,7 @@ import styles from './gooddeal.style';
 import React from 'react';
 import { View, Text } from 'react-native';
 import Icon from '@expo/vector-icons/FontAwesome';
+import IconStar from '../Icons/IconStar';
 
 const GoodDeal = ({ storeName, description, like, isFav }) => (
   <View style={styles.wrapper}>
@@ -17,7 +18,7 @@ const GoodDeal = ({ storeName, description, like, isFav }) => (
         {like}
       </Text>
       </View>
-      <Icon size={20} name={isFav ? 'star' : 'star-o'} color="#000" />
+      <IconStar size={20} isFill={isFav} color="#000" />
     </View>
   </View>
 );

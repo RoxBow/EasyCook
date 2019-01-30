@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, TouchableOpacity, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getTabBarIcon } from '../constants/helpers';
-import { greenApp } from '../constants/colors';
+import { pink } from '../constants/colors';
 import { styleTabBarIcon } from './MainTabNavigator';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { Header, Left, Body, Right, Title } from 'native-base';
@@ -20,7 +20,7 @@ const ListShoppingListStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerRight: (
           <TouchableOpacity onPress={() => navigation.navigate('AddShoppingList')}>
-            <Feather name="plus" size={30} color={greenApp} style={{ paddingRight: 20 }} />
+            <Feather name="plus" size={30} color={pink} style={{ paddingRight: 20 }} />
           </TouchableOpacity>
         ),
         title: 'Mes listes de course',
@@ -32,7 +32,7 @@ const ListShoppingListStack = createStackNavigator(
       screen: ShoppingListItemScreen,
       navigationOptions: ({ navigation }) => ({
         title: navigation.state.params.name,
-        headerTintColor: greenApp,
+        headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     }
@@ -66,7 +66,7 @@ const RootStack = createStackNavigator(
             transparent
             style={{
               height: 120,
-              backgroundColor: greenApp,
+              backgroundColor: pink,
               borderBottomLeftRadius: 15,
               borderBottomRightRadius: 15
             }}
@@ -86,7 +86,7 @@ const RootStack = createStackNavigator(
           </Header>
         ),
         headerBackTitle: 'Rechercher',
-        headerTintColor: greenApp,
+        headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     },
@@ -94,7 +94,7 @@ const RootStack = createStackNavigator(
       screen: AddIngredientScreen,
       navigationOptions: ({ navigation }) => ({
         title: 'Ajouter ingrédient',
-        headerTintColor: greenApp,
+        headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     },
@@ -107,7 +107,7 @@ const RootStack = createStackNavigator(
               <AntDesign
                 name="close"
                 size={30}
-                color={greenApp}
+                color={pink}
                 onPress={() => navigation.goBack()}
               />
             </Left>
@@ -118,7 +118,7 @@ const RootStack = createStackNavigator(
           </Header>
         ),
         title: 'Créer liste de course',
-        headerTintColor: greenApp,
+        headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     }

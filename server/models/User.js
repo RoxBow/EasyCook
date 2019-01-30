@@ -13,9 +13,9 @@ const User = new Schema(
       unique: true,
       trim: true
     },
-    password: { 
-      type: String, 
-      required: true 
+    password: {
+      type: String,
+      required: true
     },
     username: {
       type: String,
@@ -28,8 +28,14 @@ const User = new Schema(
     shoppingLists: [{ type: Schema.Types.ObjectId, ref: 'ShoppingList' }],
     goodDeals: [],
     bio: {
+      type: String
+    },
+    firstName: {
       type: String,
     },
+    lastName: String,
+    localization: String,
+    birthday: Date,
     lastConnection: Date,
     isVerified: {
       type: Boolean,
