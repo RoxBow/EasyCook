@@ -10,7 +10,7 @@ class UserRouterClass {
 
     userRouter.put('/edit', (req, res) => {
       const { firstName, lastName, localization, bio } = req.body;
-      console.log(',frs');
+      
       User.findById(req.user._id).exec((err, user) => {
         user.firstName = firstName;
         user.lastName = lastName;
@@ -25,6 +25,13 @@ class UserRouterClass {
 
           res.status(200).send({ status: 'SUCCESS', messageInfo: 'Modifié avec succès', user });
         });
+      });
+    });
+
+    userRouter.delete('/delete', (req, res) => {
+      User.deleteOne({ _id: req.user._id }).exec((err, user) => {
+
+        res.status(200).send({ status: 'SUCCESS' });
       });
     });
   }

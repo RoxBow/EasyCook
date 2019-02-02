@@ -2,11 +2,9 @@ import styles from './recipesscreen.style';
 import React from 'react';
 import axios from 'axios';
 import { Tabs, Tab } from 'native-base';
-import { tabBar } from '../../constants/colors';
-import { serverUrl, styleTab } from '../../constants/global';
+import { serverUrl, styleTab, styleTabs } from '../../constants/global';
 import ThumbnailList from '../../components/ThumbnailList/ThumbnailList';
 
-const { tabBarSelected } = tabBar;
 
 class RecipesScreen extends React.Component {
   constructor(props) {
@@ -32,7 +30,7 @@ class RecipesScreen extends React.Component {
     const { ingredients } = this.state;
 
     return (
-      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} locked={true}>
+      <Tabs {...styleTabs} locked={true}>
         <Tab heading="Toutes les recettes" {...styleTab}>
           {ingredients && <ThumbnailList title="Ingrédients de saison" list={ingredients} />}
           {ingredients && <ThumbnailList title="La communauté" list={ingredients} />}

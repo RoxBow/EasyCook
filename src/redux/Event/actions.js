@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { serverUrl, STATUS } from '../../constants/global';
 import { getToken } from '../../constants/helpers';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 const { SUCCESS, FAILURE } = STATUS;
 
@@ -37,6 +36,20 @@ export const fetchEvents = () => {
       .catch(err => {});
   };
 };
+
+export const updateImage = image => {
+  return dispatch => {
+    axiosEvent
+      .post('/updateImage', image, {
+        headers: 
+          {'Content-Type': 'multipart/form-data' }
+      })
+      .then(({ data }) => {
+        console.log('Update image');
+      })
+      .catch(err => {});
+  };
+}
 
 export const createEvent = (name, date, address, description, image, navigation) => {
   // const data = new FormData();

@@ -8,13 +8,12 @@ import MapView from 'react-native-maps';
 import { Container, Header, Left, Right, Body } from 'native-base';
 import { Item, Input } from 'native-base';
 import Layout from '../../../constants/layout';
-import { styleTab } from '../../../constants/global';
-import { tabBar, pink } from '../../../constants/colors';
+import { styleTab, styleTabs } from '../../../constants/global';
+import { pink } from '../../../constants/colors';
 import { fetchEvents } from '../../../redux/Event/actions';
 import { connect } from 'react-redux';
 import EventTab from '../../../components/EventTab/EvenTab';
 
-const { tabBarSelected } = tabBar;
 const { window } = Layout;
 
 class DiscoverScreen extends React.Component {
@@ -83,7 +82,7 @@ class DiscoverScreen extends React.Component {
             />
           </Right>
         </Header>
-        <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} locked={true}>
+        <Tabs {...styleTabs} locked={true}>
           <Tab heading="Événements culinaires" {...styleTab}>
             <EventTab />
           </Tab>

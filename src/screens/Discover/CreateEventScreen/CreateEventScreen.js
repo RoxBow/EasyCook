@@ -1,9 +1,9 @@
 import styles from './createeventscreen.style';
 import React from 'react';
-import { TextInput, View, Text, Platform } from 'react-native';
+import { Text } from 'react-native';
 import { Container, DatePicker, Button, Item, Input } from 'native-base';
 import { connect } from 'react-redux';
-import { createEvent } from '../../../redux/Event/actions';
+import { createEvent, updateImage } from '../../../redux/Event/actions';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
 
@@ -38,17 +38,23 @@ class CreateEventScreen extends React.Component {
       allowsEditing: true,
       aspect: [2, 1],
       base64: false,
-      mediaTypes: 'Images',
-      quality: 0.5
+      mediaTypes: 'Images'
     });
 
     if (!image.cancelled) {
-      this.setState({ image });
+      const body = new FormData();
+      body.append('file', {
+        uri: image.uri,
+        type: image.type,
+        name: image.name || "test"
+      });
+
+      this.setState({ image: body });
     }
   };
 
   render() {
-    const { createEvent } = this.props;
+    const { createEvent, updateImage } = this.props;
     const { name, date, description, address, image } = this.state;
 
     return (
@@ -105,6 +111,10 @@ class CreateEventScreen extends React.Component {
         >
           <Text style={styles.btnValidateText}>Créer</Text>
         </Button>
+
+        <Button style={styles.btnValidate} rounded onPress={() => updateImage(image)}>
+          <Text style={styles.btnValidateText}>Upload</Text>
+        </Button>
       </Container>
     );
   }
@@ -112,7 +122,8 @@ class CreateEventScreen extends React.Component {
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   createEvent: (name, date, address, description, image) =>
-    dispatch(createEvent(name, date, address, description, image, navigation))
+    dispatch(createEvent(name, date, address, description, image, navigation)),
+  updateImage: image => dispatch(updateImage(image))
 });
 
 export default connect(

@@ -5,7 +5,8 @@ import {
   LOGOUT,
   SET_ERROR,
   UPDATE_SHOPPING_LIST,
-  SET_FETCH
+  SET_FETCH,
+  REMOVE_USER
 } from './actions';
 
 const initialState = {
@@ -56,6 +57,10 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      };
+    case REMOVE_USER:
+      return {
+        ...initialState,
       };
     default:
       return state;

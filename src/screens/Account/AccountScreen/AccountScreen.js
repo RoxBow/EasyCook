@@ -2,12 +2,9 @@ import styles from './accountscreen.style';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'native-base';
-import { tabBar } from '../../../constants/colors';
 import EventTab from '../../../components/EventTab/EvenTab';
-import { styleTab } from '../../../constants/global';
+import { styleTab, styleTabs } from '../../../constants/global';
 import { userEventsSelector } from '../../../redux/Event/selectors';
-
-const { tabBarSelected } = tabBar;
 
 class AccountScreen extends React.Component {
   constructor() {
@@ -20,7 +17,7 @@ class AccountScreen extends React.Component {
     const { events } = this.props;
 
     return (
-      <Tabs tabBarUnderlineStyle={{ backgroundColor: tabBarSelected }} locked={true}>
+      <Tabs {...styleTabs} locked={true}>
         <Tab heading="Événements à venir" {...styleTab}>
           {events && <EventTab events={events} />}
         </Tab>

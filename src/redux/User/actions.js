@@ -12,6 +12,7 @@ export const SET_ERROR = 'SET_ERROR';
 export const SET_USER = 'SET_USER';
 export const UPDATE_SHOPPING_LIST = 'UPDATE_SHOPPING_LIST';
 export const SET_FETCH = 'SET_FETCH';
+export const REMOVE_USER = 'REMOVE_USER';
 
 const axiosUser = axios.create({
   baseURL: `${serverUrl}/api/user`
@@ -135,6 +136,27 @@ export const requestLogout = navigation => {
       });
   };
 };
+
+export const requestDeleteAccount = navigation => {
+  return dispatch => {
+    axiosUser
+      .delete(`/delete`)
+      .then(({ data }) => {
+        if (data.status === STATUS.SUCCESS) {
+          navigation.navigate('Auth');
+          dispatch(removeUser());
+          AsyncStorage.removeItem('userToken');
+        }
+      })
+      .catch(err => {
+        // dispatch(setError(err.response.data.err.message));
+      });
+  };
+}
+
+export const removeUser = () => ({
+  type: REMOVE_USER,
+});
 
 export const setError = error => ({
   type: SET_ERROR,

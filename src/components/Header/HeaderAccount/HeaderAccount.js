@@ -7,7 +7,7 @@ import { withNavigation } from 'react-navigation';
 import { pink } from '../../../constants/colors';
 
 const HeaderAccount = ({ username, requestLogout, navigation }) => (
-  <Header style={{ height: 200, borderBottomWidth: 0 }}>
+  <Header style={{ height: 200, borderBottomWidth: 0, backgroundColor: "#fff" }}>
     <Left>
       <Entypo name="bell" size={35} style={{ marginHorizontal: 20 }} />
     </Left>

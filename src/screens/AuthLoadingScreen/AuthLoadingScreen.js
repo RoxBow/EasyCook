@@ -17,6 +17,7 @@ class AuthLoadingScreen extends React.Component {
     const userToken = await AsyncStorage.getItem('userToken');
 
     if (userToken) {
+      console.log('token ::::', userToken);
       requestValidityToken(userToken);
     } else {
       navigation.navigate('Auth');

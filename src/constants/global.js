@@ -1,5 +1,7 @@
 import { tabBar, pink } from './colors';
 import { LocaleConfig } from 'react-native-calendars';
+import { Dimensions } from 'react-native';
+
 const { tabBarSelected, textDefault, backgroundTab } = tabBar;
 
 /**
@@ -54,6 +56,14 @@ LocaleConfig.defaultLocale = 'fr';
  * COMPONENTS
  *
  */
+
+export const styleTabs = {
+  tabBarUnderlineStyle: { 
+    backgroundColor: tabBarSelected, 
+    width: "30%", 
+    marginHorizontal: Dimensions.get('window').width / 10 
+  }
+};
 
 export const styleTab = {
   textStyle: { color: textDefault, fontWeight: '600' },
