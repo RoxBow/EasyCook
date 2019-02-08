@@ -1,9 +1,25 @@
 const express = require('express');
 const authRouter = express.Router({ mergeParams: true });
 const User = require('../../models/User');
+const Image = require('../../models/Image');
 const passport = require('passport');
 const { jwtSecret } = require('../../constants');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: "./assets/avatars/users/",
+  filename: (req, file, cb) => {
+    const extension =  getExtFromMime(file.mimetype);
+    const id = randomId();
+
+    cb(null, id + '.'+ extension)
+  }
+});
+
+const upload = multer({
+  storage
+});
 
 class AuthRouterClass {
   routes() {
@@ -32,10 +48,21 @@ class AuthRouterClass {
     });
 
     // Register
-    authRouter.post('/signUp', (req, res) => {
+    authRouter.post('/signUp', upload.single('file'), (req, res) => {
       const { email, username, password } = req.body;
 
-      let user = new User({ email, username });
+      const avatar = new Image({ 
+        uri: (req.file && req.file.path) || 'assets/avatars/users/user_default.jpg'
+      });
+
+      avatar.save();
+
+      let user = new User({ 
+        email, 
+        username,
+        avatar, 
+      });
+
       user.password = user.encryptPassword(password);
 
       user.save(err => {
