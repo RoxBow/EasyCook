@@ -15,19 +15,16 @@ class AddIngredientScreen extends React.Component {
     this.addIngredientToSoppingList = this.addIngredientToSoppingList.bind(this);
   }
 
-  goToShoppingListItem() {
+  redirectToShoppingListItem() {
     this.props.navigation.pop(2);
   }
 
   addIngredientToSoppingList() {
-    const {
-      id: idIngredient,
-      idShoppingList,
-    } = this.props.navigation.state.params;
+    const { id: idIngredient, idShoppingList } = this.props.navigation.state.params;
 
-    const { addIngredientToShoppingListItem } = this.props;
+    const { addIngredientToShoppingListItem } = this.props;
 
-     addIngredientToShoppingListItem(idIngredient, idShoppingList);
+    addIngredientToShoppingListItem(idIngredient, idShoppingList);
   }
 
   render() {
@@ -40,7 +37,7 @@ class AddIngredientScreen extends React.Component {
             name="closecircle"
             size={25}
             color="#000"
-            onPress={() => this.goToShoppingListItem()}
+            onPress={() => this.redirectToShoppingListItem()}
           />
         </Header>
         <Text>Saisir une quantité</Text>

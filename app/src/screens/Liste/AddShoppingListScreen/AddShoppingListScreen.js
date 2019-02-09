@@ -1,6 +1,6 @@
 import styles from './addshoppinglistscreen.style';
 import React from 'react';
-import { TextInput, View, Text } from 'react-native';
+import { TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { Container, DatePicker, Button } from 'native-base';
 import { connect } from 'react-redux';
 import { addShoppingList } from '../../../redux/ShoppingList/actions';
@@ -15,6 +15,8 @@ class AddShoppingListScreen extends React.Component {
     };
 
     this.setDate = this.setDate.bind(this);
+    this.openModalUsers = this.openModalUsers.bind(this);
+    this.addShoppingList = this.addShoppingList.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +31,26 @@ class AddShoppingListScreen extends React.Component {
     this.setState({ chosenDate: newDate });
   }
 
+  openModalUsers() {
+    const { usersSelected, navigation } = this.props;
+
+    navigation.navigate('SearchUser', {
+      usersSelected
+    });
+  }
+
+  addShoppingList() {
+    const { addShoppingList, usersSelected } = this.props;
+    const { name, chosenDate } = this.state;
+
+    // keep only _id users
+    const users = usersSelected.map(({ _id }) => _id);
+
+    addShoppingList(name, chosenDate, users);
+  }
+
   render() {
-    const { addShoppingList } = this.props;
+    const { addShoppingList, usersSelected } = this.props;
     const { name, chosenDate } = this.state;
 
     return (
@@ -59,10 +79,16 @@ class AddShoppingListScreen extends React.Component {
         />
         <Text>Date: {chosenDate.toString().substr(4, 12)}</Text>
 
+        <TouchableOpacity onPress={() => this.openModalUsers()}>
+          <Text>Ajouter des amis</Text>
+          {usersSelected.map(({ username }, i) => (
+            <Text key={i}>{username}</Text>
+          ))}
+        </TouchableOpacity>
         <Button
           style={styles.btnValidate}
           rounded
-          onPress={() => addShoppingList(name, chosenDate)}
+          onPress={() => this.addShoppingList(name, chosenDate)}
         >
           <Text style={styles.btnValidateText}>Créer</Text>
         </Button>
@@ -72,11 +98,13 @@ class AddShoppingListScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  refIngredients: state.recipe.refIngredients
+  refIngredients: state.recipe.refIngredients,
+  usersSelected: state.shoppingList.usersSelected || []
 });
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
-  addShoppingList: (name, maxDate) => dispatch(addShoppingList(name, maxDate, navigation))
+  addShoppingList: (name, maxDate, users) =>
+    dispatch(addShoppingList(name, maxDate, users, navigation))
 });
 
 export default connect(

@@ -18,6 +18,7 @@ const ShoppingList = new Schema(
     name: String,
     maxDate: Date,
     ingredients: [ingredient],
+    users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     isPin: Boolean
   },
   {

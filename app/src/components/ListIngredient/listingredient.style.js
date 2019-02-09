@@ -2,10 +2,7 @@ import { StyleSheet } from 'react-native';
 import { greyApp } from '../../constants/colors';
 
 const styles = StyleSheet.create({
-  wrapperIngredients: {
-    marginBottom: 25,
-  },
-
+ 
   line: {
     borderBottomColor: greyApp,
     borderBottomWidth: 1,
@@ -14,17 +11,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  title: {
-    fontSize: 22,
-    marginBottom: 6,
-    fontWeight: 'bold',
-    borderBottomColor: greyApp,
-    borderBottomWidth: 1,
-  },
-
   textValidate: { 
     color: greyApp, 
     textDecorationLine: 'line-through' 
+  },
+
+  textIngredient: {
+    marginLeft: 10
   }
 });
 

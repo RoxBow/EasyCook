@@ -8,8 +8,7 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  * CONFIG
  */
 
-// export const serverUrl = 'http://localhost:3333';
-export const serverUrl = 'http://10.1.241.10:3333';
+export const serverUrl = 'http://localhost:3333';
 
 export const STATUS = {
   SUCCESS: "SUCCESS",
@@ -118,4 +117,19 @@ export const tabBarIcon = {
     normal: require('../assets/images/tabBar/account.png'),
     focus: require('../assets/images/tabBar/account_focus.png')
   }
+};
+
+export const styleTabBarIcon = {
+  flex: 1,
+  width: 22,
+  height: 22,
+  resizeMode: 'contain',
+  marginBottom: -3
+};
+
+export const ARROW = {
+  LEFT: 'ios-arrow-back',
+  BOTTOM: 'ios-arrow-down',
+  RIGHT: 'ios-arrow-forward',
+  TOP: 'ios-arrow-up',
 };

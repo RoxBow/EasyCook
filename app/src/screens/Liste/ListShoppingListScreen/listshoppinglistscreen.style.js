@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ddd',
     flex: 1,
   },
 
@@ -12,7 +11,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginBottom: 5,
+    marginVertical: 10,
+    textTransform: 'uppercase',
   },
 
   wrapperShoppingList: {

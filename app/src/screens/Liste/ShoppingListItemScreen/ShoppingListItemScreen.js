@@ -1,16 +1,18 @@
 import styles from './shoppinglistitemscreen.style';
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { Header, Item, Input, Button } from 'native-base';
+import { Header, Item, Input, Button, Thumbnail } from 'native-base';
 import { EvilIcons, Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import ListIngredient from '../../../components/ListIngredient/ListIngredient';
 import {
   getValidateIngredientsFromId,
   getIngredientsFromKind,
-  getIngredientsFromId,
   isArrayFill
 } from '../../../constants/helpers';
+import Accordeon from '../../../components/Accordeon/Accordeon';
+import { currentShoppingListSelector } from '../../../redux/ShoppingList/selectors';
+import { serverUrl } from '../../../constants/global';
 
 class ShoppingListScreen extends React.Component {
   constructor(props) {
@@ -22,11 +24,16 @@ class ShoppingListScreen extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { ingredients } = props.navigation.state.params;
+    const { ingredients } = props.currentShoppingList;
     const { refIngredients } = props;
 
     if (state.ingredients !== ingredients) {
-      const ingredientsNotValidate = getValidateIngredientsFromId(ingredients, refIngredients, false);
+      const ingredientsNotValidate = getValidateIngredientsFromId(
+        ingredients,
+        refIngredients,
+        false
+      );
+
       const fruitsAliment = getIngredientsFromKind(ingredientsNotValidate, 'fruit');
       const vegetablesAliment = getIngredientsFromKind(ingredientsNotValidate, 'vegetable');
 
@@ -43,26 +50,26 @@ class ShoppingListScreen extends React.Component {
   }
 
   renderRemainingAliments() {
-    const { ingredients } = this.props.navigation.state.params;
+    const { ingredients } = this.props.currentShoppingList;
 
     const ingredientsValidate = ingredients.filter(({ isValidate }) => isValidate);
     const ingredientsNotValidate = ingredients.filter(({ isValidate }) => !isValidate);
     const nbrIngredients = ingredients.length;
 
-    if (ingredientsNotValidate.length > 1) {
+    if (ingredientsNotValidate.length >= 1) {
       return `${ingredientsNotValidate.length} ingredients restants`;
-    } else if(ingredientsValidate.length === ingredientsNotValidate.length && nbrIngredients > 1){
-      return "COMPLET";
+    } else if (ingredientsValidate.length === nbrIngredients && nbrIngredients > 0) {
+      return 'COMPLET';
     } else if (nbrIngredients === 0) {
-      return "Liste vide";
+      return 'Liste vide';
     }
 
     return `${nbrIngredients} ingredients restant`;
   }
 
   addAliment() {
-    const { navigation } = this.props;
-    const { _id, name } = this.props.navigation.state.params;
+    const { navigation, currentShoppingList } = this.props;
+    const { _id, name } = currentShoppingList;
 
     navigation.navigate('SearchIngredient', {
       idShoppingList: _id,
@@ -71,12 +78,21 @@ class ShoppingListScreen extends React.Component {
   }
 
   render() {
-    const { validateAliments, fruitsAliment, vegetablesAliment, remainingAliment } = this.state;
-    const { _id } = this.props.navigation.state.params;
+    const { validateAliments, fruitsAliment, vegetablesAliment } = this.state;
+    const { _id, users } = this.props.currentShoppingList;
 
     return (
       <View style={styles.parentContainer}>
         <ScrollView contentContainerStyle={styles.container}>
+          <ScrollView horizontal contentContainerStyle={{ paddingVertical: 10 }}>
+            {users.map(({ username, avatar }, i) => (
+              <View key={i} style={{ marginRight: 10 }}>
+                <Thumbnail source={{ uri: `${serverUrl}/${avatar.uri}` }} />
+                <Text style={{ alignSelf: 'center', marginTop: 6 }}>{username}</Text>
+              </View>
+            ))}
+          </ScrollView>
+
           <Header searchBar rounded transparent>
             <Item style={styles.item}>
               <EvilIcons name="search" size={25} color="#000" style={styles.iconSearch} />
@@ -85,26 +101,28 @@ class ShoppingListScreen extends React.Component {
           </Header>
 
           <View style={styles.containerIngredients}>
-            {remainingAliment && (
-              <Text style={styles.remainingAliment}>{this.renderRemainingAliments()}</Text>
-            )}
+            <Text style={styles.remainingAliment}>{this.renderRemainingAliments()}</Text>
             {isArrayFill(fruitsAliment) && (
-              <ListIngredient title="Fruits" ingredients={fruitsAliment} idShoppingList={_id} />
+              <Accordeon title="Fruits">
+                <ListIngredient ingredients={fruitsAliment} idShoppingList={_id} />
+              </Accordeon>
             )}
             {isArrayFill(vegetablesAliment) && (
-              <ListIngredient
-                title="Légumes"
-                ingredients={vegetablesAliment}
-                idShoppingList={_id}
-              />
+              <Accordeon title="Légumes">
+                <ListIngredient ingredients={vegetablesAliment} idShoppingList={_id} />
+              </Accordeon>
             )}
             {isArrayFill(validateAliments) && (
-              <ListIngredient
+              <Accordeon
                 title={validateAliments.length > 0 ? 'Aliments validés' : 'Aliment validé'}
-                ingredients={validateAliments}
-                isValidate={true}
-                idShoppingList={_id}
-              />
+                isOpen={true}
+              >
+                <ListIngredient
+                  ingredients={validateAliments}
+                  isValidate={true}
+                  idShoppingList={_id}
+                />
+              </Accordeon>
             )}
           </View>
         </ScrollView>
@@ -118,8 +136,12 @@ class ShoppingListScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  refIngredients: state.recipe.refIngredients
+const mapStateToProps = (state, { navigation }) => ({
+  refIngredients: state.recipe.refIngredients,
+  currentShoppingList: currentShoppingListSelector(
+    state.shoppingList.shoppingLists,
+    navigation.state.params.idShoppingList
+  )
 });
 
 export default connect(mapStateToProps)(ShoppingListScreen);

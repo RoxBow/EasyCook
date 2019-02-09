@@ -35,7 +35,7 @@ class ListShoppingListScreen extends React.Component {
       <Root>
         <View style={styles.container}>
           <ScrollView contentContainerStyle={styles.wrapper}>
-            <Text style={styles.title}>Épinglé</Text>
+            <Text style={styles.title}>Épinglée</Text>
             <View styles={styles.wrapperShoppingList}>
               {this.filteredShoppingList().pinnedShoppingList &&
                 this.filteredShoppingList().pinnedShoppingList.map((shoppingList, i) => (

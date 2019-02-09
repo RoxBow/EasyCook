@@ -5,6 +5,7 @@ import Arrow from '../../../components/Icons/IconArrow';
 import { connect } from 'react-redux';
 import { requestLogout, requestDeleteAccount } from '../../../redux/User/actions';
 import { Entypo, AntDesign, Feather, MaterialCommunityIcons, Foundation } from '@expo/vector-icons';
+import { ARROW } from '../../../constants/global';
 
 class SettingsScreen extends React.Component {
   constructor() {
@@ -29,7 +30,7 @@ class SettingsScreen extends React.Component {
             <Text>Gérer les notifications</Text>
           </Body>
           <Right>
-            <Arrow size={26} name="ios-arrow-forward" />
+            <Arrow size={26} name={ARROW.RIGHT} />
           </Right>
         </ListItem>
         <Separator bordered>
@@ -43,7 +44,7 @@ class SettingsScreen extends React.Component {
             <Text>Aide</Text>
           </Body>
           <Right>
-            <Arrow size={26} name="ios-arrow-forward" />
+            <Arrow size={26} name={ARROW.RIGHT} />
           </Right>
         </ListItem>
         <ListItem icon>
@@ -54,7 +55,7 @@ class SettingsScreen extends React.Component {
             <Text>A propos</Text>
           </Body>
           <Right>
-            <Arrow size={26} name="ios-arrow-forward" />
+            <Arrow size={26} name={ARROW.RIGHT} />
           </Right>
         </ListItem>
         <ListItem icon>
@@ -65,7 +66,7 @@ class SettingsScreen extends React.Component {
             <Text>Mentions légales</Text>
           </Body>
           <Right>
-            <Arrow size={26} name="ios-arrow-forward" />
+            <Arrow size={26} name={ARROW.RIGHT} />
           </Right>
         </ListItem>
         <Button

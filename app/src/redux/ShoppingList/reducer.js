@@ -2,7 +2,10 @@ import {
   SET_MESSAGE_INFO,
   SET_ERROR,
   UPDATE_SHOPPING_LIST,
-  SET_FETCH
+  UPDATE_SHOPPING_LIST_ITEM,
+  SET_FETCH,
+  SET_USERS,
+  SET_USERS_SELECTED,
 } from './actions';
 
 const initialState = {
@@ -26,6 +29,29 @@ const shoppingListReducer = (state = initialState, action) => {
         ...state,
         shoppingLists: action.shoppingLists
       };
+    case UPDATE_SHOPPING_LIST_ITEM:
+      const updatedShoppingLists = state.shoppingLists.map(shoppingListItem => {
+        if (shoppingListItem._id === action.shoppingList._id) {
+          return action.shoppingList;
+        }
+
+        return shoppingListItem;
+      });
+
+      return {
+        ...state,
+        shoppingLists: updatedShoppingLists
+      };
+    case SET_USERS: 
+      return {
+        ...state,
+        users: action.users
+      }
+    case SET_USERS_SELECTED:
+      return {
+        ...state,
+        usersSelected: action.users
+      }
     case SET_ERROR:
       return {
         ...state,

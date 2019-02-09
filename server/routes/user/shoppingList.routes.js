@@ -5,18 +5,38 @@ const ShoppingList = require('../../models/ShoppingList');
 
 class ShoppingListRouterClass {
   routes() {
+    const populateFields = [{ path: 'users', populate: { path: 'avatar' } }];
+
     shoppingListRouter.get('/', (req, res) => {
-      User.findById(req.user._id)
-        .populate('shoppingLists')
-        .exec((err, user) => {
-          res.send({ shoppingList: user.shoppingLists });
+      ShoppingList.find({ users: req.user._id })
+        .populate(populateFields)
+        .exec((err, shoppingLists) => {
+          res.send({ shoppingList: shoppingLists });
+        });
+
+      // User.findById(req.user._id)
+      //   .populate(populateFields)
+      //   .exec((err, user) => {
+      //     res.send({ shoppingList: user.shoppingLists });
+      //   });
+    });
+
+    shoppingListRouter.get('/users', (req, res) => {
+      // find all except me
+      User.find({ _id: { $nin: req.user._id } })
+        .populate('avatar')
+        .exec((err, users) => {
+          res.status(200).send({ users });
         });
     });
 
     shoppingListRouter.post('/add', (req, res) => {
-      const { name, maxDate } = req.body;
+      let { name, maxDate, users } = req.body;
 
-      const shoppingListAdded = new ShoppingList({ name, maxDate });
+      // add me to users
+      users = [req.user._id, ...users];
+
+      const shoppingListAdded = new ShoppingList({ name, maxDate, users });
 
       shoppingListAdded.save(err => {
         if (err) {
@@ -24,16 +44,10 @@ class ShoppingListRouterClass {
           return res.status(400).send({ status: 'FAILURE', errorMessage: err });
         }
 
-        User.findOneAndUpdate(
-          { _id: req.user._id },
-          { $push: { shoppingLists: shoppingListAdded } },
-          { new: true }
-        )
-          .populate('shoppingLists')
-          .exec((err, user) => {
-            if (err) console.log('Something wrong when updating data!');
-
-            res.status(200).send({ status: 'SUCCESS', shoppingList: user.shoppingLists });
+        ShoppingList.find({ users: req.user._id })
+          .populate(populateFields)
+          .exec((err, shoppingLists) => {
+            res.status(200).send({ status: 'SUCCESS', shoppingList: shoppingLists });
           });
       });
     });
@@ -41,26 +55,23 @@ class ShoppingListRouterClass {
     shoppingListRouter.post('/toggleValidAliment', (req, res) => {
       const { idAliment, idShoppingList } = req.body;
 
-      ShoppingList.findById(idShoppingList, (err, shoppingList) => {
-        if (err) console.log(err);
-
-        const updatedIngredient = shoppingList.ingredients.find(({ id }) => id === idAliment);
-        updatedIngredient.isValidate = !updatedIngredient.isValidate;
-
-        shoppingList.save((err, updatedShoppingList) => {
+      ShoppingList.findById(idShoppingList)
+        .populate(populateFields)
+        .exec((err, shoppingList) => {
           if (err) console.log(err);
 
-          User.findById({ _id: req.user._id })
-            .populate('shoppingLists')
-            .exec((err, user) => {
-              res.status(200).send({
-                status: 'SUCCESS',
-                currentShoppingList: updatedShoppingList,
-                shoppingList: user.shoppingLists
-              });
+          const updatedIngredient = shoppingList.ingredients.find(({ id }) => id === idAliment);
+          updatedIngredient.isValidate = !updatedIngredient.isValidate;
+
+          shoppingList.save((err, updatedShoppingList) => {
+            if (err) console.log(err);
+
+            res.status(200).send({
+              status: 'SUCCESS',
+              currentShoppingList: updatedShoppingList
             });
+          });
         });
-      });
     });
 
     shoppingListRouter.post('/shoppingListItem/togglePin', (req, res) => {
@@ -74,12 +85,13 @@ class ShoppingListRouterClass {
         shoppingList.save((err, updatedShoppingList) => {
           if (err) console.log(err);
 
-          User.findById({ _id: req.user._id })
-            .populate('shoppingLists')
-            .exec((err, user) => {
+          ShoppingList.find({ users: req.user._id })
+            .populate(populateFields)
+            .exec((err, shoppingLists) => {
               res.status(200).send({
                 status: 'SUCCESS',
-                shoppingList: user.shoppingLists
+                currentShoppingList: updatedShoppingList,
+                shoppingList: shoppingLists
               });
             });
         });
@@ -97,14 +109,13 @@ class ShoppingListRouterClass {
         shoppingList.save((err, updatedShoppingList) => {
           if (err) console.log(err);
 
-          User.findById({ _id: req.user._id })
-            .populate('shoppingLists')
-            .exec((err, user) => {
-              console.log('USER', user);
+          ShoppingList.find({ users: req.user._id })
+            .populate(populateFields)
+            .exec((err, shoppingLists) => {
               res.status(200).send({
                 status: 'SUCCESS',
                 currentShoppingList: updatedShoppingList,
-                shoppingList: user.shoppingLists
+                shoppingList: shoppingLists
               });
             });
         });

@@ -2,21 +2,14 @@ import React from 'react';
 import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getTabBarIcon } from '../constants/helpers';
+import { styleTabBarIcon } from '../constants/global';
+import { pink } from '../constants/colors';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
-import { pink } from '../constants/colors';
 
 import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
 import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
 import CreateEvent from '../screens/Discover/CreateEventScreen/CreateEventScreen';
-
-const styleTabBarIcon = {
-  flex: 1,
-  width: 22,
-  height: 22,
-  resizeMode: 'contain',
-  marginBottom: -3
-};
 
 const DiscoverStack = createStackNavigator(
   {

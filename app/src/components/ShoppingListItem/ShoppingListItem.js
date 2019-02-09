@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import { Entypo } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { togglePin } from '../../redux/ShoppingList/actions';
+import ListAvatar from '../ListAvatar/ListAvatar';
 
 class ShoppingListItem extends React.Component {
   constructor(props) {
@@ -20,13 +21,14 @@ class ShoppingListItem extends React.Component {
   renderRemainingAliments() {
     const { ingredients } = this.props;
 
+    
     const ingredientsValidate = ingredients.filter(({ isValidate }) => isValidate);
     const ingredientsNotValidate = ingredients.filter(({ isValidate }) => !isValidate);
     const nbrIngredients = ingredients.length;
 
-    if (ingredientsNotValidate.length > 1) {
+    if (ingredientsNotValidate.length >= 1) {
       return `${ingredientsNotValidate.length} ingredients restants`;
-    } else if(ingredientsValidate.length === ingredientsNotValidate.length && nbrIngredients > 1){
+    } else if(ingredientsValidate.length === nbrIngredients && nbrIngredients > 0){
       return "COMPLET";
     } else if (nbrIngredients === 0) {
       return "Liste vide";
@@ -39,7 +41,8 @@ class ShoppingListItem extends React.Component {
     const dataShoppingList = this.props;
 
     this.props.navigation.navigate('ShoppingListItem', {
-      ...dataShoppingList
+      idShoppingList: dataShoppingList._id,
+      name: dataShoppingList.name,
     });
   }
 
@@ -52,7 +55,7 @@ class ShoppingListItem extends React.Component {
   }
 
   render() {
-    const { name, dateMax, sharedUers, isPin } = this.props;
+    const { name, dateMax, isPin, users } = this.props;
     const isPinLabel = isPin ? 'Désépingler' : 'Épingler';
 
     const BUTTONS = [isPinLabel, 'Ajouter un membre', 'Ajouter un aliment', 'Fermer'];
@@ -62,7 +65,7 @@ class ShoppingListItem extends React.Component {
     return (
       <TouchableOpacity style={styles.wrapper} onPress={this.redirectToShoppingListItem}>
         <View style={styles.wrapperTextIcon}>
-          <View>
+          <View style={{ flex: 1}}>
             <Text numberOfLines={1} ellipsizeMode='tail' style={styles.name}>{name}</Text>
             {dateMax && <Text style={styles.dateMax}>{dateMax.toString().substr(4, 12)}</Text>}
             <Text style={styles.remainingAliments}>{this.renderRemainingAliments()}</Text>
@@ -86,8 +89,9 @@ class ShoppingListItem extends React.Component {
             }}
           />
         </View>
-        <View>
-          <Text>Shared users</Text>
+        <View style={{ borderTopWidth: 1, paddingTop: 8, borderColor: 'lightgrey' }}>
+          <Text>Partagé avec {users.length} membre(s)</Text>
+          <ListAvatar listUser={users} />
         </View>
       </TouchableOpacity>
     );

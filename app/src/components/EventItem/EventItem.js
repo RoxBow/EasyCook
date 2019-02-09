@@ -28,7 +28,7 @@ class EventItem extends React.Component {
 
   render() {
     const { name, creator, image } = this.props;
-    
+
     return (
       <TouchableOpacity style={styles.container} onPress={this.redirectToEventItem}>
         <View style={styles.wrapper}>

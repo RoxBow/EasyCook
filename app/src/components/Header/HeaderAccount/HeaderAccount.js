@@ -15,7 +15,6 @@ const HeaderAccount = ({ info, requestLogout, navigation }) => (
     </Left>
     <Body>
       <Thumbnail large source={{uri: `${serverUrl}/${info.avatar.uri}`}} />
-      <Text>Bonjour</Text>
       <Text>{info.username}</Text>
       <FontAwesome
         name="edit"

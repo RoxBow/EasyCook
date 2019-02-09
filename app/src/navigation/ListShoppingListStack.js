@@ -2,23 +2,18 @@ import React from 'react';
 import { Image, TouchableOpacity, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { getTabBarIcon } from '../constants/helpers';
+import { styleTabBarIcon, ARROW } from '../constants/global';
 import { pink } from '../constants/colors';
 import { Feather, AntDesign } from '@expo/vector-icons';
-import { Header, Left, Body, Right, Title } from 'native-base';
+import { Header, Left, Body, Right, Title, Button } from 'native-base';
+import IconArrow from '../components/Icons/IconArrow';
 
 import ListShoppingListScreen from '../screens/Liste/ListShoppingListScreen/ListShoppingListScreen';
 import ShoppingListItemScreen from '../screens/Liste/ShoppingListItemScreen/ShoppingListItemScreen';
 import AddShoppingListScreen from '../screens/Liste/AddShoppingListScreen/AddShoppingListScreen';
 import SearchIngredientScreen from '../screens/Liste/SearchIngredientScreen/SearchIngredientScreen';
 import AddIngredientScreen from '../screens/Liste/AddIngredientScreen/AddIngredientScreen';
-
-const styleTabBarIcon = {
-  flex: 1,
-  width: 22,
-  height: 22,
-  resizeMode: 'contain',
-  marginBottom: -3
-};
+import SearchUserScreen from '../screens/Liste/SearchUserScreen/SearchUserScreen';
 
 const ListShoppingListStack = createStackNavigator(
   {
@@ -39,6 +34,25 @@ const ListShoppingListStack = createStackNavigator(
       screen: ShoppingListItemScreen,
       navigationOptions: ({ navigation }) => ({
         title: navigation.state.params.name,
+        headerTintColor: pink,
+        headerTitleStyle: { color: '#000' }
+      })
+    },
+    AddShoppingList: {
+      screen: AddShoppingListScreen,
+      navigationOptions: ({ navigation }) => ({
+        header: (
+          <Header>
+            <Left>
+              <IconArrow name={ARROW.LEFT} size={30} onPress={() => navigation.goBack()} />
+            </Left>
+            <Body style={{ flex: 3 }}>
+              <Title>Créer liste de course</Title>
+            </Body>
+            <Right />
+          </Header>
+        ),
+        title: 'Créer liste de course',
         headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
@@ -83,12 +97,7 @@ const RootStack = createStackNavigator(
               <Title style={{ color: '#fff' }}>Ajoute un aliment</Title>
             </Body>
             <Right>
-              <AntDesign
-                name="close"
-                size={30}
-                color="#fff"
-                onPress={() => navigation.goBack()}
-              />
+              <AntDesign name="close" size={30} color="#fff" onPress={() => navigation.goBack()} />
             </Right>
           </Header>
         ),
@@ -105,33 +114,18 @@ const RootStack = createStackNavigator(
         headerTitleStyle: { color: '#000' }
       })
     },
-    AddShoppingList: {
-      screen: AddShoppingListScreen,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header>
-            <Left>
-              <AntDesign
-                name="close"
-                size={30}
-                color={pink}
-                onPress={() => navigation.goBack()}
-              />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Créer liste de course</Title>
-            </Body>
-            <Right />
-          </Header>
-        ),
-        title: 'Créer liste de course',
+    SearchUser: {
+      screen: SearchUserScreen,
+      navigationOptions: ({ navigation, screenProps }) => ({
+        header: null,
+        headerBackTitle: 'Rechercher',
         headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
     }
   },
   {
-    mode: 'modal',
+    mode: 'modal'
   }
 );
 

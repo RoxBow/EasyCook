@@ -1,23 +1,16 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { getTabBarIcon } from '../constants/helpers';
 import { AntDesign } from '@expo/vector-icons';
 import HeaderAccount from '../components/Header/HeaderAccount/HeaderAccount';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import { pink } from '../constants/colors';
+import { getTabBarIcon } from '../constants/helpers';
+import { styleTabBarIcon } from '../constants/global';
 
 import AccountScreen from '../screens/Account/AccountScreen/AccountScreen';
 import SettingsScreen from '../screens/Account/SettingsScreen/SettingsScreen';
 import EditUserScreen from '../screens/Account/EditUserScreen/EditUserScreen';
-
-const styleTabBarIcon = {
-  flex: 1,
-  width: 22,
-  height: 22,
-  resizeMode: 'contain',
-  marginBottom: -3
-};
 
 const AccountStack = createStackNavigator({
   Account: {

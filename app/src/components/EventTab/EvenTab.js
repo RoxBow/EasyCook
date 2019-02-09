@@ -4,33 +4,16 @@ import { connect } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 import EventItem from '../EventItem/EventItem';
 
-class EventTab extends React.Component {
-  constructor(props) {
-    super(props);
+const EventTab = ({ events }) => (
+  <ScrollView contentContainerStyle={styles.container}>
+    {events.map((event, i) => (
+      <EventItem key={i} {...event} />
+    ))}
+  </ScrollView>
+);
 
-    this.state = {};
-  }
-
-  render() {
-    const { events } = this.props;
-
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
-        {events.map((event, i) => (
-          <EventItem key={i} {...event} />
-        ))}
-      </ScrollView>
-    );
-  }
-}
-
-const mapStateToProps= (state, { events }) => ({
+const mapStateToProps = (state, { events }) => ({
   events: events || state.event.events
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EventTab);
+export default connect(mapStateToProps)(EventTab);

@@ -86,11 +86,8 @@ export const requestLogin = (email, password, navigation) => {
 };
 
 export const saveEditUser = (info, navigation) => dispatch => {
-  const { firstName, lastName, localization, bio } = info;
-
   const body = new FormData();
 
-  console.log('info', info);
   if (info.image) {
     body.append('file', {
       uri: info.image.uri,
