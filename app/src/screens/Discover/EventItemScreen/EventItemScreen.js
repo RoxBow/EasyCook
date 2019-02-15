@@ -9,6 +9,7 @@ import { currentEventSelector } from '../../../redux/Event/selectors';
 import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
 import ListAvatar from '../../../components/ListAvatar/ListAvatar';
+import { formatDate } from '../../../constants/helpers';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -16,15 +17,9 @@ class EventItem extends React.Component {
 
     this.state = {};
 
-    this.formatDate = this.formatDate.bind(this);
     this._toggleUser = this._toggleUser.bind(this);
     this.isParticipant = this.isParticipant.bind(this);
     this.isInterested = this.isInterested.bind(this);
-  }
-
-  formatDate(date) {
-    date = new Date(date);
-    date = date.getDate();
   }
 
   _toggleUser(interestedOrParticipate) {
@@ -81,7 +76,7 @@ class EventItem extends React.Component {
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>
               <AntDesign size={22} name="calendar" style={styles.iconInfo} />
-              <Text>{date}</Text>
+              <Text>{formatDate(new Date(date))}</Text>
             </View>
             <View style={styles.info}>
               <Entypo name="location-pin" size={22} style={styles.iconInfo} />

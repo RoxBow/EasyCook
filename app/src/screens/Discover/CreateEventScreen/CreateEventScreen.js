@@ -64,7 +64,6 @@ class CreateEventScreen extends React.Component {
 
         <DatePicker
           minimumDate={new Date()}
-          maximumDate={new Date(2019, 12, 31)}
           locale={'fr'}
           modalTransparent={false}
           animationType={'fade'}

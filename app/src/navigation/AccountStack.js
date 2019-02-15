@@ -5,8 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 import HeaderAccount from '../components/Header/HeaderAccount/HeaderAccount';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import { pink } from '../constants/colors';
-import { getTabBarIcon } from '../constants/helpers';
 import { styleTabBarIcon } from '../constants/global';
+import Icon from '../components/Icon/Icon';
 
 import AccountScreen from '../screens/Account/AccountScreen/AccountScreen';
 import SettingsScreen from '../screens/Account/SettingsScreen/SettingsScreen';
@@ -61,7 +61,9 @@ const RootStack = createStackNavigator(
 RootStack.navigationOptions = {
   tabBarLabel: 'Account',
   tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('account', focused)} style={styleTabBarIcon} />
+    focused ? 
+      <Icon icon="account_tabBar--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="account_tabBar" {...styleTabBarIcon} />
   )
 };
 

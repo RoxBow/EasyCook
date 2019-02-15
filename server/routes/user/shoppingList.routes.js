@@ -13,12 +13,6 @@ class ShoppingListRouterClass {
         .exec((err, shoppingLists) => {
           res.send({ shoppingList: shoppingLists });
         });
-
-      // User.findById(req.user._id)
-      //   .populate(populateFields)
-      //   .exec((err, user) => {
-      //     res.send({ shoppingList: user.shoppingLists });
-      //   });
     });
 
     shoppingListRouter.get('/users', (req, res) => {
@@ -101,25 +95,22 @@ class ShoppingListRouterClass {
     shoppingListRouter.post('/shoppingListItem/add', (req, res) => {
       const { idIngredient, idShoppingList } = req.body;
 
-      ShoppingList.findById(idShoppingList, (err, shoppingList) => {
-        if (err) console.log(err);
-
-        shoppingList.ingredients.push({ id: idIngredient });
-
-        shoppingList.save((err, updatedShoppingList) => {
+      ShoppingList.findById(idShoppingList)
+        .populate(populateFields)
+        .exec((err, shoppingList) => {
           if (err) console.log(err);
 
-          ShoppingList.find({ users: req.user._id })
-            .populate(populateFields)
-            .exec((err, shoppingLists) => {
-              res.status(200).send({
-                status: 'SUCCESS',
-                currentShoppingList: updatedShoppingList,
-                shoppingList: shoppingLists
-              });
+          shoppingList.ingredients.push({ id: idIngredient });
+
+          shoppingList.save((err, updatedShoppingList) => {
+            if (err) console.log(err);
+
+            res.status(200).send({
+              status: 'SUCCESS',
+              currentShoppingList: updatedShoppingList
             });
+          });
         });
-      });
     });
   }
 

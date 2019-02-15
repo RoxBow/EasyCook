@@ -7,6 +7,7 @@ import { pink } from '../constants/colors';
 import { Feather, AntDesign } from '@expo/vector-icons';
 import { Header, Left, Body, Right, Title, Button } from 'native-base';
 import IconArrow from '../components/Icons/IconArrow';
+import Icon from '../components/Icon/Icon';
 
 import ListShoppingListScreen from '../screens/Liste/ListShoppingListScreen/ListShoppingListScreen';
 import ShoppingListItemScreen from '../screens/Liste/ShoppingListItemScreen/ShoppingListItemScreen';
@@ -132,7 +133,9 @@ const RootStack = createStackNavigator(
 RootStack.navigationOptions = {
   tabBarLabel: 'Liste',
   tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('list', focused)} style={styleTabBarIcon} />
+    focused ? 
+      <Icon icon="list_tabBar--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="list_tabBar" {...styleTabBarIcon} />
   )
 };
 

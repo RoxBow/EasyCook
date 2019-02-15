@@ -1,23 +1,15 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { pink } from '../constants/colors'
-import { getTabBarIcon } from '../constants/helpers';
+import { styleTabBarIcon } from '../constants/global';
 import RecipesScreen from '../screens/RecipesScreen/RecipesScreen';
 import CalendarScreen from '../screens/CalendarScreen/CalendarScreen';
+import Icon from '../components/Icon/Icon';
 
 /* # STACK # */
 import DiscoverStack from './DiscoverStack';
 import ListShoppingListStack from './ListShoppingListStack';
 import AccountStack from './AccountStack';
-
-export const styleTabBarIcon = {
-  flex: 1,
-  width: 22,
-  height: 22,
-  resizeMode: 'contain',
-  marginBottom: -3
-};
 
 const RecipesStack = createStackNavigator({
   Recipes: RecipesScreen
@@ -26,7 +18,9 @@ const RecipesStack = createStackNavigator({
 RecipesStack.navigationOptions = {
   tabBarLabel: 'Recettes',
   tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('recipes', focused)} style={styleTabBarIcon} />
+    focused ? 
+      <Icon icon="recipe_tabBar--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="recipe_tabBar" {...styleTabBarIcon} />
   )
 };
 
@@ -37,7 +31,9 @@ const CalendarStack = createStackNavigator({
 CalendarStack.navigationOptions = {
   tabBarLabel: 'Calendrier',
   tabBarIcon: ({ focused }) => (
-    <Image source={getTabBarIcon('calendar', focused)} style={styleTabBarIcon} />
+    focused ? 
+      <Icon icon="agenda_tabBar--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="agenda_tabBar" {...styleTabBarIcon} />
   )
 };
 
@@ -50,7 +46,7 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'ListShoppingListStack',
+    initialRouteName: 'DiscoverStack',
     tabBarOptions: {
       activeTintColor: pink,
       inactiveTintColor: '#888'

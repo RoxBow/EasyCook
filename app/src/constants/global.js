@@ -9,15 +9,15 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  */
 
 export const serverUrl = 'http://localhost:3333';
+// export const serverUrl = 'https://cook-application.herokuapp.com';
 
 export const STATUS = {
-  SUCCESS: "SUCCESS",
-  FAILURE: "FAILURE",
-}
+  SUCCESS: 'SUCCESS',
+  FAILURE: 'FAILURE'
+};
 
-// Config wording calendar
-LocaleConfig.locales['fr'] = {
-  monthNames: [
+export const DATE = {
+  month: [
     'Janvier',
     'Février',
     'Mars',
@@ -31,7 +31,7 @@ LocaleConfig.locales['fr'] = {
     'Novembre',
     'Décembre'
   ],
-  monthNamesShort: [
+  shortMonth: [
     'Janv.',
     'Févr.',
     'Mars',
@@ -45,11 +45,17 @@ LocaleConfig.locales['fr'] = {
     'Nov.',
     'Déc.'
   ],
-  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.']
-};
+  day: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+  shortDay: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.']
+}
 
 LocaleConfig.defaultLocale = 'fr';
+LocaleConfig.locales['fr'] = {
+  monthNames: DATE.month,
+  monthNamesShort: DATE.shortMonth,
+  dayNames: DATE.day,
+  dayNamesShort: DATE.shortDay
+};
 
 /**
  *
@@ -58,10 +64,10 @@ LocaleConfig.defaultLocale = 'fr';
  */
 
 export const styleTabs = {
-  tabBarUnderlineStyle: { 
-    backgroundColor: tabBarSelected, 
-    width: "30%", 
-    marginHorizontal: Dimensions.get('window').width / 10 
+  tabBarUnderlineStyle: {
+    backgroundColor: tabBarSelected,
+    width: '30%',
+    marginHorizontal: Dimensions.get('window').width / 10
   }
 };
 
@@ -93,43 +99,20 @@ export const themeCalendar = {
   textMonthFontWeight: 'bold',
   textDayFontSize: 16,
   textMonthFontSize: 16,
-  textDayHeaderFontSize: 16,
-};
-
-export const tabBarIcon = {
-  discover: {
-    normal: require('../assets/images/tabBar/discover.png'),
-    focus: require('../assets/images/tabBar/discover_focus.png')
-  },
-  recipes: {
-    normal: require('../assets/images/tabBar/recipes.png'),
-    focus: require('../assets/images/tabBar/recipes_focus.png')
-  },
-  calendar: {
-    normal: require('../assets/images/tabBar/calendar.png'),
-    focus: require('../assets/images/tabBar/calendar_focus.png')
-  },
-  list: {
-    normal: require('../assets/images/tabBar/list.png'),
-    focus: require('../assets/images/tabBar/list_focus.png')
-  },
-  account: {
-    normal: require('../assets/images/tabBar/account.png'),
-    focus: require('../assets/images/tabBar/account_focus.png')
-  }
+  textDayHeaderFontSize: 16
 };
 
 export const styleTabBarIcon = {
-  flex: 1,
   width: 22,
   height: 22,
-  resizeMode: 'contain',
-  marginBottom: -3
+  style: {
+    marginBottom: -2
+  }
 };
 
 export const ARROW = {
   LEFT: 'ios-arrow-back',
   BOTTOM: 'ios-arrow-down',
   RIGHT: 'ios-arrow-forward',
-  TOP: 'ios-arrow-up',
+  TOP: 'ios-arrow-up'
 };

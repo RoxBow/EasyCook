@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import IconStar from '../Icons/IconStar';
 import { serverUrl } from '../../constants/global';
+import ListAvatar from '../ListAvatar/ListAvatar';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class EventItem extends React.Component {
   }
 
   render() {
-    const { name, creator, image } = this.props;
+    const { name, creator, image, participants } = this.props;
 
     return (
       <TouchableOpacity style={styles.container} onPress={this.redirectToEventItem}>
@@ -36,6 +37,7 @@ class EventItem extends React.Component {
           <View style={styles.wrapperInfo}>
             <Text style={styles.nameText}>{name}</Text>
             <Text>Par {creator.username}</Text>
+            <ListAvatar listUser={participants} />
             <View />
           </View>
         </View>

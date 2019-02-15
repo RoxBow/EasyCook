@@ -3,16 +3,16 @@ import React from 'react';
 import { Tabs, Tab, Text } from 'native-base';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import GoodDeal from '../../../components/GoodDeal/GoodDeal';
-import Carousel from 'react-native-snap-carousel';
-import MapView from 'react-native-maps';
 import { Container, Header, Left, Right, Body } from 'native-base';
 import { Item, Input } from 'native-base';
 import Layout from '../../../constants/layout';
 import { styleTab, styleTabs } from '../../../constants/global';
 import { pink } from '../../../constants/colors';
 import { fetchEvents } from '../../../redux/Event/actions';
+import { fetchGoodDeals } from '../../../redux/GoodDeal/actions';
 import { connect } from 'react-redux';
 import EventTab from '../../../components/EventTab/EvenTab';
+import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
 
 const { window } = Layout;
 
@@ -20,13 +20,18 @@ class DiscoverScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      activeTab: "event"
+    };
 
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
+    this.setActiveTab = this.setActiveTab.bind(this);
+    this.redirectTo = this.redirectTo.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchEvents();
+    this.props.fetchGoodDeals();
   }
 
   getCurrentLocation() {
@@ -43,9 +48,27 @@ class DiscoverScreen extends React.Component {
     return window.width * 0.7;
   }
 
-  render() {
-    const { goodDeals, region } = this.state;
+  setActiveTab(){
+    const { activeTab } = this.state;
 
+    const currentTab = activeTab === "event" ? "goodDeal" : "event";
+
+    this.setState({
+      activeTab: currentTab,
+    })
+  }
+
+  redirectTo(){
+    const { activeTab } = this.state;
+
+    if(activeTab === "event"){
+      this.props.navigation.navigate("CreateEvent")
+    } else {
+      this.props.navigation.navigate("CreateGoodDeal")
+    }
+  }
+
+  render() {
     return (
       <Container>
         <Header transparent style={{ height: 80 }}>
@@ -78,33 +101,16 @@ class DiscoverScreen extends React.Component {
               size={30}
               color={pink}
               style={{ marginHorizontal: 10 }}
-              onPress={() => this.props.navigation.navigate('CreateEvent')}
+              onPress={() => this.redirectTo()}
             />
           </Right>
         </Header>
-        <Tabs {...styleTabs} locked={true}>
+        <Tabs {...styleTabs} locked={true} onChangeTab={() => this.setActiveTab()}>
           <Tab heading="Événements culinaires" {...styleTab}>
             <EventTab />
           </Tab>
           <Tab heading="Bons plans" {...styleTab}>
-            <MapView
-              style={styles.map}
-              initialRegion={region}
-              followsUserLocation={true}
-              showsUserLocation={true}
-              maxZoomLevel={20}
-              rotateEnabled={false}
-            />
-            {goodDeals && (
-              <Carousel
-                loop={true}
-                containerCustomStyle={styles.carousel}
-                itemWidth={this.getWidthItemCarousel()}
-                sliderWidth={window.width}
-                data={goodDeals}
-                renderItem={this._renderItem}
-              />
-            )}
+            <GoodDealTab />
           </Tab>
         </Tabs>
       </Container>
@@ -113,7 +119,8 @@ class DiscoverScreen extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchEvents: () => dispatch(fetchEvents())
+  fetchEvents: () => dispatch(fetchEvents()),
+  fetchGoodDeals: () => dispatch(fetchGoodDeals())
 })
 
 export default connect(null, mapDispatchToProps)(DiscoverScreen);

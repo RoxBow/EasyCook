@@ -19,8 +19,10 @@
     "react-native-calendars": "^1.21.0",
     "react-native-maps": "^0.22.1",
     "react-native-snap-carousel": "^3.7.5",
+    "react-native-svg-uri": "^1.2.3",
     "react-navigation": "^3.0.9",
     "react-redux": "^6.0.0",
+    "recompose": "^0.30.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },

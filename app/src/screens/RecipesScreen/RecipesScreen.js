@@ -5,7 +5,6 @@ import { Tabs, Tab } from 'native-base';
 import { serverUrl, styleTab, styleTabs } from '../../constants/global';
 import ThumbnailList from '../../components/ThumbnailList/ThumbnailList';
 
-
 class RecipesScreen extends React.Component {
   constructor(props) {
     super(props);

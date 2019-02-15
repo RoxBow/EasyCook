@@ -49,9 +49,9 @@ export const createEvent = (name, date, address, description, image, navigation)
   }
 
   body.append('name', name);
-  body.append('date', date);
   body.append('address', address);
   body.append('description', description);
+  body.append('date', date.toISOString());
 
   return dispatch =>
     axiosEvent

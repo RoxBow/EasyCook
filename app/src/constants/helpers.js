@@ -1,12 +1,9 @@
-import { tabBarIcon } from './global';
+import { DATE } from './global';
 import { AsyncStorage } from 'react-native';
 
 export const getToken = () => {
   return AsyncStorage.getItem('userToken');
 };
-
-export const getTabBarIcon = (name, focus) =>
-  !focus ? tabBarIcon[name].normal : tabBarIcon[name].focus;
 
 export const isArrayFill = array => array && array.length > 0;
 
@@ -25,3 +22,8 @@ export const getIngredientsFromKind = (ingredients, kind) =>
   ingredients.filter(ingredient => ingredient.kind === kind);
 
 export const isUserInArray = (array, idUser) => array.some(element => element._id === idUser);
+
+export const formatDate = date =>
+  `${DATE.shortDay[date.getDay()]} ${date.getDate()} ${
+    DATE.month[date.getMonth()]
+  } ${date.getFullYear()}`;
