@@ -42,7 +42,7 @@ class EventItem extends React.Component {
           </View>
         </View>
         <View style={styles.wrapperActions}>
-          <IconStar isFill={this.isInterested()} size={30} style={styles.icon} />
+          <IconStar isFill={this.isInterested()} style={styles.icon} />
         </View>
       </TouchableOpacity>
     );

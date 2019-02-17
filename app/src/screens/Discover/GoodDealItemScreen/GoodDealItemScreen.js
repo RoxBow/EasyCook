@@ -91,7 +91,7 @@ class GoodDealItem extends React.Component {
             onPress={() => this._toggleUser()}
             style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
           >
-            <IconStar isFill={this.isInterested()} size={22} />
+            <IconStar isFill={this.isInterested()} />
             <Text style={styles.btnActionText}>Intéressé(e)</Text>
           </Button>
         </View>

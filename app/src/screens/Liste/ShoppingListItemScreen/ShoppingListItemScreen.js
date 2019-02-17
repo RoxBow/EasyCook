@@ -2,7 +2,7 @@ import styles from './shoppinglistitemscreen.style';
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Header, Item, Input, Button, Thumbnail } from 'native-base';
-import { EvilIcons, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import ListIngredient from '../../../components/ListIngredient/ListIngredient';
 import {
@@ -13,6 +13,7 @@ import {
 import Accordeon from '../../../components/Accordeon/Accordeon';
 import { currentShoppingListSelector } from '../../../redux/ShoppingList/selectors';
 import { serverUrl } from '../../../constants/global';
+import Icon from '../../../components/Icon/Icon';
 
 class ShoppingListScreen extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class ShoppingListScreen extends React.Component {
     this.state = {};
 
     this.addAliment = this.addAliment.bind(this);
+    this.openModalAddUser = this.openModalAddUser.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -77,6 +79,15 @@ class ShoppingListScreen extends React.Component {
     });
   }
 
+  openModalAddUser() {
+    const { _id } = this.props.currentShoppingList;
+
+    this.props.navigation.navigate('SearchUser', {
+      isEditUser: true,
+      idShoppingList: _id
+    });
+  }
+
   render() {
     const { validateAliments, fruitsAliment, vegetablesAliment } = this.state;
     const { _id, users } = this.props.currentShoppingList;
@@ -91,11 +102,18 @@ class ShoppingListScreen extends React.Component {
                 <Text style={{ alignSelf: 'center', marginTop: 6 }}>{username}</Text>
               </View>
             ))}
+            <Button
+              transparent
+              onPress={() => this.openModalAddUser()}
+              style={{ marginLeft: 10, alignSelf: 'center' }}
+            >
+              <Icon icon="addUser" size={35} />
+            </Button>
           </ScrollView>
 
           <Header searchBar rounded transparent>
             <Item style={styles.item}>
-              <EvilIcons name="search" size={25} color="#000" style={styles.iconSearch} />
+              <Icon icon="search" size={20} style={styles.iconSearch} />
               <Input placeholder="Rechercher un aliment dans la liste" />
             </Item>
           </Header>
@@ -128,7 +146,7 @@ class ShoppingListScreen extends React.Component {
         </ScrollView>
 
         <Button iconLeft rounded onPress={this.addAliment} style={styles.btnAddAliment}>
-          <Feather name="plus-circle" size={30} color="#fff" />
+          <Icon icon="plus--white" size={15} style={{ marginRight: 5 }} />
           <Text style={styles.textAddAliment}>Ajouter un aliment</Text>
         </Button>
       </View>

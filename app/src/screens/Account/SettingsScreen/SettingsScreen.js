@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { requestLogout, requestDeleteAccount } from '../../../redux/User/actions';
 import { Entypo, AntDesign, Feather, MaterialCommunityIcons, Foundation } from '@expo/vector-icons';
 import { ARROW } from '../../../constants/global';
+import Icon from '../../../components/Icon/Icon';
 
 class SettingsScreen extends React.Component {
   constructor() {
@@ -82,7 +83,7 @@ class SettingsScreen extends React.Component {
             shadowOpacity: 0.3
           }}
         >
-          <AntDesign name="logout" size={22} color="#000" />
+          <Icon icon="logout" size={22} />
           <Text style={{ color: '#000' }}>Me déconnecter</Text>
         </Button>
         <Button
@@ -93,7 +94,7 @@ class SettingsScreen extends React.Component {
             marginTop: 20
           }}
         >
-          <Feather name="user-x" size={22} color="#000" />
+          <Icon icon="deleteAccount" size={35} />
           <Text style={{ color: 'red' }}>Supprimer mon compte</Text>
         </Button>
       </Content>

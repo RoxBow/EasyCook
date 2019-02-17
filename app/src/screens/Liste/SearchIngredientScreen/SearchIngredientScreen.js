@@ -2,8 +2,7 @@ import styles from './searchingredientscreen.style';
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Item, Header, Input } from 'native-base';
-import { EvilIcons } from '@expo/vector-icons';
+import SearchBar from '../../../components/SearchBar/SearchBar';
 
 class SearchIngredientScreen extends React.Component {
   constructor(props) {
@@ -30,16 +29,15 @@ class SearchIngredientScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header searchBar rounded>
-          <Item>
-            <EvilIcons name="search" size={25} color="#000" style={styles.iconSearch} />
-            <Input
-              onChangeText={searchText => this.setState({ searchText })}
-              placeholder="Rechercher un ingredient"
-            />
-          </Item>
-        </Header>
-
+        <View style={styles.containerSearchBar}>
+          <SearchBar
+            onChange={searchText => this.setState({ searchText })}
+            placeholder="Rechercher un ingredient"
+            styleWrapper={styles.wrapperSearchBar}
+            styleInput={{ color: '#fff' }}
+            placeholderTextColor="#fff"
+          />
+        </View>
         <View>
           {refIngredients
             .filter(({ name }) => !searchText || name.includes(searchText))

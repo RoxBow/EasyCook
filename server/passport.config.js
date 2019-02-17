@@ -3,8 +3,7 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const optionsJwtStrategy = require('./constants').optionsJwtStrategy;
 const User = require('./models/User.js');
 
-const fieldsWanted = 'email username bio lastConnection password'
-
+const unSelectedFieldsUser = '-__v'
 const PassportLocalStrategy = new LocalStrategy(
   {
     usernameField: 'email',
@@ -12,8 +11,9 @@ const PassportLocalStrategy = new LocalStrategy(
     session: false
   },
   (email, password, done) => {
-    User.findOne({ email }).populate('avatar')
-      .exec((err, user) => {
+    User.findOne({ email })
+      .populate('avatar')
+      .select(unSelectedFieldsUser).exec((err, user) => {
         if (err) {
           return done(err);
         }
@@ -26,15 +26,15 @@ const PassportLocalStrategy = new LocalStrategy(
           return done(null, false, { message: 'Incorrect password.' });
         }
 
-        // marche pas
-        delete user.password;
         return done(null, user);
       });
   }
 );
 
 const PassportJwtStrategy = new JwtStrategy(optionsJwtStrategy, (jwt_payload, done) => {
-  User.findOne({ username: jwt_payload.id }).populate('avatar')
+  User.findOne({ username: jwt_payload.id })
+    .populate('avatar')
+    .select(unSelectedFieldsUser)
     .exec((err, user) => {
       if (err) {
         console.log('Erreur identification avec le token');
@@ -42,7 +42,6 @@ const PassportJwtStrategy = new JwtStrategy(optionsJwtStrategy, (jwt_payload, do
       }
 
       if (user) {
-        delete user.password;
         return done(null, user);
       }
     });

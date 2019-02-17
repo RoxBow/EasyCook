@@ -8,7 +8,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingVertical: 8,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  wrapperName: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   textValidate: { 

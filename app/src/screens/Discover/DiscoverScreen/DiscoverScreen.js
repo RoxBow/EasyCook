@@ -2,7 +2,6 @@ import styles from './discoverscreen.style';
 import React from 'react';
 import { Tabs, Tab, Text } from 'native-base';
 import { Feather, FontAwesome } from '@expo/vector-icons';
-import GoodDeal from '../../../components/GoodDeal/GoodDeal';
 import { Container, Header, Left, Right, Body } from 'native-base';
 import { Item, Input } from 'native-base';
 import Layout from '../../../constants/layout';

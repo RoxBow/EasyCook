@@ -1,12 +1,12 @@
 import styles from './SearchUserScreen.style';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { Item, Header, Input, Left, Body, Right, Container, Button, Title } from 'native-base';
 import { EvilIcons, AntDesign } from '@expo/vector-icons';
-import { fetchUsers, setUsersSelected } from '../../../redux/ShoppingList/actions';
+import { fetchUsers, setUsersSelected, saveNewUsers } from '../../../redux/ShoppingList/actions';
 import { connect } from 'react-redux';
 import { usersSelector } from '../../../redux/ShoppingList/selectors';
-import CheckBox from '../../../components/Checkbox/Checkbox';
+import ListUserItem from '../../../components/ListUserItem/ListUserItem';
 import { pink } from '../../../constants/colors';
 
 class SearchUserScreen extends React.Component {
@@ -17,11 +17,12 @@ class SearchUserScreen extends React.Component {
 
     this.state = {
       searchText: '',
-      usersSelected
+      usersSelected: usersSelected || []
     };
 
     this.toggleUser = this.toggleUser.bind(this);
     this.isUserSelected = this.isUserSelected.bind(this);
+    this.confirmUser = this.confirmUser.bind(this);
   }
 
   componentDidMount() {
@@ -51,9 +52,23 @@ class SearchUserScreen extends React.Component {
     return usersSelected.some(({ _id }) => _id === idUser);
   }
 
+  confirmUser() {
+    const { navigation, setUsersSelected, saveNewUsers } = this.props;
+    const { usersSelected } = this.state;
+    const { isEditUser, idShoppingList } = navigation.state.params;
+
+    if (isEditUser) {
+      saveNewUsers(usersSelected, idShoppingList, navigation);
+      return;
+    }
+
+    setUsersSelected(usersSelected);
+    navigation.goBack();
+  }
+
   render() {
-    const { users, navigation, setUsersSelected } = this.props;
-    const { searchText, usersSelected } = this.state;
+    const { users, navigation } = this.props;
+    const { searchText } = this.state;
 
     return (
       <Container>
@@ -65,14 +80,8 @@ class SearchUserScreen extends React.Component {
             <Title>Ajouter des amis</Title>
           </Body>
           <Right>
-            <Button
-              transparent
-              onPress={() => {
-                setUsersSelected(usersSelected);
-                navigation.goBack();
-              }}
-            >
-              <Text>Terminer</Text>
+            <Button transparent onPress={() => this.confirmUser()}>
+              <Text>Ajouter</Text>
             </Button>
           </Right>
         </Header>
@@ -90,17 +99,43 @@ class SearchUserScreen extends React.Component {
 
           <View style={styles.wrapperUsers}>
             {users
-              .filter(({ username }) => !searchText || username.includes(searchText))
-              .map((user, i) => (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() => this.toggleUser(user)}
-                  style={styles.lineUser}
-                >
-                  <Text>{user.username}</Text>
-                  <CheckBox isChecked={this.isUserSelected(user._id)} />
-                </TouchableOpacity>
-              ))}
+              .filter(
+                ({ username }) =>
+                  !searchText || username.toLowerCase().includes(searchText.toLowerCase())
+              )
+              .map((user, i) => {
+                if (i === 0) {
+                  return (
+                    <View key={i}>
+                      <Text>{user.username[0].toUpperCase()}</Text>
+                      <ListUserItem
+                        user={user}
+                        checkUser={() => this.toggleUser(user)}
+                        isChecked={this.isUserSelected(user._id)}
+                      />
+                    </View>
+                  );
+                } else if (users[i - 1].username[0] !== user.username[0]) {
+                  return (
+                    <View key={i}>
+                      <Text>{user.username[0].toUpperCase()}</Text>
+                      <ListUserItem
+                        user={user}
+                        checkUser={() => this.toggleUser(user)}
+                        isChecked={this.isUserSelected(user._id)}
+                      />
+                    </View>
+                  );
+                }
+
+                return (
+                  <ListUserItem
+                    user={user}
+                    checkUser={() => this.toggleUser(user)}
+                    isChecked={this.isUserSelected(user._id)}
+                  />
+                );
+              })}
           </View>
         </View>
       </Container>
@@ -114,7 +149,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
-  setUsersSelected: usersSelected => dispatch(setUsersSelected(usersSelected))
+  setUsersSelected: usersSelected => dispatch(setUsersSelected(usersSelected)),
+  saveNewUsers: (usersSelected, idShoppingList, navigation) =>
+    dispatch(saveNewUsers(usersSelected, idShoppingList, navigation))
 });
 
 export default connect(

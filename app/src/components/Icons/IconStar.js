@@ -1,14 +1,13 @@
 import React from 'react';
-import { FontAwesome } from '@expo/vector-icons';
+import Icon from '../Icon/Icon';
 
-const IconStart = ({ isFill, size, color, style, onPress }) => (
-  <FontAwesome
-    name={isFill ? 'star' : 'star-o'}
-    size={size}
-    color={color || '#000'}
+const IconStar = ({ width, height, isFill, style }) => (
+  <Icon
+    width={width || 22}
+    height={height || 22}
+    icon={isFill ? 'star--fill' : 'star'}
     style={style}
-    onPress={onPress}
   />
 );
 
-export default IconStart;
+export default IconStar;

@@ -1,17 +1,20 @@
+import styles from './HeaderAccount.style';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Left, Body, Right, Text, Thumbnail } from 'native-base';
-import { Ionicons, Entypo, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
+import { Header, Left, Body, Right, Text, Thumbnail, Button } from 'native-base';
+import { FontAwesome } from '@expo/vector-icons';
 import { requestLogout } from '../../../redux/User/actions';
 import { withNavigation } from 'react-navigation';
 import { pink } from '../../../constants/colors';
 import { serverUrl } from '../../../constants/global';
-
+import Icon from '../../Icon/Icon';
 
 const HeaderAccount = ({ info, requestLogout, navigation }) => (
-  <Header style={{ height: 200, borderBottomWidth: 0, backgroundColor: "#fff" }}>
-    <Left>
-      <Entypo name="bell" size={35} style={{ marginHorizontal: 20 }} />
+  <Header style={styles.wrapper}>
+    <Left style={styles.wrapperIcon}>
+      <Button transparent>
+        <Icon icon="notification" size={28} />
+      </Button>
     </Left>
     <Body>
       <Thumbnail large source={{uri: `${serverUrl}/${info.avatar.uri}`}} />
@@ -23,14 +26,13 @@ const HeaderAccount = ({ info, requestLogout, navigation }) => (
         color={pink}
       />
     </Body>
-    <Right>
-      <Ionicons name="md-settings" size={35} onPress={() => navigation.navigate('Settings')} />
-      <MaterialCommunityIcons
-        name="logout"
-        size={35}
-        style={{ marginHorizontal: 20 }}
-        onPress={requestLogout}
-      />
+    <Right style={styles.wrapperIcon}>
+      <Button transparent onPress={() => navigation.navigate('Settings')}>
+        <Icon icon="setting" size={28} />
+      </Button>
+      <Button transparent onPress={requestLogout}>
+        <Icon icon="logout" size={28} />
+      </Button>
     </Right>
   </Header>
 );

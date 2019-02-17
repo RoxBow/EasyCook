@@ -34,7 +34,7 @@ export const fetchShoppingList = () => {
     axiosShoppingList
       .get('/')
       .then(({ data }) => {
-        dispatch(updateShoppingList(data.shoppingList));
+        dispatch(updateShoppingList(data.shoppingLists));
         dispatch(setFetch(false));
       })
       .catch(err => {});
@@ -55,10 +55,10 @@ export const fetchUsers = () => {
   };
 };
 
-export const toggleValidAliment = (idShoppingList, idAliment, navigation) => async dispatch => {
+export const toggleValidAliment = (idShoppingList, refId) => async dispatch => {
   return axiosShoppingList
     .post('/toggleValidAliment', {
-      idAliment,
+      idAliment: refId,
       idShoppingList
     })
     .then(({ data }) => {
@@ -81,8 +81,11 @@ export const addShoppingList = (name, maxDate, users, navigation) => async dispa
     })
     .then(({ data }) => {
       if (data.status === SUCCESS) {
-        dispatch(updateShoppingList(data.shoppingList));
-        navigation.goBack();
+        dispatch(updateShoppingList(data.shoppingLists));
+        navigation.navigate('ShoppingListItem', {
+          idShoppingList: data.shoppingListAdded._id,
+          name: data.shoppingListAdded.name,
+        });
       }
     })
     .catch(err => {
@@ -98,7 +101,7 @@ export const togglePin = idShoppingList => dispatch => {
     })
     .then(({ data }) => {
       if (data.status === SUCCESS) {
-        dispatch(updateShoppingList(data.shoppingList));
+        dispatch(updateShoppingList(data.shoppingLists));
       }
     })
     .catch(err => {
@@ -107,10 +110,12 @@ export const togglePin = idShoppingList => dispatch => {
     });
 };
 
-export const addIngredientToShoppingListItem = (idIngredient, idShoppingList, navigation) => dispatch => {
+export const addIngredientToShoppingListItem = (idIngredient, quantity, unity,idShoppingList, navigation) => dispatch => {
   return axiosShoppingList
     .post('/shoppingListItem/add', {
       idIngredient,
+      quantity,
+      unity,
       idShoppingList
     })
     .then(({ data }) => {
@@ -124,6 +129,24 @@ export const addIngredientToShoppingListItem = (idIngredient, idShoppingList, na
       // dispatch(setError(err.response.data));
     });
 };
+
+export const saveNewUsers = (users, idShoppingList, navigation) => dispatch => {
+  return axiosShoppingList
+    .put('/shoppingListItem/editUsers', {
+      users,
+      idShoppingList,
+    })
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        dispatch(updateShoppingListItem(data.currentShoppingList));
+        navigation.goBack();
+      }
+    })
+    .catch(err => {
+      // console.log(err);
+      // dispatch(setError(err.response.data));
+    });
+}
 
 export const setMessageInfo = messageInfo => ({
   type: SET_MESSAGE_INFO,

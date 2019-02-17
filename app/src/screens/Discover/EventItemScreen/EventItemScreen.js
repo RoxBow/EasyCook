@@ -10,6 +10,7 @@ import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
 import ListAvatar from '../../../components/ListAvatar/ListAvatar';
 import { formatDate } from '../../../constants/helpers';
+import Icon from '../../../components/Icon/Icon';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -75,15 +76,15 @@ class EventItem extends React.Component {
           </View>
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>
-              <AntDesign size={22} name="calendar" style={styles.iconInfo} />
+              <Icon icon="calendar" size={22} style={styles.iconInfo} />
               <Text>{formatDate(new Date(date))}</Text>
             </View>
             <View style={styles.info}>
-              <Entypo name="location-pin" size={22} style={styles.iconInfo} />
+              <Icon icon="location" size={22} style={styles.iconInfo} />
               <Text>{address}</Text>
             </View>
             <View style={styles.info}>
-              <Entypo name="price-tag" size={22} style={styles.iconInfo} />
+              <Icon icon="price" size={22} style={styles.iconInfo} />
               <Text>{price === 0 ? 'Gratuit' : `${price}€`}</Text>
             </View>
           </View>
@@ -119,7 +120,7 @@ class EventItem extends React.Component {
             onPress={() => this._toggleUser('interested')}
             style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
           >
-            <IconStar isFill={this.isInterested()} size={22} />
+            <IconStar isFill={this.isInterested()} />
             <Text style={styles.btnActionText}>Intéressé(e)</Text>
           </Button>
           <Button style={styles.btnAction} onPress={() => this._toggleUser('participate')}>

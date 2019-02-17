@@ -3,8 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'native-base';
 import EventTab from '../../../components/EventTab/EvenTab';
+import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
 import { styleTab, styleTabs } from '../../../constants/global';
 import { userEventsSelector } from '../../../redux/Event/selectors';
+import { userGoodDealsSelector } from '../../../redux/GoodDeal/selectors';
 
 class AccountScreen extends React.Component {
   constructor() {
@@ -14,21 +16,24 @@ class AccountScreen extends React.Component {
   }
 
   render() {
-    const { events } = this.props;
+    const { events, goodDeals } = this.props;
 
     return (
       <Tabs {...styleTabs} locked={true}>
         <Tab heading="Événements à venir" {...styleTab}>
           {events && <EventTab events={events} />}
         </Tab>
-        <Tab heading="Mes publications" {...styleTab} />
+        <Tab heading="Mes bons plans" {...styleTab}>
+        {goodDeals && <GoodDealTab goodDeals={goodDeals} />}
+        </Tab>
       </Tabs>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  events: userEventsSelector(state.event.events, state.user.info._id)
+  events: userEventsSelector(state.event.events, state.user.info._id),
+  goodDeals: userGoodDealsSelector(state.goodDeal.goodDeals, state.user.info._id)
 });
 
 export default connect(mapStateToProps)(AccountScreen);

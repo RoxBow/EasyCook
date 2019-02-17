@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
   btnAddAliment: {
     position: 'absolute',
     bottom: 15,
-    paddingRight: 15,
-    paddingLeft: 10,
+    paddingHorizontal: 15,
     alignSelf: 'center',
     backgroundColor: pink,
   },

@@ -4,13 +4,19 @@ const Schema = mongoose.Schema;
 
 const ingredient = mongoose.Schema(
   {
-    id: String,
+    refId: String,
     isValidate: {
       type: Boolean,
       default: false
-    }
+    },
+    quantity: Number,
+    unity: {
+      type: String,
+      default: 'gram',
+      enum: ['gram', 'piece'],
+    },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
   },
-  { _id: false }
 );
 
 const ShoppingList = new Schema(

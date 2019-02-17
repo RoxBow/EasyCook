@@ -5,13 +5,16 @@ const ShoppingList = require('../../models/ShoppingList');
 
 class ShoppingListRouterClass {
   routes() {
-    const populateFields = [{ path: 'users', populate: { path: 'avatar' } }];
+    const populateFields = [
+      { path: 'users', populate: { path: 'avatar' } },
+      { path: 'ingredients.user', select: 'avatar', populate: { path: 'avatar' } }
+    ];
 
     shoppingListRouter.get('/', (req, res) => {
       ShoppingList.find({ users: req.user._id })
         .populate(populateFields)
         .exec((err, shoppingLists) => {
-          res.send({ shoppingList: shoppingLists });
+          res.send({ shoppingLists });
         });
     });
 
@@ -32,7 +35,7 @@ class ShoppingListRouterClass {
 
       const shoppingListAdded = new ShoppingList({ name, maxDate, users });
 
-      shoppingListAdded.save(err => {
+      shoppingListAdded.save((err, shoppingListAdded) => {
         if (err) {
           console.log('err', err);
           return res.status(400).send({ status: 'FAILURE', errorMessage: err });
@@ -41,7 +44,7 @@ class ShoppingListRouterClass {
         ShoppingList.find({ users: req.user._id })
           .populate(populateFields)
           .exec((err, shoppingLists) => {
-            res.status(200).send({ status: 'SUCCESS', shoppingList: shoppingLists });
+            res.status(200).send({ status: 'SUCCESS', shoppingLists, shoppingListAdded });
           });
       });
     });
@@ -54,15 +57,31 @@ class ShoppingListRouterClass {
         .exec((err, shoppingList) => {
           if (err) console.log(err);
 
-          const updatedIngredient = shoppingList.ingredients.find(({ id }) => id === idAliment);
+          const updatedIngredient = shoppingList.ingredients.find(
+            ({ refId }) => refId === idAliment
+          );
           updatedIngredient.isValidate = !updatedIngredient.isValidate;
+
+          // if ingredient validated, link user to it
+          // else remove him
+          if (updatedIngredient.isValidate) {
+            updatedIngredient.user = req.user._id;
+          } else {
+            updatedIngredient.user = null;
+          }
 
           shoppingList.save((err, updatedShoppingList) => {
             if (err) console.log(err);
 
-            res.status(200).send({
-              status: 'SUCCESS',
-              currentShoppingList: updatedShoppingList
+            updatedShoppingList.populate(populateFields, (err, updatedShoppingList) => {
+              if (err) {
+                console.log(err);
+                return res.status(400).send({ status: 'FAILURE', errorMessage: err });
+              }
+              res.status(200).send({
+                status: 'SUCCESS',
+                currentShoppingList: updatedShoppingList
+              });
             });
           });
         });
@@ -84,8 +103,7 @@ class ShoppingListRouterClass {
             .exec((err, shoppingLists) => {
               res.status(200).send({
                 status: 'SUCCESS',
-                currentShoppingList: updatedShoppingList,
-                shoppingList: shoppingLists
+                shoppingLists
               });
             });
         });
@@ -93,14 +111,14 @@ class ShoppingListRouterClass {
     });
 
     shoppingListRouter.post('/shoppingListItem/add', (req, res) => {
-      const { idIngredient, idShoppingList } = req.body;
+      const { idIngredient, quantity, unity, idShoppingList } = req.body;
 
       ShoppingList.findById(idShoppingList)
         .populate(populateFields)
         .exec((err, shoppingList) => {
           if (err) console.log(err);
 
-          shoppingList.ingredients.push({ id: idIngredient });
+          shoppingList.ingredients.push({ refId: idIngredient, quantity, unity });
 
           shoppingList.save((err, updatedShoppingList) => {
             if (err) console.log(err);
@@ -111,6 +129,27 @@ class ShoppingListRouterClass {
             });
           });
         });
+    });
+
+    shoppingListRouter.put('/shoppingListItem/editUsers', (req, res) => {
+      const { users, idShoppingList } = req.body;
+
+      ShoppingList.findById(idShoppingList, (err, shoppingList) => {
+        if (err) console.log(err);
+
+        shoppingList.users = shoppingList.users.concat(users);
+
+        shoppingList.save((err, updatedShoppingList) => {
+          if (err) console.log(err);
+
+          ShoppingList.populate(updatedShoppingList, populateFields, (err, updatedShoppingList) => {
+            res.status(200).send({
+              status: 'SUCCESS',
+              currentShoppingList: updatedShoppingList
+            });
+          });
+        });
+      });
     });
   }
 

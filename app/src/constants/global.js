@@ -8,7 +8,8 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  * CONFIG
  */
 
-export const serverUrl = 'http://localhost:3333';
+export const serverUrl = 'http://192.168.1.40:3333';
+// export const serverUrl = 'http://localhost:3333';
 // export const serverUrl = 'https://cook-application.herokuapp.com';
 
 export const STATUS = {
@@ -67,7 +68,9 @@ export const styleTabs = {
   tabBarUnderlineStyle: {
     backgroundColor: tabBarSelected,
     width: '30%',
-    marginHorizontal: Dimensions.get('window').width / 10
+    marginHorizontal: Dimensions.get('window').width / 10,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   }
 };
 

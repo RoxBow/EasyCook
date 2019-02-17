@@ -50,7 +50,7 @@ class AddShoppingListScreen extends React.Component {
   }
 
   render() {
-    const { addShoppingList, usersSelected } = this.props;
+    const { usersSelected } = this.props;
     const { name, chosenDate } = this.state;
 
     return (

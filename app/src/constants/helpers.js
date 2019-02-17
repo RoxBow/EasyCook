@@ -1,15 +1,14 @@
 import { DATE } from './global';
 import { AsyncStorage } from 'react-native';
 
-export const getToken = () => {
-  return AsyncStorage.getItem('userToken');
-};
+export const getToken = () => AsyncStorage.getItem('userToken');
 
 export const isArrayFill = array => array && array.length > 0;
 
 export const getIngredientsFromId = (ingredients, refIngredients) =>
-  ingredients.map(({ id, ...rest }) => ({
-    ...refIngredients.find(({ id: refIngredientId }) => refIngredientId === id),
+  ingredients.map(({ refId, ...rest }) => ({
+    ...refIngredients.find(({ id: refIngredientId }) => refIngredientId === refId),
+    refId,
     ...rest
   }));
 

@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
+import { pink } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#ddd',
-    flex: 1
+  containerSearchBar: {
+    backgroundColor: pink,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+    paddingBottom: 15,
   },
-
-  iconSearch: {
-    paddingVertical: 5
+  wrapperSearchBar: {
+    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+    borderColor: 'transparent',
+    borderWidth: 0,
   }
 });
 
