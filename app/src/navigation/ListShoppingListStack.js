@@ -30,11 +30,7 @@ const ListShoppingListStack = createStackNavigator(
             <Feather name="plus" size={30} color={pink} />
           </TouchableOpacity>
         ),
-        headerLeft: (
-          <Text style={{ fontSize: 23, fontWeight: 'bold' }}>
-            Mes listes de course
-          </Text>
-        ),
+        headerLeft: <Text style={{ fontSize: 23, fontWeight: 'bold' }}>Mes listes de course</Text>,
         headerLeftContainerStyle: { marginTop: 20, marginLeft: 15 },
         headerStyle: { height: 80 }
       })
@@ -45,7 +41,11 @@ const ListShoppingListStack = createStackNavigator(
         title: navigation.state.params.name,
         headerRight: (
           <TouchableOpacity
-            onPress={() => navigation.navigate('SettingShoppingListItem')}
+            onPress={() =>
+              navigation.navigate('SettingShoppingListItem', {
+                idShoppingList: navigation.state.params.idShoppingList
+              })
+            }
             style={{ paddingHorizontal: 20 }}
           >
             <Text style={{ color: pink }}>Modifier</Text>
@@ -75,7 +75,8 @@ const ListShoppingListStack = createStackNavigator(
       screen: SettingShoppingListItemScreen,
       navigationOptions: ({ navigation }) => ({
         title: 'Modifier la liste',
-        headerLeft: <ArrowBack navigation={navigation} />
+        headerLeft: <ArrowBack navigation={navigation} />,
+        headerStyle: { height: 50 }
       })
     }
   },

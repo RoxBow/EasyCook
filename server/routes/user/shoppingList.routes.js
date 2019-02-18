@@ -95,7 +95,7 @@ class ShoppingListRouterClass {
 
         shoppingList.isPin = !shoppingList.isPin;
 
-        shoppingList.save((err, updatedShoppingList) => {
+        shoppingList.save(err => {
           if (err) console.log(err);
 
           ShoppingList.find({ users: req.user._id })
@@ -148,6 +148,30 @@ class ShoppingListRouterClass {
               currentShoppingList: updatedShoppingList
             });
           });
+        });
+      });
+    });
+
+    shoppingListRouter.post('/shoppingListItem/leave', (req, res) => {
+      const { idShoppingList } = req.body;
+
+      ShoppingList.findById(idShoppingList, (err, shoppingList) => {
+        if (err) console.log(err);
+
+        const indexUser = shoppingList.users.findIndex(_id => _id === req.user._id);
+        shoppingList.users.splice(indexUser, 1);
+
+        shoppingList.save(err => {
+          if (err) console.log(err);
+
+          ShoppingList.find({ users: req.user._id })
+            .populate(populateFields)
+            .exec((err, shoppingLists) =>
+              res.status(200).send({
+                status: 'SUCCESS',
+                shoppingLists
+              })
+            );
         });
       });
     });

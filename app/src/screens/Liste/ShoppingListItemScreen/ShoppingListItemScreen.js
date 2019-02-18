@@ -2,7 +2,6 @@ import styles from './shoppinglistitemscreen.style';
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Header, Item, Input, Button, Thumbnail } from 'native-base';
-import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import ListIngredient from '../../../components/ListIngredient/ListIngredient';
 import {

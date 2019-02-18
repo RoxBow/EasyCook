@@ -5,7 +5,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   thumbnail: {
-    marginLeft: -10
+    marginLeft: -10,
+    borderWidth: 2,
+    borderColor: '#fff'
   },
 });
 

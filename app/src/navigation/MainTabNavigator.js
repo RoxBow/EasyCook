@@ -46,7 +46,7 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'ListShoppingListStack',
+    initialRouteName: 'DiscoverStack',
     tabBarOptions: {
       activeTintColor: pink,
       inactiveTintColor: '#888'

@@ -5,6 +5,9 @@ import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import IconStar from '../Icons/IconStar';
 import { serverUrl } from '../../constants/global';
+import { currentUsernameSelector } from '../../redux/User/selectors';
+import { compose } from 'recompose';
+import { combineSelectors } from '../../constants/helpers';
 
 class GoodDealItem extends React.Component {
   constructor(props) {
@@ -48,8 +51,7 @@ class GoodDealItem extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUsername: state.user.info.username
-});
-
-export default withNavigation(connect(mapStateToProps)(GoodDealItem));
+export default compose(
+  connect(combineSelectors(currentUsernameSelector)),
+  withNavigation
+)(GoodDealItem);

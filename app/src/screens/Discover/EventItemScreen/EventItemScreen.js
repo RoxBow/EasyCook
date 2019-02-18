@@ -3,14 +3,16 @@ import React from 'react';
 import { Text, View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header, Thumbnail } from 'native-base';
-import { AntDesign, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import { toggleParticipate, toggleInterested } from '../../../redux/Event/actions';
 import { currentEventSelector } from '../../../redux/Event/selectors';
+import { currentUsernameSelector } from '../../../redux/User/selectors';
 import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
 import ListAvatar from '../../../components/ListAvatar/ListAvatar';
-import { formatDate } from '../../../constants/helpers';
 import Icon from '../../../components/Icon/Icon';
+import { combineSelectors, formatDate } from '../../../constants/helpers';
+import { compose } from 'recompose';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -92,7 +94,7 @@ class EventItem extends React.Component {
           <View style={styles.wrapperParticipants}>
             {participants && participants.length ? (
               <View style={{ flex: 1, width: '100%' }}>
-                <ListAvatar listUser={ participants } />
+                <ListAvatar listUser={participants} />
                 <Text>{participants.length} y participent</Text>
               </View>
             ) : (
@@ -137,17 +139,19 @@ class EventItem extends React.Component {
   }
 }
 
-const mapStateToProps = (state, { navigation }) => ({
-  currentUsername: state.user.info.username,
-  currentEvent: currentEventSelector(state.event.events, navigation.state.params.idEvent)
-});
+const mapStateToProps = combineSelectors(
+  currentUsernameSelector,
+  (s, {navigation}) => currentEventSelector(navigation.state.params.idEvent)(s),
+);
 
 const mapDispatchToProps = dispatch => ({
   toggleParticipate: idEvent => dispatch(toggleParticipate(idEvent)),
   toggleInterested: idEvent => dispatch(toggleInterested(idEvent))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(EventItem);

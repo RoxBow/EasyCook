@@ -1,7 +1,7 @@
 import styles from './GoodDealTab.style';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native';
 import GoodDealItem from '../GoodDealItem/GoodDealItem';
 
 const GoodDealTab = ({ goodDeals }) => (

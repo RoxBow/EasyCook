@@ -27,9 +27,8 @@ export default class App extends React.Component {
       ]),
       Font.loadAsync({
         /* Load assets fonts/icons here */
-        /*
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-        */
+        'Quicksand': require('./src/assets/fonts/Quicksand/Quicksand-Regular.ttf'),
+        'Quicksand--bold': require('./src/assets/fonts/Quicksand/Quicksand-Bold.ttf'),
       })
     ]);
   };

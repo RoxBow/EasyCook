@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import IconStar from '../Icons/IconStar';
 import { serverUrl } from '../../constants/global';
 import ListAvatar from '../ListAvatar/ListAvatar';
+import { compose } from 'recompose';
+import { combineSelectors } from '../../constants/helpers';
+import { currentUsernameSelector } from '../../redux/User/selectors';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -28,10 +31,10 @@ class EventItem extends React.Component {
   }
 
   render() {
-    const { name, creator, image, participants } = this.props;
+    const { name, creator, image, participants, style } = this.props;
 
     return (
-      <TouchableOpacity style={styles.container} onPress={this.redirectToEventItem}>
+      <TouchableOpacity style={[styles.container, style]} onPress={this.redirectToEventItem}>
         <View style={styles.wrapper}>
           <Image style={styles.imageEvent} source={{ uri: `${serverUrl}/${image.uri}` }} />
           <View style={styles.wrapperInfo}>
@@ -49,8 +52,7 @@ class EventItem extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentUsername: state.user.info.username
-});
-
-export default withNavigation(connect(mapStateToProps)(EventItem));
+export default compose(
+  connect(combineSelectors(currentUsernameSelector)),
+  withNavigation
+)(EventItem);

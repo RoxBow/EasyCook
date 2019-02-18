@@ -84,7 +84,7 @@ export const addShoppingList = (name, maxDate, users, navigation) => async dispa
         dispatch(updateShoppingList(data.shoppingLists));
         navigation.navigate('ShoppingListItem', {
           idShoppingList: data.shoppingListAdded._id,
-          name: data.shoppingListAdded.name,
+          name: data.shoppingListAdded.name
         });
       }
     })
@@ -97,7 +97,7 @@ export const addShoppingList = (name, maxDate, users, navigation) => async dispa
 export const togglePin = idShoppingList => dispatch => {
   return axiosShoppingList
     .post('/shoppingListItem/togglePin', {
-      idShoppingList,
+      idShoppingList
     })
     .then(({ data }) => {
       if (data.status === SUCCESS) {
@@ -110,7 +110,13 @@ export const togglePin = idShoppingList => dispatch => {
     });
 };
 
-export const addIngredientToShoppingListItem = (idIngredient, quantity, unity,idShoppingList, navigation) => dispatch => {
+export const addIngredientToShoppingListItem = (
+  idIngredient,
+  quantity,
+  unity,
+  idShoppingList,
+  navigation
+) => dispatch => {
   return axiosShoppingList
     .post('/shoppingListItem/add', {
       idIngredient,
@@ -134,7 +140,7 @@ export const saveNewUsers = (users, idShoppingList, navigation) => dispatch => {
   return axiosShoppingList
     .put('/shoppingListItem/editUsers', {
       users,
-      idShoppingList,
+      idShoppingList
     })
     .then(({ data }) => {
       if (data.status === SUCCESS) {
@@ -146,7 +152,23 @@ export const saveNewUsers = (users, idShoppingList, navigation) => dispatch => {
       // console.log(err);
       // dispatch(setError(err.response.data));
     });
-}
+};
+
+export const leaveShoppingList = (idShoppingList, navigation) => dispatch =>
+  axiosShoppingList
+    .post('/shoppingListItem/leave', {
+      idShoppingList
+    })
+    .then(({ data }) => {
+      if (data.status === SUCCESS) {
+        dispatch(updateShoppingList(data.shoppingLists));
+        navigation.navigate('ListShoppingList');
+      }
+    })
+    .catch(err => {
+      // console.log(err);
+      // dispatch(setError(err.response.data));
+    });
 
 export const setMessageInfo = messageInfo => ({
   type: SET_MESSAGE_INFO,

@@ -26,3 +26,12 @@ export const formatDate = date =>
   `${DATE.shortDay[date.getDay()]} ${date.getDate()} ${
     DATE.month[date.getMonth()]
   } ${date.getFullYear()}`;
+
+export const combineSelectors = (...selectors) => (state, props) =>
+  selectors.reduce(
+    (acc, selector) => ({
+      ...acc,
+      ...selector(state, props)
+    }),
+    {}
+  );

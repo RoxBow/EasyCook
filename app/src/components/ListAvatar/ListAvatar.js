@@ -4,14 +4,14 @@ import { View } from 'react-native';
 import { Thumbnail } from 'native-base';
 import { serverUrl } from '../../constants/global';
 
-const ListAvatar = ({ listUser }) => (
+const ListAvatar = ({ listUser, styleThumbnail }) => (
   <View style={ styles.wraperListAvatar }>
     {listUser.map(({ avatar }, i) => (
       <Thumbnail
         small
         key={i}
         source={{ uri: `${serverUrl}/${avatar.uri}` }}
-        style={[i !== 0 && styles.thumbnail]}
+        style={[i !== 0 && styles.thumbnail, styleThumbnail]}
       />
     ))}
   </View>
