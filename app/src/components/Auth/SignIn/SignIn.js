@@ -1,9 +1,10 @@
 import styles from './signin.style';
 import React from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
+import { Button, TextInput, View } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { requestLogin } from '../../../redux/User/actions';
 import { connect } from 'react-redux';
+import Text from '../../Text/Text';
 
 class SignIn extends React.Component {
   constructor() {

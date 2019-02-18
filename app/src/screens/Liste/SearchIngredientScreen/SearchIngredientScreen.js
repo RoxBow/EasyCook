@@ -1,8 +1,9 @@
 import styles from './searchingredientscreen.style';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import SearchBar from '../../../components/SearchBar/SearchBar';
+import Text from '../../../components/Text/Text';
 
 class SearchIngredientScreen extends React.Component {
   constructor(props) {

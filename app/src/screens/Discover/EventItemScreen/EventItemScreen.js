@@ -1,6 +1,6 @@
 import styles from './eventitemscreen.style';
 import React from 'react';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header, Thumbnail } from 'native-base';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -13,6 +13,7 @@ import ListAvatar from '../../../components/ListAvatar/ListAvatar';
 import Icon from '../../../components/Icon/Icon';
 import { combineSelectors, formatDate } from '../../../constants/helpers';
 import { compose } from 'recompose';
+import Text from '../../../components/Text/Text';
 
 class EventItem extends React.Component {
   constructor(props) {

@@ -1,8 +1,9 @@
 import styles from './Accordeon.style';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import Arrow from '../Icons/IconArrow';
 import { ARROW } from '../../constants/global';
+import Text from '../Text/Text';
 
 class Accordeon extends React.Component {
   constructor(props) {

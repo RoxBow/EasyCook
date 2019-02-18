@@ -1,9 +1,10 @@
 import styles from './addshoppinglistscreen.style';
 import React from 'react';
-import { TextInput, View, Text, TouchableOpacity } from 'react-native';
+import { TextInput, View, TouchableOpacity } from 'react-native';
 import { Container, DatePicker, Button } from 'native-base';
 import { connect } from 'react-redux';
 import { addShoppingList } from '../../../redux/ShoppingList/actions';
+import Text from '../../../components/Text/Text';
 
 class AddShoppingListScreen extends React.Component {
   constructor() {

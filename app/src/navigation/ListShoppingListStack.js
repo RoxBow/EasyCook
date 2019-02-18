@@ -1,13 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon, ARROW } from '../constants/global';
 import { pink } from '../constants/colors';
 import { Feather, AntDesign } from '@expo/vector-icons';
-import { Header, Left, Body, Right, Title, Button } from 'native-base';
+import { Header, Left, Body, Right, Title } from 'native-base';
 import IconArrow from '../components/Icons/IconArrow';
 import Icon from '../components/Icon/Icon';
 import ArrowBack from '../components/ArrowBack/ArrowBack';
+import Text from '../components/Text/Text';
 
 import ListShoppingListScreen from '../screens/Liste/ListShoppingListScreen/ListShoppingListScreen';
 import ShoppingListItemScreen from '../screens/Liste/ShoppingListItemScreen/ShoppingListItemScreen';

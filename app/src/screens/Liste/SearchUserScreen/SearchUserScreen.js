@@ -1,6 +1,6 @@
 import styles from './SearchUserScreen.style';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Item, Header, Input, Left, Body, Right, Container, Button, Title } from 'native-base';
 import { EvilIcons, AntDesign } from '@expo/vector-icons';
 import { fetchUsers, setUsersSelected, saveNewUsers } from '../../../redux/ShoppingList/actions';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { usersSelector } from '../../../redux/ShoppingList/selectors';
 import ListUserItem from '../../../components/ListUserItem/ListUserItem';
 import { pink } from '../../../constants/colors';
+import Text from '../../../components/Text/Text';
 
 class SearchUserScreen extends React.Component {
   constructor(props) {

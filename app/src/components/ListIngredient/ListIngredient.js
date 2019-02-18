@@ -1,12 +1,13 @@
 import styles from './listingredient.style';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import CheckBox from '../Checkbox/Checkbox';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import { toggleValidAliment } from '../../redux/ShoppingList/actions';
 import { Thumbnail } from 'native-base';
 import { serverUrl } from '../../constants/global';
+import Text from '../Text/Text';
 
 const ListIngredient = ({ ingredients, isValidate, toggleValidAliment, idShoppingList }) =>
   ingredients.map(({ name, quantity, unity, refId, user }, i) => (

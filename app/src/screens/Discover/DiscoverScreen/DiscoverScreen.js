@@ -1,6 +1,6 @@
 import styles from './discoverscreen.style';
 import React from 'react';
-import { Tabs, Tab, Text } from 'native-base';
+import { Tabs, Tab } from 'native-base';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Container, Header, Left, Right, Body } from 'native-base';
 import { Item, Input } from 'native-base';
@@ -12,6 +12,7 @@ import { fetchGoodDeals } from '../../../redux/GoodDeal/actions';
 import { connect } from 'react-redux';
 import EventTab from '../../../components/EventTab/EvenTab';
 import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
+import Text from '../../../components/Text/Text';
 
 const { window } = Layout;
 

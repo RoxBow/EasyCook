@@ -1,6 +1,6 @@
 import styles from './eventitem.style';
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import IconStar from '../Icons/IconStar';
@@ -9,6 +9,7 @@ import ListAvatar from '../ListAvatar/ListAvatar';
 import { compose } from 'recompose';
 import { combineSelectors } from '../../constants/helpers';
 import { currentUsernameSelector } from '../../redux/User/selectors';
+import Text from '../Text/Text';
 
 class EventItem extends React.Component {
   constructor(props) {

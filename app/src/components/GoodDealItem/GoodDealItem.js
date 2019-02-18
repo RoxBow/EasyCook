@@ -1,6 +1,6 @@
 import styles from './GoodDealItem.style';
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { connect } from 'react-redux';
 import IconStar from '../Icons/IconStar';
@@ -8,6 +8,7 @@ import { serverUrl } from '../../constants/global';
 import { currentUsernameSelector } from '../../redux/User/selectors';
 import { compose } from 'recompose';
 import { combineSelectors } from '../../constants/helpers';
+import Text from '../Text/Text';
 
 class GoodDealItem extends React.Component {
   constructor(props) {

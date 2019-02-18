@@ -1,12 +1,13 @@
 import styles from './shoppinglistitem.style';
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { ActionSheet } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { Entypo } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { togglePin } from '../../redux/ShoppingList/actions';
 import ListAvatar from '../ListAvatar/ListAvatar';
+import Text from '../Text/Text';
 
 class ShoppingListItem extends React.Component {
   constructor(props) {

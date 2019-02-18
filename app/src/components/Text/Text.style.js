@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
   },
   textBold: {
     fontFamily: 'Quicksand--bold',
+  },
+  textMedium: {
+    fontFamily: 'Quicksand--medium',
   }
 });
 

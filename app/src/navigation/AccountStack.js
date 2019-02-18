@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
 import HeaderAccount from '../components/Header/HeaderAccount/HeaderAccount';

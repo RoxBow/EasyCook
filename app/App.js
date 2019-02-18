@@ -29,6 +29,7 @@ export default class App extends React.Component {
         /* Load assets fonts/icons here */
         'Quicksand': require('./src/assets/fonts/Quicksand/Quicksand-Regular.ttf'),
         'Quicksand--bold': require('./src/assets/fonts/Quicksand/Quicksand-Bold.ttf'),
+        'Quicksand--medium': require('./src/assets/fonts/Quicksand/Quicksand-Medium.ttf'),
       })
     ]);
   };

@@ -1,11 +1,11 @@
 import styles from './CreateGoodDealScreen.style';
 import React from 'react';
-import { Text } from 'react-native';
 import { Container, DatePicker, Button, Item, Input, Label } from 'native-base';
 import { connect } from 'react-redux';
 import { createGoodDeal } from '../../../redux/GoodDeal/actions';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
+import Text from '../../../components/Text/Text';
 
 class CreateGoodDealScreen extends React.Component {
   constructor() {

@@ -1,11 +1,12 @@
 import styles from './EditerUserScreen.style';
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Textarea, Label, Item, Input, Form, Button, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
 import { ImagePicker, Permissions } from 'expo';
 import { saveEditUser } from '../../../redux/User/actions';
 import { serverUrl } from '../../../constants/global';
+import Text from '../../../components/Text/Text';
 
 class EditUserScreen extends React.Component {
   constructor(props) {

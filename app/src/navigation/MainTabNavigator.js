@@ -49,7 +49,10 @@ export default createBottomTabNavigator(
     initialRouteName: 'DiscoverStack',
     tabBarOptions: {
       activeTintColor: pink,
-      inactiveTintColor: '#888'
+      inactiveTintColor: '#888',
+      labelStyle: { 
+        fontFamily: 'Quicksand'
+      }
     }
   }
 );

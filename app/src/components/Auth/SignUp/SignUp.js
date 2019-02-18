@@ -1,8 +1,9 @@
 import styles from './signup.style';
 import React from 'react';
-import { Button, TextInput, View, Text } from 'react-native';
+import { Button, TextInput, View } from 'react-native';
 import { connect } from 'react-redux';
 import { requestSignUp } from '../../../redux/User/actions';
+import Text from '../../Text/Text';
 
 class SignUp extends React.Component {
   constructor() {

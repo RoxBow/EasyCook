@@ -1,11 +1,11 @@
 import styles from './createeventscreen.style';
 import React from 'react';
-import { Text } from 'react-native';
 import { Container, DatePicker, Button, Item, Input } from 'native-base';
 import { connect } from 'react-redux';
 import { createEvent } from '../../../redux/Event/actions';
 import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
+import Text from '../../../components/Text/Text';
 
 class CreateEventScreen extends React.Component {
   constructor() {

@@ -1,6 +1,7 @@
 import styles from './empty.style';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import Text from '../Text/Text';
 
 const Empty = ({ name }) => (
   <View style={styles.container}>

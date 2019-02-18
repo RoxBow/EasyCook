@@ -1,12 +1,13 @@
 import styles from './listshoppinglistscreen.style';
 import React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Root } from 'native-base';
 import ShoppingListItem from '../../../components/ShoppingListItem/ShoppingListItem';
 import { isArrayFill } from '../../../constants/helpers';
 import Empty from '../../../components/Empty/Empty';
 import { fetchShoppingList, setFetch } from '../../../redux/ShoppingList/actions';
 import { connect } from 'react-redux';
+import Text from '../../../components/Text/Text';
 
 class ListShoppingListScreen extends React.Component {
   constructor(props) {

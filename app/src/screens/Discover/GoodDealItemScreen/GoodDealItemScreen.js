@@ -1,6 +1,6 @@
 import styles from './GoodDealItem.style';
 import React from 'react';
-import { Text, View, ImageBackground, ScrollView } from 'react-native';
+import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header, Thumbnail } from 'native-base';
 import { AntDesign, Entypo } from '@expo/vector-icons';
@@ -9,6 +9,7 @@ import { currentGoodDealSelector } from '../../../redux/GoodDeal/selectors';
 import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
 import { formatDate } from '../../../constants/helpers';
+import Text from '../../../components/Text/Text';
 
 class GoodDealItem extends React.Component {
   constructor(props) {

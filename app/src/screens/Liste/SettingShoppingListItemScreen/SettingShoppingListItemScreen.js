@@ -1,11 +1,12 @@
 import styles from './SettingShoppingListItemScreen.style';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 import { currentShoppingListSelector } from '../../../redux/ShoppingList/selectors';
 import ListAvatar from '../../../components/ListAvatar/ListAvatar';
 import { leaveShoppingList } from '../../../redux/ShoppingList/actions';
+import Text from '../../../components/Text/Text';
 
 class SettingShoppingListItemScreen extends React.Component {
   constructor() {

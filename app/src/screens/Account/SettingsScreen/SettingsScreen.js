@@ -1,12 +1,13 @@
 import styles from './SettingsScreen.style';
 import React from 'react';
-import { Separator, ListItem, Text, Left, Right, Body, Content, Button } from 'native-base';
+import { Separator, ListItem, Left, Right, Body, Content, Button } from 'native-base';
 import Arrow from '../../../components/Icons/IconArrow';
 import { connect } from 'react-redux';
 import { requestLogout, requestDeleteAccount } from '../../../redux/User/actions';
-import { Entypo, AntDesign, Feather, MaterialCommunityIcons, Foundation } from '@expo/vector-icons';
+import { Entypo, Feather, MaterialCommunityIcons, Foundation } from '@expo/vector-icons';
 import { ARROW } from '../../../constants/global';
 import Icon from '../../../components/Icon/Icon';
+import Text from '../../../components/Text/Text';
 
 class SettingsScreen extends React.Component {
   constructor() {

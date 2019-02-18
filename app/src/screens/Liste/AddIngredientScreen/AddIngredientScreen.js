@@ -1,11 +1,11 @@
 import styles from './addingredientscreen.style';
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { Picker, Item } from 'native-base';
+import { View, TextInput } from 'react-native';
+import { Picker } from 'native-base';
 import { connect } from 'react-redux';
 import { addIngredientToShoppingListItem } from '../../../redux/ShoppingList/actions';
 import Button from '../../../components/Button/Button';
-import Icon from '../../../components/Icon/Icon';
+import Text from '../../../components/Text/Text';
 
 class AddIngredientScreen extends React.Component {
   constructor(props) {

@@ -1,12 +1,13 @@
 import styles from './eventtab.style';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import EventItem from '../EventItem/EventItem';
 import { compose } from 'recompose';
 import { eventsSelector } from '../../redux/Event/selectors';
-import { combineSelectors, formatDate } from '../../constants/helpers';
+import { combineSelectors } from '../../constants/helpers';
 import { DATE } from '../../constants/global';
+import Text from '../Text/Text';
 
 const compareDate = (d1, d2) => d1.getMonth() < d2.getMonth() || d1.getDate() < d2.getDate();
 

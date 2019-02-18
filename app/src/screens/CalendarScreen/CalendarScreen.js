@@ -1,11 +1,12 @@
 import styles from './calendarscreen.style';
 import React from 'react';
 import axios from 'axios';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'native-base';
 import { Agenda } from 'react-native-calendars';
 import { serverUrl, styleDotCalendar, themeCalendar } from '../../constants/global';
 import RecipeCalendar from '../../components/RecipeCalendar/RecipeCalendar';
+import Text from '../../components/Text/Text';
 
 const MEAL = {
   breakFast: { key: 'breakFast', ...styleDotCalendar },
