@@ -39,7 +39,7 @@ class GoodDealItem extends React.Component {
         <View style={styles.wrapper}>
           <Image style={styles.imageEvent} source={{ uri: `${serverUrl}/${image.uri}` }} />
           <View style={styles.wrapperInfo}>
-            <Text style={styles.nameText}>{storeName}</Text>
+            <Text style={styles.nameText} bold>{storeName}</Text>
             <Text>Par {creator.username}</Text>
             <View />
           </View>

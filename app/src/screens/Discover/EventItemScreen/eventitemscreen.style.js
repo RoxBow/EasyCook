@@ -19,9 +19,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 8
   },
-  proposedBy: {
-    color: '#ccc'
-  },
 
   wrapperInfo: {
     marginVertical: 10,

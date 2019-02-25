@@ -39,7 +39,7 @@ class EventItem extends React.Component {
         <View style={styles.wrapper}>
           <Image style={styles.imageEvent} source={{ uri: `${serverUrl}/${image.uri}` }} />
           <View style={styles.wrapperInfo}>
-            <Text style={styles.nameText}>{name}</Text>
+            <Text style={styles.nameText} bold>{name}</Text>
             <Text>Par {creator.username}</Text>
             <ListAvatar listUser={participants} />
             <View />

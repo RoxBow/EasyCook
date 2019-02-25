@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
 
   btnValidateText: {
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 15,
   }
 });

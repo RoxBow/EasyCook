@@ -7,7 +7,7 @@ import Text from '../Text/Text';
 
 const ThumbnailList = ({ title, list }) => (
   <View style={styles.wrapper}>
-    {title && <Text style={styles.title}>{title}</Text>}
+    {title && <Text style={styles.title} medium>{title}</Text>}
     <ScrollView horizontal>
       {list.map((element, i) => (
         <Thumbnail key={i} source={{ uri: `${serverUrl}/${element.uri}` }} />

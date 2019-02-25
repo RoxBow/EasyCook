@@ -1,4 +1,4 @@
-import styles from './eventitemscreen.style';
+import styles from './Eventitemscreen.style';
 import React from 'react';
 import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
@@ -14,6 +14,7 @@ import Icon from '../../../components/Icon/Icon';
 import { combineSelectors, formatDate } from '../../../constants/helpers';
 import { compose } from 'recompose';
 import Text from '../../../components/Text/Text';
+import ProposedBy from '../../../components/ProposedBy/ProposedBy';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -73,9 +74,8 @@ class EventItem extends React.Component {
         </Header>
         <View style={styles.wrapperContent}>
           <View style={styles.headContent}>
-            <Text style={styles.eventName}>{name}</Text>
-            <Thumbnail small source={{ uri: `${serverUrl}/${creator.avatar.uri}` }} />
-            <Text style={styles.proposedBy}>proposée par {creator.username}</Text>
+            <Text style={styles.eventName} medium>{name}</Text>
+            <ProposedBy creator={creator} />
           </View>
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>

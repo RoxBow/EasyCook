@@ -1,0 +1,12 @@
+[
+  {
+    "id": "E00001",
+    "name": "Poêle",
+    "uri": "assets/equipments/poele.svg"
+  },
+  {
+    "id": "E00002",
+    "name": "Cuisson",
+    "uri": "assets/equipments/cuisson.svg"
+  }
+]

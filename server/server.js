@@ -1,5 +1,4 @@
-
-if (process.env.NODE_ENV !== 'production') require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -14,10 +13,9 @@ const JwtStrategy = require('./passport.config').PassportJwtStrategy;
 
 const { mainRouter } = require('./routes/main.router');
 
-const goodDeals = require('./mocks/goodDeals.json');
 const ingredients = require('./mocks/ingredients.json');
+const equipments = require('./mocks/equipments.json');
 const calendar = require('./mocks/calendar.json');
-const shoppingLists = require('./mocks/shoppingLists.json');
 
 /* # MODELS # */
 const User = require('./models/User.js');
@@ -27,13 +25,10 @@ const User = require('./models/User.js');
   res.header("Access-Control-Allow-Origin", "*");
 */
 
-mongoose.connect(
-  process.env.DB_URL,
-  {
-    useNewUrlParser: true,
-    useCreateIndex: true
-  }
-);
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 const db = mongoose.connection;
 
@@ -94,25 +89,12 @@ passport.deserializeUser((id, done) => {
 
 /* # fetch data # */
 
-app.get('/goodDeals', (req, res) => {
-  res.json(goodDeals);
-});
-
-app.get('/ingredients', (req, res) => {
-  res.json(ingredients);
+app.get('/refData', (req, res) => {
+  res.send({ refIngredients: ingredients, refEquipments: equipments });
 });
 
 app.get('/calendar', (req, res) => {
   res.json(calendar);
-});
-
-app.get('/shoppingLists', (req, res) => {
-  res.json(shoppingLists);
-});
-
-app.get('/shoppingLists/:id', (req, res) => {
-  // req.params.id
-  res.json(shoppingLists);
 });
 
 app.listen(process.env.PORT, () => {

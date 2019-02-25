@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19005,
-  "packagerPid": 30124,
-  "expoServerNgrokUrl": "https://i3-j9u.roxbow.app.exp.direct",
-  "packagerNgrokUrl": "https://packager.i3-j9u.roxbow.app.exp.direct",
-  "ngrokPid": 30145
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

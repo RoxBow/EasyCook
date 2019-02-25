@@ -35,3 +35,13 @@ export const combineSelectors = (...selectors) => (state, props) =>
     }),
     {}
   );
+
+export const addOrRemoveInArray = (array, value) => {
+  var index = array.indexOf(value);
+
+  if (index === -1) {
+    array.push(value);
+  } else {
+    array.splice(index, 1);
+  }
+};

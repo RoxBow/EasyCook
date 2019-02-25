@@ -4,6 +4,7 @@ import { View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Text from '../../../components/Text/Text';
+import { refDataSelector } from '../../../redux/Recipe/selectors';
 
 class SearchIngredientScreen extends React.Component {
   constructor(props) {
@@ -53,8 +54,4 @@ class SearchIngredientScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  refIngredients: state.recipe.refIngredients
-});
-
-export default connect(mapStateToProps)(SearchIngredientScreen);
+export default connect(refDataSelector)(SearchIngredientScreen);

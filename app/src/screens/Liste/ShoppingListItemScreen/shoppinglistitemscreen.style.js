@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   textAddAliment: {
     marginLeft: 5,
     color: '#fff',
-    fontWeight: '600'
   }
 });
 

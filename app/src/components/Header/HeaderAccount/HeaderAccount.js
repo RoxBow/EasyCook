@@ -18,14 +18,13 @@ const HeaderAccount = ({ info, requestLogout, navigation }) => (
       </Button>
     </Left>
     <Body>
-      <Thumbnail large source={{uri: `${serverUrl}/${info.avatar.uri}`}} />
-      <Text>{info.username}</Text>
-      <FontAwesome
-        name="edit"
-        onPress={() => navigation.navigate('EditUser')}
-        size={25}
-        color={pink}
-      />
+      <Thumbnail large source={{ uri: `${serverUrl}/${info.avatar.uri}` }} />
+      <Text style={styles.username} bold>
+        {info.username}
+      </Text>
+      <Button transparent onPress={() => navigation.navigate('EditUser')}>
+        <Icon icon="edit" size={22} />
+      </Button>
     </Body>
     <Right style={styles.wrapperIcon}>
       <Button transparent onPress={() => navigation.navigate('Settings')}>

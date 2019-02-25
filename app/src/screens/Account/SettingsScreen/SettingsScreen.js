@@ -95,7 +95,7 @@ class SettingsScreen extends React.Component {
             marginTop: 20
           }}
         >
-          <Icon icon="deleteAccount" size={35} />
+          <Icon icon="delete_account" size={35} />
           <Text style={{ color: 'red' }}>Supprimer mon compte</Text>
         </Button>
       </Content>

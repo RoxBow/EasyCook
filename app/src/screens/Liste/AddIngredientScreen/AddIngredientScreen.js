@@ -1,11 +1,12 @@
 import styles from './addingredientscreen.style';
 import React from 'react';
 import { View, TextInput } from 'react-native';
-import { Picker } from 'native-base';
 import { connect } from 'react-redux';
 import { addIngredientToShoppingListItem } from '../../../redux/ShoppingList/actions';
 import Button from '../../../components/Button/Button';
 import Text from '../../../components/Text/Text';
+import Select from '../../../components/Select/Select';
+import { UNITS } from '../../../constants/global';
 
 class AddIngredientScreen extends React.Component {
   constructor(props) {
@@ -54,18 +55,11 @@ class AddIngredientScreen extends React.Component {
               marginRight: 10
             }}
           />
-          <Picker
-            mode="dropdown"
-            iosHeader="Unité"
-            headerBackButtonText="Fermer"
-            style={styles.picker}
-            textStyle={styles.pickerText}
-            selectedValue={unity}
-            onValueChange={itemValue => this.setState({ unity: itemValue })}
-          >
-            <Picker.Item label={quantity > 1 ? 'grammes' : 'gramme'} value="gram" />
-            <Picker.Item label={quantity > 1 ? 'pieces' : 'piece'} value="piece" />
-          </Picker>
+          <Select
+            values={UNITS}
+            selected={unity}
+            updateValue={value => this.setState({ unity: value })}
+          />
         </View>
         <Button
           rounded

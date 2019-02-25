@@ -31,7 +31,7 @@ const ListShoppingListStack = createStackNavigator(
             <Feather name="plus" size={30} color={pink} />
           </TouchableOpacity>
         ),
-        headerLeft: <Text style={{ fontSize: 23, fontWeight: 'bold' }}>Mes listes de course</Text>,
+        headerLeft: <Text style={{ fontSize: 23 }} bold>Mes listes de course</Text>,
         headerLeftContainerStyle: { marginTop: 20, marginLeft: 15 },
         headerStyle: { height: 80 }
       })
@@ -49,7 +49,7 @@ const ListShoppingListStack = createStackNavigator(
             }
             style={{ paddingHorizontal: 20 }}
           >
-            <Text style={{ color: pink }}>Modifier</Text>
+            <Text style={{ color: pink, fontSize: 16 }} medium>Modifier</Text>
           </TouchableOpacity>
         ),
         headerTintColor: pink,
@@ -134,7 +134,7 @@ const RootStack = createStackNavigator(
           >
             <Left>
               <Icon icon={navigation.state.params.kind} size={30} />
-              <Text style={{ color: '#fff', fontSize: 20, marginTop: 10 }}>
+              <Text style={{ color: '#fff', fontSize: 20, marginTop: 10 }} bold>
                 {navigation.state.params.name}
               </Text>
             </Left>
@@ -165,9 +165,9 @@ RootStack.navigationOptions = {
   tabBarLabel: 'Liste',
   tabBarIcon: ({ focused }) =>
     focused ? (
-      <Icon icon="list_tabBar--focus" {...styleTabBarIcon} />
+      <Icon icon="list_tab--focus" {...styleTabBarIcon} />
     ) : (
-      <Icon icon="list_tabBar" {...styleTabBarIcon} />
+      <Icon icon="list_tab" {...styleTabBarIcon} />
     )
 };
 

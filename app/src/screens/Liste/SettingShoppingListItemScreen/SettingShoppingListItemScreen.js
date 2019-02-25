@@ -26,7 +26,7 @@ class SettingShoppingListItemScreen extends React.Component {
             listUser={users}
             styleThumbnail={{ width: 80, height: 80, borderRadius: 40 }}
           />
-          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.name} bold>{name}</Text>
         </View>
         <Button onPress={() => leaveShoppingList(_id)}>
           <Text>Quitter la liste</Text>

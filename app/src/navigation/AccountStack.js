@@ -61,8 +61,8 @@ RootStack.navigationOptions = {
   tabBarLabel: 'Account',
   tabBarIcon: ({ focused }) => (
     focused ? 
-      <Icon icon="account_tabBar--focus" {...styleTabBarIcon} /> : 
-      <Icon icon="account_tabBar" {...styleTabBarIcon} />
+      <Icon icon="account_tab--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="account_tab" {...styleTabBarIcon} />
   )
 };
 

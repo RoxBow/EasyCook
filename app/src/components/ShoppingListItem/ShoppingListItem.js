@@ -67,7 +67,7 @@ class ShoppingListItem extends React.Component {
       <TouchableOpacity style={styles.wrapper} onPress={this.redirectToShoppingListItem}>
         <View style={styles.wrapperTextIcon}>
           <View style={{ flex: 1}}>
-            <Text numberOfLines={1} ellipsizeMode='tail' style={styles.name}>{name}</Text>
+            <Text numberOfLines={1} ellipsizeMode='tail' style={styles.name} bold>{name}</Text>
             {dateMax && <Text style={styles.dateMax}>{dateMax.toString().substr(4, 12)}</Text>}
             <Text style={styles.remainingAliments}>{this.renderRemainingAliments()}</Text>
           </View>

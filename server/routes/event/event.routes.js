@@ -2,7 +2,6 @@ const express = require('express');
 const eventRouter = express.Router({ mergeParams: true });
 const Event = require('../../models/Event');
 const Image = require('../../models/Image');
-const fs = require('fs');
 const multer = require('multer');
 const { getExtFromMime, randomId } = require('../../helpers.js');
 

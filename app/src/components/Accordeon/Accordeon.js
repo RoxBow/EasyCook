@@ -31,7 +31,7 @@ class Accordeon extends React.Component {
     return (
       <View style={styles.wrapperIngredients}>
         <TouchableOpacity style={styles.wrapperTitle} onPress={this.toggle}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title} bold>{title}</Text>
           <Arrow
             size={22}
             name={isOpen ? ARROW.TOP : ARROW.BOTTOM}

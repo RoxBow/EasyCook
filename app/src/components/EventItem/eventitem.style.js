@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   },
 
   nameText: {
-    fontWeight: 'bold',
     fontSize: 17
   },
 

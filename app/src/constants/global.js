@@ -8,8 +8,7 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  * CONFIG
  */
 
-export const serverUrl = 'http://192.168.1.40:3333';
-// export const serverUrl = 'http://localhost:3333';
+export const serverUrl = 'http://localhost:3333';
 // export const serverUrl = 'https://cook-application.herokuapp.com';
 
 export const STATUS = {
@@ -119,3 +118,48 @@ export const ARROW = {
   RIGHT: 'ios-arrow-forward',
   TOP: 'ios-arrow-up'
 };
+
+export const LEVELS = [
+  {
+    label: 'Débutant',
+    value: 'beginner',
+  },
+  {
+    label: 'Amateur',
+    value: 'amateur',
+  },
+  {
+    label: 'Expert',
+    value: 'master',
+  },
+]
+
+export const CATEGORIES = [
+  {
+    label: 'Petit déjeuner',
+    value: 'breakfast',
+  },
+  {
+    label: 'Déjeuner',
+    value: 'lunch',
+  },
+  {
+    label: 'Goûter',
+    value: 'collation',
+  },
+  {
+    label: 'Dîner',
+    value: 'dinner',
+  }
+];
+
+export const UNITS = [
+  {
+    label: 'gramme',
+    value: 'gram',
+  },
+  {
+    label: 'pièce',
+    value: 'piece',
+  },
+]

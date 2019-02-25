@@ -10,6 +10,12 @@ const styles = StyleSheet.create({
   wrapperIcon: {
     alignSelf: 'flex-start',
     marginTop: 30,
+    marginHorizontal: 10,
+  },
+
+  username: {
+    fontSize: 20,
+    marginVertical: 10,
   }
 });
 

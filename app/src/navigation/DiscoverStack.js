@@ -2,15 +2,14 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon } from '../constants/global';
 import { pink } from '../constants/colors';
-import { Header, Left, Body, Right, Title, Button } from 'native-base';
-import { AntDesign } from '@expo/vector-icons';
+import { Header, Left, Body, Right, Title } from 'native-base';
 import Icon from '../components/Icon/Icon';
 
 import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
 import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
 import GoodDealItemScreen from '../screens/Discover/GoodDealItemScreen/GoodDealItemScreen';
-import CreateEvent from '../screens/Discover/CreateEventScreen/CreateEventScreen';
-import CreateGoodDeal from '../screens/Discover/CreateGoodDealScreen/CreateGoodDealScreen';
+import CreateEventScreen from '../screens/Discover/CreateEventScreen/CreateEventScreen';
+import CreateGoodDealScreen from '../screens/Discover/CreateGoodDealScreen/CreateGoodDealScreen';
 import CloseModal from '../components/CloseModal/CloseModal';
 
 const DiscoverStack = createStackNavigator(
@@ -42,7 +41,7 @@ const RootStack = createStackNavigator(
       })
     },
     CreateEvent: {
-      screen: CreateEvent,
+      screen: CreateEventScreen,
       navigationOptions: ({ navigation }) => ({
         header: (
           <Header transparent>
@@ -61,7 +60,7 @@ const RootStack = createStackNavigator(
       })
     },
     CreateGoodDeal: {
-      screen: CreateGoodDeal,
+      screen: CreateGoodDealScreen,
       navigationOptions: ({ navigation }) => ({
         header: (
           <Header transparent>
@@ -89,8 +88,8 @@ RootStack.navigationOptions = {
   tabBarLabel: 'Découvrir',
   tabBarIcon: ({ focused }) => (
     focused ? 
-      <Icon icon="discover_tabBar--focus" {...styleTabBarIcon} /> : 
-      <Icon icon="discover_tabBar" {...styleTabBarIcon} />
+      <Icon icon="discover_tab--focus" {...styleTabBarIcon} /> : 
+      <Icon icon="discover_tab" {...styleTabBarIcon} />
   )
 };
 

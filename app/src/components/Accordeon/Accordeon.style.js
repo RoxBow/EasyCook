@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     marginBottom: 6,
-    fontWeight: 'bold',
     borderBottomColor: greyApp,
     borderBottomWidth: 1
   }

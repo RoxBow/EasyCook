@@ -58,8 +58,7 @@ class GoodDealItem extends React.Component {
         <View style={styles.wrapperContent}>
           <View style={styles.headContent}>
             <Text style={styles.eventName}>{storeName}</Text>
-            <Thumbnail small source={{ uri: `${serverUrl}/${creator.avatar.uri}` }} />
-            <Text style={styles.proposedBy}>proposée par {creator.username}</Text>
+            <ProposedBy creator={creator} />
           </View>
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>

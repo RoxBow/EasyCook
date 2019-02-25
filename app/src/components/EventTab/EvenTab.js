@@ -9,66 +9,50 @@ import { combineSelectors } from '../../constants/helpers';
 import { DATE } from '../../constants/global';
 import Text from '../Text/Text';
 
-const compareDate = (d1, d2) => d1.getMonth() < d2.getMonth() || d1.getDate() < d2.getDate();
+const compareDate = (d1, d2) => d1.getMonth() < d2.getMonth() && d1.getDate() < d2.getDate();
+const equalDate = (d1, d2) => d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
 
 const getDayMonth = date => `${DATE.shortMonth[date.getMonth()].toUpperCase()} ${date.getDate()}`;
 
-const EventTab = ({ events }) => (
-  <ScrollView contentContainerStyle={styles.container}>
-    {events.map((event, i) => {
-      if (i === 0) {
-        return (
-          <View style={{ flexDirection: 'row' }} key={i}>
-            <Text
-              style={{
-                alignSelf: 'center',
-                width: '15%',
-                textAlign: 'center',
-                fontSize: 16,
-                fontWeight: 'bold'
-              }}
-            >
-              {getDayMonth(new Date(event.date))}
-            </Text>
-            <EventItem {...event} style={{ flex: 1 }} />
-          </View>
-        );
-      } else if (compareDate(new Date(events[i - 1].date), new Date(event.date))) {
-        return (
-          <View style={{ flexDirection: 'row' }} key={i}>
-            <Text
-              style={{
-                alignSelf: 'center',
-                width: '15%',
-                textAlign: 'center',
-                fontSize: 16,
-                fontWeight: 'bold'
-              }}
-            >
-              {getDayMonth(new Date(event.date))}
-            </Text>
-            <EventItem {...event} style={{ flex: 1 }} />
-          </View>
-        );
-      }
-
-      return (
-        <View style={{ flexDirection: 'row' }} key={i}>
-          <Text
-            style={{
-              alignSelf: 'center',
-              width: '15%',
-              textAlign: 'center',
-              fontSize: 16,
-              fontWeight: 'bold'
-            }}
-          />
-          <EventItem {...event} style={{ flex: 1 }} />
-        </View>
+const EventTab = ({ events }) => {
+  const allResult = [];
+  events.map(({ date, ...rest }, i) => {
+    if (i === 0 || !equalDate(new Date(events[i - 1].date), new Date(date))) {
+      allResult.push({
+        date,
+        events: [{ date, ...rest }]
+      });
+    } else {
+      const index = allResult.findIndex(({ date: dateE }) =>
+        equalDate(new Date(dateE), new Date(date))
       );
-    })}
-  </ScrollView>
-);
+      allResult[index].events.push({ date, ...rest });
+    }
+  });
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      {allResult.map(({ events }, i) =>
+        events.map((event, i) => (
+          <View style={{ flexDirection: 'row' }} key={i}>
+            <Text
+              style={{
+                alignSelf: 'center',
+                width: '15%',
+                textAlign: 'center',
+                fontSize: 16,
+              }}
+              bold
+            >
+              {i === 0 ? getDayMonth(new Date(event.date)) : ''}
+            </Text>
+            <EventItem {...event} style={{ flex: 1 }} />
+          </View>
+        ))
+      )}
+    </ScrollView>
+  );
+};
 
 const mapStateToProps = combineSelectors(eventsSelector);
 
