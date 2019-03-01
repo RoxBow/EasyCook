@@ -7,6 +7,7 @@ const { SUCCESS, FAILURE } = STATUS;
 export const SET_REF_DATA = 'SET_REF_DATA';
 export const SET_ERROR = 'SET_ERROR';
 export const UPDATE_RECIPES = 'UPDATE_RECIPES';
+export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const ADD_RECIPE = 'ADD_RECIPE';
 
 const axiosRecipe = axios.create({
@@ -84,7 +85,6 @@ export const createRecipe = (
         headers: { 'Content-Type': 'multipart/form-data' }
       })
       .then(({ data }) => {
-
         if (data.status === SUCCESS) {
           dispatch(addRecipe(data.recipe));
           navigation.goBack();
@@ -95,6 +95,37 @@ export const createRecipe = (
         // dispatch(setError(err.response.data));
       });
 };
+
+export const addComment = (idRecipe, text, rating) => {
+  return dispatch =>
+    axiosRecipe
+      .put('/comment/add', { idRecipe, text, rating })
+      .then(({ data }) => {
+        if (data.status === SUCCESS) {
+          dispatch(updateRecipe(data.recipe));
+        }
+      })
+      .catch(err => {
+        //console.log(err);
+        // dispatch(setError(err.response.data));
+      });
+};
+
+export const deleteComment = (idRecipe, idComment) => {
+  return dispatch =>
+    axiosRecipe
+      .post('/comment/delete', { idRecipe, idComment })
+      .then(({ data }) => {
+        if (data.status === SUCCESS) {
+          dispatch(updateRecipe(data.recipe));
+        }
+      })
+      .catch(err => {
+        //console.log(err);
+        // dispatch(setError(err.response.data));
+      });
+};
+
 
 export const setRefData = data => ({
   type: SET_REF_DATA,
@@ -110,6 +141,11 @@ export const setError = error => ({
 export const updateRecipes = recipes => ({
   type: UPDATE_RECIPES,
   recipes
+});
+
+export const updateRecipe = recipe => ({
+  type: UPDATE_RECIPE,
+  recipe
 });
 
 export const addRecipe = recipe => ({

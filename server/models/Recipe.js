@@ -14,6 +14,20 @@ const ingredient = mongoose.Schema(
   },
 );
 
+const comment = mongoose.Schema(
+  {
+    text: String,
+    rating: String,
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+  },
+  {
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at'
+    }
+  }
+);
+
 const Recipe = new Schema(
   {
     name: String,
@@ -25,7 +39,8 @@ const Recipe = new Schema(
     steps: [String],
     ingredients: [ingredient],
     equipments: [String],
-    rating: Number,
+    comments: [comment],
+    rating: String,
     image: { type: Schema.Types.ObjectId, ref: 'Image' }
   },
   {

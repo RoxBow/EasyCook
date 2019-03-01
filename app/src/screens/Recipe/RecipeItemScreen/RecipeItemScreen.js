@@ -2,7 +2,7 @@ import styles from './RecipeItemScreen.style';
 import React from 'react';
 import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Header } from 'native-base';
+import { Header, Item, Input, Button, Thumbnail } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { serverUrl } from '../../../constants/global';
 import { combineSelectors } from '../../../constants/helpers';
@@ -10,14 +10,23 @@ import { compose } from 'recompose';
 import Text from '../../../components/Text/Text';
 import Icon from '../../../components/Icon/Icon';
 import { refDataSelector, currentRecipeSelector } from '../../../redux/Recipe/selectors';
+import { currentUsernameSelector } from '../../../redux/User/selectors';
 import HeadItem from '../../../components/HeadItem/HeadItem';
 import TitleLine from '../../../components/TitleLine/TitleLine';
+import Rating from '../../../components/Rating/Rating';
+import { addComment } from '../../../redux/Recipe/actions';
+import Comments from '../../../components/Comments/Comments';
 
 class RecipeItem extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      comment: '',
+      stars: 0
+    };
+
+    this.addComment = this.addComment.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +48,18 @@ class RecipeItem extends React.Component {
     });
   }
 
+  addComment() {
+    const { addComment, currentRecipe } = this.props;
+    const { comment, stars } = this.state;
+
+    addComment(currentRecipe._id, comment, stars);
+
+    this.setState({
+      comment: '',
+      stars: 0
+    });
+  }
+
   render() {
     const { navigation, currentRecipe } = this.props;
 
@@ -50,12 +71,13 @@ class RecipeItem extends React.Component {
       cookingTime,
       steps,
       equipments,
-      description,
       image,
-      creator
+      creator,
+      comments,
+      _id,
     } = currentRecipe;
 
-    const { formatedIngredient } = this.state;
+    const { formatedIngredient, comment, stars } = this.state;
 
     return (
       <ScrollView>
@@ -121,19 +143,48 @@ class RecipeItem extends React.Component {
             <TitleLine title="Préparation" styleWrapper={styles.titleLine} />
             {steps.map((content, i) => (
               <View style={styles.step} key={i}>
-                <Text style={styles.numberStep} medium>{i + 1}</Text>
+                <Text style={styles.numberStep} medium>
+                  {i + 1}
+                </Text>
                 <Text>{content}</Text>
               </View>
             ))}
           </View>
         </View>
+
+        <View>
+          <TitleLine title="Commentaires" styleWrapper={styles.titleLine} />
+          <Rating getRating={rating => this.setState({ stars: rating })} selected={stars} />
+          <Item rounded>
+            <Input
+              onChangeText={comment => this.setState({ comment })}
+              placeholder="J'adore ce gâteau"
+              value={comment}
+            />
+          </Item>
+          <Button transparent onPress={() => this.addComment()}>
+            <Text>Envoyez</Text>
+          </Button>
+        </View>
+
+        <Comments comments={comments} idRecipe={_id} />
       </ScrollView>
     );
   }
 }
 
-const mapStateToProps = combineSelectors(refDataSelector, (s, { navigation }) =>
-  currentRecipeSelector(navigation.state.params.idRecipe)(s)
+const mapStateToProps = combineSelectors(
+  refDataSelector,
+  (s, { navigation }) => currentRecipeSelector(navigation.state.params.idRecipe)(s)
 );
 
-export default compose(connect(mapStateToProps))(RecipeItem);
+const mapDispatchToProps = dispatch => ({
+  addComment: (idRecipe, text, rating) => dispatch(addComment(idRecipe, text, rating)),
+});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(RecipeItem);

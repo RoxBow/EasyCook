@@ -63,7 +63,10 @@ RootStack.navigationOptions = {
     focused ? 
       <Icon icon="account_tab--focus" {...styleTabBarIcon} /> : 
       <Icon icon="account_tab" {...styleTabBarIcon} />
-  )
+  ),
+  tabBarOnPress: ({ navigation }) => {
+    navigation.navigate('Account');
+  }
 };
 
 export default RootStack;

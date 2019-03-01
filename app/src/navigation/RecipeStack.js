@@ -19,7 +19,7 @@ const RecipeStack = createStackNavigator(
     RecipeItem: {
       screen: RecipeItemScreen,
       navigationOptions: ({ navigation }) => ({})
-    },
+    }
   },
   {
     headerMode: 'none'
@@ -52,7 +52,7 @@ const RootStack = createStackNavigator(
         headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
-    },
+    }
   },
   {
     mode: 'modal'
@@ -61,11 +61,15 @@ const RootStack = createStackNavigator(
 
 RootStack.navigationOptions = {
   tabBarLabel: 'Recettes',
-  tabBarIcon: ({ focused }) => (
-    focused ? 
-      <Icon icon="recipe_tab--focus" {...styleTabBarIcon} /> : 
+  tabBarIcon: ({ focused }) =>
+    focused ? (
+      <Icon icon="recipe_tab--focus" {...styleTabBarIcon} />
+    ) : (
       <Icon icon="recipe_tab" {...styleTabBarIcon} />
-  )
+    ),
+  tabBarOnPress: ({ navigation }) => {
+    navigation.navigate('Recipes');
+  }
 };
 
 export default RootStack;

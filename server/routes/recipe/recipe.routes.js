@@ -21,7 +21,11 @@ const upload = multer({
 
 class RecipeRouterClass {
   routes() {
-    const populateFields = ['image', { path: 'creator', populate: { path: 'avatar' } }];
+    const populateFields = [
+      'image', 
+      { path: 'creator', populate: { path: 'avatar' } },
+      { path: 'comments.user', select: 'username avatar', populate: { path: 'avatar' } }
+    ];
 
     recipeRouter.get('/', (req, res) => {
       Recipe.find({})
@@ -81,6 +85,41 @@ class RecipeRouterClass {
         });
       });
     }); // put /add
+
+    recipeRouter.put('/comment/add', (req, res) => {
+      let { text, rating, idRecipe } = req.body;
+
+      const comment = {
+        text,
+        rating,
+        user: req.user._id
+      };
+
+      Recipe.findById(idRecipe, (err, recipe) => {
+        recipe.comments.push(comment);
+
+        recipe.save((err, recipe) => {
+          recipe.populate(populateFields, (err, recipe) => {
+            res.status(200).send({ status: 'SUCCESS', recipe });
+          });
+        });
+      });
+    });
+
+    recipeRouter.post('/comment/delete', (req, res) => {
+      let { idComment, idRecipe } = req.body;
+
+      Recipe.findById(idRecipe, (err, recipe) => {
+        const indexComment = recipe.comments.findIndex(({ _id }) => _id.toString() === idComment.toString());
+        recipe.comments.splice(indexComment, 1);
+
+        recipe.save((err, recipe) => {
+          recipe.populate(populateFields, (err, recipe) => {
+            res.status(200).send({ status: 'SUCCESS', recipe });
+          });
+        });
+      });
+    });
   } // end routes()
 
   init() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, NavigationActions, StackActions } from 'react-navigation';
 import { styleTabBarIcon, ARROW } from '../constants/global';
 import { pink } from '../constants/colors';
 import { Feather, AntDesign } from '@expo/vector-icons';
@@ -31,7 +31,11 @@ const ListShoppingListStack = createStackNavigator(
             <Feather name="plus" size={30} color={pink} />
           </TouchableOpacity>
         ),
-        headerLeft: <Text style={{ fontSize: 23 }} bold>Mes listes de course</Text>,
+        headerLeft: (
+          <Text style={{ fontSize: 23 }} bold>
+            Mes listes de course
+          </Text>
+        ),
         headerLeftContainerStyle: { marginTop: 20, marginLeft: 15 },
         headerStyle: { height: 80 }
       })
@@ -49,7 +53,9 @@ const ListShoppingListStack = createStackNavigator(
             }
             style={{ paddingHorizontal: 20 }}
           >
-            <Text style={{ color: pink, fontSize: 16 }} medium>Modifier</Text>
+            <Text style={{ color: pink, fontSize: 16 }} medium>
+              Modifier
+            </Text>
           </TouchableOpacity>
         ),
         headerTintColor: pink,
@@ -168,7 +174,10 @@ RootStack.navigationOptions = {
       <Icon icon="list_tab--focus" {...styleTabBarIcon} />
     ) : (
       <Icon icon="list_tab" {...styleTabBarIcon} />
-    )
+    ),
+  tabBarOnPress: ({ navigation }) => {
+    navigation.navigate('ListShoppingList');
+  }
 };
 
 export default RootStack;

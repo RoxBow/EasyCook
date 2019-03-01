@@ -2,30 +2,30 @@ import styles from './RecipeTab.style';
 import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, View } from 'react-native';
-import RecipeItem from '../RecipeItem/RecipeItem';
 import SuggestionRecipe from '../SuggestionRecipe/SuggestionRecipe';
 import { compose } from 'recompose';
-import { combineSelectors } from '../../constants/helpers';
 import ThumbnailList from '../ThumbnailList/ThumbnailList';
-import { recipesSelector, refDataSelector } from '../../redux/Recipe/selectors';
+import SectionCategoryRecipe from '../SectionCategoryRecipe/SectionCategoryRecipeContainer';
+import Text from '../Text/Text';
+import { refDataSelector } from '../../redux/Recipe/selectors';
+import { CATEGORIES } from '../../constants/global';
 
 const RecipeTab = ({ recipes, refIngredients }) => (
   <ScrollView contentContainerStyle={styles.container}>
     <ThumbnailList title="Ingrédients de saison" list={refIngredients} />
     <ThumbnailList title="La communauté" list={refIngredients} />
 
-    <ScrollView horizontal style={{ flexDirection: 'row'}}>
-      {recipes.map((recipe, i) => (
-        <SuggestionRecipe {...recipe} key={i} />
-      ))}
-    </ScrollView>
+    <SectionCategoryRecipe
+      title="Suggestions du moment"
+      category={CATEGORIES[0].value}
+      isSuggestion={true}
+    />
 
-    {recipes.map((recipe, i) => (
-      <RecipeItem {...recipe} key={i} />
-    ))}
+    <SectionCategoryRecipe title="Petit déjeuner" category={CATEGORIES[0].value} />
+    <SectionCategoryRecipe title="Déjeuner" category={CATEGORIES[1].value} />
+    <SectionCategoryRecipe title="Goûter" category={CATEGORIES[2].value} />
+    <SectionCategoryRecipe title="Dîner" category={CATEGORIES[3].value} />
   </ScrollView>
 );
 
-const mapStateToProps = combineSelectors(recipesSelector, refDataSelector);
-
-export default compose(connect(mapStateToProps))(RecipeTab);
+export default compose(connect(refDataSelector))(RecipeTab);

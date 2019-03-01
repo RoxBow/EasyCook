@@ -4,7 +4,6 @@ const USER = 'user';
 const stateSelector = state => state[USER];
 
 export const currentUsernameSelector = compose(
-  ({ username }) => ({ username }),
-  ({ info }) => ({ info }),
+  ({ info }) => ({ currentUsername: info.username }),
   stateSelector,
 );

@@ -107,7 +107,7 @@ class ShoppingListScreen extends React.Component {
               onPress={() => this.openModalAddUser()}
               style={{ marginLeft: 10, alignSelf: 'center' }}
             >
-              <Icon icon="addUser" size={35} />
+              <Icon icon="add_user" size={35} />
             </Button>
           </ScrollView>
 

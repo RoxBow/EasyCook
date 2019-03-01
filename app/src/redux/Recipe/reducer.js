@@ -1,15 +1,10 @@
-import {
-  SET_REF_DATA,
-  UPDATE_RECIPES,
-  SET_ERROR,
-  ADD_RECIPE,
-} from './actions';
+import { SET_REF_DATA, UPDATE_RECIPES, UPDATE_RECIPE, SET_ERROR, ADD_RECIPE } from './actions';
 
 const initialState = {
   refIngredients: [],
   refEquipments: [],
   error: '',
-  recipes: [],
+  recipes: []
 };
 
 const recipeReducer = (state = initialState, action) => {
@@ -24,6 +19,19 @@ const recipeReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: action.recipes
+      };
+    case UPDATE_RECIPE:
+      const updatedRecipes = state.recipes.map(recipe => {
+        if (recipe._id === action.recipe._id) {
+          return action.recipe;
+        }
+
+        return recipe;
+      });
+
+      return {
+        ...state,
+        recipes: updatedRecipes
       };
     case ADD_RECIPE:
       return {

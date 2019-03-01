@@ -95,7 +95,7 @@ const Icon = ({ icon, width, size, height, style }) => {
             return <Svg source={Star} {...config} />;
         case 'star--fill':
             return <Svg source={StarFill} {...config} />;
-        case 'addUser':
+        case 'add_user':
             return <Svg source={AddUser} {...config} />;
         case 'location':
             return <Svg source={Location} {...config} />;

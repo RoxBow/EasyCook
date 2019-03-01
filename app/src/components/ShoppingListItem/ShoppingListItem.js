@@ -59,7 +59,7 @@ class ShoppingListItem extends React.Component {
     const { name, dateMax, isPin, users } = this.props;
     const isPinLabel = isPin ? 'Désépingler' : 'Épingler';
 
-    const BUTTONS = [isPinLabel, 'Ajouter un membre', 'Ajouter un aliment', 'Fermer'];
+    const BUTTONS = [isPinLabel, 'Ajouter un membre', 'Ajouter un aliment', 'Annuler'];
 
     const CANCEL_INDEX = 4;
 

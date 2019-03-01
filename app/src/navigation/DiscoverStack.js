@@ -90,7 +90,10 @@ RootStack.navigationOptions = {
     focused ? 
       <Icon icon="discover_tab--focus" {...styleTabBarIcon} /> : 
       <Icon icon="discover_tab" {...styleTabBarIcon} />
-  )
+  ),
+  tabBarOnPress: ({ navigation }) => {
+    navigation.navigate('Discover');
+  }
 };
 
 export default RootStack;
