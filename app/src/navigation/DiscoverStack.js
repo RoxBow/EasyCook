@@ -4,6 +4,7 @@ import { styleTabBarIcon } from '../constants/global';
 import { pink } from '../constants/colors';
 import { Header, Left, Body, Right, Title } from 'native-base';
 import Icon from '../components/Icon/Icon';
+import Text from '../components/Text/Text';
 
 import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
 import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
@@ -43,39 +44,25 @@ const RootStack = createStackNavigator(
     CreateEvent: {
       screen: CreateEventScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header transparent>
-            <Left>
-              <CloseModal navigation={navigation} />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Créer un événement</Title>
-            </Body>
-            <Right />
-          </Header>
+        headerRight: (
+          <CloseModal navigation={navigation} />
         ),
+        headerLeft: null,
         title: 'Créer un événement',
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerStyle: { borderBottomWidth: 0 },
+        headerTitleStyle: { fontFamily: 'Quicksand--bold' }
       })
     },
     CreateGoodDeal: {
       screen: CreateGoodDealScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header transparent>
-            <Left>
-              <CloseModal navigation={navigation} />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Créer un bon plan</Title>
-            </Body>
-            <Right />
-          </Header>
+        headerRight: (
+          <CloseModal navigation={navigation} />
         ),
+        headerLeft: null,
         title: 'Créer un bon plan',
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerStyle: { borderBottomWidth: 0 },
+        headerTitleStyle: { fontFamily: 'Quicksand--bold' }
       })
     }
   },

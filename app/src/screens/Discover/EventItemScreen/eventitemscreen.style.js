@@ -10,16 +10,6 @@ const styles = StyleSheet.create({
     marginTop: -15
   },
 
-  headContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10
-  },
-  eventName: {
-    fontSize: 18,
-    marginBottom: 8
-  },
-
   wrapperInfo: {
     marginVertical: 10,
   },

@@ -12,6 +12,10 @@ const Event = new Schema(
       type: String,
       maxlength: 500
     },
+    category: {
+      type: String,
+      default: 'event',
+    },
     price: {
       type: Number,
       default: 0,

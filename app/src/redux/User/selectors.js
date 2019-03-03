@@ -7,3 +7,8 @@ export const currentUsernameSelector = compose(
   ({ info }) => ({ currentUsername: info.username }),
   stateSelector,
 );
+
+export const favRecipesSelector = compose(
+  ({ info }) => ({ currentFavRecipes: info.favRecipes }),
+  stateSelector,
+);

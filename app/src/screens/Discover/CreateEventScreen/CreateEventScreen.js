@@ -1,20 +1,22 @@
-import styles from './createeventscreen.style';
 import React from 'react';
-import { Container, DatePicker, Button, Item, Input } from 'native-base';
+import { DatePicker } from 'native-base';
 import { connect } from 'react-redux';
+import { View } from 'react-native';
 import { createEvent } from '../../../redux/Event/actions';
-import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
 import Text from '../../../components/Text/Text';
+import Input from '../../../components/Input/Input';
+import InputImage from '../../../components/Input/InputImage';
+import Button from '../../../components/Button/Button';
 
 class CreateEventScreen extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      name: 'La pêche aux moules',
-      address: '12 avenue des bonbons',
-      description: "C'est bon les bonbons",
+      name: '',
+      address: '',
+      description: '',
       date: new Date()
     };
 
@@ -37,7 +39,7 @@ class CreateEventScreen extends React.Component {
     let image = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [2, 1],
-      base64: false,
+      base64: true,
       mediaTypes: 'Images'
     });
 
@@ -51,16 +53,20 @@ class CreateEventScreen extends React.Component {
     const { name, date, description, address, image } = this.state;
 
     return (
-      <Container style={styles.container}>
-        <Item style={styles.wrapperInput}>
-          <Input
-            style={styles.mainInput}
-            onChangeText={name => this.setState({ name })}
-            value={name}
-            placeholder="Nom de l'événement"
-          />
-          <Ionicons name="md-images" size={35} color="#000" onPress={this._pickImage} />
-        </Item>
+      <View>
+        <Input
+          big
+          onChange={name => this.setState({ name })}
+          value={name}
+          placeholder="Nom de l'événement"
+        />
+
+        <InputImage
+          icon="picture"
+          placeholder="Ajouter une image"
+          picture={`data:image/jpg;base64,${image.base64}`}
+          onPress={this._pickImage}
+        />
 
         <DatePicker
           minimumDate={new Date()}
@@ -76,42 +82,34 @@ class CreateEventScreen extends React.Component {
         />
         <Text>Date: {date.toString().substr(4, 12)}</Text>
 
-        <Item style={styles.wrapperInput}>
-          <Entypo name="location" size={20} color="#000" />
-          <Input
-            style={styles.input}
-            onChangeText={address => this.setState({ address })}
-            value={address}
-            placeholder="Ajouter un lieu"
-          />
-        </Item>
+        <Input
+          icon="location"
+          onChange={address => this.setState({ address })}
+          value={address}
+          placeholder="Lieu"
+        />
 
-        <Item style={styles.wrapperInput}>
-          <MaterialIcons name="description" size={20} color="#000" />
-          <Input
-            style={styles.input}
-            onChangeText={description => this.setState({ description })}
-            value={description}
-            placeholder="Décrire l'événement"
-          />
-        </Item>
+        <Input
+          icon="detail"
+          onChange={description => this.setState({ description })}
+          value={description}
+          placeholder="Description"
+        />
 
         <Button
-          style={styles.btnValidate}
           rounded
+          text="Créer"
           onPress={() => createEvent(name, date, address, description, image)}
-        >
-          <Text style={styles.btnValidateText}>Créer</Text>
-        </Button>
-
-      </Container>
+          style={{ marginTop: 20 }}
+        />
+      </View>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   createEvent: (name, date, address, description, image) =>
-    dispatch(createEvent(name, date, address, description, image, navigation)),
+    dispatch(createEvent(name, date, address, description, image, navigation))
 });
 
 export default connect(

@@ -1,21 +1,23 @@
-import styles from './CreateGoodDealScreen.style';
 import React from 'react';
-import { Container, DatePicker, Button, Item, Input, Label } from 'native-base';
+import { DatePicker } from 'native-base';
 import { connect } from 'react-redux';
 import { createGoodDeal } from '../../../redux/GoodDeal/actions';
-import { Ionicons, Entypo, MaterialIcons } from '@expo/vector-icons';
 import { ImagePicker, Permissions } from 'expo';
+import { View } from 'react-native';
 import Text from '../../../components/Text/Text';
+import Input from '../../../components/Input/Input';
+import InputImage from '../../../components/Input/InputImage';
+import Button from '../../../components/Button/Button';
 
 class CreateGoodDealScreen extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      storeName: 'Bio c\'bon',
-      promo: '1 article acheté 1 offert',
-      address: '15 avenue des tulipes',
-      description: "C'est bon les bonbons",
+      storeName: '',
+      promo: '',
+      address: '',
+      description: '',
       date: new Date()
     };
 
@@ -52,15 +54,20 @@ class CreateGoodDealScreen extends React.Component {
     const { storeName, date, promo, address, image, description } = this.state;
 
     return (
-      <Container style={styles.container}>
-        <Item style={styles.wrapperInput}>
-          <Input
-            style={styles.mainInput}
-            onChangeText={storeName => this.setState({ storeName })}
-            value={storeName}
-            placeholder="Nom du magasin"
-          />
-        </Item>
+      <View>
+        <Input
+          big
+          onChange={storeName => this.setState({ storeName })}
+          value={storeName}
+          placeholder="Nom du magasin"
+        />
+
+        <InputImage
+          icon="picture"
+          placeholder="Ajouter une image"
+          picture={`data:image/jpg;base64,${image.base64}`}
+          onPress={this._pickImage}
+        />
 
         <DatePicker
           minimumDate={new Date()}
@@ -76,56 +83,41 @@ class CreateGoodDealScreen extends React.Component {
         />
         <Text>Date: {date.toString().substr(4, 12)}</Text>
 
-        <Item style={styles.wrapperInput}>
-          <Entypo name="location" size={20} color="#000" />
-          <Input
-            style={styles.input}
-            onChangeText={address => this.setState({ address })}
-            value={address}
-            placeholder="Ajouter un lieu"
-          />
-        </Item>
+        <Input
+          icon="location"
+          onChange={address => this.setState({ address })}
+          value={address}
+          placeholder="Lieu"
+        />
 
-        <Item style={styles.wrapperInput}>
-          <MaterialIcons name="description" size={20} color="#000" />
-          <Input
-            style={styles.input}
-            onChangeText={promo => this.setState({ promo })}
-            value={promo}
-            placeholder="Entrer la réduction"
-          />
-        </Item>
-        
-        <Item style={styles.wrapperInput}>
-          <MaterialIcons name="description" size={20} color="#000" />
-          <Input
-            style={styles.input}
-            onChangeText={description => this.setState({ description })}
-            value={description}
-            placeholder="Décrire le bon plan"
-          />
-        </Item>
+        <Input
+          icon="location"
+          onChange={promo => this.setState({ promo })}
+          value={promo}
+          placeholder="Réduction"
+        />
 
-        <Item>
-          <Ionicons name="md-images" size={35} color="#000" onPress={this._pickImage} />
-          <Label>Ajouter une image</Label>
-        </Item>
+        <Input
+          icon="detail"
+          onChange={description => this.setState({ description })}
+          value={description}
+          placeholder="Description"
+        />
+
         <Button
-          style={styles.btnValidate}
           rounded
+          text="Créer"
           onPress={() => createGoodDeal(storeName, date, address, description, image)}
-        >
-          <Text style={styles.btnValidateText}>Créer</Text>
-        </Button>
-
-      </Container>
+          style={{ marginTop: 20 }}
+        />
+      </View>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   createGoodDeal: (storeName, date, address, description, image) =>
-    dispatch(createGoodDeal(storeName, date, address, description, image, navigation)),
+    dispatch(createGoodDeal(storeName, date, address, description, image, navigation))
 });
 
 export default connect(

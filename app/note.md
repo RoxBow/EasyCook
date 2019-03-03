@@ -18,3 +18,21 @@ User: {
 ];
 
 [EVENT]
+...
+
+TODO LIST:
+[] Feature thumb up / down good deals
+[] Feature edit and remove ingredient in shopping list
+[X] Add category to good deal and event
+[X] Add favorites recipes
+[] Filter month event
+[] Date in shopping list item
+[] Create components' containers
+[] Clean function
+[] Fix bug edit user informations
+[] Fix back when create an event
+[] Refacto action 
+[] Review style
+[] Setup eslint
+[] Gestion des erreurs
+[] Search in recipes page

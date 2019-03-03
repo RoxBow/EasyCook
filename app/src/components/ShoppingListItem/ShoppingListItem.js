@@ -81,7 +81,7 @@ class ShoppingListItem extends React.Component {
                 {
                   options: BUTTONS,
                   cancelButtonIndex: CANCEL_INDEX,
-                  title: `Actions ${name}`
+                  title: name
                 },
                 buttonIndex => {
                   this.actionShoppingList(BUTTONS[buttonIndex]);

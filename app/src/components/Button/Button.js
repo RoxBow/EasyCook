@@ -6,7 +6,9 @@ import Text from '../Text/Text';
 const Button = ({ text, style, styleText, rounded, children, onPress }) => (
   <ButtonNB rounded={rounded} style={[styles.btn, style]} onPress={onPress}>
     {children}
-    <Text style={[styles.btnText, styleText]} medium>{text}</Text>
+    <Text style={[styles.btnText, styleText]} medium>
+      {text}
+    </Text>
   </ButtonNB>
 );
 

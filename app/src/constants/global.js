@@ -74,8 +74,8 @@ export const styleTabs = {
 };
 
 export const styleTab = {
-  textStyle: { color: textDefault, fontWeight: '600' },
-  activeTextStyle: { backgroundColor: backgroundTab, color: tabBarSelected },
+  textStyle: { color: textDefault, fontWeight: '600', fontFamily: 'Quicksand--medium'},
+  activeTextStyle: { backgroundColor: backgroundTab, color: tabBarSelected, fontFamily: 'Quicksand--bold' },
   tabStyle: { backgroundColor: backgroundTab },
   activeTabStyle: { backgroundColor: backgroundTab }
 };
@@ -162,4 +162,32 @@ export const UNITS = [
     label: 'pièce',
     value: 'piece',
   },
+];
+
+export const KIND_INGREDIENTS = [
+  {
+    label: 'Légumes',
+    value: 'vegetable',
+  },
+  {
+    label: 'Fruits',
+    value: 'fruit',
+  },
+  {
+    label: 'Fromages',
+    value: 'cheese',
+  },
+  {
+    label: 'Viandes',
+    value: 'meat',
+  },
+  {
+    label: 'Poissons',
+    value: 'fish',
+  },
+  {
+    label: 'Arômates',
+    value: 'spice',
+  },
+  
 ]

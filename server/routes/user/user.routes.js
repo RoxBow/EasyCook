@@ -3,7 +3,7 @@ const userRouter = express.Router({ mergeParams: true });
 const User = require('../../models/User');
 const Image = require('../../models/Image');
 const multer = require('multer');
-const { getExtFromMime, randomId } = require('../../helpers.js');
+const { getExtFromMime, randomId, addOrRemoveInArray } = require('../../helpers.js');
 
 const storage = multer.diskStorage({
   destination: './assets/avatars/users/',
@@ -23,6 +23,18 @@ class UserRouterClass {
   routes() {
     userRouter.get('/', (req, res) => {
       res.send({ msg: 'HATEOAS for user' });
+    });
+
+    userRouter.put('/favRecipe', (req, res) => {
+      const { idRecipe } = req.body;
+
+      User.findById(req.user._id).exec((err, user) => {
+        addOrRemoveInArray(user.favRecipes, idRecipe);
+
+        user.save((err, user) => {
+          res.status(200).send({ status: 'SUCCESS', messageInfo: 'Modifié avec succès', user });
+        });
+      });
     });
 
     userRouter.put('/edit', upload.single('file'), (req, res) => {

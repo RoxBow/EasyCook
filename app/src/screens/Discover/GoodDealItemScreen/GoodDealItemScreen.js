@@ -10,6 +10,7 @@ import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
 import { formatDate } from '../../../constants/helpers';
 import Text from '../../../components/Text/Text';
+import HeadItem from '../../../components/HeadItem/HeadItem';
 
 class GoodDealItem extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class GoodDealItem extends React.Component {
   render() {
     const { navigation, currentGoodDeal } = this.props;
 
-    const { storeName, date, creator, address, description, image } = currentGoodDeal;
+    const { storeName, date, creator, address, description, image, category } = currentGoodDeal;
 
     return (
       <ScrollView>
@@ -56,10 +57,7 @@ class GoodDealItem extends React.Component {
           </ImageBackground>
         </Header>
         <View style={styles.wrapperContent}>
-          <View style={styles.headContent}>
-            <Text style={styles.eventName}>{storeName}</Text>
-            <ProposedBy creator={creator} />
-          </View>
+          <HeadItem category={category} title={storeName} creator={creator} />
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>
               <AntDesign size={22} name="calendar" style={styles.iconInfo} />

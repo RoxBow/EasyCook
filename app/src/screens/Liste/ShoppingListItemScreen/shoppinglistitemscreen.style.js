@@ -14,11 +14,6 @@ const styles = StyleSheet.create({
 
   item: {
     backgroundColor: greyApp,
-    paddingHorizontal: 5
-  },
-
-  iconSearch: {
-    paddingVertical: 5
   },
 
   remainingAliment: {

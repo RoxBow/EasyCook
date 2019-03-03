@@ -24,7 +24,7 @@ const User = new Schema(
       trim: true
     },
     avatar: { type: Schema.Types.ObjectId, ref: 'Image' },
-    recipes: [String],
+    favRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
     bio: {
       type: String
     },

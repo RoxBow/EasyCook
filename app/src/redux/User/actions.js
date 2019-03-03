@@ -85,6 +85,18 @@ export const requestLogin = (email, password, navigation) => {
   };
 };
 
+export const toggleFavRecipe = idRecipe => dispatch => {
+  axiosUser
+  .put(`/favRecipe`, {idRecipe})
+  .then(({ data }) => {
+    dispatch(setMessageInfo(data.messageInfo));
+    dispatch(setUser(data.user));
+  })
+  .catch(err => {
+    // dispatch(setError(err.response.data.err));
+  });
+}
+
 export const saveEditUser = (info, navigation) => dispatch => {
   const body = new FormData();
 

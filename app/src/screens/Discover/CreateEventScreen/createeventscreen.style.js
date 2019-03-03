@@ -2,11 +2,6 @@ import { StyleSheet } from 'react-native';
 import { pink } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-
   wrapperInput: {
     marginBottom: 10,
     borderBottomWidth: 0,

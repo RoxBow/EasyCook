@@ -10,11 +10,12 @@ import { compose } from 'recompose';
 import Text from '../../../components/Text/Text';
 import Icon from '../../../components/Icon/Icon';
 import { refDataSelector, currentRecipeSelector } from '../../../redux/Recipe/selectors';
-import { currentUsernameSelector } from '../../../redux/User/selectors';
+import { favRecipesSelector } from '../../../redux/User/selectors';
 import HeadItem from '../../../components/HeadItem/HeadItem';
 import TitleLine from '../../../components/TitleLine/TitleLine';
 import Rating from '../../../components/Rating/Rating';
 import { addComment } from '../../../redux/Recipe/actions';
+import { toggleFavRecipe } from '../../../redux/User/actions';
 import Comments from '../../../components/Comments/Comments';
 
 class RecipeItem extends React.Component {
@@ -27,10 +28,16 @@ class RecipeItem extends React.Component {
     };
 
     this.addComment = this.addComment.bind(this);
+    this.isFav = this.isFav.bind(this);
   }
 
   componentDidMount() {
     this.formatIngredients();
+  }
+
+  isFav() {
+    const { currentRecipe, currentFavRecipes } = this.props;
+    return currentFavRecipes.includes(currentRecipe._id);
   }
 
   formatIngredients() {
@@ -61,7 +68,7 @@ class RecipeItem extends React.Component {
   }
 
   render() {
-    const { navigation, currentRecipe } = this.props;
+    const { navigation, currentRecipe, toggleFavRecipe } = this.props;
 
     const {
       name,
@@ -74,7 +81,7 @@ class RecipeItem extends React.Component {
       image,
       creator,
       comments,
-      _id,
+      _id
     } = currentRecipe;
 
     const { formatedIngredient, comment, stars } = this.state;
@@ -86,12 +93,17 @@ class RecipeItem extends React.Component {
             source={{ uri: `${serverUrl}/${image.uri}` }}
             style={{ width: '100%', height: '100%' }}
           >
-            <AntDesign
-              size={26}
-              name="arrowleft"
-              style={{ padding: 8 }}
-              onPress={() => navigation.goBack()}
-            />
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <AntDesign
+                size={26}
+                name="arrowleft"
+                style={{ padding: 8 }}
+                onPress={() => navigation.goBack()}
+              />
+              <Button transparent onPress={() => toggleFavRecipe(_id)} style={{ paddingHorizontal: 8 }}>
+                <Icon icon={this.isFav() ? 'heart--fill' : 'heart'} size={24} />
+              </Button>
+            </View>
           </ImageBackground>
         </Header>
         <View style={styles.wrapperContent}>
@@ -173,13 +185,13 @@ class RecipeItem extends React.Component {
   }
 }
 
-const mapStateToProps = combineSelectors(
-  refDataSelector,
-  (s, { navigation }) => currentRecipeSelector(navigation.state.params.idRecipe)(s)
+const mapStateToProps = combineSelectors(refDataSelector, favRecipesSelector, (s, { navigation }) =>
+  currentRecipeSelector(navigation.state.params.idRecipe)(s)
 );
 
 const mapDispatchToProps = dispatch => ({
   addComment: (idRecipe, text, rating) => dispatch(addComment(idRecipe, text, rating)),
+  toggleFavRecipe: idRecipe => dispatch(toggleFavRecipe(idRecipe))
 });
 
 export default compose(

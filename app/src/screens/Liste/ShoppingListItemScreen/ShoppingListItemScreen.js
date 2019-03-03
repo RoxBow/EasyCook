@@ -1,7 +1,7 @@
 import styles from './shoppinglistitemscreen.style';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
-import { Header, Item, Input, Button, Thumbnail } from 'native-base';
+import { Header, Item, Input, Thumbnail } from 'native-base';
 import { connect } from 'react-redux';
 import ListIngredient from '../../../components/ListIngredient/ListIngredient';
 import {
@@ -14,6 +14,9 @@ import { currentShoppingListSelector } from '../../../redux/ShoppingList/selecto
 import { serverUrl } from '../../../constants/global';
 import Icon from '../../../components/Icon/Icon';
 import Text from '../../../components/Text/Text';
+import Button from '../../../components/Button/Button';
+import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
+import SearchBar from '../../../components/SearchBar/SearchBar';
 
 class ShoppingListScreen extends React.Component {
   constructor(props) {
@@ -102,22 +105,15 @@ class ShoppingListScreen extends React.Component {
                 <Text style={{ alignSelf: 'center', marginTop: 6 }}>{username}</Text>
               </View>
             ))}
-            <Button
-              transparent
-              onPress={() => this.openModalAddUser()}
+            <ButtonIcon
               style={{ marginLeft: 10, alignSelf: 'center' }}
-            >
-              <Icon icon="add_user" size={35} />
-            </Button>
+              onPress={() => this.openModalAddUser()}
+              icon="add_user"
+              size={35}
+            />
           </ScrollView>
 
-          <Header searchBar rounded transparent>
-            <Item style={styles.item}>
-              <Icon icon="search" size={20} style={styles.iconSearch} />
-              <Input placeholder="Rechercher un aliment dans la liste" />
-            </Item>
-          </Header>
-
+          <SearchBar styleWrapper={styles.item} placeholder="Rechercher un aliment dans la liste" />
           <View style={styles.containerIngredients}>
             <Text style={styles.remainingAliment}>{this.renderRemainingAliments()}</Text>
             {isArrayFill(fruitsAliment) && (
@@ -145,9 +141,14 @@ class ShoppingListScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <Button iconLeft rounded onPress={this.addAliment} style={styles.btnAddAliment}>
+        <Button
+          rounded
+          onPress={this.addAliment}
+          style={styles.btnAddAliment}
+          styleText={styles.textAddAliment}
+          text="Ajouter un aliment"
+        >
           <Icon icon="plus--white" size={15} style={{ marginRight: 5 }} />
-          <Text style={styles.textAddAliment}>Ajouter un aliment</Text>
         </Button>
       </View>
     );

@@ -29,6 +29,8 @@ const Cuisson = require('../../assets/images/equipments/cuisson.svg');
 /* Icons */
 const Star = require('../../assets/images/star.svg');
 const StarFill = require('../../assets/images/star--fill.svg');
+const Heart = require('../../assets/images/heart.svg');
+const HeartFill = require('../../assets/images/heart--fill.svg');
 const AddUser = require('../../assets/images/addUser.svg');
 const Location = require('../../assets/images/location.svg');
 const Calendar = require('../../assets/images/calendar.svg');
@@ -44,6 +46,7 @@ const CrossWhite = require('../../assets/images/plus--white.svg');
 const CrossRounded = require('../../assets/images/plus_rounded.svg');
 const ArrowBack = require('../../assets/images/arrow_back.svg');
 const Edit = require('../../assets/images/edit.svg');
+const Detail = require('../../assets/images/detail.svg');
 
 const Icon = ({ icon, width, size, height, style }) => {
 
@@ -86,6 +89,7 @@ const Icon = ({ icon, width, size, height, style }) => {
         case 'cheese':
             return <Svg source={Cheese} {...config} />;
         case 'salt':
+        case 'spice':
             return <Svg source={Salt} {...config} />;
         case 'fruit':
             return <Svg source={Fruit} {...config} />;
@@ -115,6 +119,10 @@ const Icon = ({ icon, width, size, height, style }) => {
             return <Svg source={Notification} {...config} />;
         case 'picture':
             return <Svg source={Picture} {...config} />;
+        case 'heart':
+            return <Svg source={Heart} {...config} />;
+        case 'heart--fill':
+            return <Svg source={HeartFill} {...config} />;
         case 'plus':
             return <Svg source={Cross} {...config} />;
         case 'plus--white':
@@ -123,7 +131,7 @@ const Icon = ({ icon, width, size, height, style }) => {
             return <Svg source={Cross} {...config} style={{ transform: [{ rotate: '45deg'}] }} />;
         case 'cross_rounded':
             return <Svg source={CrossRounded} {...config} style={{ transform: [{ rotate: '45deg'}] }} />;
-        case 'arrowBack':
+        case 'arrow_back':
             return <Svg source={ArrowBack} {...config} />;
         case 'edit':
             return <Svg source={Edit} {...config} />;
@@ -131,6 +139,8 @@ const Icon = ({ icon, width, size, height, style }) => {
             return <Svg source={Poele} {...config} />;
         case 'cuisson':
             return <Svg source={Cuisson} {...config} />;
+        case 'detail':
+            return <Svg source={Detail} {...config} />;
     }
     return null;
 };

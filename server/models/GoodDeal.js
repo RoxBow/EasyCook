@@ -12,6 +12,10 @@ const GoodDeal = new Schema(
       type: String,
       maxlength: 500
     },
+    category: {
+      type: String,
+      default: 'good deal',
+    },
     interested: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     thumbUp: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     thumbDown: [{ type: Schema.Types.ObjectId, ref: 'User' }],

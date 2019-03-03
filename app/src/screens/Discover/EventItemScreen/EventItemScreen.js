@@ -14,7 +14,7 @@ import Icon from '../../../components/Icon/Icon';
 import { combineSelectors, formatDate } from '../../../constants/helpers';
 import { compose } from 'recompose';
 import Text from '../../../components/Text/Text';
-import ProposedBy from '../../../components/ProposedBy/ProposedBy';
+import HeadItem from '../../../components/HeadItem/HeadItem';
 
 class EventItem extends React.Component {
   constructor(props) {
@@ -26,6 +26,8 @@ class EventItem extends React.Component {
     this.isParticipant = this.isParticipant.bind(this);
     this.isInterested = this.isInterested.bind(this);
   }
+
+  static navigationOptions = { tabBarVisible: false }
 
   _toggleUser(interestedOrParticipate) {
     const { idEvent } = this.props.navigation.state.params;
@@ -55,7 +57,7 @@ class EventItem extends React.Component {
   render() {
     const { navigation, currentEvent } = this.props;
 
-    const { name, date, creator, address, description, price, participants, image } = currentEvent;
+    const { name, date, creator, address, description, price, participants, image, category } = currentEvent;
 
     return (
       <ScrollView>
@@ -73,10 +75,8 @@ class EventItem extends React.Component {
           </ImageBackground>
         </Header>
         <View style={styles.wrapperContent}>
-          <View style={styles.headContent}>
-            <Text style={styles.eventName} medium>{name}</Text>
-            <ProposedBy creator={creator} />
-          </View>
+          <HeadItem category={category} title={name} creator={creator} />
+
           <View style={styles.wrapperInfo}>
             <View style={styles.info}>
               <Icon icon="calendar" size={22} style={styles.iconInfo} />

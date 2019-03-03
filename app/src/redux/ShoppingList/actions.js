@@ -13,7 +13,7 @@ export const SET_USERS = 'SET_USERS';
 export const SET_USERS_SELECTED = 'SET_USERS_SELECTED';
 
 const axiosShoppingList = axios.create({
-  baseURL: `${serverUrl}/api/user/shoppingList`
+  baseURL: `${serverUrl}/api/shoppingList`
 });
 
 axiosShoppingList.interceptors.request.use(
