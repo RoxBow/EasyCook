@@ -55,9 +55,8 @@ const styles = StyleSheet.create({
   },
   btnAction: {
     flex: .5,
-    backgroundColor: 'transparent',
     justifyContent: 'center',
-    flexDirection: 'column',
+    alignItems: 'center',
   },
   btnActionText: {
     fontSize: 15,

@@ -3,28 +3,30 @@ import { orange } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   container: {
-    height: 200,
-    width: 170,
+    width: 160,
     backgroundColor: '#fff',
-    margin: 10,
+    marginRight: 10,
+    marginBottom: 10,
     borderRadius: 15,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: '#000',
     shadowOpacity: 0.3,
+    elevation: 2,
   },
   wrapperImage: {
-    flex: .6,
     overflow: 'hidden',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   wrapperText: {
     padding: 10,
-    flex: .5,
+    flex: 1,
   },
 
   image: {
     flex: 1,
     width: null,
-    height: null,
+    height: 100,
     resizeMode: 'cover'
   },
 

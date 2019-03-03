@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
     height: 160,
     width: 160,
     margin: 10,
-    borderRadius: 15,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: '#000',
     shadowOpacity: 0.3,
+    elevation: 2,
   },
   wrapperText: {
     position: 'absolute',

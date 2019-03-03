@@ -64,7 +64,7 @@ class CreateEventScreen extends React.Component {
         <InputImage
           icon="picture"
           placeholder="Ajouter une image"
-          picture={`data:image/jpg;base64,${image.base64}`}
+          picture={image && `data:image/jpg;base64,${image.base64}`}
           onPress={this._pickImage}
         />
 

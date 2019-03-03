@@ -1,6 +1,6 @@
 import styles from './Eventitemscreen.style';
 import React from 'react';
-import { View, ImageBackground, ScrollView } from 'react-native';
+import { View, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Header, Thumbnail } from 'native-base';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -119,21 +119,21 @@ class EventItem extends React.Component {
           </View>
         </View>
         <View style={styles.wrapperActions}>
-          <Button
+          <TouchableOpacity
             onPress={() => this._toggleUser('interested')}
             style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
           >
             <IconStar isFill={this.isInterested()} />
             <Text style={styles.btnActionText}>Intéressé(e)</Text>
-          </Button>
-          <Button style={styles.btnAction} onPress={() => this._toggleUser('participate')}>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnAction} onPress={() => this._toggleUser('participate')}>
             <MaterialCommunityIcons
               name={this.isParticipant() ? 'check-circle' : 'check-circle-outline'}
               size={22}
             />
 
             <Text style={styles.btnActionText}>J'y participe</Text>
-          </Button>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );

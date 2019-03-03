@@ -48,7 +48,7 @@ const RecipeStack = createStackNavigator({
       headerLeft: <ArrowBack navigation={navigation} />,
       title: 'Mes aliments',
       headerStyle: { backgroundColor: '#fff', elevation: 0, borderBottomWidth: 0, height: 50 },
-      headerTitleStyle: { fontFamily: 'Quicksand--bold' }
+      headerTitleStyle: { fontFamily: 'Quicksand--bold' },
     })
   }
 });
@@ -86,8 +86,9 @@ const RootStack = createStackNavigator(
   }
 );
 
-RootStack.navigationOptions = {
+RootStack.navigationOptions = ({ navigation }) =>  ({
   tabBarLabel: 'Recettes',
+  tabBarVisible: navigation.state.routes[0].index === 0 && navigation.state.index === 0,
   tabBarIcon: ({ focused }) =>
     focused ? (
       <Icon icon="recipe_tab--focus" {...styleTabBarIcon} />
@@ -97,6 +98,6 @@ RootStack.navigationOptions = {
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Recipes');
   }
-};
+});
 
 export default RootStack;

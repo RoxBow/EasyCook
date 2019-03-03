@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { pink } from '../../constants/colors';
+import { pink, darkPink } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -8,17 +8,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignItems: 'center',
     backgroundColor: '#fff',
-    width: '30%',
+    width: '30%'
   },
   wrapperSelected: {
     borderWidth: 1,
-    borderColor: '#f0373f',
+    borderColor: darkPink,
     backgroundColor: pink
   },
   name: {
     marginTop: 10,
     fontSize: 15
   },
+  nameSelected: {
+    color: '#fff'
+  }
 });
 
 export default styles;

@@ -40,7 +40,7 @@ class CreateGoodDealScreen extends React.Component {
     let image = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       aspect: [2, 1],
-      base64: false,
+      base64: true,
       mediaTypes: 'Images'
     });
 
@@ -65,7 +65,7 @@ class CreateGoodDealScreen extends React.Component {
         <InputImage
           icon="picture"
           placeholder="Ajouter une image"
-          picture={`data:image/jpg;base64,${image.base64}`}
+          picture={image && `data:image/jpg;base64,${image.base64}`}
           onPress={this._pickImage}
         />
 
@@ -108,7 +108,7 @@ class CreateGoodDealScreen extends React.Component {
           rounded
           text="Créer"
           onPress={() => createGoodDeal(storeName, date, address, description, image)}
-          style={{ marginTop: 20 }}
+          style={{ marginTop: 20, paddingHorizontal: 30 }}
         />
       </View>
     );

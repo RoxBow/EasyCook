@@ -21,10 +21,23 @@ const Fruit = require('../../assets/images/food/fruit.svg');
 const Vegetable = require('../../assets/images/food/vegetable.svg');
 const Cheese = require('../../assets/images/food/cheese.svg');
 
+const MeatPink = require('../../assets/images/food/meat--pink.svg');
+const FishPink = require('../../assets/images/food/fish--pink.svg');
+const SaltPink = require('../../assets/images/food/salt--pink.svg');
+const FruitPink = require('../../assets/images/food/fruit--pink.svg');
+const VegetablePink = require('../../assets/images/food/vegetable--pink.svg');
+const CheesePink = require('../../assets/images/food/cheese--pink.svg');
+
+const MeatWhite = require('../../assets/images/food/meat--white.svg');
+const FishWhite = require('../../assets/images/food/fish--white.svg');
+const SaltWhite = require('../../assets/images/food/salt--white.svg');
+const FruitWhite = require('../../assets/images/food/fruit--white.svg');
+const VegetableWhite = require('../../assets/images/food/vegetable--white.svg');
+const CheeseWhite = require('../../assets/images/food/cheese--white.svg');
+
 /* Icons Equipments */
 const Poele = require('../../assets/images/equipments/poele.svg');
 const Cuisson = require('../../assets/images/equipments/cuisson.svg');
-
 
 /* Icons */
 const Star = require('../../assets/images/star.svg');
@@ -49,100 +62,125 @@ const Edit = require('../../assets/images/edit.svg');
 const Detail = require('../../assets/images/detail.svg');
 
 const Icon = ({ icon, width, size, height, style }) => {
+  (width = width || size), (height = height || size);
 
-    width = width || size,
-    height = height || size;
+  icon = icon
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 
-    icon = icon.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const config = {
+    width,
+    height,
+    style
+  };
 
-    const config = {
-        width,
-        height,
-        style,
-    };
-
-    switch (icon) {
-        case 'agenda_tab':
-            return <Svg source={AgendaTabBar} {...config} />;
-        case 'agenda_tab--focus':
-            return <Svg source={AgendaTabBarFocus} {...config} />;
-        case 'discover_tab':
-            return <Svg source={DiscoverTabBar} {...config} />;
-        case 'discover_tab--focus':
-            return <Svg source={DiscoverTabBarFocus} {...config} />;
-        case 'recipe_tab':
-            return <Svg source={RecipeTabBar} {...config} />;
-        case 'recipe_tab--focus':
-            return <Svg source={RecipeTabBarFocus} {...config} />;
-        case 'account_tab':
-            return <Svg source={AccountTabBar} {...config} />;
-        case 'account_tab--focus':
-            return <Svg source={AccountTabBarFocus} {...config} />;
-        case 'list_tab':
-            return <Svg source={ListTabBar} {...config} />;
-        case 'list_tab--focus':
-            return <Svg source={ListTabBarFocus} {...config} />;
-        case 'meat':
-            return <Svg source={Meat} {...config} />;
-        case 'fish':
-            return <Svg source={Fish} {...config} />;
-        case 'cheese':
-            return <Svg source={Cheese} {...config} />;
-        case 'salt':
-        case 'spice':
-            return <Svg source={Salt} {...config} />;
-        case 'fruit':
-            return <Svg source={Fruit} {...config} />;
-        case 'vegetable':
-            return <Svg source={Vegetable} {...config} />;
-        case 'star':
-            return <Svg source={Star} {...config} />;
-        case 'star--fill':
-            return <Svg source={StarFill} {...config} />;
-        case 'add_user':
-            return <Svg source={AddUser} {...config} />;
-        case 'location':
-            return <Svg source={Location} {...config} />;
-        case 'calendar':
-            return <Svg source={Calendar} {...config} />;
-        case 'price':
-            return <Svg source={Price} {...config} />;
-        case 'search':
-            return <Svg source={Search} {...config} />;
-        case 'logout':
-            return <Svg source={Logout} {...config} />;
-        case 'delete_account':
-            return <Svg source={DeleteAccount} {...config} />;
-        case 'setting':
-            return <Svg source={Setting} {...config} />;
-        case 'notification':
-            return <Svg source={Notification} {...config} />;
-        case 'picture':
-            return <Svg source={Picture} {...config} />;
-        case 'heart':
-            return <Svg source={Heart} {...config} />;
-        case 'heart--fill':
-            return <Svg source={HeartFill} {...config} />;
-        case 'plus':
-            return <Svg source={Cross} {...config} />;
-        case 'plus--white':
-            return <Svg source={CrossWhite} {...config} />;
-        case 'cross':
-            return <Svg source={Cross} {...config} style={{ transform: [{ rotate: '45deg'}] }} />;
-        case 'cross_rounded':
-            return <Svg source={CrossRounded} {...config} style={{ transform: [{ rotate: '45deg'}] }} />;
-        case 'arrow_back':
-            return <Svg source={ArrowBack} {...config} />;
-        case 'edit':
-            return <Svg source={Edit} {...config} />;
-        case 'poele':
-            return <Svg source={Poele} {...config} />;
-        case 'cuisson':
-            return <Svg source={Cuisson} {...config} />;
-        case 'detail':
-            return <Svg source={Detail} {...config} />;
-    }
-    return null;
+  switch (icon) {
+    case 'agenda_tab':
+      return <Svg source={AgendaTabBar} {...config} />;
+    case 'agenda_tab--focus':
+      return <Svg source={AgendaTabBarFocus} {...config} />;
+    case 'discover_tab':
+      return <Svg source={DiscoverTabBar} {...config} />;
+    case 'discover_tab--focus':
+      return <Svg source={DiscoverTabBarFocus} {...config} />;
+    case 'recipe_tab':
+      return <Svg source={RecipeTabBar} {...config} />;
+    case 'recipe_tab--focus':
+      return <Svg source={RecipeTabBarFocus} {...config} />;
+    case 'account_tab':
+      return <Svg source={AccountTabBar} {...config} />;
+    case 'account_tab--focus':
+      return <Svg source={AccountTabBarFocus} {...config} />;
+    case 'list_tab':
+      return <Svg source={ListTabBar} {...config} />;
+    case 'list_tab--focus':
+      return <Svg source={ListTabBarFocus} {...config} />;
+    case 'meat':
+      return <Svg source={Meat} {...config} />;
+    case 'fish':
+      return <Svg source={Fish} {...config} />;
+    case 'cheese':
+      return <Svg source={Cheese} {...config} />;
+    case 'salt':
+    case 'spice':
+      return <Svg source={Salt} {...config} />;
+    case 'fruit':
+      return <Svg source={Fruit} {...config} />;
+    case 'vegetable':
+      return <Svg source={Vegetable} {...config} />;
+    case 'meat--white':
+      return <Svg source={MeatWhite} {...config} />;
+    case 'fish--white':
+      return <Svg source={FishWhite} {...config} />;
+    case 'cheese--white':
+      return <Svg source={CheeseWhite} {...config} />;
+    case 'spice--white':
+      return <Svg source={SaltWhite} {...config} />;
+    case 'fruit--white':
+      return <Svg source={FruitWhite} {...config} />;
+    case 'vegetable--white':
+      return <Svg source={VegetableWhite} {...config} />;
+      case 'meat--pink':
+      return <Svg source={MeatPink} {...config} />;
+    case 'fish--pink':
+      return <Svg source={FishPink} {...config} />;
+    case 'cheese--pink':
+      return <Svg source={CheesePink} {...config} />;
+    case 'spice--pink':
+      return <Svg source={SaltPink} {...config} />;
+    case 'fruit--pink':
+      return <Svg source={FruitPink} {...config} />;
+    case 'vegetable--pink':
+      return <Svg source={VegetablePink} {...config} />;
+    case 'star':
+      return <Svg source={Star} {...config} />;
+    case 'star--fill':
+      return <Svg source={StarFill} {...config} />;
+    case 'add_user':
+      return <Svg source={AddUser} {...config} />;
+    case 'location':
+      return <Svg source={Location} {...config} />;
+    case 'calendar':
+      return <Svg source={Calendar} {...config} />;
+    case 'price':
+      return <Svg source={Price} {...config} />;
+    case 'search':
+      return <Svg source={Search} {...config} />;
+    case 'logout':
+      return <Svg source={Logout} {...config} />;
+    case 'delete_account':
+      return <Svg source={DeleteAccount} {...config} />;
+    case 'setting':
+      return <Svg source={Setting} {...config} />;
+    case 'notification':
+      return <Svg source={Notification} {...config} />;
+    case 'picture':
+      return <Svg source={Picture} {...config} />;
+    case 'heart':
+      return <Svg source={Heart} {...config} />;
+    case 'heart--fill':
+      return <Svg source={HeartFill} {...config} />;
+    case 'plus':
+      return <Svg source={Cross} {...config} />;
+    case 'plus--white':
+      return <Svg source={CrossWhite} {...config} />;
+    case 'cross':
+      return <Svg source={Cross} {...config} style={{ transform: [{ rotate: '45deg' }] }} />;
+    case 'cross_rounded':
+      return <Svg source={CrossRounded} {...config} style={{ transform: [{ rotate: '45deg' }] }} />;
+    case 'arrow_back':
+      return <Svg source={ArrowBack} {...config} />;
+    case 'edit':
+      return <Svg source={Edit} {...config} />;
+    case 'poele':
+      return <Svg source={Poele} {...config} />;
+    case 'cuisson':
+      return <Svg source={Cuisson} {...config} />;
+    case 'detail':
+      return <Svg source={Detail} {...config} />;
+  }
+  return null;
 };
 
 export default Icon;

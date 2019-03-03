@@ -81,7 +81,8 @@ class SettingsScreen extends React.Component {
             marginTop: 50,
             shadowOffset: { width: 1, height: 1 },
             shadowColor: '#000',
-            shadowOpacity: 0.3
+            shadowOpacity: 0.3,
+            elevation: 2,
           }}
         >
           <Icon icon="logout" size={22} />

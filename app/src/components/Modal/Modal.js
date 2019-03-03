@@ -1,10 +1,15 @@
 import React from 'react';
-import { Modal as ModalRN } from 'react-native';
-
-const Modal = ({ animationType, isOpen, children, transparent }) => (
-  <ModalRN animationType={animationType || "fade"} transparent={ transparent || false} visible={isOpen}>
+import { Modal as ModalRN } from 'react-native';
+import { withNavigation } from 'react-navigation';
+const Modal = ({ animationType, isOpen, children, transparent, navigation }) => (
+  <ModalRN
+    onRequestClose={() => navigation.goBack()}
+    animationType={animationType || 'fade'}
+    transparent={transparent || false}
+    visible={isOpen}
+  >
     {children}
   </ModalRN>
 );
 
-export default Modal;
+export default withNavigation(Modal);

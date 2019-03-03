@@ -20,7 +20,7 @@ export default class App extends React.Component {
     // await AsyncStorage.clear();
     store.dispatch(fetchRefData());
 
-    return Promise.all([
+    await Promise.all([
       Asset.loadAsync([
         /* Load assets img here */
       ]),

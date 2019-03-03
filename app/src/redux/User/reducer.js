@@ -4,14 +4,14 @@ import {
   SET_AUTHENTICATION,
   LOGOUT,
   SET_ERROR,
-  UPDATE_SHOPPING_LIST,
   SET_FETCH,
-  REMOVE_USER
+  REMOVE_USER,
+  UPDATE_FRIDGE
 } from './actions';
 
 const initialState = {
   isAuthenticated: false,
-  error: '',
+  error: ''
 };
 
 const userReducer = (state = initialState, action) => {
@@ -30,18 +30,18 @@ const userReducer = (state = initialState, action) => {
           ...action.info
         }
       };
-    case SET_FETCH:
-      return {
-        ...state,
-        isFetching: action.isFetching
-      };
-    case UPDATE_SHOPPING_LIST:
+    case UPDATE_FRIDGE:
       return {
         ...state,
         info: {
           ...state.info,
-          shoppingLists: action.shoppingLists
+          fridge: action.fridge
         }
+      };
+    case SET_FETCH:
+      return {
+        ...state,
+        isFetching: action.isFetching
       };
     case LOGOUT:
       return {
@@ -60,7 +60,7 @@ const userReducer = (state = initialState, action) => {
       };
     case REMOVE_USER:
       return {
-        ...initialState,
+        ...initialState
       };
     default:
       return state;

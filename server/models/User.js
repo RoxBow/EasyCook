@@ -25,12 +25,9 @@ const User = new Schema(
     },
     avatar: { type: Schema.Types.ObjectId, ref: 'Image' },
     favRecipes: [{ type: Schema.Types.ObjectId, ref: 'Recipe' }],
-    bio: {
-      type: String
-    },
-    firstName: {
-      type: String,
-    },
+    fridge: [String],
+    bio: String,
+    firstName: String,
     lastName: String,
     localization: String,
     birthday: Date,

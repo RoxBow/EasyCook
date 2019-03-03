@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 0, 
     backgroundColor: '#fff',
-    height: 200 
+    height: 200
   },
 
   wrapperIcon: {

@@ -10,7 +10,7 @@ export const LOGOUT = 'LOGOUT';
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_USER = 'SET_USER';
-export const UPDATE_SHOPPING_LIST = 'UPDATE_SHOPPING_LIST';
+export const UPDATE_FRIDGE = 'UPDATE_FRIDGE';
 export const SET_FETCH = 'SET_FETCH';
 export const REMOVE_USER = 'REMOVE_USER';
 
@@ -87,15 +87,15 @@ export const requestLogin = (email, password, navigation) => {
 
 export const toggleFavRecipe = idRecipe => dispatch => {
   axiosUser
-  .put(`/favRecipe`, {idRecipe})
-  .then(({ data }) => {
-    dispatch(setMessageInfo(data.messageInfo));
-    dispatch(setUser(data.user));
-  })
-  .catch(err => {
-    // dispatch(setError(err.response.data.err));
-  });
-}
+    .put(`/favRecipe`, { idRecipe })
+    .then(({ data }) => {
+      dispatch(setMessageInfo(data.messageInfo));
+      dispatch(setUser(data.user));
+    })
+    .catch(err => {
+      // dispatch(setError(err.response.data.err));
+    });
+};
 
 export const saveEditUser = (info, navigation) => dispatch => {
   const body = new FormData();
@@ -124,6 +124,18 @@ export const saveEditUser = (info, navigation) => dispatch => {
     });
 };
 
+export const saveFridge = (fridge, navigation) => dispatch => {
+  axiosUser
+    .put('/fridge', { fridge })
+    .then(({ data }) => {
+      dispatch(updateFridge(data.fridge));
+      navigation.goBack();
+    })
+    .catch(err => {
+      // dispatch(setError(err.response.data.err));
+    });
+};
+
 export const setMessageInfo = messageInfo => ({
   type: SET_MESSAGE_INFO,
   messageInfo
@@ -137,6 +149,11 @@ export const setFetch = fetch => ({
 export const setUser = user => ({
   type: SET_USER,
   info: user
+});
+
+export const updateFridge = fridge => ({
+  type: UPDATE_FRIDGE,
+  fridge
 });
 
 export const setAuthentication = isAuthenticated => ({

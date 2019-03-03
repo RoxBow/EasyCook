@@ -12,3 +12,8 @@ export const favRecipesSelector = compose(
   ({ info }) => ({ currentFavRecipes: info.favRecipes }),
   stateSelector,
 );
+
+export const fridgeSelector = compose(
+  ({ info }) => ({ currentFridge: info.fridge }),
+  stateSelector,
+);

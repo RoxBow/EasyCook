@@ -22,7 +22,7 @@ class RecipesScreen extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <Tabs {...styleTabs} locked={true} initialPage={1}>
+      <Tabs {...styleTabs} locked={true}>
         <Tab heading="Toutes les recettes" {...styleTab}>
           <Button success onPress={() => navigation.navigate('CreateRecipe')}>
             <Text>Créer recette</Text>

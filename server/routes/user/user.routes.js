@@ -64,6 +64,18 @@ class UserRouterClass {
       });
     });
 
+    userRouter.put('/fridge', upload.single('file'), (req, res) => {
+      const { fridge } = req.body;
+
+      User.findById(req.user._id).exec((err, user) => {
+        user.fridge = fridge;
+
+        user.save((err, user) => {
+          res.status(200).send({ status: 'SUCCESS', fridge: user.fridge });
+        });
+      });
+    });
+
     userRouter.delete('/delete', (req, res) => {
       User.deleteOne({ _id: req.user._id }).exec((err, user) => {
         res.status(200).send({ status: 'SUCCESS' });

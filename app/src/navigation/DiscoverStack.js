@@ -71,8 +71,9 @@ const RootStack = createStackNavigator(
   }
 );
 
-RootStack.navigationOptions = {
+RootStack.navigationOptions = ({ navigation }) => ({
   tabBarLabel: 'Découvrir',
+  tabBarVisible: navigation.state.routes[0].index === 0 && navigation.state.index === 0,
   tabBarIcon: ({ focused }) => (
     focused ? 
       <Icon icon="discover_tab--focus" {...styleTabBarIcon} /> : 
@@ -81,6 +82,6 @@ RootStack.navigationOptions = {
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Discover');
   }
-};
+});
 
 export default RootStack;

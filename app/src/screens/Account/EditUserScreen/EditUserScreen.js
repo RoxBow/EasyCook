@@ -82,7 +82,12 @@ class EditUserScreen extends React.Component {
         />
         <Input value={bio} onChange={bio => this.setState({ bio })} placeholder="Bio" />
 
-        <Button text="Sauvegarder" onPress={() => saveEditUser(this.state)} />
+        <Button
+          rounded
+          text="Sauvegarder"
+          onPress={() => saveEditUser(this.state)}
+          style={{ marginTop: 20 }}
+        />
       </ScrollView>
     );
   }

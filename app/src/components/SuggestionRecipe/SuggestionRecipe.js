@@ -27,7 +27,7 @@ class SuggestionRecipe extends React.Component {
       <TouchableOpacity style={styles.container} onPress={this.redirectToRecipeItemScreen}>
         <ImageBackground
           source={{ uri: `${serverUrl}/${image.uri}` }}
-          style={{ width: '100%', height: '100%' }}
+          style={{ width: '100%', height: '100%', borderRadius: 15, overflow: 'hidden' }}
         >
           <View style={styles.wrapperText}>
             <Text style={styles.category}>{category}</Text>
