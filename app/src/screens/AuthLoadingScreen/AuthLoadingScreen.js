@@ -1,6 +1,6 @@
 import styles from './authloadingscreen.style';
 import React from 'react';
-import { ActivityIndicator, AsyncStorage, StatusBar, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, View } from 'react-native';
 import { connect } from 'react-redux';
 import { requestValidityToken } from '../../redux/User/actions';
 import { withNavigation } from 'react-navigation';
@@ -27,7 +27,6 @@ class AuthLoadingScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }

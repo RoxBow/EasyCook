@@ -42,7 +42,7 @@ class Select extends React.Component {
     const selectedValue = values[indexValue].value;
 
     // update value of parent's state
-    this.props.updateValue(selectedValue);
+    this.props.updateValue(selectedValue, indexValue);
 
     this.setState({ 
       selectedValue,
@@ -52,10 +52,11 @@ class Select extends React.Component {
 
   render() {
     const { label } = this.state;
+    const { style, bold, styleText } = this.props;
 
     return (
-      <TouchableOpacity onPress={() => this.showActions()} style={styles.wrapper}>
-        <Text>{label}</Text>
+      <TouchableOpacity onPress={() => this.showActions()} style={[styles.wrapper, style]}>
+        <Text style={styleText} bold={bold}>{label}</Text>
         <Arrow size={22} name={ARROW.BOTTOM} />
       </TouchableOpacity>
     );

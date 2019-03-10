@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
 
   wrapperInfo: {
     flexDirection: 'column',
-    alignItems: 'center',
     flex: 0.6,
     paddingHorizontal: 5,
     paddingVertical: 10

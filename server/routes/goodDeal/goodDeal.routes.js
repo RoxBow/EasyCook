@@ -4,7 +4,7 @@ const GoodDeal = require('../../models/GoodDeal');
 const Image = require('../../models/Image');
 const fs = require('fs');
 const multer = require('multer');
-const { getExtFromMime, randomId } = require('../../helpers.js');
+const { getExtFromMime, randomId, addOrRemoveInArray } = require('../../helpers.js');
 
 const storage = multer.diskStorage({
   destination: './assets/avatars/goodDeals/',
@@ -93,6 +93,41 @@ class GoodDealRouterClass {
           goodDeal.interested.splice(indexUserInterested, 1);
         } else {
           goodDeal.interested.push(req.user._id);
+        }
+
+        goodDeal.save((err, goodDeal) => {
+          if (err) {
+            console.log('err', err);
+            return res.status(400).send({ status: 'FAILURE', errorMessage: err });
+          }
+
+          goodDeal.populate(populateFields, (err, goodDeal) => {
+            if (err) {
+              console.log(err);
+              return res.status(400).send({ status: 'FAILURE', errorMessage: err });
+            }
+            res.status(200).send({ status: 'SUCCESS', goodDeal });
+          });
+        });
+      });
+    });
+
+    goodDealRouter.put('/toggleThumb', (req, res) => {
+      const { idGoodDeal, isThumbUp } = req.body;
+
+      GoodDeal.findById(idGoodDeal, (err, goodDeal) => {
+        if (err) console.log(err);
+
+        if (isThumbUp) {
+          addOrRemoveInArray(goodDeal.thumbUp, req.user._id);
+
+          const indexUser = goodDeal.thumbDown.indexOf(req.user._id);
+          if (indexUser > -1) goodDeal.thumbDown.splice(indexUser, 1);
+        } else if (!isThumbUp) {
+          addOrRemoveInArray(goodDeal.thumbDown, req.user._id);
+
+          const indexUser = goodDeal.thumbUp.indexOf(req.user._id);
+          if (indexUser > -1) goodDeal.thumbUp.splice(indexUser, 1);
         }
 
         goodDeal.save((err, goodDeal) => {

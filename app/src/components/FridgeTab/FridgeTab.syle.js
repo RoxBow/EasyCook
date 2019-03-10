@@ -20,7 +20,12 @@ const styles = StyleSheet.create({
 
   wrapperRecipes: {
     marginTop: 20,
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
+  },
+
+  recipe: {
+    marginRight: 10,
+    marginBottom: 10
   }
 });
 

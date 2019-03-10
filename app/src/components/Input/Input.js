@@ -12,19 +12,26 @@ const Input = ({
   value,
   placeholder,
   big,
-  editable = true,
+  editable = true
 }) => (
-  <View style={[styles.wrapper, styleWrapperInput, big && styles.wrapperBigInput, !editable && styles.wrapperDisabledInput]}>
+  <View
+    style={[
+      styles.wrapper,
+      styleWrapperInput,
+      big && styles.wrapperBigInput,
+      !editable && styles.wrapperDisabledInput
+    ]}
+  >
     {icon && <Icon icon={icon} size={sizeIcon || 20} style={styles.icon} />}
 
     <TextInput
-        editable={editable}
-        onChangeText={onChange}
-        value={value}
-        placeholder={placeholder}
-        placeholderTextColor="grey"
-        style={[styles.input, styleInput, big && styles.bigInput]}
-      />
+      editable={editable}
+      onChangeText={onChange}
+      value={value}
+      placeholder={placeholder}
+      placeholderTextColor="grey"
+      style={[styles.input, styleInput, big && styles.bigInput]}
+    />
   </View>
 );
 

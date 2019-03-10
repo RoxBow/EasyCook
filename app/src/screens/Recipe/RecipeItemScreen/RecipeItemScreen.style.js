@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     marginTop: -15
   },
   titleLine: {
-    marginBottom: 15,
+    marginBottom: 15
   },
 
   wrapperInfoIntro: {
@@ -21,39 +21,39 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 30,
     borderBottomWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'grey'
   },
   elementInfoIntro: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   wrapperIngredients: {
     justifyContent: 'center',
-    paddingHorizontal: 30,
+    paddingHorizontal: 30
   },
   wrapperIngredient: {
-    marginVertical: 8,
+    marginVertical: 8
   },
 
   containerEquipments: {
     marginVertical: 15,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   wrapperEquipments: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   equipment: {
     marginHorizontal: 10,
-    alignItems: 'center',
+    alignItems: 'center'
   },
 
   containerSteps: {
-    marginVertical: 15,
+    marginVertical: 15
   },
   step: {
     flexDirection: 'row',
     marginVertical: 8,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   numberStep: {
     fontSize: 13,
@@ -65,7 +65,24 @@ const styles = StyleSheet.create({
     borderColor: pink,
     borderWidth: 1,
     textAlign: 'center',
-    marginRight: 15,
+    marginRight: 15
+  },
+
+  btnRecipeCalendar: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    backgroundColor: pink,
+    width: 45,
+    height: 45,
+    borderRadius: 22.5,
+    shadowOffset: { width: 1, height: 1 },
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    elevation: 2
   }
 });
 

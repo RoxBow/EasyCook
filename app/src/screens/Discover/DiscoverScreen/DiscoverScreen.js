@@ -1,108 +1,93 @@
-import styles from './discoverscreen.style';
+import styles from './DiscoverScreen.style';
 import React from 'react';
 import { Tabs, Tab } from 'native-base';
-import { Feather, FontAwesome } from '@expo/vector-icons';
 import { Container, Header, Left, Right, Body } from 'native-base';
-import { Item, Input } from 'native-base';
-import Layout from '../../../constants/layout';
 import { styleTab, styleTabs } from '../../../constants/global';
-import { pink } from '../../../constants/colors';
-import { fetchEvents } from '../../../redux/Event/actions';
+import { fetchEvents } from '../../../redux/Event/actions';
 import { fetchGoodDeals } from '../../../redux/GoodDeal/actions';
-import { connect } from 'react-redux';
-import EventTab from '../../../components/EventTab/EvenTab';
+import EventTab from '../../../components/EventTab/EvenTabContainer';
 import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
 import Text from '../../../components/Text/Text';
-
-const { window } = Layout;
+import { Location, Permissions } from 'expo';
+import { TextInput, View } from 'react-native';
+import { connect } from 'react-redux';
+import Icon from '../../../components/Icon/Icon';
+import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
 
 class DiscoverScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeTab: "event"
+      activeTab: 'event'
     };
 
-    this.getCurrentLocation = this.getCurrentLocation.bind(this);
     this.setActiveTab = this.setActiveTab.bind(this);
     this.redirectTo = this.redirectTo.bind(this);
   }
 
   componentDidMount() {
+    this._getLocationAsync();
     this.props.fetchEvents();
     this.props.fetchGoodDeals();
   }
 
-  getCurrentLocation() {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
+  _getLocationAsync = async () => {
+    let { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status !== 'granted') {
+      this.setState({
+        errorMessage: 'Permission to access location was denied'
+      });
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    const { latitude, longitude } = location.coords;
+    const address = await Location.reverseGeocodeAsync({ latitude, longitude });
+
+    this.setState({
+      address
     });
-  }
+  };
 
   _renderItem({ item, index }) {
     return <GoodDeal key={index} {...item} />;
   }
 
-  getWidthItemCarousel() {
-    return window.width * 0.7;
-  }
+  setActiveTab() {
+    const { activeTab } = this.state;
 
-  setActiveTab(){
-    const { activeTab } = this.state;
-
-    const currentTab = activeTab === "event" ? "goodDeal" : "event";
+    const currentTab = activeTab === 'event' ? 'goodDeal' : 'event';
 
     this.setState({
-      activeTab: currentTab,
-    })
+      activeTab: currentTab
+    });
   }
 
-  redirectTo(){
-    const { activeTab } = this.state;
-
-    if(activeTab === "event"){
-      this.props.navigation.navigate("CreateEvent")
+  redirectTo() {
+    if (this.state.activeTab === 'event') {
+      this.props.navigation.navigate('CreateEvent');
     } else {
-      this.props.navigation.navigate("CreateGoodDeal")
+      this.props.navigation.navigate('CreateGoodDeal');
     }
   }
 
   render() {
+    const { address } = this.state;
+
     return (
       <Container>
-        <Header transparent style={{ height: 80 }}>
+        <Header transparent style={{ height: 100, marginHorizontal: 10 }}>
           <Left>
             <Text>À</Text>
-            <Item>
-              <Input
-                placeholder="location"
-                style={{ paddingHorizontal: 5, fontWeight: 'bold', fontSize: 20 }}
-              />
-              <FontAwesome
-                name="location-arrow"
-                size={20}
-                color={pink}
-                style={{ marginHorizontal: 5 }}
-              />
-            </Item>
+            <View style={styles.wrapperGeolocation}>
+              {address && <TextInput value={address[0].city} style={styles.textGeolocation} />}
+              <Icon icon="geolocation" size={14} />
+            </View>
           </Left>
           <Body />
-          <Right>
-            <Feather
-              name="star"
-              size={30}
-              color="#000"
-              style={{ marginHorizontal: 10 }}
-              onPress={() => {}}
-            />
-            <Feather
-              name="plus"
-              size={30}
-              color={pink}
-              style={{ marginHorizontal: 10 }}
-              onPress={() => this.redirectTo()}
-            />
+          <Right style={{ alignItems: 'center' }}>
+            <ButtonIcon icon="favorite" size={28} onPress={() => {}} />
+            <ButtonIcon icon="plus" size={25} onPress={() => this.redirectTo()} />
           </Right>
         </Header>
         <Tabs {...styleTabs} locked={true} onChangeTab={() => this.setActiveTab()}>
@@ -121,6 +106,9 @@ class DiscoverScreen extends React.Component {
 const mapDispatchToProps = dispatch => ({
   fetchEvents: () => dispatch(fetchEvents()),
   fetchGoodDeals: () => dispatch(fetchGoodDeals())
-})
+});
 
-export default connect(null, mapDispatchToProps)(DiscoverScreen);
+export default connect(
+  null,
+  mapDispatchToProps
+)(DiscoverScreen);

@@ -87,6 +87,24 @@ export const toggleInterested = idGoodDeal => {
       });
 };
 
+export const toggleThumb = (idGoodDeal, isThumbUp) => {
+  return dispatch =>
+  axiosGoodDeal
+      .put('/toggleThumb', {
+        idGoodDeal,
+        isThumbUp
+      })
+      .then(({ data }) => {
+        if (data.status === SUCCESS) {
+          dispatch(updateGoodDeal(data.goodDeal));
+        }
+      })
+      .catch(err => {
+        // console.log(err);
+        // dispatch(setError(err.response.data));
+      });
+};
+
 export const setMessageInfo = messageInfo => ({
   type: SET_MESSAGE_INFO,
   messageInfo

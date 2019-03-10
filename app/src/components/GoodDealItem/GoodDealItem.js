@@ -41,7 +41,6 @@ class GoodDealItem extends React.Component {
           <View style={styles.wrapperInfo}>
             <Text style={styles.nameText} bold>{storeName}</Text>
             <Text>Par {creator.username}</Text>
-            <View />
           </View>
         </View>
         <View style={styles.wrapperActions}>

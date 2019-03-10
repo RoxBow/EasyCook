@@ -7,6 +7,7 @@ import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
 import { styleTab, styleTabs } from '../../../constants/global';
 import { userEventsSelector } from '../../../redux/Event/selectors';
 import { userGoodDealsSelector } from '../../../redux/GoodDeal/selectors';
+import Empty from '../../../components/Empty/Empty';
 
 class AccountScreen extends React.Component {
   constructor() {
@@ -21,10 +22,10 @@ class AccountScreen extends React.Component {
     return (
       <Tabs {...styleTabs} locked={true}>
         <Tab heading="Événements à venir" {...styleTab}>
-          {events && <EventTab events={events} />}
+          {events.length ? <EventTab events={events} /> : <Empty name="événements" />}
         </Tab>
         <Tab heading="Mes bons plans" {...styleTab}>
-        {goodDeals && <GoodDealTab goodDeals={goodDeals} />}
+          {goodDeals.length ? <GoodDealTab goodDeals={goodDeals} /> : <Empty name="bons plans" />}
         </Tab>
       </Tabs>
     );

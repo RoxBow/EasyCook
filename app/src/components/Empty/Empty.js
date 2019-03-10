@@ -3,9 +3,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Text from '../Text/Text';
 
-const Empty = ({ name }) => (
+const Empty = ({ text }) => (
   <View style={styles.container}>
-    <Text style={styles.text}>Vous n'avez actuellement aucun {name}</Text>
+    <Text style={styles.text}>{text}</Text>
   </View>
 );
 

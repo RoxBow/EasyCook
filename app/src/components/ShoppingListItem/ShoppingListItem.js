@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 import { Entypo } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { togglePin } from '../../redux/ShoppingList/actions';
+import { formatDateShort } from '../../constants/helpers';
 import ListAvatar from '../ListAvatar/ListAvatar';
 import Text from '../Text/Text';
 
@@ -17,25 +18,25 @@ class ShoppingListItem extends React.Component {
 
     this.redirectToShoppingListItem = this.redirectToShoppingListItem.bind(this);
     this.actionShoppingList = this.actionShoppingList.bind(this);
+    this.isOutDated = this.isOutDated.bind(this);
   }
 
   renderRemainingAliments() {
     const { ingredients } = this.props;
 
-    
     const ingredientsValidate = ingredients.filter(({ isValidate }) => isValidate);
     const ingredientsNotValidate = ingredients.filter(({ isValidate }) => !isValidate);
     const nbrIngredients = ingredients.length;
 
     if (ingredientsNotValidate.length >= 1) {
-      return `${ingredientsNotValidate.length} ingredients restants`;
-    } else if(ingredientsValidate.length === nbrIngredients && nbrIngredients > 0){
-      return "COMPLET";
+      return `${ingredientsNotValidate.length} aliments restants`;
+    } else if (ingredientsValidate.length === nbrIngredients && nbrIngredients > 0) {
+      return 'COMPLET';
     } else if (nbrIngredients === 0) {
-      return "Liste vide";
+      return 'Liste vide';
     }
 
-    return `${nbrIngredients} ingredients restant`;
+    return `${nbrIngredients} aliment restant`;
   }
 
   redirectToShoppingListItem() {
@@ -43,7 +44,7 @@ class ShoppingListItem extends React.Component {
 
     this.props.navigation.navigate('ShoppingListItem', {
       idShoppingList: dataShoppingList._id,
-      name: dataShoppingList.name,
+      name: dataShoppingList.name
     });
   }
 
@@ -55,8 +56,15 @@ class ShoppingListItem extends React.Component {
     }
   }
 
+  isOutDated(date) {
+    const now = new Date();
+    date = new Date(date);
+
+    return date < now;
+  }
+
   render() {
-    const { name, dateMax, isPin, users } = this.props;
+    const { name, maxDate, isPin, users } = this.props;
     const isPinLabel = isPin ? 'Désépingler' : 'Épingler';
 
     const BUTTONS = [isPinLabel, 'Ajouter un membre', 'Ajouter un aliment', 'Annuler'];
@@ -66,9 +74,11 @@ class ShoppingListItem extends React.Component {
     return (
       <TouchableOpacity style={styles.wrapper} onPress={this.redirectToShoppingListItem}>
         <View style={styles.wrapperTextIcon}>
-          <View style={{ flex: 1}}>
-            <Text numberOfLines={1} ellipsizeMode='tail' style={styles.name} bold>{name}</Text>
-            {dateMax && <Text style={styles.dateMax}>{dateMax.toString().substr(4, 12)}</Text>}
+          <View style={{ flex: 1 }}>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name} bold>
+              {name}
+            </Text>
+            {maxDate && <Text style={[this.isOutDated(maxDate) ? styles.outdated : styles.validDate]}>Jusqu'au {formatDateShort(maxDate)}</Text>}
             <Text style={styles.remainingAliments}>{this.renderRemainingAliments()}</Text>
           </View>
 
@@ -91,7 +101,7 @@ class ShoppingListItem extends React.Component {
           />
         </View>
         <View style={{ borderTopWidth: 1, paddingTop: 8, borderColor: 'lightgrey' }}>
-          <Text>Partagé avec {users.length} membre(s)</Text>
+          <Text style={styles.shareWith}>Partagé avec {users.length} membre(s)</Text>
           <ListAvatar listUser={users} />
         </View>
       </TouchableOpacity>

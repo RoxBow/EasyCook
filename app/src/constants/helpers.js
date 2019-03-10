@@ -27,6 +27,13 @@ export const formatDate = date =>
     DATE.month[date.getMonth()]
   } ${date.getFullYear()}`;
 
+export const formatDateShort = date =>
+  new Date(date).toLocaleDateString('fr-fr', {
+    year: '2-digit',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
 export const combineSelectors = (...selectors) => (state, props) =>
   selectors.reduce(
     (acc, selector) => ({
@@ -45,3 +52,7 @@ export const addOrRemoveInArray = (array, value) => {
     array.splice(index, 1);
   }
 };
+
+export const orderByDate = array => array.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+export const equalDate = (d1, d2) => d1.getDate() === d2.getDate();

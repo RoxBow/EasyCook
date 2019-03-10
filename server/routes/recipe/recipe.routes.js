@@ -22,7 +22,7 @@ const upload = multer({
 class RecipeRouterClass {
   routes() {
     const populateFields = [
-      'image', 
+      'image',
       { path: 'creator', populate: { path: 'avatar' } },
       { path: 'comments.user', select: 'username avatar', populate: { path: 'avatar' } }
     ];
@@ -98,6 +98,12 @@ class RecipeRouterClass {
       Recipe.findById(idRecipe, (err, recipe) => {
         recipe.comments.push(comment);
 
+        const averageRating = recipe.comments.reduce((acc, comment, i) => {
+          return acc + parseInt(comment.rating, 10);
+        }, 0);
+
+        recipe.averageRating = Math.round(averageRating/recipe.comments.length);
+
         recipe.save((err, recipe) => {
           recipe.populate(populateFields, (err, recipe) => {
             res.status(200).send({ status: 'SUCCESS', recipe });
@@ -110,7 +116,9 @@ class RecipeRouterClass {
       let { idComment, idRecipe } = req.body;
 
       Recipe.findById(idRecipe, (err, recipe) => {
-        const indexComment = recipe.comments.findIndex(({ _id }) => _id.toString() === idComment.toString());
+        const indexComment = recipe.comments.findIndex(
+          ({ _id }) => _id.toString() === idComment.toString()
+        );
         recipe.comments.splice(indexComment, 1);
 
         recipe.save((err, recipe) => {

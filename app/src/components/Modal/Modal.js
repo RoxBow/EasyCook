@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal as ModalRN } from 'react-native';
 import { withNavigation } from 'react-navigation';
+
 const Modal = ({ animationType, isOpen, children, transparent, navigation }) => (
   <ModalRN
     onRequestClose={() => navigation.goBack()}

@@ -13,11 +13,14 @@ const styles = StyleSheet.create({
   title: {
     marginVertical: 10,
     textTransform: 'uppercase',
+    color: 'grey',
+    fontSize: 12,
   },
 
   wrapperShoppingList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   }
 });
 

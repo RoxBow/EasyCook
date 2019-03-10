@@ -82,10 +82,14 @@ export const addShoppingList = (name, maxDate, users, navigation) => async dispa
     .then(({ data }) => {
       if (data.status === SUCCESS) {
         dispatch(updateShoppingList(data.shoppingLists));
-        navigation.navigate('ShoppingListItem', {
+        navigation.replace('ShoppingListItem', {
           idShoppingList: data.shoppingListAdded._id,
           name: data.shoppingListAdded.name
         });
+        // navigation.navigate('ShoppingListItem', {
+        //   idShoppingList: data.shoppingListAdded._id,
+        //   name: data.shoppingListAdded.name
+        // });
       }
     })
     .catch(err => {

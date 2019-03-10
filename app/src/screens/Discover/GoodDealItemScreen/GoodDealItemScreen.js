@@ -1,16 +1,17 @@
 import styles from './GoodDealItem.style';
 import React from 'react';
-import { View, ImageBackground, ScrollView } from 'react-native';
+import { View, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Header, Thumbnail } from 'native-base';
+import { Header, Thumbnail } from 'native-base';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import { toggleInterested } from '../../../redux/GoodDeal/actions';
+import { toggleInterested, toggleThumb } from '../../../redux/GoodDeal/actions';
 import { currentGoodDealSelector } from '../../../redux/GoodDeal/selectors';
 import IconStar from '../../../components/Icons/IconStar';
 import { serverUrl } from '../../../constants/global';
-import { formatDate } from '../../../constants/helpers';
+import { formatDate } from '../../../constants/helpers';
 import Text from '../../../components/Text/Text';
 import HeadItem from '../../../components/HeadItem/HeadItem';
+import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
 
 class GoodDealItem extends React.Component {
   constructor(props) {
@@ -37,9 +38,9 @@ class GoodDealItem extends React.Component {
   }
 
   render() {
-    const { navigation, currentGoodDeal } = this.props;
+    const { navigation, currentGoodDeal, toggleThumb } = this.props;
 
-    const { storeName, date, creator, address, description, image, category } = currentGoodDeal;
+    const { storeName, date, creator, address, description, image, category, _id } = currentGoodDeal;
 
     return (
       <ScrollView>
@@ -69,6 +70,18 @@ class GoodDealItem extends React.Component {
             </View>
           </View>
 
+          <View>
+            <Text>Avis de la communauté</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+              <View>
+                <ButtonIcon icon="thumb_up" size={22} onPress={ () => toggleThumb(_id, true) } />
+              </View>
+              <View>
+                <ButtonIcon icon="thumb_down" size={22} onPress={ () => toggleThumb(_id, false) } />
+              </View>
+            </View>
+          </View>
+
           <View style={styles.wrapperAbout}>
             <View style={styles.wrapperDescription}>
               <Text>A propos</Text>
@@ -85,13 +98,18 @@ class GoodDealItem extends React.Component {
           </View>
         </View>
         <View style={styles.wrapperActions}>
-          <Button
+          <TouchableOpacity
             onPress={() => this._toggleUser()}
             style={[{ borderRightWidth: 1, borderColor: 'lightgrey' }, styles.btnAction]}
           >
             <IconStar isFill={this.isInterested()} />
             <Text style={styles.btnActionText}>Intéressé(e)</Text>
-          </Button>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btnAction} onPress={() => {}}>
+            <IconStar isFill={false} />
+
+            <Text style={styles.btnActionText}>Partager</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -100,11 +118,15 @@ class GoodDealItem extends React.Component {
 
 const mapStateToProps = (state, { navigation }) => ({
   currentUsername: state.user.info.username,
-  currentGoodDeal: currentGoodDealSelector(state.goodDeal.goodDeals, navigation.state.params.idGoodDeal)
+  currentGoodDeal: currentGoodDealSelector(
+    state.goodDeal.goodDeals,
+    navigation.state.params.idGoodDeal
+  )
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleInterested: idGoodDeal => dispatch(toggleInterested(idGoodDeal))
+  toggleInterested: idGoodDeal => dispatch(toggleInterested(idGoodDeal)),
+  toggleThumb: (idGoodDeal, isThumbUp) => dispatch(toggleThumb(idGoodDeal, isThumbUp))
 });
 
 export default connect(

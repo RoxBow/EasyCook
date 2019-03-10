@@ -19,3 +19,10 @@ export const currentRecipeSelector = idRecipe =>
     ({ recipes }) => recipes.find(({ _id }) => _id === idRecipe),
     recipesSelector
   );
+
+  export const categoryRecipesSelector = category =>
+  compose(
+    recipes => ({ recipes }),
+    ({ recipes }) => recipes.filter(recipe => recipe.category === category),
+    recipesSelector
+  );

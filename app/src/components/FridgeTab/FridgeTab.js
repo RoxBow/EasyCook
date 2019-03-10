@@ -44,7 +44,7 @@ const FridgeTab = ({ refIngredients, recipes, navigation, currentFridge }) => (
             ingredients.some(({ refId }) => currentFridge.includes(refId))
           )
           .map((recipe, i) => (
-            <RecipeItem {...recipe} key={i} />
+            <RecipeItem {...recipe} key={i} style={styles.recipe} />
           ))}
       </View>
     </View>

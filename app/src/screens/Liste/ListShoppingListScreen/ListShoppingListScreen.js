@@ -37,14 +37,14 @@ class ListShoppingListScreen extends React.Component {
         <View style={styles.container}>
           <ScrollView contentContainerStyle={styles.wrapper}>
             <Text style={styles.title}>Épinglée</Text>
-            <View styles={styles.wrapperShoppingList}>
+            <View style={styles.wrapperShoppingList}>
               {this.filteredShoppingList().pinnedShoppingList &&
                 this.filteredShoppingList().pinnedShoppingList.map((shoppingList, i) => (
                   <ShoppingListItem {...shoppingList} key={i} />
                 ))}
             </View>
             <Text style={styles.title}>Autres</Text>
-            <View styles={styles.wrapperShoppingList}>
+            <View style={styles.wrapperShoppingList}>
               {this.filteredShoppingList().notPinnedShoppingList &&
                 this.filteredShoppingList().notPinnedShoppingList.map((shoppingList, i) => (
                   <ShoppingListItem {...shoppingList} key={i} />

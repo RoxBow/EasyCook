@@ -47,7 +47,7 @@ export const DATE = {
   ],
   day: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
   shortDay: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.']
-}
+};
 
 LocaleConfig.defaultLocale = 'fr';
 LocaleConfig.locales['fr'] = {
@@ -74,8 +74,12 @@ export const styleTabs = {
 };
 
 export const styleTab = {
-  textStyle: { color: textDefault, fontWeight: '600', fontFamily: 'Quicksand--medium'},
-  activeTextStyle: { backgroundColor: backgroundTab, color: tabBarSelected, fontFamily: 'Quicksand--bold' },
+  textStyle: { color: textDefault, fontWeight: '600', fontFamily: 'Quicksand--medium' },
+  activeTextStyle: {
+    backgroundColor: backgroundTab,
+    color: tabBarSelected,
+    fontFamily: 'Quicksand--bold'
+  },
   tabStyle: { backgroundColor: backgroundTab },
   activeTabStyle: { backgroundColor: backgroundTab }
 };
@@ -87,7 +91,7 @@ export const styleDotCalendar = {
 };
 
 export const themeCalendar = {
-  backgroundColor: '#fff',
+  backgroundColor: 'lightgrey',
   calendarBackground: '#fff',
   textSectionTitleColor: '#000',
   selectedDayBackgroundColor: 'rgba(81,216, 197, .2)',
@@ -122,72 +126,76 @@ export const ARROW = {
 export const LEVELS = [
   {
     label: 'Débutant',
-    value: 'beginner',
+    value: 'beginner'
   },
   {
     label: 'Amateur',
-    value: 'amateur',
+    value: 'amateur'
   },
   {
     label: 'Expert',
-    value: 'master',
-  },
-]
+    value: 'master'
+  }
+];
 
 export const CATEGORIES = [
   {
     label: 'Petit déjeuner',
-    value: 'breakfast',
+    value: 'breakfast'
   },
   {
     label: 'Déjeuner',
-    value: 'lunch',
+    value: 'lunch'
   },
   {
     label: 'Goûter',
-    value: 'collation',
+    value: 'collation'
   },
   {
     label: 'Dîner',
-    value: 'dinner',
+    value: 'dinner'
   }
 ];
 
 export const UNITS = [
   {
     label: 'gramme',
-    value: 'gram',
+    value: 'gram'
   },
   {
     label: 'pièce',
-    value: 'piece',
-  },
+    value: 'piece'
+  }
 ];
 
 export const KIND_INGREDIENTS = [
   {
     label: 'Légumes',
-    value: 'vegetable',
+    value: 'vegetable'
   },
   {
     label: 'Fruits',
-    value: 'fruit',
+    value: 'fruit'
   },
   {
     label: 'Fromages',
-    value: 'cheese',
+    value: 'cheese'
   },
   {
     label: 'Viandes',
-    value: 'meat',
+    value: 'meat'
   },
   {
     label: 'Poissons',
-    value: 'fish',
+    value: 'fish'
   },
   {
     label: 'Arômates',
-    value: 'spice',
-  },
-  
-]
+    value: 'spice'
+  }
+];
+
+export const DATE_SELECT = DATE.month.map(month => ({
+  label: month,
+  value: month
+}));

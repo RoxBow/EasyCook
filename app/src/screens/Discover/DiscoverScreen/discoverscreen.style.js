@@ -1,12 +1,19 @@
 import { StyleSheet } from 'react-native';
+import { pink } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
-  map: {
-    ...StyleSheet.absoluteFillObject
+  wrapperGeolocation: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: pink,
+    paddingBottom: 2,
+    paddingRight: 16,
+    alignItems: 'center'
   },
-  carousel: {
-    position: 'absolute',
-    bottom: 10,
+  textGeolocation: {
+    fontSize: 28,
+    fontFamily: 'Quicksand--bold',
+    marginRight: 10
   }
 });
 

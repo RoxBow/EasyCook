@@ -2,7 +2,7 @@ import styles from './RecipeItemScreen.style';
 import React from 'react';
 import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Header, Item, Input, Button, Thumbnail } from 'native-base';
+import { Header, Item, Input, Button } from 'native-base';
 import { AntDesign } from '@expo/vector-icons';
 import { serverUrl } from '../../../constants/global';
 import { combineSelectors } from '../../../constants/helpers';
@@ -17,6 +17,8 @@ import Rating from '../../../components/Rating/Rating';
 import { addComment } from '../../../redux/Recipe/actions';
 import { toggleFavRecipe } from '../../../redux/User/actions';
 import Comments from '../../../components/Comments/Comments';
+import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
+import ModalAddRecipeCalendar from '../../../components/ModalAddRecipeCalendar/ModalAddRecipeCalendar';
 
 class RecipeItem extends React.Component {
   constructor(props) {
@@ -24,7 +26,8 @@ class RecipeItem extends React.Component {
 
     this.state = {
       comment: '',
-      stars: 0
+      stars: 0,
+      modalRecipeCalendarIsOpen: false
     };
 
     this.addComment = this.addComment.bind(this);
@@ -84,103 +87,120 @@ class RecipeItem extends React.Component {
       _id
     } = currentRecipe;
 
-    const { formatedIngredient, comment, stars } = this.state;
+    const { formatedIngredient, comment, stars, modalRecipeCalendarIsOpen } = this.state;
 
     return (
-      <ScrollView>
-        <Header style={{ height: 200 }} transparent>
-          <ImageBackground
-            source={{ uri: `${serverUrl}/${image.uri}` }}
-            style={{ width: '100%', height: '100%' }}
-          >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <AntDesign
-                size={26}
-                name="arrowleft"
-                style={{ padding: 8 }}
-                onPress={() => navigation.goBack()}
-              />
-              <Button transparent onPress={() => toggleFavRecipe(_id)} style={{ paddingHorizontal: 8 }}>
-                <Icon icon={this.isFav() ? 'heart--fill' : 'heart'} size={24} />
-              </Button>
-            </View>
-          </ImageBackground>
-        </Header>
-        <View style={styles.wrapperContent}>
-          <HeadItem category={category} title={name} creator={creator} />
-
-          <View style={styles.wrapperInfoIntro}>
-            <View style={styles.elementInfoIntro}>
-              <Icon icon="price" size={15} />
-              <Text>{level}</Text>
-            </View>
-            <View style={styles.elementInfoIntro}>
-              <Icon icon="price" size={15} />
-              <Text>{preparationTime} min</Text>
-            </View>
-            <View style={styles.elementInfoIntro}>
-              <Icon icon="price" size={15} />
-              <Text>{cookingTime} min</Text>
-            </View>
-            <View style={styles.elementInfoIntro}>
-              <Icon icon="price" size={15} />
-              <Text>frigo/frigo</Text>
-            </View>
-          </View>
-
-          <View style={styles.wrapperIngredients}>
-            {formatedIngredient &&
-              formatedIngredient.map(({ name, quantity, unity }, i) => (
-                <View style={styles.wrapperIngredient} key={i}>
-                  <Text>
-                    {quantity} {unity} {name}
-                  </Text>
-                </View>
-              ))}
-          </View>
-
-          <View style={styles.containerEquipments}>
-            <TitleLine title="Matériel" styleWrapper={styles.titleLine} />
-            <View style={styles.wrapperEquipments}>
-              {equipments.map((name, i) => (
-                <View style={styles.equipment} key={i}>
-                  <Icon icon={name} size={25} />
-                  <Text>{name}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-
-          <View style={styles.containerSteps}>
-            <TitleLine title="Préparation" styleWrapper={styles.titleLine} />
-            {steps.map((content, i) => (
-              <View style={styles.step} key={i}>
-                <Text style={styles.numberStep} medium>
-                  {i + 1}
-                </Text>
-                <Text>{content}</Text>
+      <View>
+        <ScrollView>
+          <Header style={{ height: 200 }} transparent>
+            <ImageBackground
+              source={{ uri: `${serverUrl}/${image.uri}` }}
+              style={{ width: '100%', height: '100%' }}
+            >
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <AntDesign
+                  size={26}
+                  name="arrowleft"
+                  style={{ padding: 8 }}
+                  onPress={() => navigation.goBack()}
+                />
+                <Button
+                  transparent
+                  onPress={() => toggleFavRecipe(_id)}
+                  style={{ paddingHorizontal: 8 }}
+                >
+                  <Icon icon={this.isFav() ? 'heart--fill' : 'heart'} size={24} />
+                </Button>
               </View>
-            ))}
+            </ImageBackground>
+          </Header>
+          <View style={styles.wrapperContent}>
+            <HeadItem category={category} title={name} creator={creator} />
+
+            <View style={styles.wrapperInfoIntro}>
+              <View style={styles.elementInfoIntro}>
+                <Icon icon="price" size={15} />
+                <Text>{level}</Text>
+              </View>
+              <View style={styles.elementInfoIntro}>
+                <Icon icon="price" size={15} />
+                <Text>{preparationTime} min</Text>
+              </View>
+              <View style={styles.elementInfoIntro}>
+                <Icon icon="price" size={15} />
+                <Text>{cookingTime} min</Text>
+              </View>
+              <View style={styles.elementInfoIntro}>
+                <Icon icon="price" size={15} />
+                <Text>frigo/frigo</Text>
+              </View>
+            </View>
+
+            <View style={styles.wrapperIngredients}>
+              {formatedIngredient &&
+                formatedIngredient.map(({ name, quantity, unity }, i) => (
+                  <View style={styles.wrapperIngredient} key={i}>
+                    <Text>
+                      {quantity} {unity} {name}
+                    </Text>
+                  </View>
+                ))}
+            </View>
+
+            <View style={styles.containerEquipments}>
+              <TitleLine title="Matériel" styleWrapper={styles.titleLine} />
+              <View style={styles.wrapperEquipments}>
+                {equipments.map((name, i) => (
+                  <View style={styles.equipment} key={i}>
+                    <Icon icon={name} size={25} />
+                    <Text>{name}</Text>
+                  </View>
+                ))}
+              </View>
+            </View>
+
+            <View style={styles.containerSteps}>
+              <TitleLine title="Préparation" styleWrapper={styles.titleLine} />
+              {steps.map((content, i) => (
+                <View style={styles.step} key={i}>
+                  <Text style={styles.numberStep} medium>
+                    {i + 1}
+                  </Text>
+                  <Text>{content}</Text>
+                </View>
+              ))}
+            </View>
           </View>
-        </View>
 
-        <View>
-          <TitleLine title="Commentaires" styleWrapper={styles.titleLine} />
-          <Rating getRating={rating => this.setState({ stars: rating })} selected={stars} />
-          <Item rounded>
-            <Input
-              onChangeText={comment => this.setState({ comment })}
-              placeholder="J'adore ce gâteau"
-              value={comment}
-            />
-          </Item>
-          <Button transparent onPress={() => this.addComment()}>
-            <Text>Envoyez</Text>
-          </Button>
-        </View>
+          <View>
+            <TitleLine title="Commentaires" styleWrapper={styles.titleLine} />
+            <Rating getRating={rating => this.setState({ stars: rating })} selected={stars} />
+            <Item rounded>
+              <Input
+                onChangeText={comment => this.setState({ comment })}
+                placeholder="J'adore ce gâteau"
+                value={comment}
+              />
+            </Item>
+            <Button transparent onPress={() => this.addComment()}>
+              <Text>Envoyez</Text>
+            </Button>
+          </View>
 
-        <Comments comments={comments} idRecipe={_id} />
-      </ScrollView>
+          <Comments comments={comments} idRecipe={_id} />
+        </ScrollView>
+        <ButtonIcon
+          icon="calendar_add"
+          size={25}
+          onPress={() => this.setState({ modalRecipeCalendarIsOpen: true })}
+          style={styles.btnRecipeCalendar}
+        />
+        <ModalAddRecipeCalendar
+          idRecipe={_id}
+          isOpen={modalRecipeCalendarIsOpen}
+          onRequestClose={() => this.setState({ modalRecipeCalendarIsOpen: false })}
+        />
+      </View>
     );
   }
 }

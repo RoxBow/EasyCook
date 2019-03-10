@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { createStackNavigator, NavigationActions, StackActions } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon, ARROW } from '../constants/global';
 import { pink } from '../constants/colors';
 import { Feather, AntDesign } from '@expo/vector-icons';
@@ -9,6 +9,8 @@ import IconArrow from '../components/Icons/IconArrow';
 import Icon from '../components/Icon/Icon';
 import ArrowBack from '../components/ArrowBack/ArrowBack';
 import Text from '../components/Text/Text';
+import ButtonIcon from '../components/ButtonIcon/ButtonIcon';
+import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
 
 import ListShoppingListScreen from '../screens/Liste/ListShoppingListScreen/ListShoppingListScreen';
 import ShoppingListItemScreen from '../screens/Liste/ShoppingListItemScreen/ShoppingListItemScreen';
@@ -113,10 +115,10 @@ const RootStack = createStackNavigator(
           >
             <Left />
             <Body style={{ flex: 3 }}>
-              <Title style={{ color: '#fff' }}>Ajoute un aliment</Title>
+              <TitleHeader title="Ajoute un aliment" style={{ color: '#fff' }} />
             </Body>
             <Right>
-              <AntDesign name="close" size={30} color="#fff" onPress={() => navigation.goBack()} />
+              <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
             </Right>
           </Header>
         ),
@@ -145,8 +147,8 @@ const RootStack = createStackNavigator(
               </Text>
             </Left>
             <Body />
-            <Right style={{ alignSelf: 'flex-start' }}>
-              <AntDesign name="close" size={30} color="#fff" onPress={() => navigation.goBack()} />
+            <Right style={{ alignSelf: 'flex-start', marginTop: 10 }}>
+              <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
             </Right>
           </Header>
         )
@@ -154,7 +156,7 @@ const RootStack = createStackNavigator(
     },
     SearchUser: {
       screen: SearchUserScreen,
-      navigationOptions: ({ navigation, screenProps }) => ({
+      navigationOptions: ({ navigation }) => ({
         header: null,
         headerBackTitle: 'Rechercher',
         headerTintColor: pink,

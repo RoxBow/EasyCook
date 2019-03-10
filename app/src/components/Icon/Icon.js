@@ -56,10 +56,17 @@ const Notification = require('../../assets/images/notification.svg');
 const Picture = require('../../assets/images/picture.svg');
 const Cross = require('../../assets/images/plus.svg');
 const CrossWhite = require('../../assets/images/plus--white.svg');
-const CrossRounded = require('../../assets/images/plus_rounded.svg');
+const CrossRounded = require('../../assets/images/cross_rounded.svg');
+const PlusRounded = require('../../assets/images/plus_rounded.svg');
 const ArrowBack = require('../../assets/images/arrow_back.svg');
 const Edit = require('../../assets/images/edit.svg');
 const Detail = require('../../assets/images/detail.svg');
+const CalendarAdd = require('../../assets/images/add-recipe-calendar.svg');
+const ThumbUp = require('../../assets/images/thumb-up.svg');
+const ThumbDown = require('../../assets/images/thumb-down.svg');
+const Favorite = require('../../assets/images/favorite.svg');
+const ArrowSelectWhite = require('../../assets/images/arrow_select--white.svg');
+const Geolocation = require('../../assets/images/geolocation.svg');
 
 const Icon = ({ icon, width, size, height, style }) => {
   (width = width || size), (height = height || size);
@@ -163,6 +170,8 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={HeartFill} {...config} />;
     case 'plus':
       return <Svg source={Cross} {...config} />;
+    case 'plus_rounded':
+      return <Svg source={PlusRounded} {...config} />;
     case 'plus--white':
       return <Svg source={CrossWhite} {...config} />;
     case 'cross':
@@ -179,6 +188,18 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={Cuisson} {...config} />;
     case 'detail':
       return <Svg source={Detail} {...config} />;
+    case 'calendar_add':
+      return <Svg source={CalendarAdd} {...config} />;
+    case 'thumb_up':
+      return <Svg source={ThumbUp} {...config} />;
+    case 'thumb_down':
+      return <Svg source={ThumbDown} {...config} />;
+    case 'arrow_select--white':
+      return <Svg source={ArrowSelectWhite} {...config} />;
+    case 'favorite':
+      return <Svg source={Favorite} {...config} />;
+    case 'geolocation':
+      return <Svg source={Geolocation} {...config} />;
   }
   return null;
 };

@@ -36,6 +36,10 @@ const Recipe = new Schema(
     level: String,
     preparationTime: String,
     cookingTime: String,
+    averageRating: {
+      type: Number,
+      default: 0
+    },
     steps: [String],
     ingredients: [ingredient],
     equipments: [String],

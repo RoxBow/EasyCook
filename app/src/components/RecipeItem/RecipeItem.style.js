@@ -5,13 +5,12 @@ const styles = StyleSheet.create({
   container: {
     width: 160,
     backgroundColor: '#fff',
-    marginRight: 10,
-    marginBottom: 10,
     borderRadius: 15,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: '#000',
     shadowOpacity: 0.3,
     elevation: 2,
+    position: 'relative',
   },
   wrapperImage: {
     overflow: 'hidden',

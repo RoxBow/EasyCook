@@ -1,8 +1,9 @@
+import Reactotron from 'reactotron-react-native'
 import React from 'react';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { AsyncStorage, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { AsyncStorage, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import AppNavigator from './src/navigation/AppNavigator';
 import rootReducer from './src/redux/index';
@@ -10,6 +11,11 @@ import { fetchRefData } from './src/redux/Recipe/actions';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk)));
+
+Reactotron
+  .configure() // controls connection & communication settings
+  .useReactNative() // add all built-in react native plugins
+  .connect() // let's connect!
 
 export default class App extends React.Component {
   state = {
@@ -55,7 +61,7 @@ export default class App extends React.Component {
     ) : (
       <Provider store={store}>
         <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <StatusBar barStyle="dark-content" translucent={true} />
           <AppNavigator />
         </View>
       </Provider>

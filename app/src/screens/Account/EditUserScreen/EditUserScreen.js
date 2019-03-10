@@ -15,7 +15,6 @@ class EditUserScreen extends React.Component {
 
     const { firstName, lastName, localization, bio, birthday } = this.props.infoUser;
 
-    console.log('info', this.props.infoUser);
     this.state = {
       firstName,
       lastName,
