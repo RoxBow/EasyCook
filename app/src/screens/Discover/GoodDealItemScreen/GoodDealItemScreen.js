@@ -40,7 +40,18 @@ class GoodDealItem extends React.Component {
   render() {
     const { navigation, currentGoodDeal, toggleThumb } = this.props;
 
-    const { storeName, date, creator, address, description, image, category, _id } = currentGoodDeal;
+    const {
+      storeName,
+      date,
+      creator,
+      address,
+      description,
+      image,
+      category,
+      _id,
+      thumbUp,
+      thumbDown
+    } = currentGoodDeal;
 
     return (
       <ScrollView>
@@ -72,12 +83,14 @@ class GoodDealItem extends React.Component {
 
           <View>
             <Text>Avis de la communauté</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
               <View>
-                <ButtonIcon icon="thumb_up" size={22} onPress={ () => toggleThumb(_id, true) } />
+                <ButtonIcon icon="thumb_up" size={22} onPress={() => toggleThumb(_id, true)} />
+                <Text>{thumbUp.length}</Text>
               </View>
               <View>
-                <ButtonIcon icon="thumb_down" size={22} onPress={ () => toggleThumb(_id, false) } />
+                <ButtonIcon icon="thumb_down" size={22} onPress={() => toggleThumb(_id, false)} />
+                <Text>{thumbDown.length}</Text>
               </View>
             </View>
           </View>

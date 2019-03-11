@@ -1,10 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon } from '../constants/global';
-import { pink } from '../constants/colors';
-import { Header, Left, Body, Right, Title } from 'native-base';
 import Icon from '../components/Icon/Icon';
-import Text from '../components/Text/Text';
 
 import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
 import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
