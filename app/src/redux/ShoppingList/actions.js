@@ -4,13 +4,15 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
-export const SET_ERROR = 'SET_ERROR';
-export const UPDATE_SHOPPING_LIST = 'UPDATE_SHOPPING_LIST';
-export const UPDATE_SHOPPING_LIST_ITEM = 'UPDATE_SHOPPING_LIST_ITEM';
-export const SET_FETCH = 'SET_FETCH';
-export const SET_USERS = 'SET_USERS';
-export const SET_USERS_SELECTED = 'SET_USERS_SELECTED';
+export const SHOPPING_LIST = "SHOPPING_LIST";
+
+export const SET_MESSAGE_INFO = `${SHOPPING_LIST}/SET_MESSAGE_INFO`;
+export const SET_ERROR = `${SHOPPING_LIST}/SET_ERROR`;
+export const UPDATE_SHOPPING_LIST = `${SHOPPING_LIST}/UPDATE_SHOPPING_LIST`;
+export const UPDATE_SHOPPING_LIST_ITEM = `${SHOPPING_LIST}/UPDATE_SHOPPING_LIST_ITEM`;
+export const SET_FETCH = `${SHOPPING_LIST}/SET_FETCH`;
+export const SET_USERS = `${SHOPPING_LIST}/SET_USERS`;
+export const SET_USERS_SELECTED = `${SHOPPING_LIST}/SET_USERS_SELECTED`;
 
 const axiosShoppingList = axios.create({
   baseURL: `${serverUrl}/api/shoppingList`

@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ScrollView } from 'react-native';
 import GoodDealItem from '../GoodDealItem/GoodDealItem';
+import { combineSelectors } from '../../constants/helpers';
+import { goodDealsSelector } from '../../redux/GoodDeal/selectors';
 
 const GoodDealTab = ({ goodDeals }) => (
   <ScrollView contentContainerStyle={styles.container}>
@@ -12,8 +14,6 @@ const GoodDealTab = ({ goodDeals }) => (
   </ScrollView>
 );
 
-const mapStateToProps = (state, { goodDeals }) => ({
-  goodDeals: goodDeals || state.goodDeal.goodDeals
-});
+const mapStateToProps = combineSelectors((s, { goodDeals }) => goodDeals || goodDealsSelector(s));
 
 export default connect(mapStateToProps)(GoodDealTab);

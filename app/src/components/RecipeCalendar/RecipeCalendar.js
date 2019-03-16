@@ -1,33 +1,35 @@
 import styles from './recipecalendar.style';
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, View } from 'react-native';
 import { serverUrl } from '../../constants/global';
 import Text from '../Text/Text';
 import Icon from '../Icon/Icon';
+import { withNavigation } from 'react-navigation';
+import RecipeRate from '../RecipeRate/RecipeRate';
 
-const RecipeCalendar = ({ name, image }) => (
-  <TouchableOpacity
-    style={{
-      shadowOffset: { width: 1, height: 1 },
-      shadowColor: '#000',
-      shadowOpacity: 0.3,
-      elevation: 2,
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      padding: 10,
-      backgroundColor: '#fff',
-      width: '90%',
-      alignSelf: 'center',
-      borderRadius: 10,
-      marginVertical: 10
-    }}
-  >
-    <Image style={{width: 60, height: 60, borderRadius: 30}} source={{ uri: `${serverUrl}/${image.uri}` }} />
-    <Text>{name}</Text>
-    <Icon icon="arrow_back" size={20} />
-  </TouchableOpacity>
+const RecipeCalendar = ({ name, image, category, navigation, refRecipe, averageRating }) => (
+  <View style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapperText}
+      onPress={() => navigation.navigate('RecipeItem', { idRecipe: refRecipe })}
+    >
+      <View>
+        <RecipeRate rate={averageRating} style={{ top: '65%', right: 0 }} />
+        <Image style={styles.thumbnail} source={{ uri: `${serverUrl}/${image.uri}` }} />
+      </View>
+      <View>
+        <Text style={styles.textCategory}>{category}</Text>
+        <Text style={{ fontSize: 18 }}>{name}</Text>
+      </View>
+    </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.wrapperChange}
+      onPress={() => navigation.navigate('CategoryRecipes', { category })}
+    >
+      <Icon icon="plus" size={18} />
+      <Text style={styles.textChange}>Changer</Text>
+    </TouchableOpacity>
+  </View>
 );
 
-
-export default RecipeCalendar;
+export default withNavigation(RecipeCalendar);

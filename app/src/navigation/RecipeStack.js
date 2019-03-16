@@ -1,35 +1,33 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { TouchableOpacity, View } from 'react-native';
+import { View } from 'react-native';
 import { styleTabBarIcon } from '../constants/global';
 import { pink } from '../constants/colors';
-import { Header, Left, Body, Right, Title } from 'native-base';
 import Icon from '../components/Icon/Icon';
-import CloseModal from '../components/CloseModal/CloseModal';
 import Text from '../components/Text/Text';
 import ArrowBack from '../components/ArrowBack/ArrowBack';
 
-import RecipesScreen from '../screens/Recipe/RecipesScreen/RecipesScreen';
-import RecipeItemScreen from '../screens/Recipe/RecipeItemScreen/RecipeItemScreen';
-import CategoryRecipesScreen from '../screens/Recipe/CategoryRecipesScreen/CategoryRecipesScreen';
-import CreateRecipeScreen from '../screens/Recipe/CreateRecipeScreen/CreateRecipeScreen';
-import FridgeIngredientScreen from '../screens/Recipe/FridgeIngredientScreen/FridgeIngredientScreen';
+import RecipesScreen from '../views/Recipe/RecipesScreen/RecipesScreen';
+import RecipeItemScreen from '../views/Recipe/RecipeItemScreen/RecipeItemScreen';
+import CategoryRecipesScreen from '../views/Recipe/CategoryRecipesScreen/CategoryRecipesScreen';
+import CreateRecipeScreen from '../views/Recipe/CreateRecipeScreen/CreateRecipeScreen';
+import FridgeIngredientScreen from '../views/Recipe/FridgeIngredientScreen/FridgeIngredientScreen';
+import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
+import ButtonIcon from '../components/ButtonIcon/ButtonIcon';
 
 const RecipeStack = createStackNavigator({
   Recipes: {
     screen: RecipesScreen,
     navigationOptions: ({ navigation }) => ({
       headerRight: (
-        <View style={{ marginTop: 10, marginRight: 10, flexDirection: 'row' }}>
-          <TouchableOpacity
+        <View style={{ marginTop: 10, flexDirection: 'row' }}>
+          <ButtonIcon
+            icon="heart--fill"
+            size={25}
             onPress={() => navigation.navigate('AddShoppingList')}
             style={{ marginRight: 15 }}
-          >
-            <Icon icon="heart--fill" size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('CreateRecipe')}>
-            <Icon icon="plus" size={25} />
-          </TouchableOpacity>
+          />
+          <ButtonIcon icon="plus" size={25} onPress={() => navigation.navigate('CreateRecipe')} />
         </View>
       ),
       headerLeft: (
@@ -52,18 +50,16 @@ const RecipeStack = createStackNavigator({
     screen: CategoryRecipesScreen,
     navigationOptions: ({ navigation, name }) => ({
       headerLeft: <ArrowBack navigation={navigation} />,
-      title: navigation.state.params.category,
-      headerStyle: { backgroundColor: '#fff', elevation: 0, borderBottomWidth: 0, height: 50 },
-      headerTitleStyle: { fontFamily: 'Quicksand--bold' }
+      headerTitle: <TitleHeader title={navigation.state.params.category} />,
+      headerStyle: { backgroundColor: '#fff', elevation: 0, borderBottomWidth: 0, height: 50 }
     })
   },
   FridgeIngredient: {
     screen: FridgeIngredientScreen,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <ArrowBack navigation={navigation} />,
-      title: 'Mes aliments',
-      headerStyle: { backgroundColor: '#fff', elevation: 0, borderBottomWidth: 0, height: 50 },
-      headerTitleStyle: { fontFamily: 'Quicksand--bold' }
+      headerTitle: <TitleHeader title="Mes aliments" />,
+      headerStyle: { backgroundColor: '#fff', elevation: 0, borderBottomWidth: 0, height: 50 }
     })
   }
 });
@@ -79,18 +75,8 @@ const RootStack = createStackNavigator(
     CreateRecipe: {
       screen: CreateRecipeScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header transparent>
-            <Left>
-              <CloseModal navigation={navigation} />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Créer une recette</Title>
-            </Body>
-            <Right />
-          </Header>
-        ),
-        title: 'Créer une recette',
+        headerLeft: <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />,
+        headerTitle: <TitleHeader title="Créer une recette" />,
         headerTintColor: pink,
         headerTitleStyle: { color: '#000' }
       })
@@ -104,12 +90,9 @@ const RootStack = createStackNavigator(
 RootStack.navigationOptions = ({ navigation }) => ({
   tabBarLabel: 'Recettes',
   tabBarVisible: navigation.state.routes[0].index === 0 && navigation.state.index === 0,
-  tabBarIcon: ({ focused }) =>
-    focused ? (
-      <Icon icon="recipe_tab--focus" {...styleTabBarIcon} />
-    ) : (
-      <Icon icon="recipe_tab" {...styleTabBarIcon} />
-    ),
+  tabBarIcon: ({ focused }) => (
+    <Icon icon={focused ? 'recipe_tab--focus' : 'recipe_tab'} {...styleTabBarIcon} />
+  ),
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Recipes');
   }

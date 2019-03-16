@@ -40,7 +40,7 @@ class ListEventItem extends React.Component {
 
     return (
       <FlatList
-        contentContainerStyle={{ flex: 1 }}
+        contentContainerStyle={{ minHeight: '100%' }}
         data={events}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}

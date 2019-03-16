@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
+import { mainFont, mainFontMedium, mainFontBold } from '../../constants/global';
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Quicksand',
+    fontFamily: mainFont,
   },
   textBold: {
-    fontFamily: 'Quicksand--bold',
+    fontFamily: mainFontBold,
   },
   textMedium: {
-    fontFamily: 'Quicksand--medium',
+    fontFamily: mainFontMedium,
   }
 });
 

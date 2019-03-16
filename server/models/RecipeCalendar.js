@@ -5,7 +5,10 @@ const Schema = mongoose.Schema;
 const RecipeCalendar = new Schema(
   {
     refRecipe: { type: Schema.Types.ObjectId, ref: 'Recipe' },
-    date: Date,
+    date: {
+      type: Date,
+      required: true
+    },
   },
   {
     timestamps: {

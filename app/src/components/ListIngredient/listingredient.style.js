@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { greyApp } from '../../constants/colors';
+import { lightgrey, grey } from '../../constants/colors';
 
 const styles = StyleSheet.create({
  
   line: {
-    borderBottomColor: greyApp,
+    borderBottomColor: lightgrey,
     borderBottomWidth: 1,
     paddingVertical: 8,
     flexDirection: 'row',
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 
   textValidate: { 
-    color: greyApp, 
+    color: grey, 
     textDecorationLine: 'line-through' 
   },
 

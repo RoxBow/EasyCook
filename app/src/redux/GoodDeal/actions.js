@@ -4,12 +4,14 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
-export const SET_ERROR = 'SET_ERROR';
-export const UPDATE_GOOD_DEALS = 'UPDATE_GOOD_DEALS';
-export const UPDATE_GOOD_DEAL = 'UPDATE_GOOD_DEAL';
-export const ADD_GOOD_DEAL = 'ADD_GOOD_DEAL';
-export const SET_FETCH = 'SET_FETCH';
+export const GOOD_DEAL = "GOOD_DEAL";
+
+export const SET_MESSAGE_INFO = `${GOOD_DEAL}/SET_MESSAGE_INFO`;
+export const SET_ERROR = `${GOOD_DEAL}/SET_ERROR`;
+export const UPDATE_GOOD_DEALS = `${GOOD_DEAL}/UPDATE_GOOD_DEALS`;
+export const UPDATE_GOOD_DEAL = `${GOOD_DEAL}/UPDATE_GOOD_DEAL`;
+export const ADD_GOOD_DEAL = `${GOOD_DEAL}/ADD_GOOD_DEAL`;
+export const SET_FETCH = `${GOOD_DEAL}/SET_FETCH`;
 
 const axiosGoodDeal = axios.create({
   baseURL: `${serverUrl}/api/goodDeal`

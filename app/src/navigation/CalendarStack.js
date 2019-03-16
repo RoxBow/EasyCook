@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon } from '../constants/global';
 import Icon from '../components/Icon/Icon';
 
-import CalendarScreen from '../screens/Calendar/CalendarScreen/CalendarScreen';
+import CalendarScreen from '../views/Calendar/CalendarScreen/CalendarScreen';
 
 const CalendarStack = createStackNavigator({
   Calendar: {
@@ -28,12 +28,9 @@ const RootStack = createStackNavigator(
 
 RootStack.navigationOptions = {
   tabBarLabel: 'Calendrier',
-  tabBarIcon: ({ focused }) =>
-    focused ? (
-      <Icon icon="agenda_tab--focus" {...styleTabBarIcon} />
-    ) : (
-      <Icon icon="agenda_tab" {...styleTabBarIcon} />
-    ),
+  tabBarIcon: ({ focused }) => (
+    <Icon icon={focused ? 'agenda_tab--focus' : 'agenda_tab'} {...styleTabBarIcon} />
+  ),
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Calendar');
   }

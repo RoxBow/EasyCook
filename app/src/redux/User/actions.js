@@ -5,14 +5,16 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
-export const LOGOUT = 'LOGOUT';
-export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
-export const SET_ERROR = 'SET_ERROR';
-export const SET_USER = 'SET_USER';
-export const UPDATE_FRIDGE = 'UPDATE_FRIDGE';
-export const SET_FETCH = 'SET_FETCH';
-export const REMOVE_USER = 'REMOVE_USER';
+export const USER = "USER";
+
+export const SET_MESSAGE_INFO = `${USER}/SET_MESSAGE_INFO`;
+export const LOGOUT = `${USER}/LOGOUT`;
+export const SET_AUTHENTICATION = `${USER}/SET_AUTHENTICATION`;
+export const SET_ERROR = `${USER}/SET_ERROR`;
+export const SET_USER = `${USER}/SET_USER`;
+export const UPDATE_FRIDGE = `${USER}/UPDATE_FRIDGE`;
+export const SET_FETCH = `${USER}/SET_FETCH`;
+export const REMOVE_USER = `${USER}/REMOVE_USER`;
 
 const axiosUser = axios.create({
   baseURL: `${serverUrl}/api/user`

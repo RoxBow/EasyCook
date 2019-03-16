@@ -1,24 +1,22 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-import { styleTabBarIcon, ARROW } from '../constants/global';
+import { styleTabBarIcon } from '../constants/global';
 import { pink } from '../constants/colors';
-import { Feather, AntDesign } from '@expo/vector-icons';
-import { Header, Left, Body, Right, Title } from 'native-base';
-import IconArrow from '../components/Icons/IconArrow';
+import { Header, Left, Body, Right } from 'native-base';
 import Icon from '../components/Icon/Icon';
 import ArrowBack from '../components/ArrowBack/ArrowBack';
 import Text from '../components/Text/Text';
 import ButtonIcon from '../components/ButtonIcon/ButtonIcon';
+import Button from '../components/Button/Button';
 import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
 
-import ListShoppingListScreen from '../screens/Liste/ListShoppingListScreen/ListShoppingListScreen';
-import ShoppingListItemScreen from '../screens/Liste/ShoppingListItemScreen/ShoppingListItemScreen';
-import AddShoppingListScreen from '../screens/Liste/AddShoppingListScreen/AddShoppingListScreen';
-import SettingShoppingListItemScreen from '../screens/Liste/SettingShoppingListItemScreen/SettingShoppingListItemScreen';
-import SearchIngredientScreen from '../screens/Liste/SearchIngredientScreen/SearchIngredientScreen';
-import AddIngredientScreen from '../screens/Liste/AddIngredientScreen/AddIngredientScreen';
-import SearchUserScreen from '../screens/Liste/SearchUserScreen/SearchUserScreen';
+import ListShoppingListScreen from '../views/Liste/ListShoppingListScreen/ListShoppingListScreen';
+import ShoppingListItemScreen from '../views/Liste/ShoppingListItemScreen/ShoppingListItemScreen';
+import AddShoppingListScreen from '../views/Liste/AddShoppingListScreen/AddShoppingListScreen';
+import SettingShoppingListItemScreen from '../views/Liste/SettingShoppingListItemScreen/SettingShoppingListItemScreen';
+import SearchIngredientScreen from '../views/Liste/SearchIngredientScreen/SearchIngredientScreen';
+import AddIngredientScreen from '../views/Liste/AddIngredientScreen/AddIngredientScreen';
+import SearchUserScreen from '../views/Liste/SearchUserScreen/SearchUserScreen';
 
 const ListShoppingListStack = createStackNavigator(
   {
@@ -26,12 +24,12 @@ const ListShoppingListStack = createStackNavigator(
       screen: ListShoppingListScreen,
       navigationOptions: ({ navigation }) => ({
         headerRight: (
-          <TouchableOpacity
+          <ButtonIcon
+            icon="plus"
+            size={22}
             onPress={() => navigation.navigate('AddShoppingList')}
-            style={{ alignSelf: 'flex-start', marginTop: 10, marginRight: 10 }}
-          >
-            <Feather name="plus" size={30} color={pink} />
-          </TouchableOpacity>
+            style={{ alignSelf: 'flex-start', marginTop: 16, marginRight: 20 }}
+          />
         ),
         headerLeft: (
           <Text style={{ fontSize: 23 }} bold>
@@ -45,47 +43,36 @@ const ListShoppingListStack = createStackNavigator(
     ShoppingListItem: {
       screen: ShoppingListItemScreen,
       navigationOptions: ({ navigation }) => ({
-        title: navigation.state.params.name,
         headerRight: (
-          <TouchableOpacity
+          <Button
+            text="Modifier"
             onPress={() =>
               navigation.navigate('SettingShoppingListItem', {
                 idShoppingList: navigation.state.params.idShoppingList
               })
             }
-            style={{ paddingHorizontal: 20 }}
-          >
-            <Text style={{ color: pink, fontSize: 16 }} medium>
-              Modifier
-            </Text>
-          </TouchableOpacity>
+            transparent
+          />
         ),
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerTitle: <TitleHeader title={navigation.state.params.name} />,
+        headerLeft: <ArrowBack navigation={navigation} />,
+        headerStyle: { height: 60 }
       })
     },
     AddShoppingList: {
       screen: AddShoppingListScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header>
-            <Left>
-              <IconArrow name={ARROW.LEFT} size={30} onPress={() => navigation.goBack()} />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Créer liste de course</Title>
-            </Body>
-            <Right />
-          </Header>
-        )
+        headerTitle: <TitleHeader title="Créer liste de course" />,
+        headerLeft: <ArrowBack navigation={navigation} />,
+        headerStyle: { borderBottomWidth: 0, height: 50 },
       })
     },
     SettingShoppingListItem: {
       screen: SettingShoppingListItemScreen,
       navigationOptions: ({ navigation }) => ({
-        title: 'Modifier la liste',
+        headerTitle: <TitleHeader title="Modifier la liste" />,
         headerLeft: <ArrowBack navigation={navigation} />,
-        headerStyle: { height: 50 }
+        headerStyle: { height: 60 }
       })
     }
   },
@@ -105,26 +92,12 @@ const RootStack = createStackNavigator(
     SearchIngredient: {
       screen: SearchIngredientScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header
-            transparent
-            style={{
-              height: 100,
-              backgroundColor: pink
-            }}
-          >
-            <Left />
-            <Body style={{ flex: 3 }}>
-              <TitleHeader title="Ajoute un aliment" style={{ color: '#fff' }} />
-            </Body>
-            <Right>
-              <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
-            </Right>
-          </Header>
+        headerLeft: null,
+        headerTitle: <TitleHeader title="Ajoute un aliment" style={{ color: '#fff' }} />,
+        headerRight: (
+          <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
         ),
-        headerBackTitle: 'Rechercher',
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerStyle: { height: 100, backgroundColor: pink, borderBottomWidth: 0 }
       })
     },
     AddIngredient: {
@@ -141,7 +114,7 @@ const RootStack = createStackNavigator(
             }}
           >
             <Left>
-              <Icon icon={navigation.state.params.kind} size={30} />
+              <Icon icon={`${navigation.state.params.kind}--white`} size={30} />
               <Text style={{ color: '#fff', fontSize: 20, marginTop: 10 }} bold>
                 {navigation.state.params.name}
               </Text>
@@ -157,10 +130,7 @@ const RootStack = createStackNavigator(
     SearchUser: {
       screen: SearchUserScreen,
       navigationOptions: ({ navigation }) => ({
-        header: null,
-        headerBackTitle: 'Rechercher',
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        header: null
       })
     }
   },
@@ -171,12 +141,9 @@ const RootStack = createStackNavigator(
 
 RootStack.navigationOptions = {
   tabBarLabel: 'Liste',
-  tabBarIcon: ({ focused }) =>
-    focused ? (
-      <Icon icon="list_tab--focus" {...styleTabBarIcon} />
-    ) : (
-      <Icon icon="list_tab" {...styleTabBarIcon} />
-    ),
+  tabBarIcon: ({ focused }) => (
+    <Icon icon={focused ? 'list_tab--focus' : 'list_tab'} {...styleTabBarIcon} />
+  ),
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('ListShoppingList');
   }

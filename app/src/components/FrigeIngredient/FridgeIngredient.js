@@ -2,7 +2,7 @@ import styles from './FridgeIngredient.style';
 import React from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 import { serverUrl } from '../../constants/global';
-import Text from '../../components/Text/Text';
+import Text from '../Text/Text';
 
 const FridgeIngredient = ({ id, name, uri, selected, selectIngredient }) => (
   <TouchableOpacity onPress={() => selectIngredient(id)} style={[styles.wrapper, selected && styles.wrapperSelected]}>

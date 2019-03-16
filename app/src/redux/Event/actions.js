@@ -4,12 +4,13 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_MESSAGE_INFO = 'SET_MESSAGE_INFO';
-export const SET_ERROR = 'SET_ERROR';
-export const UPDATE_EVENTS = 'UPDATE_EVENTS';
-export const UPDATE_EVENT = 'UPDATE_EVENT';
-export const ADD_EVENT = 'ADD_EVENT';
-export const SET_FETCH = 'SET_FETCH';
+export const EVENT = "EVENT";
+
+export const SET_MESSAGE_INFO = `${EVENT}/SET_MESSAGE_INFO`;
+export const UPDATE_EVENTS = `${EVENT}/UPDATE_EVENTS`;
+export const UPDATE_EVENT = `${EVENT}/UPDATE_EVENT`;
+export const ADD_EVENT = `${EVENT}/ADD_EVENT`;
+export const SET_FETCH = `${EVENT}/SET_FETCH`;
 
 const axiosEvent = axios.create({
   baseURL: `${serverUrl}/api/event`
@@ -37,7 +38,7 @@ export const fetchEvents = () => {
   };
 };
 
-export const createEvent = (name, date, address, description, image, navigation) => {
+export const createEvent = (name, date, address, description, price, image, navigation) => {
   const body = new FormData();
 
   if (image) {
@@ -51,6 +52,7 @@ export const createEvent = (name, date, address, description, image, navigation)
   body.append('name', name);
   body.append('address', address);
   body.append('description', description);
+  body.append('price', parseInt(price, 10));
   body.append('date', date.toISOString());
 
   return dispatch =>

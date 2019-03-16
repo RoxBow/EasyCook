@@ -46,7 +46,6 @@ const Heart = require('../../assets/images/heart.svg');
 const HeartFill = require('../../assets/images/heart--fill.svg');
 const AddUser = require('../../assets/images/addUser.svg');
 const Location = require('../../assets/images/location.svg');
-const Calendar = require('../../assets/images/calendar.svg');
 const Price = require('../../assets/images/price.svg');
 const Search = require('../../assets/images/search.svg');
 const Logout = require('../../assets/images/logout.svg');
@@ -67,6 +66,17 @@ const ThumbDown = require('../../assets/images/thumb-down.svg');
 const Favorite = require('../../assets/images/favorite.svg');
 const ArrowSelectWhite = require('../../assets/images/arrow_select--white.svg');
 const Geolocation = require('../../assets/images/geolocation.svg');
+const Date = require('../../assets/images/date.svg');
+const Equipment = require('../../assets/images/equipment.svg');
+const CookingTime = require('../../assets/images/cookingTime.svg');
+const PreparationTime = require('../../assets/images/preparationTime.svg');
+const Toque = require('../../assets/images/toque.svg');
+const Category = require('../../assets/images/category.svg');
+const Fridge = require('../../assets/images/fridge.svg');
+const Publication = require('../../assets/images/publication.svg');
+const ChevronSelect = require('../../assets/images/chevron_select.svg');
+const ChevronSelectPink = require('../../assets/images/chevron_select--pink.svg');
+const ChevronSelectWhite = require('../../assets/images/chevron_select--white.svg');
 
 const Icon = ({ icon, width, size, height, style }) => {
   (width = width || size), (height = height || size);
@@ -79,7 +89,7 @@ const Icon = ({ icon, width, size, height, style }) => {
   const config = {
     width,
     height,
-    style
+    style: { ...style, overflow: 'hidden' }
   };
 
   switch (icon) {
@@ -115,6 +125,7 @@ const Icon = ({ icon, width, size, height, style }) => {
     case 'fruit':
       return <Svg source={Fruit} {...config} />;
     case 'vegetable':
+    case 'ingredient':
       return <Svg source={Vegetable} {...config} />;
     case 'meat--white':
       return <Svg source={MeatWhite} {...config} />;
@@ -200,6 +211,28 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={Favorite} {...config} />;
     case 'geolocation':
       return <Svg source={Geolocation} {...config} />;
+    case 'date':
+      return <Svg source={Date} {...config} />;
+    case 'equipment':
+      return <Svg source={Equipment} {...config} />;
+    case 'cooking_time':
+      return <Svg source={CookingTime} {...config} />;
+    case 'preparation_time':
+      return <Svg source={PreparationTime} {...config} />;
+    case 'difficulty':
+      return <Svg source={Toque} {...config} />;
+    case 'category':
+      return <Svg source={Category} {...config} />;
+    case 'fridge':
+      return <Svg source={Fridge} {...config} />;
+    case 'publication':
+      return <Svg source={Publication} {...config} />;
+    case 'chevron_select':
+      return <Svg source={ChevronSelect} {...config} />;
+    case 'chevron_select--pink':
+      return <Svg source={ChevronSelectPink} {...config} />;
+    case 'chevron_select--white':
+      return <Svg source={ChevronSelectWhite} {...config} />;
   }
   return null;
 };

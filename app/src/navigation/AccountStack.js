@@ -1,15 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import { AntDesign } from '@expo/vector-icons';
 import HeaderAccount from '../components/Header/HeaderAccount/HeaderAccount';
-import { Header, Left, Body, Right, Title } from 'native-base';
-import { pink } from '../constants/colors';
 import { styleTabBarIcon } from '../constants/global';
 import Icon from '../components/Icon/Icon';
+import ArrowBack from '../components/ArrowBack/ArrowBack';
+import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
 
-import AccountScreen from '../screens/Account/AccountScreen/AccountScreen';
-import SettingsScreen from '../screens/Account/SettingsScreen/SettingsScreen';
-import EditUserScreen from '../screens/Account/EditUserScreen/EditUserScreen';
+import AccountScreen from '../views/Account/AccountScreen/AccountScreen';
+import SettingsScreen from '../views/Account/SettingsScreen/SettingsScreen';
+import EditUserScreen from '../views/Account/EditUserScreen/EditUserScreen';
 
 const AccountStack = createStackNavigator({
   Account: {
@@ -35,20 +34,9 @@ const RootStack = createStackNavigator(
     EditUser: {
       screen: EditUserScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header transparent>
-            <Left>
-              <AntDesign name="close" size={30} color={pink} onPress={() => navigation.goBack()} />
-            </Left>
-            <Body style={{ flex: 3 }}>
-              <Title>Modifier le profil</Title>
-            </Body>
-            <Right />
-          </Header>
-        ),
-        title: 'Modifier le profil',
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerLeft: <ArrowBack navigation={navigation} />,
+        headerTitle: <TitleHeader title="Modifier le profil" />,
+        headerStyle: { borderBottomWidth: 0 }
       })
     }
   },
@@ -58,11 +46,9 @@ const RootStack = createStackNavigator(
 );
 
 RootStack.navigationOptions = {
-  tabBarLabel: 'Account',
+  tabBarLabel: 'Compte',
   tabBarIcon: ({ focused }) => (
-    focused ? 
-      <Icon icon="account_tab--focus" {...styleTabBarIcon} /> : 
-      <Icon icon="account_tab" {...styleTabBarIcon} />
+    <Icon icon={focused ? 'account_tab--focus' : 'account_tab'} {...styleTabBarIcon} />
   ),
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Account');

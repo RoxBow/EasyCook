@@ -3,6 +3,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Arrow from '../Icons/IconArrow';
 import { ARROW } from '../../constants/global';
+import { lightgrey } from '../../constants/colors';
 import Text from '../Text/Text';
 
 class Accordeon extends React.Component {
@@ -36,6 +37,7 @@ class Accordeon extends React.Component {
             size={22}
             name={isOpen ? ARROW.TOP : ARROW.BOTTOM}
             style={{ alignSelf: 'center' }}
+            color={lightgrey}
           />
         </TouchableOpacity>
         {isOpen && children}

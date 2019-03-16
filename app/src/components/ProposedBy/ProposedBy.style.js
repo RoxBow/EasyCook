@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
   },
   thumnailCreator: {
     marginRight: 10,
+    width: 25,
+    height: 25,
+    borderRadius: 12.5,
   },
   proposedBy: {
     color: 'grey',

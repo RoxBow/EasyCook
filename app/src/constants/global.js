@@ -9,7 +9,7 @@ const { tabBarSelected, textDefault, backgroundTab } = tabBar;
  */
 
 export const serverUrl = 'http://localhost:3333';
-// export const serverUrl = 'https://cook-application.herokuapp.com';
+// export const serverUrl = 'https://app-easy-cook.herokuapp.com/';
 
 export const STATUS = {
   SUCCESS: 'SUCCESS',
@@ -57,6 +57,10 @@ LocaleConfig.locales['fr'] = {
   dayNamesShort: DATE.shortDay
 };
 
+export const mainFont = 'Quicksand';
+export const mainFontMedium = 'Quicksand--medium';
+export const mainFontBold = 'Quicksand--bold';
+
 /**
  *
  * COMPONENTS
@@ -66,8 +70,8 @@ LocaleConfig.locales['fr'] = {
 export const styleTabs = {
   tabBarUnderlineStyle: {
     backgroundColor: tabBarSelected,
-    width: '30%',
-    marginHorizontal: Dimensions.get('window').width / 10,
+    width: '40%',
+    marginHorizontal: Dimensions.get('window').width / 20,
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5
   }

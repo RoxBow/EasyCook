@@ -21,11 +21,17 @@ const ingredient = mongoose.Schema(
 
 const ShoppingList = new Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true
+    },
     maxDate: Date,
     ingredients: [ingredient],
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    isPin: Boolean
+    isPin: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: {

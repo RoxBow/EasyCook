@@ -1,6 +1,6 @@
 import { compose } from 'recompose';
+import { RECIPE } from './actions';
 
-const RECIPE = 'recipe';
 const stateSelector = state => state[RECIPE];
 
 export const refDataSelector = compose(
@@ -16,11 +16,11 @@ export const recipesSelector = compose(
 export const currentRecipeSelector = idRecipe =>
   compose(
     currentRecipe => ({ currentRecipe }),
-    ({ recipes }) => recipes.find(({ _id }) => _id === idRecipe),
+    ({ recipes }) => recipes.find(({ _id }) => _id.toString() === idRecipe.toString()),
     recipesSelector
   );
 
-  export const categoryRecipesSelector = category =>
+export const categoryRecipesSelector = category =>
   compose(
     recipes => ({ recipes }),
     ({ recipes }) => recipes.filter(recipe => recipe.category === category),

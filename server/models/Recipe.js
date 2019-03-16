@@ -30,21 +30,32 @@ const comment = mongoose.Schema(
 
 const Recipe = new Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      require: true
+    },
     category: String,
     creator: { type: Schema.Types.ObjectId, ref: 'User' },
-    level: String,
-    preparationTime: String,
-    cookingTime: String,
-    averageRating: {
-      type: Number,
-      default: 0
+    level: {
+      type: String,
+      required: true
+    },
+    preparationTime: {
+      type: String,
+      required: true
+    },
+    cookingTime: {
+      type: String,
+      required: true
     },
     steps: [String],
     ingredients: [ingredient],
     equipments: [String],
     comments: [comment],
-    rating: String,
+    averageRating: {
+      type: Number,
+      default: 0
+    },
     image: { type: Schema.Types.ObjectId, ref: 'Image' }
   },
   {

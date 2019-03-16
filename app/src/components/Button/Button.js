@@ -1,15 +1,18 @@
 import styles from './Button.style';
 import React from 'react';
-import { Button as ButtonNB } from 'native-base';
+import { TouchableOpacity } from 'react-native';
 import Text from '../Text/Text';
 
-const Button = ({ text, style, styleText, rounded, children, onPress }) => (
-  <ButtonNB rounded={rounded} style={[styles.btn, style]} onPress={onPress}>
+const Button = ({ text, style, styleText, rounded, transparent, children, onPress }) => (
+  <TouchableOpacity
+    style={[styles.btn, rounded && styles.btnRounded, transparent && styles.btnTransparent, style]}
+    onPress={onPress}
+  >
     {children}
-    <Text style={[styles.btnText, styleText]} medium>
+    <Text style={[styles.btnText, transparent && styles.textBtnTransparent, styleText]} medium>
       {text}
     </Text>
-  </ButtonNB>
+  </TouchableOpacity>
 );
 
 export default Button;

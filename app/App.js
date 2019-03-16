@@ -1,4 +1,4 @@
-import Reactotron from 'reactotron-react-native'
+import Reactotron from 'reactotron-react-native';
 import React from 'react';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
@@ -13,9 +13,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk)));
 
 Reactotron
-  .configure() // controls connection & communication settings
-  .useReactNative() // add all built-in react native plugins
-  .connect() // let's connect!
+  .configure()
+  .useReactNative()
+  .connect();
 
 export default class App extends React.Component {
   state = {

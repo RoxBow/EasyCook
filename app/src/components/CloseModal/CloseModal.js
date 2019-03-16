@@ -1,11 +1,8 @@
 import React from 'react';
-import { Button } from 'native-base';
-import Icon from '../../components/Icon/Icon';
+import ButtonIcon from '../ButtonIcon/ButtonIcon';
 
 const CloseModal = ({ navigation }) => (
-  <Button transparent onPress={() => navigation.goBack()}>
-    <Icon icon="cross" size={30} />
-  </Button>
+  <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />
 );
 
 export default CloseModal;

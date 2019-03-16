@@ -19,7 +19,10 @@ const EventTab = ({ onSelectMonth, selectedMonth, hasSelectMonth = true }) => (
           bold={true}
           updateValue={(value, indexValue) => onSelectMonth(value, indexValue)}
           style={styles.select}
+          selected={selectedMonth}
           styleText={styles.selectText}
+          icon="chevron_select--white"
+          size={14}
         />
       )}
       <ListEventItem selectedMonth={selectedMonth} />
@@ -32,7 +35,7 @@ const mapStateToProps = combineSelectors(eventsSelector);
 export default compose(
   connect(mapStateToProps),
   withStateHandlers(
-    ({ selectedMonth = DATE.month[0] }) => ({
+    ({ selectedMonth = DATE.month[new Date().getMonth()] }) => ({
       selectedMonth
     }),
     {

@@ -1,12 +1,9 @@
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const KindExtractJwt = require('passport-jwt').ExtractJwt;
-
-const jwtSecret = {
-  secret: 'jwt-secret'
-};
 
 const optionsJwtStrategy = {
   jwtFromRequest: KindExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: jwtSecret.secret
+  secretOrKey: process.env.JWT_SECRET
 };
 
-module.exports = { jwtSecret, optionsJwtStrategy };
+module.exports = { optionsJwtStrategy };

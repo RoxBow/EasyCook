@@ -13,8 +13,8 @@ const isOwnComment = (user, currentUsername) => user.username === currentUsernam
 
 const Comments = ({ comments, currentUsername, idRecipe, deleteComment }) => (
   <View>
-    {comments.map(({ _id, text, user, rating }, i) => (
-      <View key={i} style={styles.wrapperComment}>
+    {comments.map(({ _id, text, user, rating }) => (
+      <View key={_id} style={styles.wrapperComment}>
         <View style={styles.wrapperHeadComment}>
           <View style={{ flexDirection: 'row' }}>
             <Thumbnail medium source={{ uri: `${serverUrl}/${user.avatar.uri}` }} />
@@ -25,7 +25,7 @@ const Comments = ({ comments, currentUsername, idRecipe, deleteComment }) => (
               <Text>Supprimer</Text>
             </Button>
           )}
-          <Rating selected={rating} disabled={true} />
+          <Rating selected={rating} disabled />
         </View>
         <Text style={{ fontSize: 18 }}>{text}</Text>
       </View>

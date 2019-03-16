@@ -38,7 +38,7 @@ const FridgeTab = ({ refIngredients, recipes, navigation, currentFridge }) => (
 
     <View style={styles.wrapperRecipes}>
       <Text medium>Recettes</Text>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         {recipes
           .filter(({ ingredients }) =>
             ingredients.some(({ refId }) => currentFridge.includes(refId))

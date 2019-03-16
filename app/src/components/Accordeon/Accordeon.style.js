@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { greyApp } from '../../constants/colors';
+import { lightgrey } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapperIngredients: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     marginBottom: 6,
-    borderBottomColor: greyApp,
+    borderBottomColor: lightgrey,
     borderBottomWidth: 1
   }
 });

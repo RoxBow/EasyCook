@@ -4,9 +4,9 @@ import { TouchableOpacity, Image } from 'react-native';
 import Icon from '../Icon/Icon';
 import Text from '../Text/Text';
 
-const Input = ({ icon, sizeIcon, onPress, styleWrapperInput, placeholder, picture }) => (
+const InputImage = ({ icon, sizeIcon, onPress, styleWrapperInput, placeholder, picture }) => (
   <TouchableOpacity style={[styles.wrapper, styleWrapperInput]} onPress={onPress}>
-    {icon && <Icon icon={icon} size={sizeIcon || 20} style={styles.icon} />}
+    {icon && <Icon icon={icon} size={sizeIcon || 22} style={styles.icon} />}
     {!picture ? (
       <Text style={styles.placeholderImage}>{placeholder}</Text>
     ) : (
@@ -20,4 +20,4 @@ const Input = ({ icon, sizeIcon, onPress, styleWrapperInput, placeholder, pictur
   </TouchableOpacity>
 );
 
-export default Input;
+export default InputImage;

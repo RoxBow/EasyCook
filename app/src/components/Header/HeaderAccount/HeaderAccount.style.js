@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   username: {
     fontSize: 20,
     marginVertical: 10,
+    marginRight: 8
   }
 });
 

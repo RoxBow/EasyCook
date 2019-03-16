@@ -1,8 +1,8 @@
 import styles from './HeadItem.style';
 import React from 'react';
+import { View } from 'react-native';
 import Text from '../Text/Text';
 import ProposedBy from '../ProposedBy/ProposedBy';
-import { View } from 'react-native';
 
 const HeadItem = ({ title, category, creator }) => (
   <View style={styles.wrapper}>

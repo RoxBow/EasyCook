@@ -25,7 +25,7 @@ TODO LIST:
 [] Feature edit and remove ingredient in shopping list
 [X] Add category to good deal and event
 [X] Add favorites recipes
-[] Filter month event
+[X] Filter month event
 [X] Date in shopping list item
 [] Create components' containers
 [] Clean function
@@ -36,3 +36,4 @@ TODO LIST:
 [] Setup eslint
 [] Gestion des erreurs
 [] Search in recipes page
+[] Filter in recipes page

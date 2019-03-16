@@ -56,3 +56,14 @@ export const addOrRemoveInArray = (array, value) => {
 export const orderByDate = array => array.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 export const equalDate = (d1, d2) => d1.getDate() === d2.getDate();
+
+export const sortArrayAlphabetically = (array = [], attr) =>
+  array.sort((a, b) => {
+    const nameA = a[attr].toLowerCase();
+    const nameB = b[attr].toLowerCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+
+    return 0;
+  });

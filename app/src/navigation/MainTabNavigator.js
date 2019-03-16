@@ -7,6 +7,7 @@ import DiscoverStack from './DiscoverStack';
 import ListShoppingListStack from './ListShoppingListStack';
 import AccountStack from './AccountStack';
 import CalendarStack from './CalendarStack';
+import { mainFont } from '../constants/global';
 
 export default createBottomTabNavigator(
   {
@@ -17,12 +18,14 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'DiscoverStack',
+    initialRouteName: 'CalendarStack',
+    resetOnBlur: true,
+    lazy: false,
     tabBarOptions: {
       activeTintColor: pink,
       inactiveTintColor: '#888',
       labelStyle: { 
-        fontFamily: 'Quicksand'
+        fontFamily: mainFont
       }
     }
   }

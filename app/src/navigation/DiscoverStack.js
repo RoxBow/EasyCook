@@ -3,12 +3,13 @@ import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon } from '../constants/global';
 import Icon from '../components/Icon/Icon';
 
-import DiscoverScreen from '../screens/Discover/DiscoverScreen/DiscoverScreen';
-import EventItemScreen from '../screens/Discover/EventItemScreen/EventItemScreen';
-import GoodDealItemScreen from '../screens/Discover/GoodDealItemScreen/GoodDealItemScreen';
-import CreateEventScreen from '../screens/Discover/CreateEventScreen/CreateEventScreen';
-import CreateGoodDealScreen from '../screens/Discover/CreateGoodDealScreen/CreateGoodDealScreen';
-import CloseModal from '../components/CloseModal/CloseModal';
+import DiscoverScreen from '../views/Discover/DiscoverScreen/DiscoverScreen';
+import EventItemScreen from '../views/Discover/EventItemScreen/EventItemScreen';
+import GoodDealItemScreen from '../views/Discover/GoodDealItemScreen/GoodDealItemScreen';
+import CreateEventScreen from '../views/Discover/CreateEventScreen/CreateEventScreen';
+import CreateGoodDealScreen from '../views/Discover/CreateGoodDealScreen/CreateGoodDealScreen';
+import ButtonIcon from '../components/ButtonIcon/ButtonIcon';
+import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
 
 const DiscoverStack = createStackNavigator(
   {
@@ -41,25 +42,19 @@ const RootStack = createStackNavigator(
     CreateEvent: {
       screen: CreateEventScreen,
       navigationOptions: ({ navigation }) => ({
-        headerRight: (
-          <CloseModal navigation={navigation} />
-        ),
         headerLeft: null,
-        title: 'Créer un événement',
-        headerStyle: { borderBottomWidth: 0 },
-        headerTitleStyle: { fontFamily: 'Quicksand--bold' }
+        headerRight: <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />,
+        headerTitle: <TitleHeader title="Créer un événement" />,
+        headerStyle: { borderBottomWidth: 0 }
       })
     },
     CreateGoodDeal: {
       screen: CreateGoodDealScreen,
       navigationOptions: ({ navigation }) => ({
-        headerRight: (
-          <CloseModal navigation={navigation} />
-        ),
         headerLeft: null,
-        title: 'Créer un bon plan',
-        headerStyle: { borderBottomWidth: 0 },
-        headerTitleStyle: { fontFamily: 'Quicksand--bold' }
+        headerRight: <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />,
+        headerTitle: <TitleHeader title="Créer un bon plan" />,
+        headerStyle: { borderBottomWidth: 0 }
       })
     }
   },
@@ -72,9 +67,7 @@ RootStack.navigationOptions = ({ navigation }) => ({
   tabBarLabel: 'Découvrir',
   tabBarVisible: navigation.state.routes[0].index === 0 && navigation.state.index === 0,
   tabBarIcon: ({ focused }) => (
-    focused ? 
-      <Icon icon="discover_tab--focus" {...styleTabBarIcon} /> : 
-      <Icon icon="discover_tab" {...styleTabBarIcon} />
+    <Icon icon={focused ? 'discover_tab--focus' : 'discover_tab'} {...styleTabBarIcon} />
   ),
   tabBarOnPress: ({ navigation }) => {
     navigation.navigate('Discover');

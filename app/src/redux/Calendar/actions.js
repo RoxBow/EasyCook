@@ -4,9 +4,12 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_ERROR = 'SET_ERROR';
-export const ADD_RECIPE_CALENDAR = 'ADD_RECIPE_CALENDAR';
-export const UPDATE_RECIPES_CALENDAR = 'UPDATE_RECIPES_CALENDAR';
+export const CALENDAR = "CALENDAR";
+
+export const SET_ERROR = `${CALENDAR}/SET_ERROR`;
+export const ADD_RECIPE_CALENDAR = `${CALENDAR}/ADD_RECIPE_CALENDAR`;
+export const UPDATE_RECIPES_CALENDAR = `${CALENDAR}/UPDATE_RECIPES_CALENDAR`;
+
 
 const axiosCalendar = axios.create({
   baseURL: `${serverUrl}/api/calendar`

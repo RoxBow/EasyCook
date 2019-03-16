@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     width: 160,
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 10,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: '#000',
     shadowOpacity: 0.3,
@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
   },
   wrapperImage: {
     overflow: 'hidden',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   wrapperText: {
     padding: 10,

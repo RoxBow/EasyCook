@@ -4,11 +4,13 @@ import { getToken } from '../../constants/helpers';
 
 const { SUCCESS, FAILURE } = STATUS;
 
-export const SET_REF_DATA = 'SET_REF_DATA';
-export const SET_ERROR = 'SET_ERROR';
-export const UPDATE_RECIPES = 'UPDATE_RECIPES';
-export const UPDATE_RECIPE = 'UPDATE_RECIPE';
-export const ADD_RECIPE = 'ADD_RECIPE';
+export const RECIPE = "RECIPE";
+
+export const SET_REF_DATA = `${RECIPE}/SET_REF_DATA`;
+export const SET_ERROR = `${RECIPE}/SET_ERROR`;
+export const UPDATE_RECIPES = `${RECIPE}/UPDATE_RECIPES`;
+export const UPDATE_RECIPE = `${RECIPE}/UPDATE_RECIPE`;
+export const ADD_RECIPE = `${RECIPE}/ADD_RECIPE`;
 
 const axiosRecipe = axios.create({
   baseURL: `${serverUrl}/api/recipe`

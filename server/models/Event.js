@@ -10,7 +10,7 @@ const Event = new Schema(
     address: String,
     description: {
       type: String,
-      maxlength: 500
+      maxlength: 2000
     },
     category: {
       type: String,

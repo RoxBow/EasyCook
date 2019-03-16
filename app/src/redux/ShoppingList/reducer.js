@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   error: '',
+  users: [],
 };
 
 const shoppingListReducer = (state = initialState, action) => {

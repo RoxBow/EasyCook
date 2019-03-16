@@ -1,9 +1,9 @@
+if (process.env.NODE_ENV !== 'production') require('dotenv').config();
 const express = require('express');
 const authRouter = express.Router({ mergeParams: true });
 const User = require('../../models/User');
 const Image = require('../../models/Image');
 const passport = require('passport');
-const { jwtSecret } = require('../../constants');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
@@ -92,7 +92,7 @@ class AuthRouterClass {
             return res.status(500).send({ error });
           }
 
-          const token = jwt.sign({ id: user.username }, jwtSecret.secret, { expiresIn: '1d' });
+          const token = jwt.sign({ id: user.username }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
           return res
             .status(200)

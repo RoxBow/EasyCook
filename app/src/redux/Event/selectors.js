@@ -1,7 +1,7 @@
 import { isUserInArray } from '../../constants/helpers';
 import { compose } from 'recompose';
+import { EVENT } from './actions';
 
-const EVENT = 'event';
 const stateSelector = state => state[EVENT];
 
 export const eventsSelector = compose(
@@ -17,8 +17,15 @@ export const currentEventSelector = idEvent =>
     stateSelector
   );
 
-export const userEventsSelector = (events, idUser) =>
-  events.filter(event => {
-    const interestedOrParticipate = event.interested.concat(event.participants);
-    if (isUserInArray(interestedOrParticipate, idUser)) return event;
-  });
+export const userEventsSelector = idUser =>
+  compose(
+    userEvents => ({ userEvents }),
+    ({ events }) =>
+      events.filter(event => {
+        const interestedOrParticipate = event.interested.concat(event.participants);
+        if (isUserInArray(interestedOrParticipate, idUser)) return event;
+      }),
+
+    ({ events }) => ({ events }),
+    stateSelector
+  );

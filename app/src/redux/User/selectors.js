@@ -1,6 +1,6 @@
 import { compose } from 'recompose';
+import { USER } from './actions';
 
-const USER = 'user';
 const stateSelector = state => state[USER];
 
 export const currentUsernameSelector = compose(
@@ -10,6 +10,11 @@ export const currentUsernameSelector = compose(
 
 export const favRecipesSelector = compose(
   ({ info }) => ({ currentFavRecipes: info.favRecipes }),
+  stateSelector,
+);
+
+export const infoSelector = compose(
+  ({ info }) => ({ info }),
   stateSelector,
 );
 
