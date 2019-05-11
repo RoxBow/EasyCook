@@ -5,6 +5,7 @@ import { requestLogin } from '../../../redux/User/actions';
 import { connect } from 'react-redux';
 import Text from '../../../components/Text/Text';
 import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
 
 class SignInScreen extends React.Component {
   constructor() {
@@ -29,7 +30,7 @@ class SignInScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ position: 'absolute', top: '15%', alignSelf: 'center' }}>
-          <Text>Easy Cook</Text>
+          <Icon icon="second_logo" width={200} height={50} />
           <Text medium>Se connecter à son compte</Text>
         </View>
         <View style={{ paddingHorizontal: 40, marginBottom: 10, width: '100%' }}>

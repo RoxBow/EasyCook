@@ -7,6 +7,7 @@ import GoodDealTab from '../../../components/GoodDealTab/GoodDealTab';
 import { styleTab, styleTabs } from '../../../constants/global';
 import { combineSelectors } from '../../../constants/helpers';
 import { userEventsSelector } from '../../../redux/Event/selectors';
+import { USER } from '../../../redux/User/actions';
 import { userGoodDealsSelector } from '../../../redux/GoodDeal/selectors';
 import Empty from '../../../components/Empty/Empty';
 import Text from '../../../components/Text/Text';
@@ -34,15 +35,18 @@ const AccountScreen = ({ userEvents, userGoodDeals }) => (
       }
       {...styleTab}
     >
-      {userGoodDeals.length ? <GoodDealTab goodDeals={userGoodDeals} /> : <Empty name="bons plans" />}
+      {userGoodDeals.length ? (
+        <GoodDealTab goodDeals={userGoodDeals} />
+      ) : (
+        <Empty name="bons plans" />
+      )}
     </Tab>
   </Tabs>
 );
 
-
 const mapStateToProps = combineSelectors(
-  s => userEventsSelector(s['USER'].info._id)(s),
-  s => userGoodDealsSelector(s['USER'].info._id)(s),
+  s => userEventsSelector(s[USER].info._id)(s),
+  s => userGoodDealsSelector(s[USER].info._id)(s)
 );
 
 export default connect(mapStateToProps)(AccountScreen);

@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
   btnTransparent: {
     backgroundColor: 'transparent'
   },
+  btnDisabled: {
+    opacity: .5
+  },
   textBtnTransparent: {
     color: pink
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import IconStar from '../Icons/IconStar';
 import { View } from 'react-native';
-import { Button } from 'native-base';
+import Button from '../Button/Button';
 
 class Rating extends React.Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class Rating extends React.Component {
           transparent
           disabled={disabled}
           onPress={() => this.selectStar(i)}
-          style={{ marginHorizontal: 3 }}
+          style={{ marginHorizontal: 3, paddingVertical: 0, paddingHorizontal: 0, opacity: 1 }}
           key={i}
         >
           <IconStar isFill={i <= selected} size={16} />

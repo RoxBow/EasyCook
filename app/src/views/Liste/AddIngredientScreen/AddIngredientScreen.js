@@ -6,7 +6,7 @@ import { addIngredientToShoppingListItem } from '../../../redux/ShoppingList/act
 import Button from '../../../components/Button/Button';
 import Text from '../../../components/Text/Text';
 import Select from '../../../components/Select/Select';
-import { UNITS } from '../../../constants/global';
+import { UNITS } from '../../../constants/global';
 
 class AddIngredientScreen extends React.Component {
   constructor(props) {
@@ -38,26 +38,19 @@ class AddIngredientScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Text style={{ marginBottom: 10 }}>Saisir une quantité</Text>
-        <View style={{ flexDirection: 'row', marginBottom: 15 }}>
+        <Text style={styles.titleQuantity}>Saisir une quantité</Text>
+        <View style={styles.containerInput}>
           <TextInput
             keyboardType="numeric"
             onChangeText={quantity => this.setState({ quantity })}
             value={quantity}
-            style={{
-              borderRadius: 15,
-              backgroundColor: '#fff',
-              color: '#000',
-              paddingVertical: 20,
-              width: '20%',
-              textAlign: 'center',
-              fontSize: 22,
-              marginRight: 10
-            }}
+            style={styles.numericInput}
           />
           <Select
             values={UNITS}
             selected={unity}
+            styleText={styles.textSelect}
+            style={styles.wrapperSelect}
             updateValue={value => this.setState({ unity: value })}
           />
         </View>

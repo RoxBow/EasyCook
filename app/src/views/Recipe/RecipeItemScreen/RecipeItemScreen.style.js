@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { pink } from '../../../constants/colors';
+import { pink, lightgrey } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapperContent: {
     paddingVertical: 5,
     paddingHorizontal: 20,
     backgroundColor: '#fff',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -15
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    marginTop: -50
   },
   titleLine: {
     marginBottom: 15
@@ -19,20 +19,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 10,
-    paddingBottom: 30,
+    paddingBottom: 40,
     borderBottomWidth: 1,
-    borderColor: 'grey'
+    borderColor: lightgrey
   },
   elementInfoIntro: {
     alignItems: 'center'
   },
   elementInfoIntroText: {
-    marginTop: 5,
+    marginTop: 5
   },
 
   wrapperIngredients: {
     justifyContent: 'center',
-    paddingHorizontal: 30
+    width: '50%',
+    alignSelf: 'center'
   },
   wrapperIngredient: {
     marginVertical: 8
@@ -86,6 +87,24 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.3,
     elevation: 2
+  },
+
+  wrapperRatingCommentAdded: {
+    backgroundColor: "#d8d8d8",
+    width: '95%',
+    paddingVertical: 10,
+    marginBottom: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  inputComment: {
+    height: 150,
+    alignItems: 'flex-start',
+    width: '95%',
+    borderWidth: 1,
+    paddingLeft: 15,
+    borderRadius: 10,
+    alignSelf: 'center'
   }
 });
 

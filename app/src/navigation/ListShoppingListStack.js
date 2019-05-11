@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { styleTabBarIcon } from '../constants/global';
 import { pink } from '../constants/colors';
+import { View } from 'react-native';
 import { Header, Left, Body, Right } from 'native-base';
 import Icon from '../components/Icon/Icon';
 import ArrowBack from '../components/ArrowBack/ArrowBack';
@@ -64,7 +65,7 @@ const ListShoppingListStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerTitle: <TitleHeader title="Créer liste de course" />,
         headerLeft: <ArrowBack navigation={navigation} />,
-        headerStyle: { borderBottomWidth: 0, height: 50 },
+        headerStyle: { borderBottomWidth: 0, height: 50 }
       })
     },
     SettingShoppingListItem: {
@@ -92,39 +93,37 @@ const RootStack = createStackNavigator(
     SearchIngredient: {
       screen: SearchIngredientScreen,
       navigationOptions: ({ navigation }) => ({
-        headerLeft: null,
+        headerLeft: <View />,
         headerTitle: <TitleHeader title="Ajoute un aliment" style={{ color: '#fff' }} />,
         headerRight: (
           <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
         ),
-        headerStyle: { height: 100, backgroundColor: pink, borderBottomWidth: 0 }
+        headerStyle: { height: 100, backgroundColor: pink, borderBottomWidth: 0, elevation: 0 }
       })
     },
     AddIngredient: {
       screen: AddIngredientScreen,
       navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header
-            transparent
-            style={{
-              height: 150,
-              backgroundColor: pink,
-              borderBottomLeftRadius: 15,
-              borderBottomRightRadius: 15
-            }}
-          >
-            <Left>
-              <Icon icon={`${navigation.state.params.kind}--white`} size={30} />
-              <Text style={{ color: '#fff', fontSize: 20, marginTop: 10 }} bold>
-                {navigation.state.params.name}
-              </Text>
-            </Left>
-            <Body />
-            <Right style={{ alignSelf: 'flex-start', marginTop: 10 }}>
-              <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
-            </Right>
-          </Header>
-        )
+        headerLeft: (
+          <View>
+            <Icon icon={`${navigation.state.params.kind}--white`} size={30} />
+            <Text style={{ color: '#fff', fontSize: 20, marginTop: 10 }} bold>
+              {navigation.state.params.name}
+            </Text>
+          </View>
+        ),
+        headerRight: (
+          <ButtonIcon icon="cross_rounded" size={30} onPress={() => navigation.goBack()} />
+        ),
+        headerStyle: {
+          height: 150,
+          backgroundColor: pink,
+          borderBottomLeftRadius: 15,
+          borderBottomRightRadius: 15
+        },
+        headerLeftContainerStyle: {
+          marginLeft: 10
+        }
       })
     },
     SearchUser: {

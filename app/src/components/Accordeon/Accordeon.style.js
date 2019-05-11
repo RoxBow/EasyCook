@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     marginBottom: 6,
-    borderBottomColor: lightgrey,
-    borderBottomWidth: 1
   }
 });
 

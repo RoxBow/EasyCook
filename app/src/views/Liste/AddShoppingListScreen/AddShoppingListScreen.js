@@ -53,16 +53,19 @@ class AddShoppingListScreen extends React.Component {
   addShoppingList() {
     const { addShoppingList, usersSelected } = this.props;
     const { name, date } = this.state;
+    let users = [];
 
     // keep only _id users
-    const users = usersSelected.map(({ _id }) => _id);
+    if(usersSelected){
+      users = usersSelected.map(({ _id }) => _id);
+    }
 
     addShoppingList(name, date, users);
   }
 
   render() {
     const { usersSelected } = this.props;
-    const { name, date } = this.state;
+    const { name, dateDisplay } = this.state;
 
     return (
       <View>
@@ -88,9 +91,8 @@ class AddShoppingListScreen extends React.Component {
           <DatePicker
             locale="fr"
             showIcon={false}
-            date={date}
+            date={dateDisplay}
             mode="datetime"
-            placeholder="select date"
             format="ddd D MMMM YYYY"
             minDate={new Date()}
             confirmBtnText="Valider"
@@ -112,23 +114,30 @@ class AddShoppingListScreen extends React.Component {
                 fontSize: 18
               }
             }}
-            onDateChange={date => {
-              this.setState({ date: date });
+            onDateChange={(dateDisplay, date) => {
+              this.setState({ dateDisplay, date });
             }}
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.openModalUsers()}>
-          <Text>Ajouter des amis</Text>
+        <View style={{ paddingVertical: 15, paddingHorizontal: 30 }}>
+          <TouchableOpacity
+            onPress={() => this.openModalUsers()}
+            style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}
+          >
+            <Icon icon="add_user" size={22} style={{ marginRight: 15 }} />
+            <Text style={{ fontSize: 18 }}>Ajouter des amis</Text>
+          </TouchableOpacity>
           <ScrollView horizontal>
-            {usersSelected && usersSelected.map(({ username, avatar }, i) => (
-              <View key={i} style={{ marginRight: 10 }}>
-                <Thumbnail source={{ uri: `${serverUrl}/${avatar.uri}` }} />
-                <Text style={{ alignSelf: 'center', marginTop: 6 }}>{username}</Text>
-              </View>
-            ))}
+            {usersSelected &&
+              usersSelected.map(({ username, avatar }, i) => (
+                <View key={i} style={{ marginRight: 10, alignItems: 'center' }}>
+                  <Thumbnail source={{ uri: `${serverUrl}/${avatar.uri}` }} />
+                  <Text style={{ alignSelf: 'center', marginTop: 6 }}>{username}</Text>
+                </View>
+              ))}
           </ScrollView>
-        </TouchableOpacity>
+        </View>
 
         <Button
           rounded
@@ -141,10 +150,7 @@ class AddShoppingListScreen extends React.Component {
   }
 }
 
-const mapStateToProps = combineSelectors(
-  refDataSelector,
-  usersSelectedSelector,
-);
+const mapStateToProps = combineSelectors(refDataSelector, usersSelectedSelector);
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
   addShoppingList: (name, maxDate, users) =>

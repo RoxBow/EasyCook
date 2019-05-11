@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { orange } from '../../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapperContent: {
-    padding: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    marginTop: -15
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    marginTop: -50
   },
 
   wrapperInfo: {

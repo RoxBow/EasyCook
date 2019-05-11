@@ -68,6 +68,11 @@ const styles = StyleSheet.create({
     marginRight: 15
   },
 
+  wrapperIngredient: {
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+
   btnAddStep: {
     flexDirection: 'row',
     width: '100%',

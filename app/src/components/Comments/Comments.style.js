@@ -1,22 +1,43 @@
 import { StyleSheet } from 'react-native';
+import { lightgrey, grey } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapperComment: {
     padding: 20,
-    backgroundColor: 'lightgrey',
-    borderBottomColor: 'grey',
+    backgroundColor: '#f7f9f9',
+    borderBottomColor: lightgrey,
     borderBottomWidth: 1
   },
 
   wrapperHeadComment: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    alignItems: 'flex-start'
+  },
+
+  username: {
+    fontSize: 20,
+    marginBottom: 6
   },
 
   commentText: {
-    fontSize: 22,
-    marginLeft: 10
+    fontSize: 16,
+    marginVertical: 10
+  },
+
+  wrapperActionComment: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end'
+  },
+  btnAction: {
+    paddingVertical: 0,
+    paddingHorizontal: 0
+  },
+  btnDelete: {
+    marginRight: 10
+  },
+  textBtnDelete: {
+    color: grey
   }
 });
 

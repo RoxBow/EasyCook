@@ -1,7 +1,17 @@
 import { DATE } from './global';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Image } from 'react-native';
+import { Asset } from 'expo';
 
 export const getToken = () => AsyncStorage.getItem('userToken');
+
+export const cacheImages = images =>
+  images.map(image => {
+    if (typeof image === 'string') {
+      return Image.prefetch(image);
+    } else {
+      return Asset.loadAsync(image);
+    }
+  });
 
 export const isArrayFill = array => array && array.length > 0;
 

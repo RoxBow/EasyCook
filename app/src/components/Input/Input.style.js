@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     paddingLeft: 25
   },
   wrapperDisabledInput: {
-    backgroundColor: 'grey'
+    opacity: .5
   },
   wrapperInputLabel: {
     flexDirection: 'column',

@@ -37,15 +37,17 @@ const styles = StyleSheet.create({
   },
 
   wrapperActions: {
+    flexDirection: 'row',
     borderTopWidth: 1,
     borderColor: 'lightgrey',
     marginTop: 5,
     paddingVertical: 5,
-    paddingRight: 15
+    paddingRight: 15,
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
-
-  icon: {
-    alignSelf: 'flex-end'
+  leftIcon: {
+    marginRight: 10
   }
 });
 

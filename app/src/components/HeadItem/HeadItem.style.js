@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 5,
+    maxWidth: 200,
+    textAlign: 'center'
   },
 });
 

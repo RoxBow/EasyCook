@@ -1,5 +1,4 @@
 import { tabBar, pink } from './colors';
-import { LocaleConfig } from 'react-native-calendars';
 import { Dimensions } from 'react-native';
 
 const { tabBarSelected, textDefault, backgroundTab } = tabBar;
@@ -49,14 +48,6 @@ export const DATE = {
   shortDay: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.']
 };
 
-LocaleConfig.defaultLocale = 'fr';
-LocaleConfig.locales['fr'] = {
-  monthNames: DATE.month,
-  monthNamesShort: DATE.shortMonth,
-  dayNames: DATE.day,
-  dayNamesShort: DATE.shortDay
-};
-
 export const mainFont = 'Quicksand';
 export const mainFontMedium = 'Quicksand--medium';
 export const mainFontBold = 'Quicksand--bold';
@@ -78,11 +69,12 @@ export const styleTabs = {
 };
 
 export const styleTab = {
-  textStyle: { color: textDefault, fontWeight: '600', fontFamily: 'Quicksand--medium' },
+  textStyle: { color: textDefault, fontFamily: 'Quicksand--medium' },
   activeTextStyle: {
     backgroundColor: backgroundTab,
     color: tabBarSelected,
-    fontFamily: 'Quicksand--bold'
+    fontFamily: 'Quicksand--bold',
+    fontWeight: null
   },
   tabStyle: { backgroundColor: backgroundTab },
   activeTabStyle: { backgroundColor: backgroundTab }

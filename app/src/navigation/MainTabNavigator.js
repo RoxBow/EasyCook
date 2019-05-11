@@ -18,7 +18,7 @@ export default createBottomTabNavigator(
     AccountStack
   },
   {
-    initialRouteName: 'CalendarStack',
+    initialRouteName: 'ListShoppingListStack',
     resetOnBlur: true,
     lazy: false,
     tabBarOptions: {

@@ -1,17 +1,16 @@
 import styles from './SearchUserScreen.style';
 import React from 'react';
 import { View } from 'react-native';
-import { Header, Left, Body, Right, Container, Button } from 'native-base';
-import { AntDesign } from '@expo/vector-icons';
 import { fetchUsers, setUsersSelected, saveNewUsers } from '../../../redux/ShoppingList/actions';
 import { connect } from 'react-redux';
 import { usersSelector } from '../../../redux/ShoppingList/selectors';
 import ListUserItem from '../../../components/ListUserItem/ListUserItem';
-import { pink } from '../../../constants/colors';
 import { combineSelectors } from '../../../constants/helpers';
 import Text from '../../../components/Text/Text';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import TitleHeader from '../../../components/Header/TitleHeader/TitleHeader';
+import Button from '../../../components/Button/Button';
+import CloseModal from '../../../components/CloseModal/CloseModal';
 
 class SearchUserScreen extends React.Component {
   constructor(props) {
@@ -75,20 +74,12 @@ class SearchUserScreen extends React.Component {
     const { searchText } = this.state;
 
     return (
-      <Container>
-        <Header transparent>
-          <Left>
-            <AntDesign name="close" size={30} color={pink} onPress={() => navigation.goBack()} />
-          </Left>
-          <Body style={{ flex: 3 }}>
-            <TitleHeader title="Ajouter des amis" />
-          </Body>
-          <Right>
-            <Button transparent onPress={() => this.confirmUser()}>
-              <Text>Ajouter</Text>
-            </Button>
-          </Right>
-        </Header>
+      <View style={{ flex: 1 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 25 }}>
+          <CloseModal navigation={navigation} />
+          <TitleHeader title="Ajouter des amis" />
+          <Button text="Valider" transparent onPress={() => this.confirmUser()} />
+        </View>
         <View style={styles.container}>
           <SearchBar
             onChange={searchText => this.setState({ searchText })}
@@ -127,6 +118,7 @@ class SearchUserScreen extends React.Component {
 
                 return (
                   <ListUserItem
+                    key={i}
                     user={user}
                     checkUser={() => this.toggleUser(user)}
                     isChecked={this.isUserSelected(user._id)}
@@ -135,7 +127,7 @@ class SearchUserScreen extends React.Component {
               })}
           </View>
         </View>
-      </Container>
+      </View>
     );
   }
 }

@@ -37,6 +37,8 @@ class DiscoverScreen extends React.Component {
       this.setState({
         errorMessage: 'Permission to access location was denied'
       });
+
+      return;
     }
 
     let location = await Location.getCurrentPositionAsync({});
@@ -70,7 +72,7 @@ class DiscoverScreen extends React.Component {
     const { address } = this.state;
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <View
           style={{
             paddingVertical: 10,
@@ -79,13 +81,15 @@ class DiscoverScreen extends React.Component {
             backgroundColor: '#fff',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'space-between'
           }}
         >
           <View>
-            <Text>À</Text>
+            <Text style={{ fontSize: 18 }} medium>
+              À
+            </Text>
             <View style={styles.wrapperGeolocation}>
-              {address && <TextInput value={address[0].city} style={styles.textGeolocation} />}
+              <TextInput value={address ? address[0].city : 'ici'} style={styles.textGeolocation} />
               <Icon icon="geolocation" size={14} />
             </View>
           </View>

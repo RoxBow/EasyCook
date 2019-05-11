@@ -22,3 +22,17 @@ export const fridgeSelector = compose(
   ({ info }) => ({ currentFridge: info.fridge }),
   stateSelector,
 );
+
+export const isInterestedSelector = listInterested => compose(
+  isInterested => ({ isInterested }),
+  ({ _id }) => listInterested.some(({ _id: idUser }) => idUser === _id),
+  ({ info }) => ({ _id: info._id }),
+  infoSelector
+);
+
+export const isParticipantSelector = listParticipant => compose(
+  isParticipant => ({ isParticipant }),
+  ({ _id }) => listParticipant.some(({ _id: idUser }) => idUser === _id),
+  ({ info }) => ({ _id: info._id }),
+  infoSelector
+);

@@ -1,12 +1,14 @@
 import {
   SET_ERROR,
   ADD_RECIPE_CALENDAR,
-  UPDATE_RECIPES_CALENDAR
+  UPDATE_RECIPES_CALENDAR,
+  SET_SELECTED_DATE
 } from './actions';
 
 const initialState = {
   recipes: [],
-  error: ''
+  error: '',
+  selectedDate: new Date()
 };
 
 const calendarReducer = (state = initialState, action) => {
@@ -25,6 +27,11 @@ const calendarReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      };
+    case SET_SELECTED_DATE:
+      return {
+        ...state,
+        selectedDate: action.date
       };
     default:
       return state;

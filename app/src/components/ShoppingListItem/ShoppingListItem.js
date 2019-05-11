@@ -75,7 +75,7 @@ class ShoppingListItem extends React.Component {
       <TouchableOpacity style={styles.wrapper} onPress={this.redirectToShoppingListItem}>
         <View style={styles.wrapperTextIcon}>
           <View style={{ flex: 1 }}>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.name} bold>
+            <Text style={styles.name} bold>
               {name}
             </Text>
             {maxDate && <Text style={[this.isOutDated(maxDate) ? styles.outdated : styles.validDate]}>Jusqu'au {formatDateShort(maxDate)}</Text>}

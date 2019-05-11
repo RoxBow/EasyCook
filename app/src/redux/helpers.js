@@ -13,7 +13,7 @@ export const updateOneAction = storeName => state => {
       return action.item;
     }
 
-    return event;
+    return item;
   });
 
   return {

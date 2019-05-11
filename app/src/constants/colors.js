@@ -1,5 +1,6 @@
 export const pink = '#fc7786';
 export const orange = '#ffac81';
+export const veryLightgrey = '#F5F8F7';
 export const lightgrey = '#DCDCDC';
 export const grey = '#8A8A8F';
 export const darkPink = '#f0373f';

@@ -51,8 +51,8 @@ export const createEvent = (name, date, address, description, price, image, navi
 
   body.append('name', name);
   body.append('address', address);
-  body.append('description', description);
-  body.append('price', parseInt(price, 10));
+  if(description) body.append('description', description);
+  if(price) body.append('price', price);
   body.append('date', date.toISOString());
 
   return dispatch =>

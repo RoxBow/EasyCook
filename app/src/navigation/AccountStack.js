@@ -3,8 +3,10 @@ import { createStackNavigator } from 'react-navigation';
 import HeaderAccount from '../components/Header/HeaderAccount/HeaderAccount';
 import { styleTabBarIcon } from '../constants/global';
 import Icon from '../components/Icon/Icon';
-import ArrowBack from '../components/ArrowBack/ArrowBack';
+import ButtonIcon from '../components/ButtonIcon/ButtonIcon';
 import TitleHeader from '../components/Header/TitleHeader/TitleHeader';
+import { lightgrey } from '../constants/colors';
+import ArrowBack from '../components/ArrowBack/ArrowBack';
 
 import AccountScreen from '../views/Account/AccountScreen/AccountScreen';
 import SettingsScreen from '../views/Account/SettingsScreen/SettingsScreen';
@@ -19,7 +21,11 @@ const AccountStack = createStackNavigator({
   },
   Settings: {
     screen: SettingsScreen,
-    navigationOptions: ({ navigation }) => ({})
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: <ArrowBack navigation={navigation} />,
+      headerTitle: <TitleHeader title="Paramètre" />,
+      headerStyle: { borderBottomColor: lightgrey }
+    })
   }
 });
 
@@ -34,9 +40,9 @@ const RootStack = createStackNavigator(
     EditUser: {
       screen: EditUserScreen,
       navigationOptions: ({ navigation }) => ({
-        headerLeft: <ArrowBack navigation={navigation} />,
+        headerLeft: <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />,
         headerTitle: <TitleHeader title="Modifier le profil" />,
-        headerStyle: { borderBottomWidth: 0 }
+        headerStyle: { borderBottomColor: lightgrey }
       })
     }
   },

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { darkPink, green } from '../../constants/colors';
+import { darkPink, green, grey } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontWeight: 'bold',
     fontSize: 18,
     marginBottom: 5,
     marginRight: 10
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
   shareWith: { 
     fontSize: 12, 
     marginBottom: 5,
-    color: 'lightgrey'
+    color: grey
   }
 });
 

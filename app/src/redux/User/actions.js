@@ -110,7 +110,7 @@ export const saveEditUser = (info, navigation) => dispatch => {
     });
   }
 
-  body.append('data', info);
+  body.append('data', JSON.stringify(info));
 
   axiosUser
     .put(`/edit`, body, {

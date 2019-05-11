@@ -134,13 +134,13 @@ class CreateEventScreen extends React.Component {
           icon="price"
           onChange={price => this.setState({ price })}
           value={price}
-          placeholder="Gratuit par défaut"
+          placeholder="Gratuit"
         />
 
         <View>
           <Input
             icon="detail"
-            maxLength={4}
+            maxLength={2000}
             onChange={description => this.setState({ description })}
             value={description}
             styleWrapperInput={{ height: 150, alignItems: 'flex-start' }}
@@ -161,7 +161,7 @@ class CreateEventScreen extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, { navigation }) => ({
-  createEvent: (name, date, address, description, image) =>
+  createEvent: (name, date, address, description, price, image) =>
     dispatch(createEvent(name, date, address, description, price, image, navigation))
 });
 

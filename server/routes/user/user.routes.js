@@ -38,13 +38,15 @@ class UserRouterClass {
     });
 
     userRouter.put('/edit', upload.single('file'), (req, res) => {
-      const { firstName, lastName, localization, bio } = req.body;
+      const { firstName, lastName, localization, bio } = JSON.parse(req.body.data);
 
       const avatar = new Image({
         uri: (req.file && req.file.path) || 'assets/avatars/users/user_default.jpg'
       });
 
       avatar.save();
+
+      console.log('req.body.data', req.body.data);
 
       User.findById(req.user._id).exec((err, user) => {
         user.firstName = firstName;

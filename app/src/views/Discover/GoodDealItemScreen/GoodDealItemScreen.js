@@ -2,7 +2,7 @@ import styles from './GoodDealItem.style';
 import React from 'react';
 import { View, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { Header, Thumbnail } from 'native-base';
+import { Thumbnail } from 'native-base';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { toggleInterested, toggleThumb } from '../../../redux/GoodDeal/actions';
 import { currentGoodDealSelector } from '../../../redux/GoodDeal/selectors';
@@ -13,6 +13,7 @@ import { formatDate, combineSelectors } from '../../../constants/helpers';
 import Text from '../../../components/Text/Text';
 import HeadItem from '../../../components/HeadItem/HeadItem';
 import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
+import ArrowBack from '../../../components/ArrowBack/ArrowBack';
 
 class GoodDealItem extends React.Component {
   constructor(props) {
@@ -56,19 +57,7 @@ class GoodDealItem extends React.Component {
 
     return (
       <ScrollView>
-        <Header style={{ height: 200 }} transparent>
-          <ImageBackground
-            source={{ uri: `${serverUrl}/${image.uri}` }}
-            style={{ width: '100%', height: '100%' }}
-          >
-            <AntDesign
-              size={26}
-              name="arrowleft"
-              style={{ padding: 8 }}
-              onPress={() => navigation.goBack()}
-            />
-          </ImageBackground>
-        </Header>
+        <HeadImage uri={`${serverUrl}/${image.uri}`} navigation={navigation} />
         <View style={styles.wrapperContent}>
           <HeadItem category={category} title={storeName} creator={creator} />
           <View style={styles.wrapperInfo}>
@@ -131,7 +120,7 @@ class GoodDealItem extends React.Component {
 }
 
 const mapStateToProps = combineSelectors(currentUsernameSelector, (s, { navigation }) =>
-  currentGoodDealSelector(navigation.state.params.idEvent)(s)
+  currentGoodDealSelector(navigation.state.params.idGoodDeal)(s)
 );
 
 const mapDispatchToProps = dispatch => ({

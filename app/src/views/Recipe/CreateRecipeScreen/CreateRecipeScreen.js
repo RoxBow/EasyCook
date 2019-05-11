@@ -23,11 +23,11 @@ class CreateRecipeScreen extends React.Component {
     super(props);
 
     this.state = {
-      name: 'Pancake framboise',
+      name: '',
       level: LEVELS[0].value,
       category: CATEGORIES[0].value,
-      preparationTime: '20',
-      cookingTime: '10',
+      preparationTime: '',
+      cookingTime: '',
       steps: [''],
       ingredients: [],
       equipments: [],
@@ -278,10 +278,10 @@ class CreateRecipeScreen extends React.Component {
             </TouchableOpacity>
 
             {isArrayFill(ingredients) && (
-              <View style={styles.wrapperListTag}>
+              <View style={styles.wrapperIngredient}>
                 {ingredients.map(({ name, quantity, unity }, i) => (
-                  <View key={i} style={{ flexDirection: 'row', marginBottom: 15 }}>
-                    <Text>{name}</Text>
+                  <View key={i} style={{ flexDirection: 'row', marginBottom: 8, alignItems: 'center' }}>
+                    <Text style={{ marginRight: 10 }}>{name}</Text>
                     <TextInput
                       keyboardType="numeric"
                       onChangeText={quantity => {
@@ -293,10 +293,9 @@ class CreateRecipeScreen extends React.Component {
                         borderRadius: 15,
                         backgroundColor: '#fff',
                         color: '#000',
-                        paddingVertical: 20,
+                        paddingVertical: 10,
                         width: '20%',
                         textAlign: 'center',
-                        fontSize: 22,
                         marginRight: 10
                       }}
                     />
@@ -312,7 +311,7 @@ class CreateRecipeScreen extends React.Component {
                       icon="cross"
                       size={18}
                       onPress={() => this.removeIngredient(i)}
-                      style={{ alignSelf: 'flex-end' }}
+                      style={{ marginLeft: 15 }}
                     />
                   </View>
                 ))}

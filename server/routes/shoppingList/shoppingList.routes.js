@@ -33,6 +33,7 @@ class ShoppingListRouterClass {
       // add me to users
       users = [req.user._id, ...users];
 
+      console.log('maxD', maxDate)
       const shoppingListAdded = new ShoppingList({ name, maxDate, users });
 
       shoppingListAdded.save((err, shoppingListAdded) => {

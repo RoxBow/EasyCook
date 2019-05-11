@@ -4,7 +4,7 @@
     "name": "Abricots",
     "kind": "fruit",
     "season": "spring",
-    "uri": "assets/ingredients/pomme.jpg"
+    "uri": "assets/ingredients/abricot.jpg"
   },
   {
     "id": "F00002",
@@ -36,28 +36,28 @@
   },
   {
     "id": "F00006",
-    "name": "Cerises",
+    "name": "Cerise",
     "kind": "fruit",
     "season": "spring",
     "uri": "assets/ingredients/cerise.jpg"
   },
   {
     "id": "F00007",
-    "name": "Châtaignes",
+    "name": "Châtaigne",
     "kind": "fruit",
     "season": "spring",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/chataigne.jpg"
   },
   {
     "id": "F00008",
-    "name": "Clémentines",
+    "name": "Clémentine",
     "kind": "fruit",
     "season": "spring",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/clementine.jpg"
   },
   {
     "id": "F00009",
-    "name": "Figues",
+    "name": "Figue",
     "kind": "fruit",
     "season": "spring",
     "uri": "assets/ingredients/figue.jpg"
@@ -172,263 +172,321 @@
     "uri": "assets/ingredients/asperge.jpg"
   },
   {
-    "name": "Aubergines",
+    "id": "I00026",
+    "name": "Aubergine",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/aubergine.jpg"
   },
   {
-    "name": "Autres salades",
+    "id": "I00027",
+    "name": "Betterave",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/betterave.jpg"
   },
   {
-    "name": "Betteraves potagères",
+    "id": "I00028",
+    "name": "Carotte",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/carotte.jpg"
   },
   {
-    "name": "Bettes et cardes",
+    "id": "I00029",
+    "name": "Céleri",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/celeri.jpg"
   },
   {
-    "name": "Carottes",
+    "id": "I00030",
+    "name": "Champignons",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/champignon.jpg"
   },
   {
-    "name": "Céleris branches",
+    "id": "I00031",
+    "name": "Brocolis",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/brocolis.jpg"
   },
   {
-    "name": "Champignons cultivés",
+    "id": "I00032",
+    "name": "Choux de Bruxelle",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/choux-bruxelle.jpg"
   },
   {
-    "name": "Chicorée",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
-    "name": "Choux à choucroute",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
-    "name": "Choux autres",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
-    "name": "Choux brocolis à jets",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
-    "name": "Choux de Bruxelles",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
+    "id": "I00033",
     "name": "Choux-fleurs",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/choux-fleur.jpg"
   },
   {
-    "name": "Concombres",
+    "id": "I00034",
+    "name": "Concombre",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/concombre.jpg"
   },
   {
-    "name": "Cornichons",
+    "id": "I00035",
+    "name": "Cornichon",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/cornichon.jpg"
   },
   {
-    "name": "Courgettes",
+    "id": "I00036",
+    "name": "Courgette",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/courgette.jpg"
   },
   {
-    "name": "Cresson",
+    "id": "I00037",
+    "name": "Echalote",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/echalote.jpg"
   },
   {
-    "name": "Echalotes",
+    "id": "I00036",
+    "name": "Endive",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/endive.jpg"
   },
   {
-    "name": "Endives chicons",
+    "id": "I00037",
+    "name": "Epinard",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/epinard.jpg"
   },
   {
-    "name": "Endives racines",
+    "id": "I00038",
+    "name": "Haricot vert",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/haricot-vert.jpg"
   },
   {
-    "name": "Epinards",
+    "id": "I00039",
+    "name": "Laitue",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/laitue.jpg"
   },
   {
-    "name": "Haricots verts",
+    "id": "I00040",
+    "name": "Lentille",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/lentille.jpg"
   },
   {
-    "name": "Laitues",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
-    "name": "Lentilles",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
+    "id": "I00041",
     "name": "Mâche",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/mache.jpg"
   },
   {
+    "id": "I00042",
     "name": "Maïs",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/mais.jpg"
   },
   {
-    "name": "Navets",
+    "id": "I00043",
+    "name": "Navet",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/navet.jpg"
   },
   {
+    "id": "I00044",
     "name": "Oignon",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/oignon.jpg"
   },
   {
-    "name": "Pastèques",
+    "id": "I00045",
+    "name": "Pastèque",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/pasteque.jpg"
   },
   {
+    "id": "I00046",
     "name": "Persil",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/persil.jpg"
   },
   {
-    "name": "Petits pois (grain)",
+    "id": "I00047",
+    "name": "Petits pois",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/petit-pois.jpg"
   },
   {
-    "name": "Poireaux",
+    "id": "I00048",
+    "name": "Poireau",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/poireau.jpg"
   },
   {
-    "name": "Pois secs",
+    "id": "I00049",
+    "name": "Poivron",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/poivron.jpg"
   },
   {
-    "name": "Poivrons",
+    "id": "I00050",
+    "name": "Piment",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/piment.jpg"
   },
   {
-    "name": "Piments",
+    "id": "I00051",
+    "name": "Potiron",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/potiron.jpg"
   },
   {
-    "name": "Potirons",
+    "id": "I00052",
+    "name": "Courge",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/courge.jpg"
   },
   {
-    "name": "Courges",
+    "id": "I00053",
+    "name": "Citrouille",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/citrouille.jpg"
   },
   {
-    "name": "Citrouilles",
-    "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
-  },
-  {
+    "id": "I00054",
     "name": "Radis",
     "kind": "vegetable",
     "uri": "assets/ingredients/radis.jpg"
   },
   {
+    "id": "I00055",
     "name": "Salsifis",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/salsifis.jpg"
   },
   {
-    "name": "Tomates",
+    "id": "I00056",
+    "name": "Tomate",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/tomate.jpg"
   },
   {
-    "name": "Truffes",
+    "id": "I00057",
+    "name": "Truffe",
     "kind": "vegetable",
-    "uri": "assets/ingredients/pomme.png"
+    "uri": "assets/ingredients/truffe.jpg"
   },
   {
+    "id": "I00058",
     "name": "Fruit du dragon",
     "kind": "fruit",
     "uri": "assets/ingredients/fruit_du_dragon.jpg"
   },
   {
+    "id": "I00059",
     "name": "Papaye",
     "kind": "fruit",
     "uri": "assets/ingredients/papaye.jpg"
   },
   {
+    "id": "I00060",
     "name": "Fruit de la passion",
     "kind": "fruit",
     "uri": "assets/ingredients/fruit_de_la_passion.jpg"
   },
   {
+    "id": "I00061",
     "name": "Noix de coco",
     "kind": "fruit",
     "uri": "assets/ingredients/noix_de_coco.jpg"
   },
   {
+    "id": "I00062",
     "name": "Litchi",
     "kind": "fruit",
     "uri": "assets/ingredients/litchi.jpg"
   },
   {
+    "id": "I00063",
     "name": "Mangue",
     "kind": "fruit",
     "uri": "assets/ingredients/mangue.jpg"
   },
   {
+    "id": "I00064",
     "name": "Mûres",
     "kind": "fruit",
     "uri": "assets/ingredients/mures.jpg"
   },
   {
+    "id": "I00065",
     "name": "Banane",
     "kind": "fruit",
     "uri": "assets/ingredients/banane.jpg"
   },
   {
+    "id": "I00066",
     "name": "Pastèque",
     "kind": "fruit",
     "uri": "assets/ingredients/pasteque.jpg"
   },
   {
+    "id": "I00067",
     "name": "Melon",
     "kind": "fruit",
     "uri": "assets/ingredients/melon.jpg"
+  },
+  {
+    "id": "I00068",
+    "name": "Camembert",
+    "kind": "cheese",
+    "uri": "assets/ingredients/camembert.jpg"
+  },
+  {
+    "id": "I00069",
+    "name": "Emmental",
+    "kind": "cheese",
+    "uri": "assets/ingredients/emmental.jpg"
+  },
+  {
+    "id": "I00070",
+    "name": "Saint-nectaire",
+    "kind": "cheese",
+    "uri": "assets/ingredients/saint-nectaire.jpg"
+  },
+  {
+    "id": "I00071",
+    "name": "Roquefort",
+    "kind": "cheese",
+    "uri": "assets/ingredients/roquefort.jpg"
+  },
+  {
+    "id": "I00072",
+    "name": "Comté",
+    "kind": "cheese",
+    "uri": "assets/ingredients/comté.jpg"
+  },
+  {
+    "id": "I00073",
+    "name": "Reblochon",
+    "kind": "cheese",
+    "uri": "assets/ingredients/reblochon.jpg"
+  },
+  {
+    "id": "I00074",
+    "name": "Mimolette",
+    "kind": "cheese",
+    "uri": "assets/ingredients/mimolette.jpg"
+  },
+  {
+    "id": "I00075",
+    "name": "Fromage bleu",
+    "kind": "cheese",
+    "uri": "assets/ingredients/cheese-bleu.jpg"
+  },
+  {
+    "id": "I00076",
+    "name": "Cantal",
+    "kind": "cheese",
+    "uri": "assets/ingredients/cantal.jpg"
   }
 ]

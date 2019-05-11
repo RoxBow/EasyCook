@@ -10,21 +10,19 @@ import Select from '../Select/Select';
 import { Root } from 'native-base';
 import ListEventItem from '../ListEventItem/ListEventItemContainer';
 
-const EventTab = ({ onSelectMonth, selectedMonth, hasSelectMonth = true }) => (
+const EventTab = ({ onSelectMonth, selectedMonth }) => (
   <Root>
     <View style={{ minHeight: '100%' }}>
-      {hasSelectMonth && (
-        <Select
-          values={DATE_SELECT}
-          bold={true}
-          updateValue={(value, indexValue) => onSelectMonth(value, indexValue)}
-          style={styles.select}
-          selected={selectedMonth}
-          styleText={styles.selectText}
-          icon="chevron_select--white"
-          size={14}
-        />
-      )}
+      <Select
+        values={DATE_SELECT}
+        bold={true}
+        updateValue={(value, indexValue) => onSelectMonth(value, indexValue)}
+        style={styles.select}
+        selected={selectedMonth}
+        styleText={styles.selectText}
+        icon="chevron_select--white"
+        size={14}
+      />
       <ListEventItem selectedMonth={selectedMonth} />
     </View>
   </Root>
@@ -43,5 +41,5 @@ export default compose(
         selectedMonth: month
       })
     }
-  ),
+  )
 )(EventTab);

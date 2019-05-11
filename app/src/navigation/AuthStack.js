@@ -17,14 +17,14 @@ const AuthStack = createStackNavigator({
     screen: SignUpScreen,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <ArrowBack navigation={navigation} />,
-      headerStyle: { borderBottomWidth: 0 }
+      headerStyle: { borderBottomWidth: 0, elevation: 0 }
     })
   },
   SignIn: {
     screen: SignInScreen,
     navigationOptions: ({ navigation }) => ({
       headerLeft: <ArrowBack navigation={navigation} />,
-      headerStyle: { borderBottomWidth: 0 }
+      headerStyle: { borderBottomWidth: 0, elevation: 0 }
     })
   }
 });

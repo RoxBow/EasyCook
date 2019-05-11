@@ -2,8 +2,6 @@ import styles from './RecipeItemScreen.style';
 import React from 'react';
 import { View, ImageBackground, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Header, Item, Input, Button } from 'native-base';
-import { AntDesign } from '@expo/vector-icons';
 import { serverUrl } from '../../../constants/global';
 import { combineSelectors } from '../../../constants/helpers';
 import { compose } from 'recompose';
@@ -14,9 +12,12 @@ import { favRecipesSelector } from '../../../redux/User/selectors';
 import HeadItem from '../../../components/HeadItem/HeadItem';
 import TitleLine from '../../../components/TitleLine/TitleLine';
 import Rating from '../../../components/Rating/Rating';
+import ArrowBack from '../../../components/ArrowBack/ArrowBack';
 import { addComment } from '../../../redux/Recipe/actions';
 import { toggleFavRecipe } from '../../../redux/User/actions';
 import Comments from '../../../components/Comments/Comments';
+import Input from '../../../components/Input/Input';
+import Button from '../../../components/Button/Button';
 import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
 import ModalAddRecipeCalendar from '../../../components/ModalAddRecipeCalendar/ModalAddRecipeCalendar';
 
@@ -92,18 +93,13 @@ class RecipeItem extends React.Component {
     return (
       <View>
         <ScrollView>
-          <Header style={{ height: 200 }} transparent>
+          <View style={{ height: 300 }}>
             <ImageBackground
               source={{ uri: `${serverUrl}/${image.uri}` }}
-              style={{ width: '100%', height: '100%' }}
+              style={{ width: '100%', height: '100%', paddingTop: 15 }}
             >
               <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <AntDesign
-                  size={26}
-                  name="arrowleft"
-                  style={{ padding: 8 }}
-                  onPress={() => navigation.goBack()}
-                />
+                <ArrowBack navigation={navigation} />
                 <Button
                   transparent
                   onPress={() => toggleFavRecipe(_id)}
@@ -113,7 +109,7 @@ class RecipeItem extends React.Component {
                 </Button>
               </View>
             </ImageBackground>
-          </Header>
+          </View>
           <View style={styles.wrapperContent}>
             <HeadItem category={category} title={name} creator={creator} />
 
@@ -140,9 +136,7 @@ class RecipeItem extends React.Component {
               {formatedIngredient &&
                 formatedIngredient.map(({ name, quantity, unity }, i) => (
                   <View style={styles.wrapperIngredient} key={i}>
-                    <Text>
-                      {quantity} {unity} {name}
-                    </Text>
+                    <Text>{`${quantity} ${unity} ${name}`}</Text>
                   </View>
                 ))}
             </View>
@@ -172,19 +166,26 @@ class RecipeItem extends React.Component {
             </View>
           </View>
 
-          <View>
+          <View style={{ alignItems: 'center' }}>
             <TitleLine title="Commentaires" styleWrapper={styles.titleLine} />
-            <Rating getRating={rating => this.setState({ stars: rating })} selected={stars} />
-            <Item rounded>
-              <Input
-                onChangeText={comment => this.setState({ comment })}
-                placeholder="J'adore ce gâteau"
-                value={comment}
-              />
-            </Item>
-            <Button transparent onPress={() => this.addComment()}>
-              <Text>Envoyez</Text>
-            </Button>
+            <View style={styles.wrapperRatingCommentAdded}>
+              <Text style={{ marginBottom: 15 }}>Noter cette recette</Text>
+              <Rating getRating={rating => this.setState({ stars: rating })} selected={stars} />
+            </View>
+            <Input
+              onChange={comment => this.setState({ comment })}
+              placeholder="J'adore ce gâteau"
+              value={comment}
+              maxLength={200}
+              styleWrapperInput={styles.inputComment}
+            />
+            <Button
+              rounded
+              text="Envoyer le commentaire"
+              onPress={() => this.addComment()}
+              disabled={comment.length <= 5}
+              style={{ marginVertical: 15 }}
+            />
           </View>
 
           <Comments comments={comments} idRecipe={_id} />
@@ -205,11 +206,8 @@ class RecipeItem extends React.Component {
   }
 }
 
-const mapStateToProps = combineSelectors(
-  refDataSelector, 
-  favRecipesSelector, 
-  (s, { navigation }) =>
-  currentRecipeSelector(navigation.state.params.idRecipe)(s)
+const mapStateToProps = combineSelectors(refDataSelector, favRecipesSelector, 
+  (s, { navigation }) => currentRecipeSelector(navigation.state.params.idRecipe)(s)
 );
 
 const mapDispatchToProps = dispatch => ({

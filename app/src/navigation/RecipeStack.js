@@ -24,7 +24,7 @@ const RecipeStack = createStackNavigator({
           <ButtonIcon
             icon="heart--fill"
             size={25}
-            onPress={() => navigation.navigate('AddShoppingList')}
+            onPress={() => {}}
             style={{ marginRight: 15 }}
           />
           <ButtonIcon icon="plus" size={25} onPress={() => navigation.navigate('CreateRecipe')} />
@@ -77,8 +77,7 @@ const RootStack = createStackNavigator(
       navigationOptions: ({ navigation }) => ({
         headerLeft: <ButtonIcon onPress={() => navigation.goBack()} icon="cross" size={30} />,
         headerTitle: <TitleHeader title="Créer une recette" />,
-        headerTintColor: pink,
-        headerTitleStyle: { color: '#000' }
+        headerStyle: { borderBottomWidth: 0 }
       })
     }
   },

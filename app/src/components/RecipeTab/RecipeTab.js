@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native';
 import SectionCategoryRecipe from '../SectionCategoryRecipe/SectionCategoryRecipeContainer';
 import { CATEGORIES } from '../../constants/global';
 
-const RecipeTab = ({  }) => (
+const RecipeTab = () => (
   <ScrollView contentContainerStyle={styles.container}>
 
     <SectionCategoryRecipe

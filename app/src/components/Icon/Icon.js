@@ -1,6 +1,10 @@
 import React from 'react';
 import Svg from 'react-native-svg-uri';
 
+/* Logo */
+const MainLogo = require('../../assets/images/logo/main-logo.svg');
+const SecondLogo = require('../../assets/images/logo/second-logo.svg');
+
 /* Icons TabBar */
 const AgendaTabBar = require('../../assets/images/tabBar/agenda.svg');
 const AgendaTabBarFocus = require('../../assets/images/tabBar/agenda--focus.svg');
@@ -58,6 +62,7 @@ const CrossWhite = require('../../assets/images/plus--white.svg');
 const CrossRounded = require('../../assets/images/cross_rounded.svg');
 const PlusRounded = require('../../assets/images/plus_rounded.svg');
 const ArrowBack = require('../../assets/images/arrow_back.svg');
+const ArrowBackWhite = require('../../assets/images/arrow_back--white.svg');
 const Edit = require('../../assets/images/edit.svg');
 const Detail = require('../../assets/images/detail.svg');
 const CalendarAdd = require('../../assets/images/add-recipe-calendar.svg');
@@ -66,7 +71,7 @@ const ThumbDown = require('../../assets/images/thumb-down.svg');
 const Favorite = require('../../assets/images/favorite.svg');
 const ArrowSelectWhite = require('../../assets/images/arrow_select--white.svg');
 const Geolocation = require('../../assets/images/geolocation.svg');
-const Date = require('../../assets/images/date.svg');
+const IconDate = require('../../assets/images/date.svg');
 const Equipment = require('../../assets/images/equipment.svg');
 const CookingTime = require('../../assets/images/cookingTime.svg');
 const PreparationTime = require('../../assets/images/preparationTime.svg');
@@ -77,6 +82,12 @@ const Publication = require('../../assets/images/publication.svg');
 const ChevronSelect = require('../../assets/images/chevron_select.svg');
 const ChevronSelectPink = require('../../assets/images/chevron_select--pink.svg');
 const ChevronSelectWhite = require('../../assets/images/chevron_select--white.svg');
+const ArrowChange = require('../../assets/images/arrow_change.svg');
+const MentionLegal = require('../../assets/images/mention-legal.svg');
+const About = require('../../assets/images/about.svg');
+const Help = require('../../assets/images/help.svg');
+const Check = require('../../assets/images/participation.svg');
+const CheckFill = require('../../assets/images/participation--fill.svg');
 
 const Icon = ({ icon, width, size, height, style }) => {
   (width = width || size), (height = height || size);
@@ -93,6 +104,10 @@ const Icon = ({ icon, width, size, height, style }) => {
   };
 
   switch (icon) {
+    case 'main_logo':
+      return <Svg source={MainLogo} {...config} />;
+    case 'second_logo':
+      return <Svg source={SecondLogo} {...config} />;
     case 'agenda_tab':
       return <Svg source={AgendaTabBar} {...config} />;
     case 'agenda_tab--focus':
@@ -139,7 +154,7 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={FruitWhite} {...config} />;
     case 'vegetable--white':
       return <Svg source={VegetableWhite} {...config} />;
-      case 'meat--pink':
+    case 'meat--pink':
       return <Svg source={MeatPink} {...config} />;
     case 'fish--pink':
       return <Svg source={FishPink} {...config} />;
@@ -172,6 +187,7 @@ const Icon = ({ icon, width, size, height, style }) => {
     case 'setting':
       return <Svg source={Setting} {...config} />;
     case 'notification':
+    case 'bell':
       return <Svg source={Notification} {...config} />;
     case 'picture':
       return <Svg source={Picture} {...config} />;
@@ -191,6 +207,8 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={CrossRounded} {...config} style={{ transform: [{ rotate: '45deg' }] }} />;
     case 'arrow_back':
       return <Svg source={ArrowBack} {...config} />;
+    case 'arrow_back--white':
+      return <Svg source={ArrowBackWhite} {...config} />;
     case 'edit':
       return <Svg source={Edit} {...config} />;
     case 'poele':
@@ -212,7 +230,7 @@ const Icon = ({ icon, width, size, height, style }) => {
     case 'geolocation':
       return <Svg source={Geolocation} {...config} />;
     case 'date':
-      return <Svg source={Date} {...config} />;
+      return <Svg source={IconDate} {...config} />;
     case 'equipment':
       return <Svg source={Equipment} {...config} />;
     case 'cooking_time':
@@ -233,8 +251,88 @@ const Icon = ({ icon, width, size, height, style }) => {
       return <Svg source={ChevronSelectPink} {...config} />;
     case 'chevron_select--white':
       return <Svg source={ChevronSelectWhite} {...config} />;
+    case 'arrow_change':
+      return <Svg source={ArrowChange} {...config} />;
+    case 'legal_mention':
+      return <Svg source={MentionLegal} {...config} />;
+    case 'about':
+      return <Svg source={About} {...config} />;
+    case 'help':
+      return <Svg source={Help} {...config} />;
+    case 'check':
+      return <Svg source={Check} {...config} />;
+    case 'check--fill':
+      return <Svg source={CheckFill} {...config} />;
   }
   return null;
 };
+
+export const LIST_SVG = [
+  AgendaTabBar,
+  AgendaTabBarFocus,
+  DiscoverTabBar,
+  DiscoverTabBarFocus,
+  RecipeTabBar,
+  RecipeTabBarFocus,
+  AccountTabBar,
+  AccountTabBarFocus,
+  ListTabBar,
+  ListTabBarFocus,
+  Star,
+  StarFill,
+  Heart,
+  HeartFill,
+  AddUser,
+  Location,
+  Price,
+  Search,
+  Logout,
+  DeleteAccount,
+  Setting,
+  Notification,
+  Picture,
+  Cross,
+  CrossWhite,
+  CrossRounded,
+  PlusRounded,
+  ArrowBack,
+  Edit,
+  Detail,
+  CalendarAdd,
+  ThumbUp,
+  ThumbDown,
+  Favorite,
+  ArrowSelectWhite,
+  Geolocation,
+  IconDate,
+  Equipment,
+  CookingTime,
+  PreparationTime,
+  Toque,
+  Category,
+  Fridge,
+  Publication,
+  ChevronSelect,
+  ChevronSelectPink,
+  ChevronSelectWhite,
+  Meat,
+  Fish,
+  Salt,
+  Fruit,
+  Vegetable,
+  Cheese,
+  MeatPink,
+  FishPink,
+  SaltPink,
+  FruitPink,
+  VegetablePink,
+  CheesePink,
+  MeatWhite,
+  FishWhite,
+  SaltWhite,
+  FruitWhite,
+  VegetableWhite,
+  CheeseWhite
+];
 
 export default Icon;

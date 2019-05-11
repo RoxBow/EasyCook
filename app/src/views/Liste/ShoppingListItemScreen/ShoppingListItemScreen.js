@@ -19,6 +19,7 @@ import Text from '../../../components/Text/Text';
 import Button from '../../../components/Button/Button';
 import ButtonIcon from '../../../components/ButtonIcon/ButtonIcon';
 import SearchBar from '../../../components/SearchBar/SearchBar';
+import { compose, mapProps } from 'recompose';
 
 class ShoppingListScreen extends React.Component {
   constructor(props) {
@@ -31,8 +32,7 @@ class ShoppingListScreen extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { ingredients } = props.currentShoppingList;
-    const { refIngredients } = props;
+    const { ingredients, refIngredients } = props;
 
     if (state.ingredients !== ingredients) {
       const ingredientsNotValidate = getValidateIngredientsFromId(
@@ -57,7 +57,7 @@ class ShoppingListScreen extends React.Component {
   }
 
   renderRemainingAliments() {
-    const { ingredients } = this.props.currentShoppingList;
+    const { ingredients } = this.props;
 
     const ingredientsValidate = ingredients.filter(({ isValidate }) => isValidate);
     const ingredientsNotValidate = ingredients.filter(({ isValidate }) => !isValidate);
@@ -75,8 +75,7 @@ class ShoppingListScreen extends React.Component {
   }
 
   addAliment() {
-    const { navigation, currentShoppingList } = this.props;
-    const { _id, name } = currentShoppingList;
+    const { navigation, _id, name } = this.props;
 
     navigation.navigate('SearchIngredient', {
       idShoppingList: _id,
@@ -85,7 +84,7 @@ class ShoppingListScreen extends React.Component {
   }
 
   openModalAddUser() {
-    const { _id } = this.props.currentShoppingList;
+    const { _id } = this.props;
 
     this.props.navigation.navigate('SearchUser', {
       isEditUser: true,
@@ -93,9 +92,17 @@ class ShoppingListScreen extends React.Component {
     });
   }
 
+  isOutDated() {
+    const { maxDate } = this.props;
+    const now = new Date();
+    const date = new Date(maxDate);
+
+    return date < now;
+  }
+
   render() {
     const { validateAliments, fruitsAliment, vegetablesAliment } = this.state;
-    const { _id, users } = this.props.currentShoppingList;
+    const { _id, users } = this.props;
 
     return (
       <View style={styles.parentContainer}>
@@ -143,15 +150,17 @@ class ShoppingListScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <Button
-          rounded
-          onPress={this.addAliment}
-          style={styles.btnAddAliment}
-          styleText={styles.textAddAliment}
-          text="Ajouter un aliment"
-        >
-          <Icon icon="plus--white" size={15} style={{ marginRight: 5 }} />
-        </Button>
+        {!this.isOutDated() && (
+          <Button
+            rounded
+            onPress={this.addAliment}
+            style={styles.btnAddAliment}
+            styleText={styles.textAddAliment}
+            text="Ajouter un aliment"
+          >
+            <Icon icon="plus--white" size={15} style={{ marginRight: 5 }} />
+          </Button>
+        )}
       </View>
     );
   }
@@ -161,4 +170,15 @@ const mapStateToProps = combineSelectors(refDataSelector, (s, { navigation }) =>
   currentShoppingListSelector(navigation.state.params.idShoppingList)(s)
 );
 
-export default connect(mapStateToProps)(ShoppingListScreen);
+export default compose(
+  connect(mapStateToProps),
+  mapProps(
+    ({
+      currentShoppingList,
+      ...rest
+    }) => ({
+      ...currentShoppingList,
+      ...rest
+    })
+  )
+)(ShoppingListScreen);

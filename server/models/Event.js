@@ -17,8 +17,8 @@ const Event = new Schema(
       default: 'event',
     },
     price: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: '0',
     },
     interested: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     participants: [{ type: Schema.Types.ObjectId, ref: 'User' }],

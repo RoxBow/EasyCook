@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import ListEventItem from './ListEventItem';
-import { compose, withProps, renderComponent, branch } from 'recompose';
+import { compose, withProps } from 'recompose';
 import { eventsSelector } from '../../redux/Event/selectors';
 import { fetchEvents } from '../../redux/Event/actions';
 import { DATE } from '../../constants/global';

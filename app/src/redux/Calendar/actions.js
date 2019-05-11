@@ -9,6 +9,7 @@ export const CALENDAR = "CALENDAR";
 export const SET_ERROR = `${CALENDAR}/SET_ERROR`;
 export const ADD_RECIPE_CALENDAR = `${CALENDAR}/ADD_RECIPE_CALENDAR`;
 export const UPDATE_RECIPES_CALENDAR = `${CALENDAR}/UPDATE_RECIPES_CALENDAR`;
+export const SET_SELECTED_DATE = `${CALENDAR}/SET_SELECTED_DATE`;
 
 
 const axiosCalendar = axios.create({
@@ -55,22 +56,6 @@ export const saveRecipeCalendar = (idRecipe, date) => {
   };
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const addRecipeCalendar = recipe => ({
   type: ADD_RECIPE_CALENDAR,
   recipe
@@ -79,6 +64,11 @@ export const addRecipeCalendar = recipe => ({
 export const setError = error => ({
   type: SET_ERROR,
   error
+});
+
+export const setSelectedDate = date => ({
+  type: SET_SELECTED_DATE,
+  date,
 });
 
 export const updateRecipesCalendar = recipes => ({

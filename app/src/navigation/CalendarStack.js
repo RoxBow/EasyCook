@@ -8,7 +8,9 @@ import CalendarScreen from '../views/Calendar/CalendarScreen/CalendarScreen';
 const CalendarStack = createStackNavigator({
   Calendar: {
     screen: CalendarScreen,
-    navigationOptions: ({ navigation }) => ({})
+    navigationOptions: ({ navigation }) => ({
+      header: null
+    })
   }
 });
 
